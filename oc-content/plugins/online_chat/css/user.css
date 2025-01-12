@@ -1,0 +1,292 @@
+/* NOT LOGGED IN */
+.oc-not-logged {display:none;float:left;clear:both;width:100%;padding:10px;text-align:center;color:#999;font-size:13px;line-height:16px;background:#f6f6f7;height:180px;}
+.oc-not-logged i {float:left;clear:both;width:100%;font-size:50px;text-align:center;line-height:50px;margin:15px 0;color:#ccc;}
+.oc-not-logged span {float:left;clear:both;width:100%;}
+.oc-not-logged a {font-weight:600;text-decoration:none;display:inline-block;width:auto;margin:15px 0 25px 0;color:#4d08f2;font-size:15px;}
+.oc-not-logged a:hover {color:#4d08f2;text-decoration:underline;}
+.oc-chat.oc-open .oc-not-logged {display:block;font-size:14px;position:absolute;left:0;top:calc(50% - 90px);width:100%;}
+
+
+/* CHAT WINDOW */
+.oc-chat, .oc-chat *:not(i), .oc-chat-button, .oc-chat-button *:not(i), .oc-not-logged, .oc-not-logged *:not(i) {outline: 0;box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;}
+.oc-chat :before, .oc-chat :after {box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;}
+.oc-chat {text-align:left;background:#f6f6f7;font-weight:normal;font-size:14px;overflow:hidden;line-height:18px;color:#444;z-index:990;position:fixed;bottom:20px;right:20px;padding:0;width:320px;height:calc(100vh - 80px);min-height:240px;max-height:480px;box-shadow:0 2px 6px rgba(0, 0, 0, .2);border-radius:8px;}
+.oc-chat.bottom-left {left:20px;bottom:20px;right:auto;top:auto;}
+.oc-chat.top-left {left:20px;bottom:auto;right:auto;top:20px;}
+.oc-chat.top-right {left:auto;bottom:auto;right:20px;top:20px;}
+.oc-chat.oc-open {box-shadow:0 1px 8px rgba(0, 0, 0, .25);}
+!.oc-chat .oc-chat-in {position:relative;overflow-y:auto;float:left;width:100%;clear:both;background:#fff;height:auto;max-height:530px;min-height:300px;}
+.oc-chat .oc-chat-in {position:absolute;overflow-y:auto;float:left;width:100%;clear:both;top:40px;background:#fff;height: calc(100% - 40px);}
+.oc-chat-in:after {position:absolute;right:10px;bottom:10px;color:rgba(0,0,0,0.03);font-size:80px;width:80px;height:80px;line-height:80px;text-align:center;font-family:"FontAwesome","Font Awesome 5 Free";content:"\f086";}
+.oc-chat.oc-closed .oc-chat-thread, .oc-chat.oc-closed .oc-before {display:none;}
+.oc-chat-thread-empty {float:left;clear:both;width:100%;font-size: 14px; color: #999; font-style: normal; line-height: 20px; padding: 30px 5px; text-align: center;}
+.oc-chat-thread + .oc-chat-thread-empty, .oc-chat.oc-init .oc-chat-thread-empty {display:none;}
+
+.oc-chat.oc-open .oc-global-head {background:#fff;color:#111;font-weight:bold;}
+.oc-chat.oc-open .oc-global-head svg {display:none;}
+.oc-chat.oc-closed {height:60px;width:60px;min-height:unset;border-radius:100px;bottom:20px;padding: 0; border: none; background: transparent;overflow:visible;}
+.oc-chat.oc-closed .oc-global-head {width:60px;height:60px;border-radius:100px;cursor:pointer;border:none;}
+.oc-chat.oc-closed .oc-global-head > span, .oc-chat.oc-closed .oc-global-head > i {display:none;}
+.oc-chat.oc-closed .oc-global-head svg {width:60px;height:60px;padding:16px;transition:0.1s;fill:#fff}
+.oc-chat.oc-closed .oc-global-head:hover svg {padding:13px 13px 15px 15px;}
+.oc-chat.oc-closed .oc-chat-in {display:none;}
+.oc-message, .oc-head, .oc-before, .oc-bans, .oc-global-head {-webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none;-ms-user-select: none; user-select: none;}
+
+
+
+/* CHAT THREAD MESSAGES */
+.oc-chat-thread {width:100%;background:#f6f6f7;z-index:2;position:relative;}
+.oc-body > div:not(.oc-me):after {display:none;left: -37px; top: -2px; position: absolute; content: "";box-shadow:0 1px 2px rgba(0,0,0,0.1); width: 30px; height: 30px; padding: 0; border-radius: 100px; background-color: #fff; background-repeat: no-repeat; background-size: 100% auto; background-position: center center;}
+.oc-body > div:not(.oc-me):first-of-type:after, .oc-body > div.oc-me + div:not(.oc-me):after, .oc-body > span + div:not(.oc-me):after {display:block;}
+.oc-body > div:not(.oc-me):first-of-type:before, .oc-body > div.oc-me + div:not(.oc-me):before, .oc-body > span + div:not(.oc-me):before,
+.oc-body > div.oc-me:first-of-type:before, .oc-body > div:not(.oc-me) + div.oc-me:before, .oc-body > span + div.oc-me:before {display:block;}
+.oc-chat-in.oc-on .oc-chat-thread.oc-on .oc-head > span em {display:none;}
+.oc-chat-in.oc-on .oc-chat-thread:not(.oc-on) {display:none!important;}
+.oc-chat-in.oc-on .oc-chat-thread.oc-on {display:block;position:absolute;top:0px;left:0;height:100%;}
+
+
+
+/* CHAT THREAD HEAD */
+.oc-head {float:left;clear:both;position:relative;cursor:pointer;width:100%;font-size:15px;padding:0px;background:#f6f6f7;color:#333;height:60px;border-bottom:1px solid #ccc;}
+.oc-head:hover {background:#fff;}
+.oc-head > span:not(.oc-to-user-name) {float:left;line-height:20px;margin:5px 0;max-width:calc(100% - 50px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-wrap: break-word; word-break: break-all;}
+.oc-head i.oc-close, .oc-head i.oc-options {cursor:pointer;position:absolute;z-index:9;top:0;right:0;display:none;background:#fff;float:right;width:40px;height:59px;line-height:60px;color:#aaa;font-size:18px;border-left:1px solid #ccc;text-align:center;}
+.oc-head i.oc-options {right:40px;}
+.oc-head:hover i.oc-close, .oc-head:hover i.oc-options {display:block;}
+.oc-head i.oc-close:hover, .oc-head i.oc-options:hover {color:#4d08f2;}
+.oc-head .oc-check {position: absolute; top: 8px; width: 12px; height: 12px; border-radius: 100px; left: 39px; background: #ff1e1e;box-shadow:0 0 1px 1px #f8f8f8;}
+!.oc-head:hover .oc-check {display:none;}
+.oc-head i.oc-back, .oc-head i.oc-back-new, i.oc-back-bans {display: none; float: left; margin: 0; line-height: 40px; height: 40px; font-size: 28px; color: #aaa; cursor: pointer; width: 40px; text-align: center; border-right: 1px solid #ccc; margin-right: 13px;}
+.oc-head i.oc-back {margin-right:8px;}
+.oc-head i.oc-back:hover, .oc-head i.oc-back-new:hover, i.oc-back-bans:hover {color:#4d08f2}
+.oc-head i.oc-back-new {display:block;margin:-10px 13px -10px -10px;}
+i.oc-back-bans {display:block;margin:-9px 10px -9px -10px;height:40px;line-height:40px;}
+
+.oc-chat-thread .oc-head .oc-img-wrap {float:left;width:42px;height:42px;border-radius:18px;background:#fff;overflow:hidden;margin:9px 10px 9px 10px;position:relative;box-shadow:0px 1px 3px rgba(0,0,0,0.15);}
+.oc-chat-thread .oc-head .oc-img-wrap img {display: block; width: auto; height: auto; max-width: 42px; max-height: 42px;position: absolute; top: -50%; left: -50%; bottom: -50%; right: -50%; margin: auto;}
+.oc-chat-thread .oc-head strong {font-weight:500;}
+.oc-chat-thread .oc-head strong span {float:left;font-weight:bold;font-size:14px;}
+.oc-chat-thread .oc-head > span:not(.oc-to-user-name) {padding:10px 0 9px 0;width:calc(100% - 92px);margin:0;padding-right:15px;}
+.oc-chat-thread .oc-head > span strong {font-size:15px;line-height:18px;float:left;clear:both;margin-bottom:2px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-wrap: break-word; word-break: break-all;}
+.oc-chat-thread .oc-head > span em {float:left;clear:both;max-width:100%;font-size:13px;line-height:16px;height:17px;font-style:normal;color:#777;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-wrap: break-word; word-break: break-all;}
+.oc-chat-thread:not(.oc-offline) .oc-head .oc-check {background:#00c944;}
+.oc-chat-thread.oc-unread .oc-head {background:#f8ffc4}
+.oc-chat-thread.oc-unread:not(.oc-on) .oc-head:before {display: block; width: 4px; top: 0px; left: 0px; height: 60px; background: rgba(0,0,0,0.2); content: ""; position: absolute;}
+.oc-chat-thread.oc-unread .oc-head:hover {background:#f2ff8d}
+.oc-chat-thread.oc-unread .oc-head strong {font-weight:600;color:#111;}
+.oc-chat-thread.oc-unread .oc-head > span em {color:#777;}
+.oc-chat-thread.oc-ended .oc-head {background:#ffdddd;}
+.oc-chat-thread.oc-ended .oc-head .oc-img-wrap {opacity:0.3;}
+.oc-chat-thread.oc-ended .oc-head > span strong > span, .oc-chat-thread.oc-ended .oc-head > span em {text-decoration:line-through;opacity:0.6;}
+
+.oc-chat-in.oc-on .oc-chat-thread.oc-on .oc-head {height:40px;background:#fff;border-bottom-color:#ccc;cursor:default;position:absolute;top:0;left:0;}
+.oc-chat-in.oc-on .oc-chat-thread.oc-on .oc-head > span:not(.oc-to-user-name) {padding:10px 0 9px 3px;margin:0;}
+.oc-chat-in.oc-on .oc-chat-thread.oc-on .oc-head .oc-img-wrap {width:30px;height:30px;margin:5px 6px 5px 4px;}
+.oc-chat-in.oc-on .oc-chat-thread.oc-on .oc-head .oc-img-wrap img {max-width:30px;max-height:30px;}
+
+.oc-chat-in.oc-on .oc-chat-thread.oc-on .oc-head .oc-check {position: absolute; right: auto; top: 4px; left: 75px; width: 12px; height: 12px; display: inline!important;box-shadow: 0 0 1px 1px #fff;}
+.oc-chat-in.oc-on .oc-chat-thread.oc-on .oc-head .oc-back {display:block;}
+!.oc-chat-in.oc-on .oc-chat-thread.oc-on .oc-head i.oc-options, .oc-chat-in.oc-on .oc-chat-thread.oc-on .oc-head i.oc-close {display:block;height:36px;line-height:36px;}
+.oc-chat-in.oc-on .oc-chat-thread.oc-on .oc-head i.oc-options, .oc-chat-in.oc-on .oc-chat-thread.oc-on .oc-head i.oc-close {display:none!important;}
+
+
+
+/* CHAT THREAD BODY */
+!.oc-body {float:left;clear:both;cursor:default;width:100%;padding:10px 10px 10px 45px;min-height:120px;max-height:calc(100vh - 235px);height:auto;overflow:hidden;overflow-y:auto;border:1px solid #f6f6f7;border-top-width:2px;border-bottom-width:2px;}
+.oc-body {cursor:default;width:100%;padding:10px 10px 10px 45px;position:absolute;top:40px;left:0;height:calc(100% - 140px);overflow:hidden;overflow-y:auto;border:1px solid #f6f6f7;border-top-width:2px;border-bottom-width:2px;}
+.oc-body > div {word-break: break-all;position:relative;float:left;clear:both;width:auto;max-width:93%;background:#fff;color:#222;font-size:14px;line-height:23px;padding:8px 12px;border-radius:8px;margin:0 0 10px 0;box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px;min-height:26px;min-width:32px;}
+.oc-body > div:before {display:none;content:"";border:4px solid transparent;border-right-color:#fff;position:absolute;left:-8px;top:8px;}
+.oc-body > div.oc-me {float:right;background:#4d08f2;color:#fff;}
+.oc-body > div.oc-me:before {border-color:transparent;border-left-color:#4d08f2;left:auto;right:-8px;}
+.oc-body > span.oc-time {position:relative;float:left;clear:both;text-align:center;width:calc(100% + 35px);color:#aaa;font-size:10px;margin:10px 0 16px -35px;font-style:normal;}
+.oc-body > span.oc-time:before {content:"";position:absolute;top:50%;left:0;width:100%;height:1px;background:rgba(0,0,0,0.1);}
+.oc-body > span.oc-time > span {background:#f6f6f7;display:inline-block;padding:0 8px;position:relative;z-index:2;}
+.oc-body > span.oc-chat-offline, .oc-body > span.oc-chat-ended {display: none; padding: 5px 5px; border: none; background: rgba(0,0,0,0.1); position: relative; float: left; clear: both; text-align: center; width: calc(100% + 35px); color: #888; border-radius: 100px; font-size: 12px; font-style:italic; margin: 5px 0 0 -35px;}
+.oc-chat-thread.oc-offline .oc-body > span.oc-chat-ended {margin-top:-5px;}
+.oc-chat-thread.oc-offline .oc-body > span.oc-chat-offline, .oc-chat-thread.oc-ended .oc-body > span.oc-chat-ended {display:block;}
+.oc-chat-thread .oc-message, .oc-chat-thread .oc-body {display:none;}
+.oc-chat-in.oc-on .oc-chat-thread.oc-on .oc-message, .oc-chat-in.oc-on .oc-chat-thread.oc-on .oc-body {display:block;}
+
+
+
+/* CHAT THREAD MESSAGE */
+.oc-message {position:absolute;bottom:0;left:0;width:100%;border-top:1px solid #ccc;padding:16px 18px;height:100px;background:#fff;}
+.oc-message textarea {border:none!important;background:#fff;padding:0px 42px 0px 0px;color:#333;font-size:14px;outline:0;height:65px;min-width:100%;max-height:65px;min-height:65px;width:100%;max-width:100%;line-height:18px;background:#fff;box-shadow:none;border-radius:0;margin:0;}
+.oc-message textarea:focus {border:none!important;}
+.oc-message textarea.disabled, .oc-chat-thread.oc-ended .oc-message textarea {opacity:0.7;}
+.oc-message textarea::-webkit-input-placeholder {color:#bbb;}
+.oc-message textarea:-moz-placeholder {color:#bbb;}
+.oc-message textarea::-moz-placeholder {color:#bbb;}
+.oc-message textarea:-ms-input-placeholder {color:#bbb;}
+.oc-message form {position:relative;}
+.oc-chat-thread .oc-message .oc-submit {border-radius:8px;cursor:pointer;display:block;position: absolute; right: 0px; top: 0px; height: 38px; background:#4d08f2;fill:#fff; width: 40px; text-decoration: none; text-align: center; }
+.oc-chat-thread .oc-message .oc-submit:not(.oc-disabled):hover {background:#4506dc;}
+.oc-chat-thread .oc-message .oc-submit.oc-disabled {background:#999;cursor:default;}
+.oc-chat-thread .oc-message .oc-submit svg {width:20px;height:20px;margin:8px 8px 10px 11px;transform:rotate(-12deg);}
+
+
+/* CHAT THREAD OPTIONS */
+.oc-options-list {position:absolute;z-index:10;margin:0;width:100%;height:60px;padding:10px 50px;top:0;left:0;border-bottom:1px solid #ccc;display:none;background:#fff;color:#333;font-size:13px;font-weight:500;list-style-type:none;}
+.oc-options-list div.oc-opt {cursor:pointer;float:left;width:100%;clear:both;height:18px;padding:0;line-height:18px;}
+.oc-options-list i + div.oc-opt {margin-bottom:2px;}
+.oc-options-list div.oc-opt:hover {text-decoration:underline;}
+.oc-options-list .oc-opt-ico {position:absolute;left:0;top:0;width:50px;height:59px;text-align:center;background:#fff;color:#aaa;font-size:24px;line-height:60px;}
+.oc-options-list .oc-opt-close {position:absolute;cursor:pointer;right:0;top:0;width:40px;border-left:1px solid #ccc;height:59px;line-height:60px;text-align:center;color:#aaa;font-size:16px;}
+.oc-options-list .oc-opt-close:hover {color:#4d08f2;}
+.oc-options-list div.oc-opt.oc-opt-success {font-weight:600;}
+.oc-options-list .oc-opt-ico.oc-opt-success {color:#00c944;}
+.oc-options-list .oc-opt-ico.oc-opt-success:before {content:"\f00c";}
+
+
+
+/* INITIATE CHAT */
+.oc-before {display:none;width:100%;background:#f6f6f7;position:absolute;top:0px;left:0;height:100%;z-index:2;}
+.oc-before .oc-head {height:40px;background:#fff;border-bottom:none;padding:10px;line-height:20px;font-size:14px;position:absolute;top:0;left:0;}
+.oc-before .oc-head .oc-to-user-name {font-weight:600;}
+.oc-before label {color:#111;font-size:13px;line-height:18px;float:left;clear:both;width:100%;margin:0 0 5px 0;font-weight:bold;}
+.oc-before input[type="text"]#userName {float:left;clear:both;width:100%;border-radius:5px;color:#111;border:1px solid #ccc;margin:0 0 15px 0;font-size:14px;box-shadow:none;background:#f8f8f8;outline:0;padding:8px;line-height:15px;height:36px;}
+.oc-before .oc-message textarea {float:left;clear:both;height:105px;max-height:105px;min-height:105px;min-width:100%;max-width:100%;padding:8px;border-radius:5px;width:100%;background:#f8f8f8;border:1px solid #ccc!important;font-size:14px;margin:0 0 15px 0;}
+.oc-before input[type="text"]#userName:hover, .oc-before input[type="text"]#userName:focus, .oc-before .oc-message textarea:hover, .oc-before .oc-message textarea:focus {border:1px solid #aaa!important;}
+.oc-before a.oc-submit {clear:both;width:100%;display:inline-block;margin:0;padding:10px;line-height:18px;background:#4d08f2;font-weight:bold;border-radius:6px;font-size:15px;text-align:center;text-decoration:none;color:#fff;border:1px solid #ccc;border-bottom-color:rgba(0,0,0,0.2);}
+.oc-before a.oc-submit:hover {background:#4608dd;}
+.oc-before .oc-message {top: 40px; bottom: auto; height: calc(100% - 40px);overflow-y:auto;padding-bottom:20px;}
+.oc-before[style*="display: block"] + .oc-chat-thread-empty, .oc-before[style*="display:block"] + .oc-chat-thread-empty, .oc-chat.oc-bans-opened .oc-chat-thread-empty {display:none;}
+.oc-chat.oc-init .oc-before {display:block;}
+
+
+
+/* INITIATE CHAT BUTTON */
+.oc-chat-button {float:left;display:inline-block;height:52px;border-left:5px solid rgba(0,0,0,0.15);margin:10px 15px 10px 0;outline:0;padding:10px 12px 10px 10px;color:#fff;text-decoration:none;font-weight:500;font-size:13px;background:#4d08f2;line-height:16px;border-radius:3px;}
+.oc-chat-button:active, .oc-chat-button:focus {outline:0;}
+.oc-chat-button.oc-active:hover {background:#4205d4;color:#fff;}
+.oc-chat-button.oc-disabled {cursor:default;opacity:0.6;color:#fff;}
+.oc-chat-button.oc-online, .oc-chat-button.oc-offline {cursor:pointer!important;}
+.oc-chat-button .oc-user-left {display:inline-block;float:left;}
+.oc-chat-button .oc-user-left i {font-size: 33px; line-height: 28px;}
+.oc-chat-button .oc-user-right {display:inline-block;padding-left:12px;padding-right:5px;float:left;}
+.oc-chat-button .oc-user-top {font-size:16px;line-height:18px;font-weight:600;float:left;clear:both;width:100%;}
+.oc-chat-button .oc-user-bot {font-size:11px;line-height:14px;float:left;clear:both;width:100%;}
+.oc-chat-button.oc-online .oc-status-online, .oc-chat-button.oc-offline .oc-status-offline {display:block;}
+.oc-chat-button.oc-offline .oc-status-online, .oc-chat-button.oc-online .oc-status-offline {display:none;}
+
+
+
+/* USER STATUS CIRCLE */
+.oc-user-status {color:#bbb;text-shadow:1px 1px 3px rgba(0,0,0,0.05);}
+.oc-user-status.oc-active.oc-online {color:#00c944;}
+
+
+
+/* USER BLOCKS */
+.oc-bans {position:absolute;top:0px;left:0;height:100%;width:100%;background:#fff;display:none;z-index:2;position:relative;}
+.oc-bans:after {position:absolute;right:10px;bottom:10px;color:rgba(0,0,0,0.03);font-size:80px;width:80px;height:80px;line-height:80px;text-align:center;font-family:"FontAwesome","Font Awesome 5 Free";content:"\f05e";}
+!.oc-bans .oc-bans-ins {background:#f6f6f7;float:left;clear:both;width:100%;overflow:hidden;overflow-y:auto;max-height:490px;min-height:260px;}
+.oc-bans .oc-bans-ins {background:#f6f6f7;width:100%;overflow:hidden;overflow-y:auto;height:calc(100% - 40px);position:absolute;top:40px;left:0;}
+.oc-bans-head {font-weight: bold; position:absolute;top:0;left:0; width: 100%; line-height: 20px; height: 40px; padding: 9px 10px; border-bottom: 1px solid #ccc; color: #333; font-size: 14px; background: #fff;}
+.oc-bans-head > div {float:left;}
+.oc-bans-head > a {float:right;color:#4d08f2;font-weight:500;text-decoration:none;font-size:13px;}
+.oc-bans-head > a:hover {text-decoration:underline;color:#4d08f2;}
+.oc-bans-head > a.oc-active {font-weight:bold;color:#F44336;}
+.oc-ban-row {background:#fff;float:left;clear:both;width:100%;line-height:20px;font-size:13px;color:#444;border-bottom:1px solid #ccc;position:relative;z-index:2;}
+.oc-ban-img {float: left; width: 32px; height: 32px; border-radius: 18px; background: #fff; overflow: hidden; margin: 4px 2px 4px 8px; position: relative;}
+.oc-ban-img img {display: block; width: auto; height: auto; max-width: 32px; max-height: 32px; position: absolute; top: -50%; left: -50%; bottom: -50%; right: -50%; margin: auto;}
+.oc-ban-user {float:left;width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-wrap: break-word; word-break: break-all;padding:10px 5px;}
+.oc-ban-empty {float: left; clear: both; width: 100%; font-size: 14px; color: #999; font-style: normal; line-height: 20px; padding: 30px 5px; text-align: center;}
+.oc-ban-row + .oc-ban-empty {display:none;}
+.oc-ban-row i.oc-ban-cancel {cursor:pointer;float:right;width:40px;height:40px;border-left:1px solid #ccc;text-align:center;line-height:40px;font-size:16px;color:#aaa;}
+.oc-ban-row i.oc-ban-cancel:hover {color:#4d08f2;}
+.oc-chat.oc-bans-opened .oc-bans {display:block;}
+.oc-chat.oc-bans-opened .oc-gear {background: rgba(255,255,255,0.2); border-left-color: rgba(0,0,0,0.1);}
+.oc-chat.oc-bans-opened .oc-before, .oc-chat.oc-bans-opened .oc-chat-thread {display:none;}
+
+
+
+/* GLOBAL CHAT WINDOW HEAD */
+.oc-global-head {border-top-left-radius:5px;border-top-right-radius:5px;width:100%;position:absolute;left:0;top:0;margin:0;height:40px;color:#fff;background:#4d08f2;font-size:14px;font-weight:600;border-bottom:1px solid #ccc;cursor:default;}
+.oc-global-head > i, .oc-global-head > span {cursor:pointer;}
+.oc-global-head > i.oc-ico {float:left;margin:5px 10px;font-size:28px;line-height:30px;}
+.oc-global-head > span {line-height:20px;padding:10px 0 8px 0;margin:0;float:left;width:150px;}
+.oc-global-head > svg + span {padding-left:15px;}
+
+.oc-global-head > span.oc-alt {opacity:0;position:absolute;left:15px;z-index:1;background:#fff;}
+.oc-global-head > i.oc-dir, .oc-global-head > i.oc-gear {float:right;font-size:26px;line-height:40px;width:40px;height:40px;margin:0;padding:0;color:#aaa;text-align:center;border-left: 1px solid #ccc;}
+.oc-global-head > i.oc-gear, .oc-global-head > i.oc-dir {font-size:18px;}
+.oc-global-head > i.oc-dir:hover, .oc-global-head > i.oc-gear:hover {color:#4d08f2;}
+!.oc-global-head > i.oc-dir:before {content:"\f107";}
+.oc-chat.oc-closed .oc-global-head > i.oc-dir:before {content:"\f106";}
+.oc-chat.oc-closed .oc-global-head > i.oc-gear {display:none;}
+.oc-chat.oc-closed .oc-global-head.oc-g-unread {animation-name: anim-unread; animation-duration: 2s;animation-iteration-count: infinite;}
+.oc-chat .oc-global-head.oc-g-unread > span {animation-name: anim-unread-switch; animation-duration: 2s;animation-iteration-count: infinite;}
+.oc-chat .oc-global-head.oc-g-unread > span.oc-alt {animation-name: anim-unread-switch-alt; animation-duration: 2s;animation-iteration-count: infinite;}
+.oc-chat.oc-closed .oc-global-head.oc-g-unread:before {content:"!";position:absolute;top:0;right:0;background:#e30000;width:20px;height:20px;border-radius:100px;text-align:center;color:#fff;line-height:20px;font-size:14px;font-weight:bold;box-shadow:0 0 1px 1px #fff;}
+
+@keyframes anim-unread {0% {background:#4d08f2;} 10% {background:#000;} 20% {background:#4d08f2;} 100% {background:#4d08f2;}}
+@keyframes anim-unread-switch {0% {opacity:1;} 24% {opacity:1;} 25% {opacity:0;} 74% {opacity:0;} 75% {opacity:1;} 100% {opacity:1;}}
+@keyframes anim-unread-switch-alt {0% {opacity:0;} 24% {opacity:0;} 25% {opacity:1;} 74% {opacity:1;} 75% {opacity:0;} 100% {opacity:0;}}
+
+
+/* MOBILE DEVICES */
+@media screen and (max-width: 767px) {
+  !.oc-chat {right:15px;bottom:15px;max-width:calc(100% - 30px);max-height:460px;}
+  .oc-chat {right:15px;bottom:15px;max-width:calc(100% - 30px);}
+  .oc-head i.oc-close, .oc-head i.oc-options {display:block;background:#f6f6f7;}
+  .oc-chat-in:not(.oc-on) .oc-chat-thread .oc-head > span:not(.oc-to-user-name) {max-width:calc(100% - 142px);}
+  !.oc-body {max-height:300px;}
+  .oc-head:hover {background:#f6f6f7;}
+  !.oc-chat .oc-chat-in {max-height: 440px;min-height:240px;}
+  !.oc-bans .oc-bans-ins {max-height: 400px;}
+  .oc-chat.oc-closed {right:15px;bottom:15px;}
+  .oc-chat {height: calc(100vh - 140px);max-height:420px;}
+}
+
+
+/* CHROME SCROLL BARS */
+@media screen and (min-width: 768px) {
+  .oc-body::-webkit-scrollbar, .oc-chat-in::-webkit-scrollbar {box-shadow: none;width: 10px;}
+  .oc-body::-webkit-scrollbar-thumb, .oc-chat-in::-webkit-scrollbar-thumb {-moz-transition: background-color 218ms cubic-bezier(0.4, 0, 0.2, 1);-o-transition: background-color 218ms cubic-bezier(0.4, 0, 0.2, 1);-webkit-transition: background-color 218ms cubic-bezier(0.4, 0, 0.2, 1);transition: background-color 218ms cubic-bezier(0.4, 0, 0.2, 1);background-color: rgba(0,0,0,0.12);background-clip: initial;box-shadow: none;}
+  .oc-body::-webkit-scrollbar-thumb:hover, .oc-chat-in::-webkit-scrollbar-thumb:hover {background-color: #9e9e9e;}
+  .oc-body::-webkit-scrollbar-corner, .oc-chat-in::-webkit-scrollbar-corner {background: #000;}
+}
+
+
+/* FONT AWESOME 5 FIX */
+body i.fa-mail-reply:before, body i.fa-reply:before {content: "\f3e5";font-weight:900;}
+body i.fa-gear:before {content: "\f013";font-weight:900;}
+
+/* RTL */
+html[dir="rtl"] .oc-body, html[dir="rtl"] #oc-chat {direction:rtl;}
+html[dir="rtl"] .oc-chat-button {float:right;margin-left:15px;margin-right:0;border-left:none;border-right:5px solid rgba(0,0,0,0.15);padding-left:12px;padding-right:10px;}
+html[dir="rtl"] .oc-chat-button .oc-user-left {float:right;}
+html[dir="rtl"] .oc-chat-button .oc-user-right {padding-right: 12px; padding-left: 5px; float:right;text-align:right;}
+html[dir="rtl"] #seller .line-chat a.btn i {margin-left:7px;margin-right:0;}
+html[dir="rtl"] .oc-chat {left:20px;right:auto;text-align:right;}
+html[dir="rtl"] .oc-global-head > svg + span {padding-left:0;padding-right:15px;}
+html[dir="rtl"] .oc-chat-thread .oc-head > span:not(.oc-to-user-name) {padding-left:15px;padding-right:0px;}
+html[dir="rtl"] .oc-global-head > span, html[dir="rtl"] .oc-head, html[dir="rtl"] .oc-chat-thread .oc-head .oc-img-wrap {float:right;}
+html[dir="rtl"] .oc-global-head > span.oc-alt {right:15px;left:auto;}
+html[dir="rtl"] .oc-global-head > i.oc-dir, html[dir="rtl"] .oc-global-head > i.oc-gear {float:left;}
+html[dir="rtl"] .oc-head > span:not(.oc-to-user-name), html[dir="rtl"] .oc-chat-thread .oc-head > span strong {float:right;}
+html[dir="rtl"] .oc-head .oc-check {right:39px;left:auto;}
+html[dir="rtl"] .oc-chat-thread .oc-head strong span, html[dir="rtl"] .oc-chat-thread .oc-head > span em, html[dir="rtl"] .oc-options-list div.oc-opt {float:right;}
+html[dir="rtl"] .oc-head i.oc-close, html[dir="rtl"] .oc-head i.oc-options, html[dir="rtl"] .oc-options-list .oc-opt-close {left:0;right:auto;}
+html[dir="rtl"] .oc-head i.oc-options {left:40px;}
+html[dir="rtl"] .oc-options-list .oc-opt-close {transform: scaleX(-1);}
+html[dir="rtl"] .oc-head i.oc-back, html[dir="rtl"] .oc-head i.oc-back-new, html[dir="rtl"] i.oc-back-bans {float:right;transform: scaleX(-1);}
+html[dir="rtl"] .oc-head i.oc-back {margin-right:0;margin-left:8px;}
+html[dir="rtl"] .oc-head i.oc-back-new {margin-right:-10px;margin-left:13px;}
+html[dir="rtl"] .oc-body > div {float:right;}
+html[dir="rtl"] .oc-body > div.oc-me {float:left;}
+html[dir="rtl"] .oc-body > div:before {right:-8px;left:auto;transform:scaleX(-1);}
+html[dir="rtl"] .oc-body > div.oc-me:before {left:-8px;right:auto;transform:scaleX(-1);}
+html[dir="rtl"] .oc-message textarea {padding-left:42px;padding-right:0;}
+html[dir="rtl"] .oc-chat-thread .oc-message .oc-submit {left:0;right:auto;transform:scaleX(-1);}
+html[dir="rtl"] .oc-global-head > i.oc-dir, html[dir="rtl"] .oc-global-head > i.oc-gear, html[dir="rtl"] .oc-head i.oc-close, html[dir="rtl"] .oc-head i.oc-options {border-left:none;border-right:1px solid #ccc;}
+html[dir="rtl"] .oc-chat-in.oc-on .oc-chat-thread.oc-on .oc-head .oc-check {right:75px;left:auto;}
+html[dir="rtl"] .oc-options-list .oc-opt-ico {right:0;left:auto;}
+html[dir="rtl"] .oc-bans-head > div {float:right;}
+html[dir="rtl"] .oc-bans-head > a {float:left;}
+html[dir="rtl"] i.oc-back-bans {margin-left:10px;margin-right:-10px;}
+html[dir="rtl"] .oc-ban-img {float:right;margin-right:8px;margin-left:2px;}
+html[dir="rtl"] .oc-ban-user {float:right;}
+html[dir="rtl"] .oc-ban-row i.oc-ban-cancel {float:left;border-left:none;border-right:1px solid #ccc;}
+html[dir="rtl"] .oc-before .oc-message textarea {padding:8px;}

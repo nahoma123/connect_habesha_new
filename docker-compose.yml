@@ -1,0 +1,44 @@
+services:
+  php:
+    image: php:7.4-apache
+    container_name: php_dev_1
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    environment:
+      - MYSQLI_ENABLED=true
+    command: /bin/bash -c "docker-php-ext-install mysqli && apache2-foreground"
+
+  db:
+    image: mysql:5.7
+    container_name: mysql_dev
+    restart: always
+    environment:
+      DB_HOST: db
+      ENV: development
+      MYSQL_ROOT_PASSWORD: root_password  # Replace with your root password
+      MYSQL_DATABASE: u609444707_NvDH4new   # Your database name
+      MYSQL_USER: u609444707_6txkvnew       # Your database username
+      MYSQL_PASSWORD: 1A/T#pm|t|rf         # Your database password
+    volumes:
+      - ../connect_habesh_db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: u609444707_6txkvnew
+      PMA_PASSWORD: 1A/T#pm|t|rf
+    depends_on:
+      - db
+
+volumes:
+  db_data:
+    external: true

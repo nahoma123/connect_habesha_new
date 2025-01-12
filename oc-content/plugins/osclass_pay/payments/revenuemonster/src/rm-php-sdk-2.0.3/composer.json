@@ -1,0 +1,25 @@
+{
+  "name": "revenuemonster/sdk",
+  "description": "RMSDK - A SDK for RevenueMonster endpoint",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "SianLoong",
+      "email": "sianloong@revenuemonster.my"
+    }
+  ],
+  "require": {
+    "php": ">=7.1.3",
+    "nategood/httpful": "*",
+    "tightenco/collect": "^8.3",
+    "rakit/validation": "^1.1"
+  },
+  "autoload": {
+    "files": [
+      "src/helpers.php"
+    ],
+    "psr-4": {
+      "RevenueMonster\\SDK\\": "src"
+    }
+  }
+}

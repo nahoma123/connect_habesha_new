@@ -1,0 +1,28 @@
+DROP TABLE IF EXISTS /*TABLE_PREFIX*/t_oc_chat;
+CREATE TABLE /*TABLE_PREFIX*/t_oc_chat (
+pk_i_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+pk_i_chat_id INT(10),
+i_from_user_id INT(10),
+s_from_user_name VARCHAR(20),
+i_to_user_id INT(10),
+s_to_user_name VARCHAR(20),
+s_text VARCHAR(1000),
+i_shown INT(1) DEFAULT 0,
+i_read INT(1) DEFAULT 0,
+i_end INT(1) DEFAULT 0,
+dt_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+PRIMARY KEY (pk_i_id)
+) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
+
+ALTER TABLE /*TABLE_PREFIX*/t_oc_chat ADD INDEX (pk_i_chat_id, i_to_user_id, i_shown);
+
+
+DROP TABLE IF EXISTS /*TABLE_PREFIX*/t_oc_chat_block;
+CREATE TABLE /*TABLE_PREFIX*/t_oc_chat_block (
+pk_i_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+i_user_id INT(10),
+i_block_user_id INT(10) DEFAULT 0,
+
+PRIMARY KEY (pk_i_id)
+) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';

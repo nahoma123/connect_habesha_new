@@ -1,0 +1,1000 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: SMS Notification and Verification Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-25 11:11+0100\n"
+"PO-Revision-Date: 2024-11-25 11:11+0100\n"
+"Last-Translator: Miso <miso546@azet.sk>\n"
+"Language-Team: MB Themes <info@mb-themes.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-KeywordsList: __;_e;_m\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: languages/en_US\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: admin/configure.php:3 admin/configure.php:71 index.php:479 index.php:488
+#: index.php:521
+msgid "Configure"
+msgstr ""
+
+#: admin/configure.php:55 admin/provider.php:66
+msgid "Settings were successfully saved"
+msgstr ""
+
+#: admin/configure.php:65
+msgid ""
+"Plugin will automatically identify phone number field for listings on "
+"OsclassPoint themes, Telephone plugin or Custom field that is set as phone "
+"number"
+msgstr ""
+
+#: admin/configure.php:83
+msgid "Admin Phone Number"
+msgstr ""
+
+#: admin/configure.php:86
+msgid "To receive SMS notifications. Format with +, no white spaces."
+msgstr ""
+
+#: admin/configure.php:90
+msgid "Site Name - Shortcut"
+msgstr ""
+
+#: admin/configure.php:93
+msgid ""
+"Your site name used in SMS. Should be shortest possible, max 20 chars. Good "
+"example: OsclassPoint Bad example: Osclass themes and plugins - OsclassPoint."
+"com."
+msgstr ""
+
+#: admin/configure.php:97
+msgid "SMS Provider (gateway)"
+msgstr ""
+
+#: admin/configure.php:105
+msgid ""
+"Select primary SMS gateway / provider used to send messages. Note that "
+"selected provider must be configured in \"SMS Providers\" section first. "
+"When \"Demo\" is selected, plugin will show user what code should be put "
+"into confirmation field, however no SMS is being sent."
+msgstr ""
+
+#: admin/configure.php:109
+msgid "SMS Provider (gateway) - Alternative"
+msgstr ""
+
+#: admin/configure.php:117
+msgid ""
+"Select alternative (backup) SMS gateway / provider used to send messages in "
+"case primary one has failed."
+msgstr ""
+
+#: admin/configure.php:122
+msgid "Phone Number Uniqueness Check"
+msgstr ""
+
+#: admin/configure.php:125
+msgid ""
+"When enabled, phone number user enters in user profile (both mobile & land) "
+"is checked for uniqueness. If some other user already use entered mobile or "
+"land phone, warning is shown to user."
+msgstr ""
+
+#: admin/configure.php:129
+msgid "Ignore First Zero in Number"
+msgstr ""
+
+#: admin/configure.php:132
+msgid ""
+"When enabled, first zero after country prefix is ignored. Means, if country "
+"prefix is +98, then phone numner +980xxxxxx and +98xxxxxx are considered as "
+"identical."
+msgstr ""
+
+#: admin/configure.php:136
+msgid "Ignore First Zero Prefixes"
+msgstr ""
+
+#: admin/configure.php:139
+msgid ""
+"For setting \"Ignore First Zero in Number\" define list of country phone "
+"prefixes where first zero is ignored. Delimit by comma. Example: +90,+420,"
+"+233"
+msgstr ""
+
+#: admin/configure.php:145
+msgid "User Account Phone Verification"
+msgstr ""
+
+#: admin/configure.php:148
+msgid ""
+"When enabled, phone number used on user register (user account) must be "
+"verified. These fields will be required as well."
+msgstr ""
+
+#: admin/configure.php:152
+msgid "Listing Phone Verification"
+msgstr ""
+
+#: admin/configure.php:155
+msgid ""
+"When enabled, phone number used on item post (listing) must be verified. "
+"These fields will be required as well."
+msgstr ""
+
+#: admin/configure.php:159
+msgid "Preferred Countries"
+msgstr ""
+
+#: admin/configure.php:162
+msgid ""
+"Countries those will be at top of list with country code prefixes. Example: "
+"gb,us,de"
+msgstr ""
+
+#: admin/configure.php:166
+msgid "Initial Country"
+msgstr ""
+
+#: admin/configure.php:169
+msgid ""
+"Default country selected for every user. If left blank, plugin will try to "
+"auto-locate user and fill country code based on its IP address. Example: us"
+msgstr ""
+
+#: admin/configure.php:173
+msgid "Only Countries"
+msgstr ""
+
+#: admin/configure.php:176
+msgid ""
+"Restrict list of countries shown in prefix select box. Delimit with comma. "
+"Example: gb,us,de"
+msgstr ""
+
+#: admin/configure.php:181
+msgid "Custom Field Phone Identifier"
+msgstr ""
+
+#: admin/configure.php:184
+msgid ""
+"Identifier of custom field used for phone number input on items (Listings > "
+"Custom Fields > Advanced > Identifier Name). Input should be text type. "
+"Field is optional, if your theme already has phone number field or telephone "
+"plugin is used."
+msgstr ""
+
+#: admin/configure.php:188
+msgid "Phone Number CSS Selector"
+msgstr ""
+
+#: admin/configure.php:191
+msgid ""
+"CSS selector for phone number field/input to add country select box in front "
+"of number"
+msgstr ""
+
+#: admin/configure.php:196
+msgid "Geo IP Lookup"
+msgstr ""
+
+#: admin/configure.php:199
+msgid ""
+"When enabled, plugin will try to detect user phone prefix automatically. May "
+"cause slower page load."
+msgstr ""
+
+#: admin/configure.php:203
+msgid "User SMS notification settings"
+msgstr ""
+
+#: admin/configure.php:208
+msgid "Account Validation"
+msgstr ""
+
+#: admin/configure.php:211
+msgid "When enabled, user will receive SMS with account validation link."
+msgstr ""
+
+#: admin/configure.php:216
+msgid "Password Reset"
+msgstr ""
+
+#: admin/configure.php:219
+msgid "When enabled, user will receive SMS with link to reset its password."
+msgstr ""
+
+#: admin/configure.php:223
+msgid "Item Validation"
+msgstr ""
+
+#: admin/configure.php:226
+msgid ""
+"When enabled, user will receive SMS with link to validate newly published "
+"listing."
+msgstr ""
+
+#: admin/configure.php:230
+msgid "Item Activated"
+msgstr ""
+
+#: admin/configure.php:233
+msgid ""
+"When enabled, user will receive confirmation SMS that item has been "
+"activated."
+msgstr ""
+
+#: admin/configure.php:237
+msgid "Item Publish"
+msgstr ""
+
+#: admin/configure.php:240
+msgid ""
+"When enabled, user will receive confirmation SMS that item has been "
+"published (if validation is not required)."
+msgstr ""
+
+#: admin/configure.php:244
+msgid "Item Contact Form"
+msgstr ""
+
+#: admin/configure.php:247
+msgid ""
+"When enabled, user will receive SMS with notification that someone has used "
+"contact form on its listing (with brief message details)."
+msgstr ""
+
+#: admin/configure.php:251
+msgid "Premium Groups"
+msgstr ""
+
+#: admin/configure.php:256
+msgid "No groups in Osclass Pay Plugin"
+msgstr ""
+
+#: admin/configure.php:265
+msgid ""
+"Select user groups from Osclass Pay Plugin those members will receive "
+"notification messages (SMS)."
+msgstr ""
+
+#: admin/configure.php:266
+msgid "If no group is selected, all users will receive SMS notifications."
+msgstr ""
+
+#: admin/configure.php:271
+msgid "Admin SMS notification settings"
+msgstr ""
+
+#: admin/configure.php:275
+msgid "Web Contact Form"
+msgstr ""
+
+#: admin/configure.php:278
+msgid ""
+"When enabled, admin will receive SMS notification that web contact form has "
+"been used (with brief message details)."
+msgstr ""
+
+#: admin/configure.php:282
+msgid "New Listing Published"
+msgstr ""
+
+#: admin/configure.php:285
+msgid ""
+"When enabled, admin will receive SMS notification that new listing has been "
+"added on site."
+msgstr ""
+
+#: admin/configure.php:289
+msgid "New User Registered"
+msgstr ""
+
+#: admin/configure.php:292
+msgid ""
+"When enabled, admin will receive SMS notification when new user has "
+"registered on site."
+msgstr ""
+
+#: admin/configure.php:300 admin/provider.php:541
+msgid "This is demo site"
+msgstr ""
+
+#: admin/configure.php:300 admin/configure.php:302 admin/provider.php:541
+#: admin/provider.php:543
+msgid "Save"
+msgstr ""
+
+#: admin/log_sms.php:3 admin/log_sms.php:21 index.php:490 index.php:523
+msgid "SMS Logs"
+msgstr ""
+
+#: admin/log_sms.php:25
+msgid "Sms logs cannot be removed."
+msgstr ""
+
+#: admin/log_sms.php:31 admin/log_sms.php:56 admin/log_verification.php:31
+msgid "Phone"
+msgstr ""
+
+#: admin/log_sms.php:36 admin/log_sms.php:57 admin/provider.php:585
+msgid "Message"
+msgstr ""
+
+#: admin/log_sms.php:41 admin/log_sms.php:59
+msgid "Action"
+msgstr ""
+
+#: admin/log_sms.php:47 admin/log_verification.php:42
+msgid "Search"
+msgstr ""
+
+#: admin/log_sms.php:54
+msgid "ID"
+msgstr ""
+
+#: admin/log_sms.php:55 form/verify.php:85
+msgid "User"
+msgstr ""
+
+#: admin/log_sms.php:58 admin/log_verification.php:55
+msgid "Date"
+msgstr ""
+
+#: admin/log_sms.php:60 admin/log_verification.php:53 admin/provider.php:570
+#: admin/provider.php:621
+msgid "Provider"
+msgstr ""
+
+#: admin/log_sms.php:61
+msgid "Response"
+msgstr ""
+
+#: admin/log_sms.php:62 admin/log_verification.php:54
+msgid "Status"
+msgstr ""
+
+#: admin/log_sms.php:67
+msgid "No sms logs has been found"
+msgstr ""
+
+#: admin/log_sms.php:82
+msgid "Click to open response"
+msgstr ""
+
+#: admin/log_sms.php:82
+msgid "Response details"
+msgstr ""
+
+#: admin/log_sms.php:88
+msgid "RESPONSE:"
+msgstr ""
+
+#: admin/log_sms.php:91
+msgid "ERROR:"
+msgstr ""
+
+#: admin/log_verification.php:3 admin/log_verification.php:21
+msgid "Phone Number Verification Logs"
+msgstr ""
+
+#: admin/log_verification.php:25
+msgid "Verification logs cannot be removed."
+msgstr ""
+
+#: admin/log_verification.php:36
+msgid "Email"
+msgstr ""
+
+#: admin/log_verification.php:50
+msgid "Phone Number"
+msgstr ""
+
+#: admin/log_verification.php:51
+msgid "User Email"
+msgstr ""
+
+#: admin/log_verification.php:52
+msgid "Verification Code"
+msgstr ""
+
+#: admin/log_verification.php:60
+msgid "No verification logs has been found"
+msgstr ""
+
+#: admin/provider.php:3
+msgid "provider"
+msgstr ""
+
+#: admin/provider.php:76
+#, php-format
+msgid "SMS has been sent. Provider response: %s"
+msgstr ""
+
+#: admin/provider.php:78
+#, php-format
+msgid "There was error while sending SMS. Provider response: %s"
+msgstr ""
+
+#: admin/provider.php:88
+#, php-format
+msgid "There was problem to retrieve balance: %s"
+msgstr ""
+
+#: admin/provider.php:90
+#, php-format
+msgid "Balance successfully retrieved. Your balance is: %s"
+msgstr ""
+
+#: admin/provider.php:114 index.php:489 index.php:522
+msgid "SMS Providers"
+msgstr ""
+
+#: admin/provider.php:131
+msgid "Twilio.com"
+msgstr ""
+
+#: admin/provider.php:137 admin/provider.php:138 admin/provider.php:171
+#: admin/provider.php:172 admin/provider.php:200 admin/provider.php:201
+#: admin/provider.php:229 admin/provider.php:230 admin/provider.php:259
+#: admin/provider.php:260 admin/provider.php:296 admin/provider.php:324
+#: admin/provider.php:325 admin/provider.php:367 admin/provider.php:368
+#: admin/provider.php:407 admin/provider.php:408 admin/provider.php:441
+#: admin/provider.php:442 admin/provider.php:475 admin/provider.php:476
+#: admin/provider.php:509 admin/provider.php:510
+msgid "Link will open in new window"
+msgstr ""
+
+#: admin/provider.php:137
+msgid "Twilio Dashboard"
+msgstr ""
+
+#: admin/provider.php:138
+msgid "Twilio Docs"
+msgstr ""
+
+#: admin/provider.php:143
+msgid "Twilio Account SID"
+msgstr ""
+
+#: admin/provider.php:148
+msgid "Twilio Auth Token"
+msgstr ""
+
+#: admin/provider.php:153
+msgid "Twilio Phone Number"
+msgstr ""
+
+#: admin/provider.php:165
+msgid "GatewayAPI.com"
+msgstr ""
+
+#: admin/provider.php:171
+msgid "GatewayAPI Home"
+msgstr ""
+
+#: admin/provider.php:172
+msgid "GatewayAPI Docs"
+msgstr ""
+
+#: admin/provider.php:177
+msgid "GatewayAPI API Token"
+msgstr ""
+
+#: admin/provider.php:182
+msgid "GatewayAPI Sender"
+msgstr ""
+
+#: admin/provider.php:194
+msgid "RingCaptcha"
+msgstr ""
+
+#: admin/provider.php:200
+msgid "RingCaptcha Dashboard"
+msgstr ""
+
+#: admin/provider.php:201
+msgid "RingCaptcha Docs"
+msgstr ""
+
+#: admin/provider.php:205
+msgid "RingCaptcha App Key"
+msgstr ""
+
+#: admin/provider.php:210
+msgid "RingCaptcha Api Key"
+msgstr ""
+
+#: admin/provider.php:223
+msgid "TextLocal.com"
+msgstr ""
+
+#: admin/provider.php:229
+msgid "TextLocal.com Home"
+msgstr ""
+
+#: admin/provider.php:230
+msgid "TextLocal.com Docs"
+msgstr ""
+
+#: admin/provider.php:235
+msgid "TextLocal.com Api Key"
+msgstr ""
+
+#: admin/provider.php:240
+msgid "TextLocal.com Sender"
+msgstr ""
+
+#: admin/provider.php:253
+msgid "TextLocal.in"
+msgstr ""
+
+#: admin/provider.php:259
+msgid "TextLocal.in Home"
+msgstr ""
+
+#: admin/provider.php:260
+msgid "TextLocal.in Docs"
+msgstr ""
+
+#: admin/provider.php:265
+msgid "TextLocal.in Api Key"
+msgstr ""
+
+#: admin/provider.php:270
+msgid "TextLocal.in Sender Id"
+msgstr ""
+
+#: admin/provider.php:276
+msgid "TextLocal.in Password"
+msgstr ""
+
+#: admin/provider.php:290
+msgid "Way2SMS"
+msgstr ""
+
+#: admin/provider.php:296
+msgid "Way2SMS Home"
+msgstr ""
+
+#: admin/provider.php:300
+msgid "Way2SMS Username"
+msgstr ""
+
+#: admin/provider.php:305
+msgid "Way2SMS Password"
+msgstr ""
+
+#: admin/provider.php:318
+msgid "Msg91"
+msgstr ""
+
+#: admin/provider.php:324
+msgid "Msg91 Home"
+msgstr ""
+
+#: admin/provider.php:325
+msgid "Msg91 Docs"
+msgstr ""
+
+#: admin/provider.php:329
+msgid ""
+"Following variables are used: OTP - One time verification code, MESSAGE - "
+"SMS text, ACTION - action code."
+msgstr ""
+
+#: admin/provider.php:334
+msgid "Msg91 Api Key (auth key)"
+msgstr ""
+
+#: admin/provider.php:339
+msgid "Msg91 Sender Id"
+msgstr ""
+
+#: admin/provider.php:344
+msgid "Msg91 Template Id"
+msgstr ""
+
+#: admin/provider.php:349
+msgid "Msg91 Short URL"
+msgstr ""
+
+#: admin/provider.php:361
+msgid "Budget SMS"
+msgstr ""
+
+#: admin/provider.php:367
+msgid "Budget SMS Dashboard"
+msgstr ""
+
+#: admin/provider.php:368
+msgid "Budget SMS Docs"
+msgstr ""
+
+#: admin/provider.php:373
+msgid "Budget SMS User Id"
+msgstr ""
+
+#: admin/provider.php:378
+msgid "Budget SMS Username"
+msgstr ""
+
+#: admin/provider.php:383
+msgid "Budget SMS From"
+msgstr ""
+
+#: admin/provider.php:388
+msgid "Budget SMS Handle"
+msgstr ""
+
+#: admin/provider.php:401
+msgid "Plivo"
+msgstr ""
+
+#: admin/provider.php:407
+msgid "Plivo Dashboard"
+msgstr ""
+
+#: admin/provider.php:408
+msgid "Plivo Docs"
+msgstr ""
+
+#: admin/provider.php:413
+msgid "Plivo Smsh Id"
+msgstr ""
+
+#: admin/provider.php:418
+msgid "Plivo Sender Id"
+msgstr ""
+
+#: admin/provider.php:423
+msgid "Plivo Smsh Token"
+msgstr ""
+
+#: admin/provider.php:435
+msgid "Notify.lk"
+msgstr ""
+
+#: admin/provider.php:441
+msgid "Notify.lk Dashboard"
+msgstr ""
+
+#: admin/provider.php:442
+msgid "Notify.lk Api Endpoints"
+msgstr ""
+
+#: admin/provider.php:447
+msgid "Notify.lk User ID"
+msgstr ""
+
+#: admin/provider.php:452
+msgid "Notify.lk Api Key"
+msgstr ""
+
+#: admin/provider.php:457
+msgid "Notify.lk Sender ID"
+msgstr ""
+
+#: admin/provider.php:459
+msgid "Default value, if you have not requested any, is NotifyDEMO"
+msgstr ""
+
+#: admin/provider.php:469
+msgid "SMS-Assistent.by"
+msgstr ""
+
+#: admin/provider.php:475
+msgid "SMS-Assistent.by Home"
+msgstr ""
+
+#: admin/provider.php:476
+msgid "SMS-Assistent.by Integration Docs"
+msgstr ""
+
+#: admin/provider.php:481
+msgid "SMS-Assistent.by Api Username"
+msgstr ""
+
+#: admin/provider.php:486
+msgid "SMS-Assistent.by Api Password"
+msgstr ""
+
+#: admin/provider.php:491
+msgid "SMS-Assistent.by Api Sender"
+msgstr ""
+
+#: admin/provider.php:503
+msgid "Routee.net"
+msgstr ""
+
+#: admin/provider.php:509
+msgid "Routee.net Account"
+msgstr ""
+
+#: admin/provider.php:510
+msgid "Routee.net Integration Docs"
+msgstr ""
+
+#: admin/provider.php:514
+msgid "Routee Application Id"
+msgstr ""
+
+#: admin/provider.php:519
+msgid "Routee Application Secret"
+msgstr ""
+
+#: admin/provider.php:524
+msgid "Routee From Name/Phone"
+msgstr ""
+
+#: admin/provider.php:530
+msgid "Routee Default Country Code"
+msgstr ""
+
+#: admin/provider.php:532
+msgid "Example: +90,+234,..."
+msgstr ""
+
+#: admin/provider.php:553
+msgid "Test SMS sending"
+msgstr ""
+
+#: admin/provider.php:564
+msgid "You can test functionality of each SMS provider here."
+msgstr ""
+
+#: admin/provider.php:580
+msgid "Phone Number (with +)"
+msgstr ""
+
+#: admin/provider.php:581
+msgid "Type phone number..."
+msgstr ""
+
+#: admin/provider.php:586
+msgid "Enter message (max 160 chars)"
+msgstr ""
+
+#: admin/provider.php:591
+msgid "Send SMS"
+msgstr ""
+
+#: admin/provider.php:604 admin/provider.php:633
+msgid "Check balance"
+msgstr ""
+
+#: admin/provider.php:615
+msgid ""
+"Check what balance is on your account. Note that not all gateways support "
+"this feature."
+msgstr ""
+
+#: form/verify.php:15
+msgid "You must be logged in to verify phone number in user profile"
+msgstr ""
+
+#: form/verify.php:21
+msgid ""
+"Phone belongs to different user, you cannot verify phone number on behalf of "
+"different user"
+msgstr ""
+
+#: form/verify.php:27
+msgid "User does not exists"
+msgstr ""
+
+#: form/verify.php:35 form/verify.php:58
+msgid "Phone number has already been verified"
+msgstr ""
+
+#: form/verify.php:47
+msgid "Item does not exists."
+msgstr ""
+
+#: form/verify.php:68
+msgid "Verify your phone number"
+msgstr ""
+
+#: form/verify.php:72
+msgid "Plugin is in demo mode, you can enter any phone number"
+msgstr ""
+
+#: form/verify.php:88
+msgid "Item"
+msgstr ""
+
+#: form/verify.php:94
+msgid "Mobile Phone"
+msgstr ""
+
+#: form/verify.php:98
+msgid "Send verification code"
+msgstr ""
+
+#: form/verify.php:113
+msgid "Please enter verification code we sent to"
+msgstr ""
+
+#: form/verify.php:120
+msgid "Verify"
+msgstr ""
+
+#: form/verify.php:122
+msgid "SMS may take up to 40 seconds. Wait up, please!"
+msgstr ""
+
+#: form/verify.php:123 form/verify.php:134
+msgid "Resend in"
+msgstr ""
+
+#: form/verify.php:133
+msgid "Resend SMS"
+msgstr ""
+
+#: form/verify.php:135
+msgid "SMS Sent!"
+msgstr ""
+
+#: functions.php:57 functions.php:83
+#, php-format
+msgid ""
+"Phone number %s is already registered to another account, please use "
+"different number"
+msgstr ""
+
+#: functions.php:151
+msgid "Phone missing"
+msgstr ""
+
+#: functions.php:156
+msgid "Verified"
+msgstr ""
+
+#: functions.php:158
+msgid "Not verified"
+msgstr ""
+
+#: functions.php:721
+msgid "Balance retrieval for this provider is not supported"
+msgstr ""
+
+#: functions.php:819 functions.php:852
+msgid "Provider returned error with code:"
+msgstr ""
+
+#: functions.php:832 functions.php:843 functions.php:865
+msgid "Provider returned error:"
+msgstr ""
+
+#: functions.php:920
+#, php-format
+msgid "Hi admin, new message from %s on topic %s: %s"
+msgstr ""
+
+#: functions.php:942
+#, php-format
+msgid "Hi %s, your ad on %s has been activated %s"
+msgstr ""
+
+#: functions.php:969
+#, php-format
+msgid "Hi %s, validate your %s ad %s"
+msgstr ""
+
+#: functions.php:973
+#, php-format
+msgid "Hi %s, your %s ad has been published: %s %s"
+msgstr ""
+
+#: functions.php:978
+#, php-format
+msgid "Hi admin, %s has published new ad: %s %s"
+msgstr ""
+
+#: functions.php:1009
+#, php-format
+msgid "Hi %s, %s has question on %s: %s"
+msgstr ""
+
+#: functions.php:1027
+#, php-format
+msgid "Hi %s, reset your %s password %s"
+msgstr ""
+
+#: functions.php:1030
+msgid ""
+"A SMS has been sent to your mobile number instructions to reset password"
+msgstr ""
+
+#: functions.php:1047
+#, php-format
+msgid "Hi %s, validate your %s account %s"
+msgstr ""
+
+#: functions.php:1050
+#, php-format
+msgid "%s activation SMS has been sent to your mobile number"
+msgstr ""
+
+#: functions.php:1063
+#, php-format
+msgid "Hi admin, new user has registered: %s (%s)"
+msgstr ""
+
+#: functions.php:1323
+msgid "Page:"
+msgstr ""
+
+#: index.php:154
+#, php-format
+msgid ""
+"Phone number %s already belongs to other user. Please use different phone "
+"number!"
+msgstr ""
+
+#: index.php:191
+#, php-format
+msgid "Hi %s, your %s verification code is: %s"
+msgstr ""
+
+#: index.php:196 index.php:206
+#, php-format
+msgid "%s: Problem to send SMS: %s"
+msgstr ""
+
+#: index.php:208
+#, php-format
+msgid ""
+"SMS Verification is in demo mode, please enter following code to proceed "
+"verification: %s"
+msgstr ""
+
+#: index.php:212
+msgid "Phone number is not valid"
+msgstr ""
+
+#: index.php:266
+msgid "Phone number verified. Thank you!"
+msgstr ""
+
+#: index.php:269
+msgid "Verification has failed, verification code does not match!"
+msgstr ""
+
+#: index.php:272
+msgid "Phone number or verification code is not valid!"
+msgstr ""
+
+#: index.php:296
+msgid "In order to show listing, you must verify your phone number"
+msgstr ""
+
+#: index.php:322
+msgid "You cannot activate listing, you must verify your phone number first"
+msgstr ""
+
+#: index.php:349 index.php:371
+msgid "In order to improve our services, you must verify your phone number"
+msgstr ""
+
+#: index.php:491 index.php:524
+msgid "Verification Logs"
+msgstr ""
+
+#: index.php:506
+msgid "Report Bug"
+msgstr ""
+
+#: index.php:507
+msgid "Support Forums"
+msgstr ""
+
+#: index.php:508
+msgid "Contact Us"
+msgstr ""

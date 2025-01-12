@@ -1,0 +1,302 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Online Chat Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-06 12:10+0100\n"
+"PO-Revision-Date: 2023-03-06 12:10+0100\n"
+"Last-Translator: Miso <miso546@azet.sk>\n"
+"Language-Team: MB Themes <info@mb-themes.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2\n"
+"X-Poedit-KeywordsList: __;_e;_m\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: languages/en_US\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: admin/configure.php:3 admin/configure.php:36 index.php:350 index.php:380
+msgid "Configure"
+msgstr ""
+
+#: admin/configure.php:19
+msgid "Your PHP version is:"
+msgstr ""
+
+#: admin/configure.php:19
+msgid "This plugin require at least PHP 5.5.0 or later."
+msgstr ""
+
+#: admin/configure.php:23
+msgid ""
+"Debug mode is enabled, online chat will not be functional! Disable debug "
+"mode in config.php"
+msgstr ""
+
+#: admin/configure.php:27
+msgid "Settings were successfully saved"
+msgstr ""
+
+#: admin/configure.php:48
+msgid "Hook Initiate Chat Button"
+msgstr ""
+
+#: admin/configure.php:51
+msgid ""
+"Button will be automatically hooked to item page (using item_detail hook) "
+"and no theme modifications are required."
+msgstr ""
+
+#: admin/configure.php:55
+msgid "Message Check Time"
+msgstr ""
+
+#: admin/configure.php:57 admin/configure.php:65 admin/configure.php:73
+msgid "seconds"
+msgstr ""
+
+#: admin/configure.php:59
+msgid ""
+"Specify time in seconds how often server check for new messages and show "
+"them to user. (default: 10)"
+msgstr ""
+
+#: admin/configure.php:63
+msgid "User Online Check Time"
+msgstr ""
+
+#: admin/configure.php:67
+msgid ""
+"Specify time in seconds how often server check if user is online or not. "
+"(default: 120)"
+msgstr ""
+
+#: admin/configure.php:71
+msgid "Chat Closed Check Time"
+msgstr ""
+
+#: admin/configure.php:75
+msgid ""
+"Specify time in seconds how often server check if chat has been closed. "
+"(default: 60)"
+msgstr ""
+
+#: admin/configure.php:79
+msgid "Inactive Chat Removed After"
+msgstr ""
+
+#: admin/configure.php:81
+msgid "days"
+msgstr ""
+
+#: admin/configure.php:83
+msgid "Specify after how many days is inactive chat removed. (default: 720)"
+msgstr ""
+
+#: admin/configure.php:88
+msgid "Save"
+msgstr ""
+
+#: admin/configure.php:90
+msgid "Save (demo - disabled)"
+msgstr ""
+
+#: admin/configure.php:101
+msgid "Plugin Setup"
+msgstr ""
+
+#: admin/configure.php:104
+msgid ""
+"If you want to place initiate chat button on specific place, you can use "
+"built-in function. This function has optional parameter $user_id that does "
+"not need to be used."
+msgstr ""
+
+#: admin/configure.php:107
+msgid ""
+"If you want to show circle with user status (online - green, offline - "
+"gray), you can use built-in function. This function has optional parameter "
+"$user_id that does not need to be used."
+msgstr ""
+
+#: admin/configure.php:116
+msgid "Help"
+msgstr ""
+
+#: admin/configure.php:119
+msgid ""
+"Enable to add button to start chat to item page into hook item_detail. Then "
+"no theme modifications are required."
+msgstr ""
+
+#: admin/configure.php:120
+msgid ""
+"Specify time in seconds. Do not put less than 5 seconds. Note that more "
+"often refresh means more load to server and your database, therefore make "
+"sure you are not overloading your machine and your site is running smoothly. "
+"Minimum time for message refresh is 3 seconds (less is risky). Minimum time "
+"for user online check is 30 seconds (less is risky). Minimum time for "
+"checking of chat closed is 30 seconds (less is risky). Put only integers!"
+msgstr ""
+
+#: admin/configure.php:121
+msgid ""
+"Specify after how many days are inactive chats removed. Plugin will check "
+"last activity on chat and remove it. Not that more days you add, more server "
+"resources are required as plugin tables are larger. Do not put more than 30 "
+"days. If you have hundreds of users online at same time, put it to 2 days to "
+"reduce table size as much as possible. Larger table is, more time takes to "
+"check for new messages."
+msgstr ""
+
+#: functions.php:110 functions.php:114 functions.php:117 functions.php:172
+#: functions.php:175 functions.php:177
+msgid "Chat unavailable"
+msgstr ""
+
+#: functions.php:111 functions.php:172
+msgid "User is not registered"
+msgstr ""
+
+#: functions.php:115 functions.php:175
+msgid "It is your listing"
+msgstr ""
+
+#: functions.php:118 functions.php:177
+msgid "User has blocked you"
+msgstr ""
+
+#: functions.php:120 functions.php:123 user/chat.php:179
+msgid "Start chatting"
+msgstr ""
+
+#: functions.php:121 user/chat.php:130 user/chat.php:277
+msgid "User is offline"
+msgstr ""
+
+#: functions.php:124
+msgid "User is online"
+msgstr ""
+
+#: index.php:96
+msgid "Are you sure you want to remove this chat? Action cannot be undone."
+msgstr ""
+
+#: index.php:97
+msgid ""
+"Are you sure you want unblock this user? User will be able to contact you "
+"via chat."
+msgstr ""
+
+#: index.php:98
+msgid ""
+"Are you sure you want unblock all users? Anyone will be able to contact you "
+"via chat."
+msgstr ""
+
+#: index.php:99
+msgid "User blocked"
+msgstr ""
+
+#: index.php:100
+msgid "Chat transcript sent"
+msgstr ""
+
+#: index.php:101 user/chat.php:74
+msgid "Block all"
+msgstr ""
+
+#: index.php:102 user/chat.php:76
+msgid "Cancel full block"
+msgstr ""
+
+#: index.php:103
+msgid "You have a new message!"
+msgstr ""
+
+#: index.php:104 model/ModelOC.php:319 model/ModelOC.php:325
+msgid "All users blocked"
+msgstr ""
+
+#: index.php:341
+msgid "Dashboard"
+msgstr ""
+
+#: index.php:365
+msgid "Report Bug"
+msgstr ""
+
+#: index.php:366
+msgid "Support Forums"
+msgstr ""
+
+#: index.php:367
+msgid "Contact Us"
+msgstr ""
+
+#: user/chat.php:46
+msgid "Chat"
+msgstr ""
+
+#: user/chat.php:49
+msgid "New message!"
+msgstr ""
+
+#: user/chat.php:63
+msgid "Login to start chatting"
+msgstr ""
+
+#: user/chat.php:64
+msgid "Sign in"
+msgstr ""
+
+#: user/chat.php:71
+msgid "Blocked users"
+msgstr ""
+
+#: user/chat.php:91
+msgid "You do not block any users"
+msgstr ""
+
+#: user/chat.php:121 user/chat.php:253
+msgid "Block this user"
+msgstr ""
+
+#: user/chat.php:122 user/chat.php:257
+msgid "Mail me chat transcript"
+msgstr ""
+
+#: user/chat.php:131 user/chat.php:278
+msgid "Chat has ended"
+msgstr ""
+
+#: user/chat.php:143 user/chat.php:290
+msgid "Type your message here"
+msgstr ""
+
+#: user/chat.php:162
+msgid "Chat with"
+msgstr ""
+
+#: user/chat.php:162
+msgid "User"
+msgstr ""
+
+#: user/chat.php:172
+msgid "Your name"
+msgstr ""
+
+#: user/chat.php:176
+msgid "Message"
+msgstr ""
+
+#: user/chat.php:251
+msgid "This user is blocked"
+msgstr ""
+
+#: user/chat.php:301
+msgid "There are no chats yet"
+msgstr ""

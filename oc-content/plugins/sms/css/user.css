@@ -1,0 +1,53 @@
+.sms-body, .sms-body * {box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;}
+.sms-body {font-size:14px;line-height:18px;}
+.sms-customize-body {background:#f6f5f7;}
+.sms-body h1, .sms-body h2, .sms-body h3, .sms-body h4 {display: inline-block; margin: 0; padding: 0; font-weight: normal; width: 100%;}
+.sms-box {max-width: 360px; margin: 20px auto 80px auto;}
+.sms-box > .sms-wrap {display: block; width: 100%; margin: 0; background: #fff; box-shadow: 1px 1px 5px rgba(0,0,0,0.08); border-radius: 5px;}
+.sms-wrap h2 {padding: 20px 20px 25px 20px; border-bottom: 1px solid rgba(0,0,0,0.1); display: block; font-size: 21px;}
+.sms-inside {padding: 20px; display: inline-block; width: 100%;}
+.sms-body label {display: block; width: 100%; margin: 0 0 5px 0;font-weight:bolder;}
+.sms-body .sms-row {display:inline-block;width:100%;margin:0 0 20px 0;}
+.sms-body .sms-row.sms-rsnd {margin-top:20px;}
+.sms-body input[type="text"], .sms-body input[type="tel"], .sms-body input[type="email"] {width:100%;height:auto;padding: 8px; font-size: 14px; line-height: 18px; border: 1px solid rgba(0,0,0,0.2);margin:0; border-radius: 3px; box-shadow: none; outline: none; background: #fff;}
+.sms-body input[type="text"]:hover, .sms-body input[type="tel"]:hover, .sms-body input[type="email"]:hover {border-color: rgba(0,0,0,0.3);}
+.sms-body input[type="text"].error, .sms-body input[type="tel"].error, .sms-body input[type="email"].error {background:#ffecec;}
+.sms-body .sms-button, .sms-body .sms-button-resend {text-decoration:none;position: relative; text-align: center; float: left; background: #0d9ecc; width:100%;color: #fff!important; padding: 9px 10px; font-size: 14px; line-height: 18px; font-weight:bold;border: 1px solid rgba(0,0,0,0.05); border-bottom-color: rgba(0,0,0,0.1); border-radius: 4px; box-shadow: none; outline: none; cursor: pointer; transition: 0.1s;}
+.sms-body .sms-button:not(.disabled):not(.loading):hover, .sms-body .sms-button-resend:not(.disabled):not(.loading):hover {text-decoration: none; opacity: 0.8;text-decoration:none;}
+.sms-body .sms-button.disabled, .sms-body .sms-button-resend.disabled {opacity: 0.5; cursor: not-allowed;}
+.sms-body .sms-button.loading, .sms-body .sms-button-resend.loading {opacity: 0.5; cursor: wait;position:relative;}
+.sms-body .sms-button.loading:before, .sms-body .sms-button-resend.loading:before {content: "\f110"; font-family: "FontAwesome","Font Awesome 5 Free"; position: absolute; left: 10px; top: 8px;animation: smsSpin 1.5s linear infinite;}
+.sms-body .sms-button-resend {background:#777!important;}
+.sms-body .sms-only-text {font-size:14px;display:block;float:left;clear:both;width:100%;}
+.sms-body input[type="text"].sms-code {float:left;width:23%;margin-right:2.65%;text-align:center;font-size:26px;line-height:30px;padding:15px 5px!important;height:62px!important;margin-top:8px;margin-bottom:4px;}
+.sms-body input[type="text"].sms-code#code4 {margin-right:0;}
+.sms-body .sms-row.sms-error {text-align:center;width: 100%; padding: 10px; font-size: 13px; font-weight: bold; background: #e68383; color: #fff; border-radius: 3px; margin: 0 0 20px 0;display:inline-block;}
+.sms-body .sms-row.sms-success {text-align:center;width: 100%; padding: 10px; font-size: 14px; font-weight: bold; background: #43d6a0; color: #fff; border-radius: 3px; margin: 0 0 20px 0;display:inline-block;}
+
+@keyframes smsSpin { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
+
+.intl-tel-input .country-list {min-width:240px;}
+.intl-tel-input .country-list.dropup {width:auto;max-width:320px;}
+.intl-tel-input .flag-container {left:0;}
+.intl-tel-input .flag-container + input[type="text"] {padding-left:45px!important;}
+.intl-tel-input .flag-container .fa {display:none!important;}
+.intl-tel-input .sms-validation {clear: both; display: inline-block; position: absolute; right: 8px; font-size: 11px; font-style: normal; color: #888; letter-spacing: -0.2px; line-height: 16px; top: 50%; margin-top: -8px;}
+.sms-body .intl-tel-input {width:100%;display:inline-block;}
+.input-box > .intl-tel-input {float: left; z-index: 12; width: 100%; }
+.add_item .input-box > .intl-tel-input input:not([type="radio"]):not([type="checkbox"]):not([type="file"]):not([type="submit"]) {padding-left:45px!important;}
+
+.sms-bo-user-ver {display:block;width:100%;padding-top:2px;}
+.sms-bo-user-ver span {display:inline-block;width:auto;height:18px;overflow:hidden;border:1px solid rgba(0,0,0,0.1);padding:2px 5px 2px 23px;position:relative;font-size:10px;font-weight:500;line-height:12px;border-radius:4px;margin:0;}
+.sms-bo-user-ver span.sms-missing {background:#e0e0e0;color:#555;}
+.sms-bo-user-ver span.sms-error {background:#e85d5d;color:#fff;}
+.sms-bo-user-ver span.sms-ok {background:#39c476;color:#fff;text-transform: uppercase; letter-spacing: 0.5px;}
+.sms-bo-user-ver span:before {font-weight:normal;position:absolute;width:18px;height:18px;top:-1px;left:-1px;text-align:center;line-height:18px;font-size:12px;text-indent:1px;background:rgba(0,0,0,0.1);border-right:1px solid rgba(0,0,0,0.1);border-radius:4px 0 0 4px;color:rgba(0,0,0,0.4);font-family:"FontAwesome","Font Awesome 5 Free";}
+.sms-bo-user-ver span.sms-missing:before {content:"\f128";color:#444;}
+.sms-bo-user-ver span.sms-error:before {content:"\f00d";color:rgba(255,255,255,0.9);}
+.sms-bo-user-ver span.sms-ok:before {content:"\f00c";color:rgba(255,255,255,0.9);}
+
+
+
+
+
+

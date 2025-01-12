@@ -1,0 +1,7456 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Osclass Pay Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-16 13:34+0200\n"
+"PO-Revision-Date: 2024-10-16 13:35+0200\n"
+"Last-Translator: Miso <miso546@azet.sk>\n"
+"Language-Team: MB Themes <info@mb-themes.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-KeywordsList: __;_e;_m\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: languages/en_US\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: admin/_ecommerce_backup.php:3
+msgid "Product selling"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:18 admin/_ecommerce_orders.php:8
+#: admin/_ecommerce_settings.php:25 admin/_gateway_backup.php:161
+#: admin/_gateway_settings.php:168 admin/_group.php:23 admin/_highlight.php:85
+#: admin/_image.php:67 admin/_movetotop.php:67 admin/_premium.php:83
+#: admin/_publish.php:67 admin/_republish.php:97 admin/_wallet.php:22
+#: admin/banner.php:54 admin/configure.php:24 admin/tax.php:39
+msgid "Settings were successfully saved"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:34 admin/_ecommerce_products.php:25
+msgid "Item data were successfully updated"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:66 admin/_ecommerce_orders.php:41
+msgid "Orders were successfully updated. Products has been restocked."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:83 admin/_ecommerce_users.php:23
+#, php-format
+msgid ""
+"User %s successfully added to seller's list. This user is now eligible to "
+"sell items."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:88 admin/_ecommerce_backup.php:110
+#: admin/_ecommerce_users.php:28 admin/_ecommerce_users.php:50
+#, php-format
+msgid ""
+"User %s successfully removed from seller's list. This user cannot sell items "
+"anymore."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:98 admin/_ecommerce_users.php:38
+#: admin/_group.php:111 admin/_wallet.php:93
+msgid "User not found"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:123 admin/_ecommerce_currencies.php:12
+msgid "Currency rates successfully updated."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:149 admin/_ecommerce_settings.php:38
+msgid "Product Selling Settings"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:163 admin/_ecommerce_settings.php:52
+msgid ""
+"Keep in mind that all payments for products goes to your account. Users "
+"allowed to sell products should be your colleagues!"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:167 admin/_ecommerce_settings.php:56
+msgid "Enable Product Selling"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:170 admin/_ecommerce_settings.php:59
+msgid ""
+"When enabled, selected users can offer products for sell. Payments for "
+"products goes to your account."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:175 admin/_ecommerce_settings.php:76
+msgid "Enable All Registered to Sell Products"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:178
+msgid ""
+"When enabled, all registered users can sell their products. If disabled, you "
+"can manually select sellers in section bellow."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:183 admin/_ecommerce_settings.php:84
+msgid "Enable Stock Management"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:186 admin/_ecommerce_settings.php:87
+msgid "When enabled, it is possible to set available quantities for products."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:191 admin/_ecommerce_settings.php:92
+msgid "Show Product Available Quantity"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:194 admin/_ecommerce_settings.php:95
+msgid ""
+"When enabled, your customers can see available quantities for each product."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:199 admin/_ecommerce_settings.php:100
+msgid "Hook \"Add to Cart\" Button to Item Page"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:202 admin/_ecommerce_settings.php:103
+msgid ""
+"When enabled, no theme modifications are required in order to enable product "
+"selling."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:207 admin/_ecommerce_settings.php:108
+msgid "Apply Membership Discount"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:210 admin/_ecommerce_settings.php:111
+msgid "When enabled, user membership discount is applied on product as well."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:215 admin/_ecommerce_settings.php:116
+msgid "Disable Order Status"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:218 admin/_ecommerce_settings.php:119
+msgid ""
+"Disable order status and all orders will have status Completed that cannot "
+"be changed."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:222 admin/_ecommerce_settings.php:123
+msgid "Hook \"Listing Type\" Select Box to Search Page"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:225 admin/_ecommerce_settings.php:126
+msgid ""
+"When enabled, select box with listing type is added to search page, once "
+"category has been selected. There are 3 entries: All listings, \"Buy now\" "
+"listings, Other listings."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:232 admin/_ecommerce_backup.php:305
+#: admin/_ecommerce_backup.php:492 admin/_ecommerce_backup.php:622
+#: admin/_ecommerce_orders.php:313 admin/_ecommerce_products.php:193
+#: admin/_ecommerce_settings.php:171 admin/_ecommerce_users.php:130
+#: admin/_group.php:236 admin/_group.php:395 admin/_group.php:466
+#: admin/_highlight.php:178 admin/_highlight.php:288 admin/_highlight.php:373
+#: admin/_image.php:129 admin/_image.php:224 admin/_image.php:309
+#: admin/_movetotop.php:127 admin/_movetotop.php:218 admin/_movetotop.php:303
+#: admin/_premium.php:161 admin/_premium.php:271 admin/_premium.php:356
+#: admin/_publish.php:134 admin/_publish.php:227 admin/_publish.php:312
+#: admin/_republish.php:197 admin/_republish.php:306 admin/_republish.php:391
+#: admin/_wallet.php:179 admin/_wallet.php:303 admin/_wallet.php:373
+#: admin/banner.php:128 admin/tax.php:160
+msgid "Update"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:242 admin/_ecommerce_users.php:67
+msgid "Make users sellers"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:268 admin/_ecommerce_users.php:93
+msgid ""
+"All users can sell their products! Selection bellow will not be used. You "
+"can disable this in section above, option \"Enable All Registered to Sell "
+"Products\"."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:273 admin/_ecommerce_users.php:98
+msgid ""
+"Select users that are allowed to sell their products. Money from payments "
+"will go to your account!"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:281 admin/_ecommerce_users.php:106
+#: admin/_group.php:439 admin/_wallet.php:348 admin/log.php:101
+msgid "User ID"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:286 admin/_ecommerce_backup.php:655
+#: admin/_ecommerce_currencies.php:62 admin/_ecommerce_shipping.php:51
+#: admin/_ecommerce_shipping.php:88 admin/_ecommerce_users.php:111
+#: admin/_group.php:444 admin/_wallet.php:353 user/banner.php:29
+#: user/shipping.php:199
+msgid "Name"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:287 admin/_ecommerce_users.php:112
+#: admin/_group.php:445 admin/_wallet.php:354
+msgid "Type user name or email..."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:288 admin/_ecommerce_users.php:113
+#: admin/_group.php:446 admin/_wallet.php:355
+msgid ""
+"Start typing user name or email and select user you want to check from list."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:292 admin/_ecommerce_backup.php:317
+#: admin/_ecommerce_users.php:117 admin/_ecommerce_users.php:142
+#: admin/_group.php:450 admin/_group.php:516 admin/_wallet.php:359
+#: admin/log.php:100 payments/2checkout/TwoCheckoutPayment.php:133
+#: payments/payumoney/PayumoneyPayment.php:115
+#: payments/worldpay/WorldpayPayment.php:129
+msgid "Email"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:299 admin/_ecommerce_users.php:124
+msgid "Set User as Seller"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:301 admin/_ecommerce_backup.php:450
+#: admin/_ecommerce_users.php:126 functions.php:1010 functions.php:1022
+#: functions.php:1051 functions.php:1063
+msgid "No"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:302 admin/_ecommerce_backup.php:449
+#: admin/_ecommerce_users.php:127 functions.php:1011 functions.php:1023
+#: functions.php:1052 functions.php:1064
+msgid "Yes"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:311 admin/_ecommerce_users.php:136
+msgid "List of active sellers"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:314 admin/_ecommerce_backup.php:401
+#: admin/_ecommerce_backup.php:512 admin/_ecommerce_backup.php:579
+#: admin/_ecommerce_orders.php:70 admin/_ecommerce_orders.php:162
+#: admin/_ecommerce_orders.php:224 admin/_ecommerce_products.php:54
+#: admin/_ecommerce_products.php:110 admin/_ecommerce_shipping.php:46
+#: admin/_ecommerce_shipping.php:86 admin/_ecommerce_users.php:139
+#: admin/_gateway_backup.php:1595 admin/_gateway_transfer.php:137
+#: admin/_group.php:274 admin/_group.php:514 admin/_highlight.php:231
+#: admin/_highlight.php:322 admin/_image.php:169 admin/_image.php:258
+#: admin/_movetotop.php:166 admin/_movetotop.php:252 admin/_premium.php:214
+#: admin/_premium.php:305 admin/_publish.php:173 admin/_publish.php:261
+#: admin/_republish.php:249 admin/_republish.php:340 admin/_wallet.php:213
+#: admin/banner.php:146 admin/log.php:30 admin/log.php:94 functions.php:2750
+#: functions.php:2882 user/cart.php:105 user/item_pay.php:90 user/order.php:92
+#: user/products.php:119 user/sales.php:46 user/shipping.php:198
+msgid "ID"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:315 admin/_ecommerce_users.php:140
+msgid "Seller"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:316 admin/_ecommerce_users.php:141
+#: functions.php:1616 index.php:788 index.php:815
+msgid "Items"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:318 admin/_ecommerce_users.php:143
+#: admin/log.php:60 admin/log.php:103 functions.php:445
+msgid "Type"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:319 admin/_ecommerce_users.php:144
+#: payments/2checkout/TwoCheckoutPayment.php:117
+#: payments/przelewy24/Przelewy24Payment.php:143
+#: payments/worldpay/WorldpayPayment.php:113
+msgid "Address"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:320 admin/_ecommerce_users.php:145
+#: payments/2checkout/TwoCheckoutPayment.php:125
+#: payments/payumoney/PayumoneyPayment.php:123
+#: payments/worldpay/WorldpayPayment.php:121
+msgid "Phone"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:321 admin/_ecommerce_users.php:146
+msgid "Web"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:329 admin/_ecommerce_users.php:154
+msgid "You have set that all users can sell, this section will not be used."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:333 admin/_ecommerce_backup.php:422
+#: admin/_ecommerce_products.php:122 admin/_ecommerce_users.php:158
+msgid "No listings has been found"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:348 admin/_ecommerce_users.php:173
+msgid "Company"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:350 admin/_ecommerce_users.php:175
+msgid "Personal"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:361 admin/_ecommerce_orders.php:239
+#: admin/_ecommerce_users.php:186
+msgid "Address not set!"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:371 admin/_ecommerce_orders.php:238
+#: admin/_ecommerce_users.php:196
+msgid "Phone not set!"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:392
+msgid "Item Data and Quantities"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:396 admin/_ecommerce_products.php:45
+msgid "Bellow are shown quantities and sell status for all your listings."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:402 admin/_ecommerce_products.php:111
+msgid "Item Title"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:403
+msgid "On sale"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:405 admin/_ecommerce_products.php:115
+#: user/products.php:124
+msgid "Quantity"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:407 admin/_ecommerce_backup.php:518
+#: admin/_ecommerce_orders.php:125 admin/_ecommerce_products.php:117
+#: admin/_gateway_backup.php:1601 admin/_gateway_transfer.php:143
+#: admin/banner.php:154 user/banner.php:34 user/manager.php:95
+#: user/manager.php:123 user/shipping.php:172
+msgid "Status"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:463 admin/_ecommerce_products.php:170
+msgid "User is not in seller"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:465 admin/_ecommerce_products.php:172
+msgid "Item Price is Free or Check with Seller"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:467 admin/_ecommerce_products.php:174
+msgid "Not allowed"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:469 admin/_ecommerce_products.php:176
+msgid "Unavailable Quantity"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:471 admin/_ecommerce_products.php:178
+msgid "Active"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:484
+msgid "Page"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:503
+msgid "Item Orders"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:507 admin/_ecommerce_orders.php:61
+msgid "Bellow are shown all product orders."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:513 admin/_ecommerce_orders.php:163
+msgid "Buyer"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:514 admin/_ecommerce_orders.php:80
+msgid "Delivery Address"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:515 user/manager.php:121 user/order.php:93
+#: user/sales.php:47
+msgid "Products"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:516
+msgid "Full Price"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:517 admin/_gateway_backup.php:1645
+#: admin/_gateway_transfer.php:187 admin/banner.php:210 functions.php:1496
+#: user/manager.php:122
+msgid "Paid"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:519 admin/_ecommerce_orders.php:95
+msgid "Comment"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:520 admin/_ecommerce_orders.php:120
+#: admin/_ecommerce_orders.php:168 admin/_ecommerce_shipping.php:93
+#: admin/_gateway_backup.php:1602 admin/_gateway_transfer.php:144
+#: admin/log.php:40 admin/log.php:96 user/order.php:95 user/order.php:110
+#: user/payments.php:35 user/sales.php:49 user/sales.php:66
+msgid "Date"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:528 admin/_ecommerce_orders.php:174
+msgid "No product orders has been found"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:552 admin/_ecommerce_orders.php:216
+#: admin/banner.php:168 admin/log.php:125
+msgid "Reg. date"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:556 admin/_ecommerce_orders.php:220
+msgid "Owner of listing, click to send mail."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:580 admin/_ecommerce_orders.php:225
+#: admin/_gateway_backup.php:1596 admin/_gateway_transfer.php:138
+#: user/order.php:108 user/sales.php:64
+msgid "Transaction"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:581 admin/_ecommerce_orders.php:226
+msgid "Gateway"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:582 admin/_ecommerce_orders.php:227
+#: admin/_ecommerce_shipping.php:89 admin/_group.php:276 admin/_wallet.php:215
+#: user/payments.php:33 user/shipping.php:124
+msgid "Description"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:583 admin/_ecommerce_orders.php:166
+#: admin/_ecommerce_orders.php:228 admin/_gateway_backup.php:1599
+#: admin/_gateway_transfer.php:141 admin/_wallet.php:216 admin/log.php:98
+#: user/order.php:94 user/payments.php:34 user/sales.php:48
+#: user/shipping.php:201
+msgid "Amount"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:590 admin/log.php:144
+msgid "Unregistered"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:592
+msgid "Not set!"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:600 admin/_ecommerce_orders.php:288
+#: functions.php:264 user/manager.php:101 user/manager.php:199
+#: user/order.php:70 user/order.php:175 user/sales.php:126
+msgid "Processing"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:601 admin/_ecommerce_orders.php:129
+#: admin/_ecommerce_orders.php:289 functions.php:266 user/manager.php:102
+#: user/manager.php:200 user/order.php:76 user/order.php:178 user/sales.php:129
+msgid "Shipped"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:602 admin/_ecommerce_backup.php:606
+#: admin/_ecommerce_orders.php:130 admin/_ecommerce_orders.php:290
+#: admin/_ecommerce_orders.php:294 functions.php:268 user/manager.php:103
+#: user/manager.php:197 user/manager.php:201 user/order.php:82
+#: user/order.php:172 user/order.php:181 user/sales.php:123 user/sales.php:132
+msgid "Completed"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:603 admin/_ecommerce_orders.php:131
+#: admin/_ecommerce_orders.php:291 admin/_gateway_backup.php:1647
+#: admin/_gateway_transfer.php:189 functions.php:270 user/manager.php:104
+#: user/manager.php:202 user/order.php:184 user/sales.php:135
+msgid "Cancelled"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:633 admin/_ecommerce_currencies.php:27
+#: admin/ecommerce.php:11
+msgid "Currency Rates"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:637 admin/_ecommerce_currencies.php:44
+msgid ""
+"In order to make eCommerce functional, it is required to convert any price "
+"of item, to currency of plugin, if it is different."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:638
+msgid ""
+"Plugin use Yahoo service to get currency rate at daily frequency. Make sure "
+"your cron is functional."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:642 admin/_ecommerce_currencies.php:49
+#, php-format
+msgid ""
+"Osclass Pay Plugin has default currency %s and all other currencies are "
+"converted to this one"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:646 admin/_ecommerce_currencies.php:53
+msgid "Your classifieds has configured following currencies as available."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:647 admin/_ecommerce_currencies.php:54
+#, php-format
+msgid "You can modify this list in %s"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:647 admin/_ecommerce_currencies.php:54
+msgid "Settings > Currencies"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:654 admin/_ecommerce_currencies.php:61
+#: admin/log.php:45 admin/log.php:97
+msgid "Code"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:656 admin/_ecommerce_currencies.php:63
+msgid "Symbol"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:657 admin/_ecommerce_currencies.php:64
+msgid "Rate"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:658 admin/_ecommerce_currencies.php:65
+msgid "Detail"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:672 admin/_ecommerce_currencies.php:79
+msgid "No conversion, osclass pay default currency"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:676 admin/_ecommerce_currencies.php:83
+msgid "Not set, run refresh!"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:696 admin/_ecommerce_currencies.php:103
+msgid "Refresh Rates"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:705 admin/_ecommerce_settings.php:180
+#: admin/_highlight.php:382 admin/_image.php:318 admin/banner.php:334
+#: admin/configure.php:167
+msgid "Plugin Setup"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:709 admin/_ecommerce_settings.php:184
+msgid ""
+"If you have not used hook to place \"Add to cart\" button on item page, you "
+"can do it manually by modifying theme files."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:710 admin/_ecommerce_settings.php:185
+msgid ""
+"Place following code into your theme files where function osc_item_id() is "
+"available (item.php or item-loop-single.php...)."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:721 admin/_ecommerce_settings.php:196
+#: admin/_group.php:550 admin/_highlight.php:416 admin/_image.php:352
+#: admin/_movetotop.php:313 admin/_premium.php:367 admin/_publish.php:321
+#: admin/_republish.php:401 admin/_wallet.php:384 admin/banner.php:356
+#: admin/configure.php:190 admin/log.php:169 admin/tax.php:172
+msgid "Help"
+msgstr ""
+
+#: admin/_ecommerce_backup.php:724 admin/_ecommerce_settings.php:199
+msgid ""
+"Enable to allow direct sales of items on your classifieds. Users marked as "
+"sellers can then allow on listings to be purchased. Note that payment for "
+"purchase go to your account so only users that you cooperate with should be "
+"added to seller list. If listing price is set to Free or Check with seller, "
+"listing cannot be purchased by users."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:725 admin/_ecommerce_settings.php:200
+msgid ""
+"When enabled, all users can sell their listings. In this case seller list is "
+"not used."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:726
+msgid ""
+"When enabled, users and admins can set available quantities on their "
+"products. When quantity is on 0, listing cannot be bought anymore."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:727 admin/_ecommerce_settings.php:202
+msgid ""
+"When enabled, available quantities for each product are shown next \"Add to "
+"cart\" button."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:728 admin/_ecommerce_settings.php:203
+msgid ""
+"Enable to hook \"Add to cart\" button into hook item_detail on item page. "
+"Then there are no modifications required in order to enable product selling."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:729 admin/_ecommerce_settings.php:204
+msgid "Enable to apply membership discount on price of selling items."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:730 admin/_ecommerce_settings.php:205
+msgid ""
+"There will be no order status tracking, status cannot be changed. All "
+"existing orders will have status Completed and all new orders will be "
+"directly marked as Completed."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:731 admin/_ecommerce_settings.php:207
+msgid ""
+"No matter what is currency set on item, price will be converted into "
+"currency used in osclass pay plugin."
+msgstr ""
+
+#: admin/_ecommerce_backup.php:752 admin/_ecommerce_users.php:233
+#: admin/_group.php:565 admin/_wallet.php:398
+msgid "Error getting data, user not found"
+msgstr ""
+
+#: admin/_ecommerce_currencies.php:22
+msgid ""
+"You are missing exchangeratesapi.io API key, currency rates refresh will not "
+"be functional! You can enter API key in Settings section."
+msgstr ""
+
+#: admin/_ecommerce_currencies.php:33
+msgid ""
+"Exchange Rates Plugin has been setup as replacement for built-in currency "
+"conversions. Rates below are not used by plugin now!"
+msgstr ""
+
+#: admin/_ecommerce_currencies.php:35
+msgid ""
+"Exchange Rates Plugin has been setup as replacement for built-in currency "
+"conversions, however plugin function <u>exr_convert</u> was not found! You "
+"may be using old or incompatible version of plugin."
+msgstr ""
+
+#: admin/_ecommerce_currencies.php:38
+msgid "You may change this setting in eCommerce > Settings page"
+msgstr ""
+
+#: admin/_ecommerce_currencies.php:45
+msgid ""
+"Plugin uses ExchangeRatesApi.io to get currency rate with a daily frequency. "
+"Make sure your cron is functional."
+msgstr ""
+
+#: admin/_ecommerce_orders.php:57
+msgid "Orders"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:62
+msgid ""
+"Order status has no impact on status of order items. Order status is "
+"automatically updated based on updates of order items."
+msgstr ""
+
+#: admin/_ecommerce_orders.php:75
+msgid "Buyer/Seller"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:85 functions.php:2268 user/cart.php:106
+#: user/item_pay.php:91
+msgid "Product"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:90
+msgid "Payment"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:101 admin/_ecommerce_products.php:103
+#: admin/_ecommerce_shipping.php:79 admin/log.php:86 user/manager.php:111
+#: user/products.php:107
+msgid "Search"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:105
+msgid "Min. Paid"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:110
+msgid "Max. Paid"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:115 admin/configure.php:68
+msgid "Currency"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:127 user/manager.php:98 user/manager.php:100
+#: user/products.php:90 user/products.php:99
+msgid "All"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:128
+msgid "In progress"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:136 admin/_ecommerce_products.php:80
+#: admin/_ecommerce_shipping.php:56 admin/log.php:65
+msgid "Sorting"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:138 admin/_ecommerce_products.php:82
+#: admin/_ecommerce_shipping.php:58 admin/log.php:67
+msgid "By ID Descending"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:139 admin/_ecommerce_products.php:83
+#: admin/_ecommerce_shipping.php:59 admin/log.php:68
+msgid "By ID Ascending"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:144 admin/_ecommerce_products.php:88
+#: admin/_ecommerce_shipping.php:64 admin/log.php:73
+msgid "Per Page"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:164
+msgid "Phone/Address"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:165
+msgid "Product/Seller/Price/Status"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:167
+msgid "Order status/Comment"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:235
+#, php-format
+msgid "User #%s"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:252 user/manager.php:210 user/order.php:148
+#: user/sales.php:102
+#, php-format
+msgid "Shipping: %s"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:256 user/manager.php:183
+msgid "Tangible product, must be shipped"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:258 user/manager.php:185
+msgid "Intangible product (service), does not require shipping"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:260 user/manager.php:187
+msgid "Shipping requirement unknown"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:263
+#, php-format
+msgid "Item #%s"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:267 admin/_ecommerce_shipping.php:133
+#: functions.php:2829 functions.php:2963 functions.php:2970
+#: user/manager.php:140
+msgid "N/A"
+msgstr ""
+
+#: admin/_ecommerce_orders.php:297
+msgid "Order comment or note"
+msgstr ""
+
+#: admin/_ecommerce_products.php:41
+msgid "Products Management"
+msgstr ""
+
+#: admin/_ecommerce_products.php:59 admin/_ecommerce_shipping.php:87
+#: admin/_gateway_backup.php:1597 admin/_gateway_transfer.php:139
+#: admin/banner.php:147 admin/log.php:50 index.php:526 index.php:605
+msgid "User"
+msgstr ""
+
+#: admin/_ecommerce_products.php:64
+msgid "Item title/description"
+msgstr ""
+
+#: admin/_ecommerce_products.php:69
+msgid "Item location"
+msgstr ""
+
+#: admin/_ecommerce_products.php:74
+msgid "Publish date"
+msgstr ""
+
+#: admin/_ecommerce_products.php:112 user/products.php:88
+msgid "Availability"
+msgstr ""
+
+#: admin/_ecommerce_products.php:113 admin/ecommerce.php:10 email.php:425
+#: functions.php:1019 functions.php:1060 functions.php:2266 index.php:1045
+#: index.php:1046 index.php:1047 user/manager.php:75 user/order.php:29
+#: user/products.php:68 user/products.php:97 user/products.php:123
+#: user/sales.php:35 user/shipping.php:96
+msgid "Shipping"
+msgstr ""
+
+#: admin/_ecommerce_products.php:149 user/products.php:92 user/products.php:158
+msgid "Available for sale"
+msgstr ""
+
+#: admin/_ecommerce_products.php:150 user/products.php:91
+msgid "Not available for sale"
+msgstr ""
+
+#: admin/_ecommerce_products.php:156 user/products.php:101
+#: user/products.php:165
+msgid "Require shipping"
+msgstr ""
+
+#: admin/_ecommerce_products.php:157 user/products.php:100
+#: user/products.php:164
+msgid "No shipping fee"
+msgstr ""
+
+#: admin/_ecommerce_settings.php:63
+msgid "Restrict Product Selling by Category"
+msgstr ""
+
+#: admin/_ecommerce_settings.php:71
+msgid ""
+"If no category selected, product selling will be enabled in all categories."
+msgstr ""
+
+#: admin/_ecommerce_settings.php:79
+msgid ""
+"When enabled, all registered users can sell their products. If disabled, you "
+"can manually select sellers in User management section."
+msgstr ""
+
+#: admin/_ecommerce_settings.php:131
+msgid "Enable User Management"
+msgstr ""
+
+#: admin/_ecommerce_settings.php:134
+msgid ""
+"When enabled, sellers can manage their orders (status) and products (avl. "
+"for sale, quantity, shipping)."
+msgstr ""
+
+#: admin/_ecommerce_settings.php:139
+msgid "Enable Shipping"
+msgstr ""
+
+#: admin/_ecommerce_settings.php:142
+msgid "When enabled, shippings will be enabled to customers."
+msgstr ""
+
+#: admin/_ecommerce_settings.php:146
+msgid "Default Shipping Price"
+msgstr ""
+
+#: admin/_ecommerce_settings.php:150
+msgid ""
+"Default shipping amount in case seller did not defined custom shipping or no "
+"seller shipping match to order criteria."
+msgstr ""
+
+#: admin/_ecommerce_settings.php:154
+msgid "ExchangeRatesApi.io API key"
+msgstr ""
+
+#: admin/_ecommerce_settings.php:157
+msgid "API key to refresh currency exchange rates."
+msgstr ""
+
+#: admin/_ecommerce_settings.php:157
+msgid "Get your API key"
+msgstr ""
+
+#: admin/_ecommerce_settings.php:161
+msgid "Use Exchange Rates Plugin for Conversions"
+msgstr ""
+
+#: admin/_ecommerce_settings.php:164
+#, php-format
+msgid ""
+"When enabled, currency conversions and exchange rates will be used from %s "
+"and Osclass Pay features & API will not be used."
+msgstr ""
+
+#: admin/_ecommerce_settings.php:164
+msgid "Exchange Rates Plugin"
+msgstr ""
+
+#: admin/_ecommerce_settings.php:201
+msgid ""
+"When enabled, users and admins & users can set available quantities on their "
+"products. When quantity is on 0, listing cannot be bought anymore."
+msgstr ""
+
+#: admin/_ecommerce_settings.php:206
+msgid ""
+"You may enable product selling just in selected categories. If you select no "
+"category, it will be enabled in all categories. Use control key or shift key "
+"to select more than one value."
+msgstr ""
+
+#: admin/_ecommerce_shipping.php:9
+msgid "Shipping option has been successfully removed"
+msgstr ""
+
+#: admin/_ecommerce_shipping.php:29
+msgid "Shipping is disabled. You can enable it in Settings page."
+msgstr ""
+
+#: admin/_ecommerce_shipping.php:34
+msgid "Shippings"
+msgstr ""
+
+#: admin/_ecommerce_shipping.php:38
+msgid "List of all shipping options created by sellers."
+msgstr ""
+
+#: admin/_ecommerce_shipping.php:90 user/shipping.php:200
+msgid "Delivery"
+msgstr ""
+
+#: admin/_ecommerce_shipping.php:91
+msgid "Location restrictions"
+msgstr ""
+
+#: admin/_ecommerce_shipping.php:92 admin/_group.php:277 admin/_image.php:171
+#: admin/_movetotop.php:168 admin/_publish.php:175
+msgid "Fee"
+msgstr ""
+
+#: admin/_ecommerce_shipping.php:99
+msgid "No shippings has been found"
+msgstr ""
+
+#: admin/_ecommerce_shipping.php:144 admin/_ecommerce_shipping.php:146
+msgid "Delete"
+msgstr ""
+
+#: admin/_ecommerce_shipping.php:146 user/shipping.php:243
+msgid ""
+"Are you sure you want to remove this shipping option? Action cannot be undone"
+msgstr ""
+
+#: admin/_gateway_backup.php:3 admin/gateway.php:3
+msgid "Payment Gateways"
+msgstr ""
+
+#: admin/_gateway_backup.php:186 admin/_gateway_transfer.php:33
+msgid "Bank transfer accepted successfully"
+msgstr ""
+
+#: admin/_gateway_backup.php:235 admin/_gateway_transfer.php:82
+#: functions.php:2549
+#, php-format
+msgid ""
+"Insufficient quantity on stock for product %s! We have %s items on stock, "
+"you have requested %s. Our team may contact you."
+msgstr ""
+
+#: admin/_gateway_backup.php:258 admin/_gateway_transfer.php:105
+msgid "Bank transfer cancelled successfully"
+msgstr ""
+
+#: admin/_gateway_backup.php:262 admin/_gateway_transfer.php:109
+msgid "Bank transfer removed successfully"
+msgstr ""
+
+#: admin/_gateway_backup.php:284 admin/_gateway_backup.php:1584
+#: admin/_gateway_settings.php:177 admin/_gateway_transfer.php:126
+msgid "Payment Methods"
+msgstr ""
+
+#: admin/_gateway_backup.php:299 admin/_gateway_settings.php:193
+msgid "Bank Transfer Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:305 admin/_gateway_settings.php:199
+msgid ""
+"Note that each payment must be accepted/approved by admin. After approval, "
+"promotions are executed."
+msgstr ""
+
+#: admin/_gateway_backup.php:306 admin/_gateway_backup.php:1590
+#: admin/_gateway_settings.php:200 admin/_gateway_transfer.php:132
+msgid ""
+"Approve transaction just in case you see it on your bank account, this "
+"action cannot be undone."
+msgstr ""
+
+#: admin/_gateway_backup.php:310 admin/_gateway_settings.php:204
+msgid "Enable Bank Transfer Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:313 admin/_gateway_settings.php:207
+msgid "Using bank transfer is possible to pay just for credit packs."
+msgstr ""
+
+#: admin/_gateway_backup.php:317 admin/_gateway_settings.php:211
+msgid "Bank Transfer IBAN"
+msgstr ""
+
+#: admin/_gateway_backup.php:322 admin/_gateway_settings.php:216
+msgid "Minimum Value for Transfer"
+msgstr ""
+
+#: admin/_gateway_backup.php:326 admin/_gateway_settings.php:220
+msgid ""
+"Payments with amount less than minimum will not be possible to pay using "
+"Bank Transfer."
+msgstr ""
+
+#: admin/_gateway_backup.php:330 admin/_gateway_settings.php:224
+msgid "Show existing bank transfers"
+msgstr ""
+
+#: admin/_gateway_backup.php:340 admin/_gateway_settings.php:234
+msgid "PayPal Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:346 admin/_gateway_settings.php:240
+msgid ""
+"It is preferred to use Digital Goods checkout if available, it is more user "
+"friendly."
+msgstr ""
+
+#: admin/_gateway_backup.php:350 admin/_gateway_backup.php:351
+#: admin/_gateway_backup.php:352 admin/_gateway_backup.php:411
+#: admin/_gateway_backup.php:412 admin/_gateway_backup.php:413
+#: admin/_gateway_backup.php:474 admin/_gateway_backup.php:475
+#: admin/_gateway_backup.php:476 admin/_gateway_backup.php:512
+#: admin/_gateway_backup.php:513 admin/_gateway_backup.php:514
+#: admin/_gateway_backup.php:565 admin/_gateway_backup.php:566
+#: admin/_gateway_backup.php:619 admin/_gateway_backup.php:620
+#: admin/_gateway_backup.php:621 admin/_gateway_backup.php:663
+#: admin/_gateway_backup.php:664 admin/_gateway_backup.php:665
+#: admin/_gateway_backup.php:698 admin/_gateway_backup.php:699
+#: admin/_gateway_backup.php:735 admin/_gateway_backup.php:736
+#: admin/_gateway_backup.php:737 admin/_gateway_backup.php:783
+#: admin/_gateway_backup.php:784 admin/_gateway_backup.php:785
+#: admin/_gateway_backup.php:870 admin/_gateway_backup.php:871
+#: admin/_gateway_backup.php:872 admin/_gateway_backup.php:947
+#: admin/_gateway_backup.php:948 admin/_gateway_backup.php:949
+#: admin/_gateway_backup.php:995 admin/_gateway_backup.php:996
+#: admin/_gateway_backup.php:997 admin/_gateway_backup.php:1048
+#: admin/_gateway_backup.php:1049 admin/_gateway_backup.php:1050
+#: admin/_gateway_backup.php:1102 admin/_gateway_backup.php:1103
+#: admin/_gateway_backup.php:1166 admin/_gateway_backup.php:1167
+#: admin/_gateway_backup.php:1231 admin/_gateway_backup.php:1232
+#: admin/_gateway_backup.php:1289 admin/_gateway_backup.php:1290
+#: admin/_gateway_backup.php:1322 admin/_gateway_backup.php:1323
+#: admin/_gateway_backup.php:1363 admin/_gateway_backup.php:1364
+#: admin/_gateway_backup.php:1402 admin/_gateway_backup.php:1403
+#: admin/_gateway_backup.php:1447 admin/_gateway_backup.php:1448
+#: admin/_gateway_backup.php:1449 admin/_gateway_backup.php:1487
+#: admin/_gateway_backup.php:1488 admin/_gateway_backup.php:1489
+#: admin/_gateway_backup.php:1521 admin/_gateway_backup.php:1522
+#: admin/_gateway_settings.php:244 admin/_gateway_settings.php:245
+#: admin/_gateway_settings.php:246 admin/_gateway_settings.php:305
+#: admin/_gateway_settings.php:306 admin/_gateway_settings.php:307
+#: admin/_gateway_settings.php:368 admin/_gateway_settings.php:369
+#: admin/_gateway_settings.php:370 admin/_gateway_settings.php:406
+#: admin/_gateway_settings.php:407 admin/_gateway_settings.php:408
+#: admin/_gateway_settings.php:474 admin/_gateway_settings.php:475
+#: admin/_gateway_settings.php:528 admin/_gateway_settings.php:529
+#: admin/_gateway_settings.php:530 admin/_gateway_settings.php:572
+#: admin/_gateway_settings.php:573 admin/_gateway_settings.php:574
+#: admin/_gateway_settings.php:607 admin/_gateway_settings.php:608
+#: admin/_gateway_settings.php:644 admin/_gateway_settings.php:645
+#: admin/_gateway_settings.php:646 admin/_gateway_settings.php:692
+#: admin/_gateway_settings.php:693 admin/_gateway_settings.php:694
+#: admin/_gateway_settings.php:777 admin/_gateway_settings.php:778
+#: admin/_gateway_settings.php:779 admin/_gateway_settings.php:854
+#: admin/_gateway_settings.php:855 admin/_gateway_settings.php:856
+#: admin/_gateway_settings.php:902 admin/_gateway_settings.php:903
+#: admin/_gateway_settings.php:904 admin/_gateway_settings.php:955
+#: admin/_gateway_settings.php:956 admin/_gateway_settings.php:957
+#: admin/_gateway_settings.php:1010 admin/_gateway_settings.php:1011
+#: admin/_gateway_settings.php:1074 admin/_gateway_settings.php:1075
+#: admin/_gateway_settings.php:1139 admin/_gateway_settings.php:1140
+#: admin/_gateway_settings.php:1197 admin/_gateway_settings.php:1198
+#: admin/_gateway_settings.php:1230 admin/_gateway_settings.php:1231
+#: admin/_gateway_settings.php:1271 admin/_gateway_settings.php:1272
+#: admin/_gateway_settings.php:1310 admin/_gateway_settings.php:1311
+#: admin/_gateway_settings.php:1355 admin/_gateway_settings.php:1356
+#: admin/_gateway_settings.php:1357 admin/_gateway_settings.php:1395
+#: admin/_gateway_settings.php:1396 admin/_gateway_settings.php:1397
+#: admin/_gateway_settings.php:1429 admin/_gateway_settings.php:1430
+#: admin/_gateway_settings.php:1491 admin/_gateway_settings.php:1492
+#: admin/_gateway_settings.php:1493
+msgid "Link will open in new window"
+msgstr ""
+
+#: admin/_gateway_backup.php:350 admin/_gateway_settings.php:244
+msgid "Open Paypal Production"
+msgstr ""
+
+#: admin/_gateway_backup.php:351 admin/_gateway_settings.php:245
+msgid "Open Paypal Sandbox"
+msgstr ""
+
+#: admin/_gateway_backup.php:352 admin/_gateway_settings.php:246
+msgid "Open Paypal Help"
+msgstr ""
+
+#: admin/_gateway_backup.php:356 admin/_gateway_settings.php:250
+msgid "Enable PayPal Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:361 admin/_gateway_settings.php:255
+msgid "PayPal API Username"
+msgstr ""
+
+#: admin/_gateway_backup.php:366 admin/_gateway_settings.php:260
+msgid "PayPal API Signature"
+msgstr ""
+
+#: admin/_gateway_backup.php:371 admin/_gateway_settings.php:265
+msgid "PayPal API Password"
+msgstr ""
+
+#: admin/_gateway_backup.php:376 admin/_gateway_settings.php:270
+msgid "PayPal Email"
+msgstr ""
+
+#: admin/_gateway_backup.php:381 admin/_gateway_settings.php:275
+msgid "PayPal Standard Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:383 admin/_gateway_settings.php:277
+msgid ""
+"Use \"Standard Payments\" if \"Digital Goods\" is not available in your "
+"country"
+msgstr ""
+
+#: admin/_gateway_backup.php:387 admin/_gateway_settings.php:281
+msgid "PayPal Sandbox Enabled"
+msgstr ""
+
+#: admin/_gateway_backup.php:399 admin/_gateway_settings.php:293
+msgid "Przelewy24 Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:406 admin/_gateway_settings.php:300
+msgid ""
+"Przelewy24 not available, currency must be set to PLN, EUR or CZK to be able "
+"to use this gateway."
+msgstr ""
+
+#: admin/_gateway_backup.php:411 admin/_gateway_settings.php:305
+msgid "Open Przelewy24 Production"
+msgstr ""
+
+#: admin/_gateway_backup.php:412 admin/_gateway_settings.php:306
+msgid "Open Przelewy24 Sandbox"
+msgstr ""
+
+#: admin/_gateway_backup.php:413 admin/_gateway_settings.php:307
+msgid "Open Przelewy24 Help"
+msgstr ""
+
+#: admin/_gateway_backup.php:417 admin/_gateway_settings.php:311
+msgid "Enable Przelewy24 Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:422 admin/_gateway_settings.php:316
+msgid "Przelewy24 Merchant Id"
+msgstr ""
+
+#: admin/_gateway_backup.php:427 admin/_gateway_settings.php:321
+msgid "Przelewy24 Shop/POS Id"
+msgstr ""
+
+#: admin/_gateway_backup.php:430 admin/_gateway_settings.php:324
+msgid "Leave blank or enter Merchant ID if not applicable for you."
+msgstr ""
+
+#: admin/_gateway_backup.php:434 admin/_gateway_settings.php:328
+msgid "Przelewy24 CRC Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:439 admin/_gateway_settings.php:333
+msgid "Przelewy24 UI Language"
+msgstr ""
+
+#: admin/_gateway_backup.php:441 admin/_gateway_settings.php:335
+msgid "Poland"
+msgstr ""
+
+#: admin/_gateway_backup.php:442 admin/_gateway_settings.php:336
+msgid "English"
+msgstr ""
+
+#: admin/_gateway_backup.php:443 admin/_gateway_settings.php:337
+msgid "German"
+msgstr ""
+
+#: admin/_gateway_backup.php:444 admin/_gateway_settings.php:338
+msgid "Spanish"
+msgstr ""
+
+#: admin/_gateway_backup.php:445 admin/_gateway_settings.php:339
+msgid "Italian"
+msgstr ""
+
+#: admin/_gateway_backup.php:451 admin/_gateway_backup.php:495
+#: admin/_gateway_backup.php:534 admin/_gateway_backup.php:641
+#: admin/_gateway_backup.php:766 admin/_gateway_backup.php:832
+#: admin/_gateway_backup.php:911 admin/_gateway_backup.php:968
+#: admin/_gateway_backup.php:1021 admin/_gateway_backup.php:1074
+#: admin/_gateway_backup.php:1138 admin/_gateway_backup.php:1201
+#: admin/_gateway_settings.php:345 admin/_gateway_settings.php:389
+#: admin/_gateway_settings.php:438 admin/_gateway_settings.php:550
+#: admin/_gateway_settings.php:675 admin/_gateway_settings.php:741
+#: admin/_gateway_settings.php:818 admin/_gateway_settings.php:875
+#: admin/_gateway_settings.php:928 admin/_gateway_settings.php:981
+#: admin/_gateway_settings.php:1046 admin/_gateway_settings.php:1109
+msgid "Enable Sandbox"
+msgstr ""
+
+#: admin/_gateway_backup.php:462 admin/_gateway_settings.php:356
+msgid "Payhere.lk Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:469 admin/_gateway_settings.php:363
+msgid ""
+"payherelk not available, currency must be set to USD or LKR to be able to "
+"use this gateway."
+msgstr ""
+
+#: admin/_gateway_backup.php:474 admin/_gateway_settings.php:368
+msgid "Open Payhere.lk Production"
+msgstr ""
+
+#: admin/_gateway_backup.php:475 admin/_gateway_settings.php:369
+msgid "Open Payhere.lk Sandbox"
+msgstr ""
+
+#: admin/_gateway_backup.php:476 admin/_gateway_settings.php:370
+msgid "Open Payhere.lk Documentation"
+msgstr ""
+
+#: admin/_gateway_backup.php:480 admin/_gateway_settings.php:374
+msgid "Enable Payhere.lk Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:485 admin/_gateway_settings.php:379
+msgid "Payhere.lk Merchant Id"
+msgstr ""
+
+#: admin/_gateway_backup.php:490 admin/_gateway_settings.php:384
+msgid "Payhere.lk Secret Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:506 admin/_gateway_settings.php:400
+msgid "Stripe Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:512 admin/_gateway_settings.php:406
+msgid "Open Stripe Production"
+msgstr ""
+
+#: admin/_gateway_backup.php:513 admin/_gateway_settings.php:407
+msgid "Open Stripe Sandbox"
+msgstr ""
+
+#: admin/_gateway_backup.php:514 admin/_gateway_backup.php:566
+#: admin/_gateway_settings.php:408 admin/_gateway_settings.php:475
+msgid "Open Stripe Help"
+msgstr ""
+
+#: admin/_gateway_backup.php:518 admin/_gateway_settings.php:418
+msgid "Enable Stripe Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:523 admin/_gateway_settings.php:423
+msgid "Stripe Publishable Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:528 admin/_gateway_settings.php:428
+msgid "Stripe Secret Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:539 admin/_gateway_settings.php:443
+msgid "Stripe Test Publishable Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:544 admin/_gateway_settings.php:448
+msgid "Stripe Test Secret Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:555 admin/_gateway_settings.php:464
+msgid "Skrill Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:561 admin/_gateway_settings.php:470
+msgid ""
+"Skrill does not have sandbox, in regard to test this gateway, contact their "
+"support to convert your account to testing one or look for testing "
+"credentials on google or in their docs."
+msgstr ""
+
+#: admin/_gateway_backup.php:565 admin/_gateway_settings.php:474
+msgid "Open Skrill Production"
+msgstr ""
+
+#: admin/_gateway_backup.php:570 admin/_gateway_settings.php:479
+msgid "Enable Skrill Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:575 admin/_gateway_settings.php:484
+msgid "Skrill Merchant ID"
+msgstr ""
+
+#: admin/_gateway_backup.php:580 admin/_gateway_settings.php:489
+msgid "Skrill Email"
+msgstr ""
+
+#: admin/_gateway_backup.php:585 admin/_gateway_settings.php:494
+msgid "Skrill Secret Word"
+msgstr ""
+
+#: admin/_gateway_backup.php:590 admin/_gateway_settings.php:499
+msgid "Send Payment Notifications"
+msgstr ""
+
+#: admin/_gateway_backup.php:592 admin/_gateway_settings.php:501
+msgid "Admin will receive notifications regarding payments."
+msgstr ""
+
+#: admin/_gateway_backup.php:602 admin/_gateway_settings.php:511
+msgid "Authorize.Net Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:608 admin/_gateway_settings.php:517
+msgid ""
+"Authorize.net operates in currency USD only, plugin must be set to this "
+"currency, otherwise payment will not be available."
+msgstr ""
+
+#: admin/_gateway_backup.php:609 admin/_gateway_settings.php:518
+msgid ""
+"Make sure to perform your registration on correct site, otherwise you will "
+"have troubles to make gateway work."
+msgstr ""
+
+#: admin/_gateway_backup.php:614 admin/_gateway_settings.php:523
+msgid ""
+"Authorize.net not available, currency must be set to USD to be able to use "
+"this gateway."
+msgstr ""
+
+#: admin/_gateway_backup.php:619 admin/_gateway_settings.php:528
+msgid "Open Authorize.net Production"
+msgstr ""
+
+#: admin/_gateway_backup.php:620 admin/_gateway_settings.php:529
+msgid "Open Authorize.net Sandbox"
+msgstr ""
+
+#: admin/_gateway_backup.php:621 admin/_gateway_settings.php:530
+msgid "Open Authorize.net Help"
+msgstr ""
+
+#: admin/_gateway_backup.php:626 admin/_gateway_settings.php:535
+msgid "Enable Authorize.Net Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:631 admin/_gateway_settings.php:540
+msgid "Authorize.Net Merchant Login ID"
+msgstr ""
+
+#: admin/_gateway_backup.php:636 admin/_gateway_settings.php:545
+msgid "Authorize.Net Merchant Transaction Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:652 admin/_gateway_settings.php:561
+msgid "Payza Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:658 admin/_gateway_settings.php:567
+msgid ""
+"In order to make Payza fully functional, you need to enable IPN v2 in your "
+"Payza account. Otherwise payments will not be received."
+msgstr ""
+
+#: admin/_gateway_backup.php:659 admin/_gateway_settings.php:568
+msgid ""
+"Payza sandbox/test mode must be enabled/disabled in Payza account (IPN "
+"section)."
+msgstr ""
+
+#: admin/_gateway_backup.php:663 admin/_gateway_settings.php:572
+msgid "Open Payza Production"
+msgstr ""
+
+#: admin/_gateway_backup.php:664 admin/_gateway_settings.php:573
+msgid "Open Payza Sandbox"
+msgstr ""
+
+#: admin/_gateway_backup.php:665 admin/_gateway_settings.php:574
+msgid "Open Payza Help"
+msgstr ""
+
+#: admin/_gateway_backup.php:669 admin/_gateway_settings.php:578
+msgid "Enable Payza Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:674 admin/_gateway_settings.php:583
+msgid "Payza Email"
+msgstr ""
+
+#: admin/_gateway_backup.php:685 admin/_gateway_settings.php:594
+msgid "Blockchain Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:691 admin/_gateway_settings.php:600
+msgid "To get your address, click on \"Request\" button in Blockchain account."
+msgstr ""
+
+#: admin/_gateway_backup.php:692 admin/_gateway_settings.php:601
+msgid ""
+"Blockchain does not have sandbox/test mode, in order to test your payments, "
+"you need to use live account and money."
+msgstr ""
+
+#: admin/_gateway_backup.php:693 admin/_gateway_settings.php:602
+msgid ""
+"Request API Key on following link, you will receive it to your mail: https://"
+"api.blockchain.info/v2/apikey/request/."
+msgstr ""
+
+#: admin/_gateway_backup.php:694 admin/_gateway_settings.php:603
+msgid ""
+"Get xPub Key in your account: Settings > Addresses > Manage > More Options > "
+"Show xPub"
+msgstr ""
+
+#: admin/_gateway_backup.php:698 admin/_gateway_settings.php:607
+msgid "Open Blockchain Production"
+msgstr ""
+
+#: admin/_gateway_backup.php:699 admin/_gateway_settings.php:608
+msgid "Open Blockchain Help"
+msgstr ""
+
+#: admin/_gateway_backup.php:703 admin/_gateway_settings.php:612
+msgid "Enable Blockchain Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:708 admin/_gateway_settings.php:617
+msgid "Blockchain Address"
+msgstr ""
+
+#: admin/_gateway_backup.php:713 admin/_gateway_settings.php:622
+msgid "Blockchain API Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:718 admin/_gateway_settings.php:627
+msgid "Blockchain xPub Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:729 admin/_gateway_settings.php:638
+msgid "Braintree Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:735 admin/_gateway_settings.php:644
+msgid "Open Braintree Production"
+msgstr ""
+
+#: admin/_gateway_backup.php:736 admin/_gateway_settings.php:645
+msgid "Open Braintree Sandbox"
+msgstr ""
+
+#: admin/_gateway_backup.php:737 admin/_gateway_settings.php:646
+msgid "Open Braintree Help"
+msgstr ""
+
+#: admin/_gateway_backup.php:741 admin/_gateway_settings.php:650
+msgid "Enable Braintree Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:746 admin/_gateway_settings.php:655
+msgid "Braintree Merchant ID"
+msgstr ""
+
+#: admin/_gateway_backup.php:751 admin/_gateway_settings.php:660
+msgid "Braintree Public Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:756 admin/_gateway_settings.php:665
+msgid "Braintree Private Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:761 admin/_gateway_settings.php:670
+msgid "Braintree Encryption Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:777 admin/_gateway_settings.php:686
+msgid "2Checkout Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:783 admin/_gateway_settings.php:692
+msgid "Open 2Checkout Production"
+msgstr ""
+
+#: admin/_gateway_backup.php:784 admin/_gateway_settings.php:693
+msgid "Open 2Checkout Sandbox"
+msgstr ""
+
+#: admin/_gateway_backup.php:785 admin/_gateway_settings.php:694
+msgid "Open 2Checkout Help"
+msgstr ""
+
+#: admin/_gateway_backup.php:789 admin/_gateway_settings.php:698
+msgid ""
+"Once you select type INLINE, go to Account > Site Management, in Direct "
+"Return option select \"Header Redirect (Your URL) and into approved URL put "
+"following:"
+msgstr ""
+
+#: admin/_gateway_backup.php:793 admin/_gateway_settings.php:702
+msgid "Enable 2Checkout Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:798 admin/_gateway_settings.php:707
+msgid "2Checkout Type"
+msgstr ""
+
+#: admin/_gateway_backup.php:800 admin/_gateway_settings.php:709
+msgid "OnSite Checkout"
+msgstr ""
+
+#: admin/_gateway_backup.php:801 admin/_gateway_settings.php:710
+msgid "Standard Checkout (redirect)"
+msgstr ""
+
+#: admin/_gateway_backup.php:804 admin/_gateway_settings.php:713
+msgid ""
+"OnSite checkout works without redirect, but allows payment with credit card. "
+"Standard will redirect user to 2Checkout."
+msgstr ""
+
+#: admin/_gateway_backup.php:808 admin/_gateway_settings.php:717
+msgid "2Checkout Seller ID"
+msgstr ""
+
+#: admin/_gateway_backup.php:811 admin/_gateway_settings.php:720
+msgid "You can get it in my account section: \"Account Number\"."
+msgstr ""
+
+#: admin/_gateway_backup.php:815 admin/_gateway_settings.php:724
+msgid "2Checkout Secret Word"
+msgstr ""
+
+#: admin/_gateway_backup.php:818 admin/_gateway_settings.php:727
+msgid "Secret word you have setup in your account, set in Site Management"
+msgstr ""
+
+#: admin/_gateway_backup.php:822 admin/_gateway_settings.php:731
+msgid "2Checkout Publishable Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:827 admin/_gateway_settings.php:736
+msgid "2Checkout Private Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:843 admin/_gateway_settings.php:752
+msgid "PagSeguro Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:849 admin/_gateway_settings.php:758
+msgid ""
+"PagSeguro operates in Brazil only, osclass pay plugin must be set to "
+"currency BRL, otherwise payment will not be available."
+msgstr ""
+
+#: admin/_gateway_backup.php:850 admin/_gateway_settings.php:759
+msgid "Use lightbox if possible, it provides better user experience."
+msgstr ""
+
+#: admin/_gateway_backup.php:854 admin/_gateway_settings.php:763
+msgid ""
+"PagSeguro require settings of your application on their site in Integration "
+"Profiles > Application. If you open bellow listed URLs and got error 404, "
+"contact your hosting provider to make these files readable."
+msgstr ""
+
+#: admin/_gateway_backup.php:856 admin/_gateway_settings.php:764
+msgid "Transaction notification URL:"
+msgstr ""
+
+#: admin/_gateway_backup.php:857 admin/_gateway_settings.php:765
+msgid "Redirect page URL:"
+msgstr ""
+
+#: admin/_gateway_backup.php:858 admin/_gateway_settings.php:766
+msgid "Redirect with transaction code, name of parameter:"
+msgstr ""
+
+#: admin/_gateway_backup.php:865 admin/_gateway_settings.php:772
+msgid ""
+"PagSeguro is not available, currency must be set to BRL to be able to use "
+"this gateway."
+msgstr ""
+
+#: admin/_gateway_backup.php:870 admin/_gateway_settings.php:777
+msgid "Open PagSeguro Production"
+msgstr ""
+
+#: admin/_gateway_backup.php:871 admin/_gateway_settings.php:778
+msgid "Open PagSeguro Sandbox"
+msgstr ""
+
+#: admin/_gateway_backup.php:872 admin/_gateway_settings.php:779
+msgid "Open PagSeguro Help"
+msgstr ""
+
+#: admin/_gateway_backup.php:876 admin/_gateway_settings.php:783
+msgid "Enable PagSeguro Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:881 admin/_gateway_settings.php:788
+msgid "PagSeguro Email"
+msgstr ""
+
+#: admin/_gateway_backup.php:886 admin/_gateway_settings.php:793
+msgid "PagSeguro Token"
+msgstr ""
+
+#: admin/_gateway_backup.php:891 admin/_gateway_settings.php:798
+msgid "PagSeguro Application ID"
+msgstr ""
+
+#: admin/_gateway_backup.php:896 admin/_gateway_settings.php:803
+msgid "Sandbox Token"
+msgstr ""
+
+#: admin/_gateway_backup.php:901 admin/_gateway_settings.php:808
+msgid "Sandbox Application ID"
+msgstr ""
+
+#: admin/_gateway_backup.php:906 admin/_gateway_settings.php:813
+msgid "Sandbox Application Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:916 admin/_gateway_settings.php:823
+msgid "Enable Lightbox"
+msgstr ""
+
+#: admin/_gateway_backup.php:919 admin/_gateway_settings.php:826
+msgid "Lightbox can be slowly loading in sandbox mode."
+msgstr ""
+
+#: admin/_gateway_backup.php:929 admin/_gateway_settings.php:836
+msgid "PayUMoney Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:935 admin/_gateway_settings.php:842
+msgid ""
+"PayUMoney operates in currency INR only, plugin must be set to this "
+"currency, otherwise payment will not be available."
+msgstr ""
+
+#: admin/_gateway_backup.php:936 admin/_gateway_settings.php:843
+msgid ""
+"PayUMoney is India company, do not get into confusion it is PayU or "
+"PayULatam. Also PayUBiz is different API of PayUMoney."
+msgstr ""
+
+#: admin/_gateway_backup.php:937 admin/_gateway_settings.php:844
+msgid ""
+"PayUMoney does not have sandbox. Use Testing credentials that can be found "
+"on \"Open PayUMoney Testing\" link."
+msgstr ""
+
+#: admin/_gateway_backup.php:942 admin/_gateway_settings.php:849
+msgid ""
+"PayUMoney is not available, currency must be set to INR to be able to use "
+"this gateway."
+msgstr ""
+
+#: admin/_gateway_backup.php:947 admin/_gateway_settings.php:854
+msgid "Open PayUMoney Production"
+msgstr ""
+
+#: admin/_gateway_backup.php:948 admin/_gateway_settings.php:855
+msgid "Open PayUMoney Testing"
+msgstr ""
+
+#: admin/_gateway_backup.php:949 admin/_gateway_settings.php:856
+msgid "Open PayUMoney Help"
+msgstr ""
+
+#: admin/_gateway_backup.php:953 admin/_gateway_settings.php:860
+msgid "Enable PayUMoney Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:958 admin/_gateway_settings.php:865
+msgid "PayUMoney Merchant Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:963 admin/_gateway_settings.php:870
+msgid "PayUMoney Salt"
+msgstr ""
+
+#: admin/_gateway_backup.php:979 admin/_gateway_settings.php:886
+msgid "Instamojo Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:985 admin/_gateway_settings.php:892
+msgid ""
+"Instamojo operates in currency INR only, plugin must be set to this "
+"currency, otherwise payment will not be available."
+msgstr ""
+
+#: admin/_gateway_backup.php:990 admin/_gateway_settings.php:897
+msgid ""
+"Instamojo is not available, currency must be set to INR to be able to use "
+"this gateway."
+msgstr ""
+
+#: admin/_gateway_backup.php:995 admin/_gateway_settings.php:902
+msgid "Open Instamojo Production"
+msgstr ""
+
+#: admin/_gateway_backup.php:996 admin/_gateway_settings.php:903
+msgid "Open Instamojo Sandbox"
+msgstr ""
+
+#: admin/_gateway_backup.php:997 admin/_gateway_settings.php:904
+msgid "Open Instamojo Help"
+msgstr ""
+
+#: admin/_gateway_backup.php:1001 admin/_gateway_settings.php:908
+msgid "Enable Instamojo Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1006 admin/_gateway_settings.php:913
+msgid "Instamojo API Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:1011 admin/_gateway_settings.php:918
+msgid "Instamojo Auth Token"
+msgstr ""
+
+#: admin/_gateway_backup.php:1016 admin/_gateway_settings.php:923
+msgid "Instamojo Salt"
+msgstr ""
+
+#: admin/_gateway_backup.php:1032 admin/_gateway_settings.php:939
+msgid "PayULatam Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1038 admin/_gateway_settings.php:945
+msgid ""
+"PayULatam operates in currencies ARS, BRL, CLP, COP, MXN, PEN, USD only, "
+"plugin must be set to one of listed currency, otherwise payment will not be "
+"available."
+msgstr ""
+
+#: admin/_gateway_backup.php:1043 admin/_gateway_settings.php:950
+msgid ""
+"PayULatam is not available, currency must be set to ARS, BRL, CLP, COP, MXN, "
+"PEN or USD to be able to use this gateway."
+msgstr ""
+
+#: admin/_gateway_backup.php:1048 admin/_gateway_settings.php:955
+msgid "Open PayULatam Production"
+msgstr ""
+
+#: admin/_gateway_backup.php:1049 admin/_gateway_settings.php:956
+msgid "Open PayULatam Sandbox"
+msgstr ""
+
+#: admin/_gateway_backup.php:1050 admin/_gateway_settings.php:957
+msgid "Open PayULatam Help"
+msgstr ""
+
+#: admin/_gateway_backup.php:1054 admin/_gateway_settings.php:961
+msgid "Enable PayULatam Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1059 admin/_gateway_settings.php:966
+msgid "PayULatam Merchant ID"
+msgstr ""
+
+#: admin/_gateway_backup.php:1064 admin/_gateway_settings.php:971
+msgid "PayULatam Account ID"
+msgstr ""
+
+#: admin/_gateway_backup.php:1069 admin/_gateway_settings.php:976
+msgid "PayULatam API Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:1085 admin/_gateway_settings.php:992
+msgid "CCAvenue Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1091 admin/_gateway_settings.php:998
+msgid ""
+"CCAvenue is very strict. If you get credentials, you can use it just on URL/"
+"domain it was registered for. Otherwise it will result in Authentication "
+"failed error."
+msgstr ""
+
+#: admin/_gateway_backup.php:1092 admin/_gateway_settings.php:999
+msgid ""
+"CCAvenue operates in currencies INR, USD, SGD, GBP, EUR only, plugin must be "
+"set to one of listed currency, otherwise payment will not be available. Note "
+"that other than INR currency must be approved by CCAvenue on your account, "
+"otherwise checkout will result in error code 115."
+msgstr ""
+
+#: admin/_gateway_backup.php:1097 admin/_gateway_settings.php:1005
+msgid ""
+"CCAvenue is not available, currency must be set to INR, USD, SGD, GBP or EUR "
+"to be able to use this gateway."
+msgstr ""
+
+#: admin/_gateway_backup.php:1102 admin/_gateway_settings.php:1010
+msgid "Open CCAvenue Production"
+msgstr ""
+
+#: admin/_gateway_backup.php:1103 admin/_gateway_settings.php:1011
+msgid "Open CCAvenue Help"
+msgstr ""
+
+#: admin/_gateway_backup.php:1107 admin/_gateway_settings.php:1015
+msgid "Enable CCAvenue Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1112 admin/_gateway_settings.php:1020
+msgid "Language on CCAvenue Checkout"
+msgstr ""
+
+#: admin/_gateway_backup.php:1114 admin/_gateway_settings.php:1022
+msgid "EN - English"
+msgstr ""
+
+#: admin/_gateway_backup.php:1115 admin/_gateway_settings.php:1023
+msgid "HI - Hindi"
+msgstr ""
+
+#: admin/_gateway_backup.php:1116 admin/_gateway_settings.php:1024
+msgid "GU - Gujarati"
+msgstr ""
+
+#: admin/_gateway_backup.php:1117 admin/_gateway_settings.php:1025
+msgid "MR - Marathi"
+msgstr ""
+
+#: admin/_gateway_backup.php:1118 admin/_gateway_settings.php:1026
+msgid "BN - Bengali"
+msgstr ""
+
+#: admin/_gateway_backup.php:1123 admin/_gateway_settings.php:1031
+msgid "CCAvenue Merchant ID"
+msgstr ""
+
+#: admin/_gateway_backup.php:1128 admin/_gateway_settings.php:1036
+msgid "CCAvenue Access Code"
+msgstr ""
+
+#: admin/_gateway_backup.php:1133 admin/_gateway_settings.php:1041
+msgid "CCAvenue Working Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:1150 admin/_gateway_settings.php:1058
+msgid "Paystack Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1156
+msgid ""
+"Paystack operates in USD, GHS & NGN currency only, plugin must be set to one "
+"of listed currency, otherwise payment will not be available."
+msgstr ""
+
+#: admin/_gateway_backup.php:1161 admin/_gateway_settings.php:1069
+msgid ""
+"Paystack is not available, currency must be set to NGN, GHS or USD to be "
+"able to use this gateway."
+msgstr ""
+
+#: admin/_gateway_backup.php:1166 admin/_gateway_settings.php:1074
+msgid "Open Paystack Production"
+msgstr ""
+
+#: admin/_gateway_backup.php:1167 admin/_gateway_settings.php:1075
+msgid "Open Paystack API"
+msgstr ""
+
+#: admin/_gateway_backup.php:1171 admin/_gateway_settings.php:1079
+msgid "Enable Paystack Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1176 admin/_gateway_settings.php:1084
+msgid "Paystack Email"
+msgstr ""
+
+#: admin/_gateway_backup.php:1181 admin/_gateway_settings.php:1089
+msgid "Paystack Public Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:1186 admin/_gateway_settings.php:1094
+msgid "Paystack Secret Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:1191 admin/_gateway_settings.php:1099
+msgid "Paystack Test Public Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:1196 admin/_gateway_settings.php:1104
+msgid "Paystack Test Secret Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:1214 admin/_gateway_settings.php:1122
+msgid "WeAccept Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1220 admin/_gateway_settings.php:1128
+msgid ""
+"Currency is selected on gateway side, ensure it is same as you have in "
+"Osclass Pay."
+msgstr ""
+
+#: admin/_gateway_backup.php:1225 admin/_gateway_settings.php:1133
+msgid ""
+"This gateway require to setup correct return and notification url. Please go "
+"to Payment Integrations and in selected integration set Transaction "
+"Processed Callback and Transaction Response Callback to following:"
+msgstr ""
+
+#: admin/_gateway_backup.php:1231 admin/_gateway_settings.php:1139
+msgid "Open WeAccept Production"
+msgstr ""
+
+#: admin/_gateway_backup.php:1232 admin/_gateway_settings.php:1140
+msgid "Open WeAccept API"
+msgstr ""
+
+#: admin/_gateway_backup.php:1236 admin/_gateway_settings.php:1144
+msgid "Enable WeAccept Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1241 admin/_gateway_settings.php:1149
+msgid "WeAccept Integration ID"
+msgstr ""
+
+#: admin/_gateway_backup.php:1246 admin/_gateway_settings.php:1154
+msgid "WeAccept Iframe ID"
+msgstr ""
+
+#: admin/_gateway_backup.php:1251 admin/_gateway_settings.php:1159
+msgid "WeAccept Api Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:1264 admin/_gateway_settings.php:1172
+msgid "EuPlatesc.ro Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1270 admin/_gateway_settings.php:1178
+msgid ""
+"EuPlatesc.ro operates in currencies RON, EUR and USD only, plugin must be "
+"set to one of listed currency, otherwise payment will not be available."
+msgstr ""
+
+#: admin/_gateway_backup.php:1275 admin/_gateway_settings.php:1183
+msgid ""
+"EuPlatesc.ro is not available, currency must be set to RON, EUR or USD to be "
+"able to use this gateway."
+msgstr ""
+
+#: admin/_gateway_backup.php:1282 admin/_gateway_settings.php:1190
+msgid ""
+"This gateway require to setup correct return and notification (silent) url. "
+"Please go to Admin > Gestionare Cont. At bottom click on Modifica cont and "
+"update Return URL and Silent URL with following:"
+msgstr ""
+
+#: admin/_gateway_backup.php:1283 admin/_gateway_settings.php:1191
+msgid "Return URL"
+msgstr ""
+
+#: admin/_gateway_backup.php:1284 admin/_gateway_settings.php:1192
+msgid "Silent URL"
+msgstr ""
+
+#: admin/_gateway_backup.php:1289 admin/_gateway_settings.php:1197
+msgid "Open EuPlatesc.ro"
+msgstr ""
+
+#: admin/_gateway_backup.php:1290 admin/_gateway_backup.php:1323
+#: admin/_gateway_backup.php:1364 admin/_gateway_backup.php:1403
+#: admin/_gateway_settings.php:1198 admin/_gateway_settings.php:1231
+#: admin/_gateway_settings.php:1272
+msgid "Open Integration Guide"
+msgstr ""
+
+#: admin/_gateway_backup.php:1294 admin/_gateway_settings.php:1202
+msgid "Enable EuPlatesc Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1299 admin/_gateway_settings.php:1207
+msgid "EuPlatesc MID"
+msgstr ""
+
+#: admin/_gateway_backup.php:1304 admin/_gateway_settings.php:1212
+msgid "EuPlatesc Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:1316 admin/_gateway_settings.php:1224
+msgid "Komfortkasse.eu Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1322 admin/_gateway_settings.php:1230
+msgid "Open Komfortkasse.eu"
+msgstr ""
+
+#: admin/_gateway_backup.php:1327 admin/_gateway_settings.php:1235
+msgid "Enable Komfortkasse Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1332 admin/_gateway_settings.php:1240
+msgid "Komfortkasse Api Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:1344 admin/_gateway_settings.php:1252
+msgid "Pays.cz Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1351 admin/_gateway_settings.php:1259
+msgid ""
+"Pays.cz is not available, currency must be set to USD, EUR or CZK to be able "
+"to use this gateway."
+msgstr ""
+
+#: admin/_gateway_backup.php:1356 admin/_gateway_settings.php:1264
+msgid "Pays.cz require to send following data to podpora@pays.cz:"
+msgstr ""
+
+#: admin/_gateway_backup.php:1357 admin/_gateway_settings.php:1265
+msgid "Successful online/offline payment url:"
+msgstr ""
+
+#: admin/_gateway_backup.php:1358 admin/_gateway_settings.php:1266
+msgid "Payment error url:"
+msgstr ""
+
+#: admin/_gateway_backup.php:1359 admin/_gateway_settings.php:1267
+msgid "Payment confirm url:"
+msgstr ""
+
+#: admin/_gateway_backup.php:1363 admin/_gateway_settings.php:1271
+msgid "Open Pays.cz"
+msgstr ""
+
+#: admin/_gateway_backup.php:1368 admin/_gateway_settings.php:1276
+msgid "Enable Pays.cz Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1373 admin/_gateway_settings.php:1281
+msgid "Pays.cz Merchant Id"
+msgstr ""
+
+#: admin/_gateway_backup.php:1378 admin/_gateway_settings.php:1286
+msgid "Pays.cz Shop Id"
+msgstr ""
+
+#: admin/_gateway_backup.php:1383 admin/_gateway_settings.php:1291
+msgid "Pays.cz API Password"
+msgstr ""
+
+#: admin/_gateway_backup.php:1396
+msgid "Yandex Money Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1402
+msgid "Open Yandex Money page"
+msgstr ""
+
+#: admin/_gateway_backup.php:1408
+msgid ""
+"Yandex Money is not available, currency must be set to RUB to be able to use "
+"this gateway."
+msgstr ""
+
+#: admin/_gateway_backup.php:1413
+msgid "In your Yandex account setup notification URL into following:"
+msgstr ""
+
+#: admin/_gateway_backup.php:1418
+msgid "Enable Yandex Money Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1423
+msgid "Yandex Shop ID (Account/Merchant)"
+msgstr ""
+
+#: admin/_gateway_backup.php:1428
+msgid "Yandex Api Secret Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:1441 admin/_gateway_settings.php:1349
+msgid "Cardinity Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1447 admin/_gateway_settings.php:1355
+msgid "Open Cardinity Dashboard"
+msgstr ""
+
+#: admin/_gateway_backup.php:1448 admin/_gateway_backup.php:1489
+#: admin/_gateway_settings.php:1356 admin/_gateway_settings.php:1397
+msgid "Open API Details"
+msgstr ""
+
+#: admin/_gateway_backup.php:1449 admin/_gateway_backup.php:1522
+#: admin/_gateway_settings.php:1357 admin/_gateway_settings.php:1430
+#: admin/_gateway_settings.php:1493
+msgid "Open PHP SDK Github"
+msgstr ""
+
+#: admin/_gateway_backup.php:1454 admin/_gateway_settings.php:1362
+msgid ""
+"Cardinity.com is not available, currency must be set to EUR, GBP or USD to "
+"be able to use this gateway."
+msgstr ""
+
+#: admin/_gateway_backup.php:1459 admin/_gateway_settings.php:1367
+msgid "Enable Cardinity Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1464 admin/_gateway_settings.php:1372
+msgid "Cardinity Project ID"
+msgstr ""
+
+#: admin/_gateway_backup.php:1469 admin/_gateway_settings.php:1377
+msgid "Cardinity Project Secret"
+msgstr ""
+
+#: admin/_gateway_backup.php:1481 admin/_gateway_settings.php:1389
+msgid "Securionpay Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1487 admin/_gateway_settings.php:1395
+msgid "Open securionpay Dashboard"
+msgstr ""
+
+#: admin/_gateway_backup.php:1488 admin/_gateway_settings.php:1396
+msgid "Open Docs"
+msgstr ""
+
+#: admin/_gateway_backup.php:1493 admin/_gateway_settings.php:1401
+msgid "Enable Securionpay Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1498 admin/_gateway_settings.php:1406
+msgid "Securionpay Public Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:1503 admin/_gateway_settings.php:1411
+msgid "Securionpay Secret Keyt"
+msgstr ""
+
+#: admin/_gateway_backup.php:1515 admin/_gateway_settings.php:1423
+msgid "BeGateway Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1521 admin/_gateway_settings.php:1429
+msgid "Open BeGateway Home"
+msgstr ""
+
+#: admin/_gateway_backup.php:1526 admin/_gateway_settings.php:1434
+msgid "Enable BeGateway Payments"
+msgstr ""
+
+#: admin/_gateway_backup.php:1531 admin/_gateway_settings.php:1439
+msgid "BeGateway Checkout Domain"
+msgstr ""
+
+#: admin/_gateway_backup.php:1534 admin/_gateway_settings.php:1442
+msgid "Enter your payment provider checkout domain e.g. checkout.example.com"
+msgstr ""
+
+#: admin/_gateway_backup.php:1538 admin/_gateway_settings.php:1446
+msgid "BeGateway Shop Id"
+msgstr ""
+
+#: admin/_gateway_backup.php:1541 admin/_gateway_settings.php:1449
+#: admin/_gateway_settings.php:1505
+msgid "Enter your shop id issued by your payment provider"
+msgstr ""
+
+#: admin/_gateway_backup.php:1545 admin/_gateway_settings.php:1453
+msgid "BeGateway Shop Secret Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:1548 admin/_gateway_settings.php:1456
+#: admin/_gateway_settings.php:1512
+msgid "Enter your shop secret key issued by your payment provider"
+msgstr ""
+
+#: admin/_gateway_backup.php:1552 admin/_gateway_settings.php:1460
+msgid "BeGateway Shop Public Key"
+msgstr ""
+
+#: admin/_gateway_backup.php:1555 admin/_gateway_settings.php:1463
+#: admin/_gateway_settings.php:1519
+msgid "Enter your shop public issued by your payment provider"
+msgstr ""
+
+#: admin/_gateway_backup.php:1559 admin/_gateway_settings.php:1467
+msgid "BeGateway Payment Timeout"
+msgstr ""
+
+#: admin/_gateway_backup.php:1562 admin/_gateway_settings.php:1470
+msgid "Enter number of minutes to complete payment by customer"
+msgstr ""
+
+#: admin/_gateway_backup.php:1566 admin/_gateway_settings.php:1474
+#: admin/_gateway_settings.php:1523
+msgid "Enable Test Mode"
+msgstr ""
+
+#: admin/_gateway_backup.php:1573 admin/_gateway_settings.php:1531
+#: admin/configure.php:157
+msgid "Save"
+msgstr ""
+
+#: admin/_gateway_backup.php:1588 admin/_gateway_transfer.php:130
+msgid "Bellow are shown all bank transfers ordered by status and date."
+msgstr ""
+
+#: admin/_gateway_backup.php:1589 admin/_gateway_transfer.php:131
+msgid "If you have received funds to your bank account, accept payment."
+msgstr ""
+
+#: admin/_gateway_backup.php:1598 admin/_gateway_transfer.php:140
+msgid "Variable Symbol"
+msgstr ""
+
+#: admin/_gateway_backup.php:1603 admin/_gateway_transfer.php:145
+msgid "Accept Date"
+msgstr ""
+
+#: admin/_gateway_backup.php:1611 admin/_gateway_transfer.php:153
+msgid "No bank transfers has been found"
+msgstr ""
+
+#: admin/_gateway_backup.php:1629 admin/_gateway_transfer.php:171
+#: functions.php:273 functions.php:2285 user/order.php:146
+msgid "Unknown"
+msgstr ""
+
+#: admin/_gateway_backup.php:1632 admin/_gateway_transfer.php:174
+msgid ""
+"This code should be used as variable symbol in transaction you have received"
+msgstr ""
+
+#: admin/_gateway_backup.php:1643 admin/_gateway_transfer.php:185
+msgid "Pending"
+msgstr ""
+
+#: admin/_gateway_backup.php:1656 admin/_gateway_transfer.php:198
+msgid "Accept payment"
+msgstr ""
+
+#: admin/_gateway_backup.php:1660 admin/_gateway_transfer.php:202
+msgid "Cancel payment"
+msgstr ""
+
+#: admin/_gateway_backup.php:1664 admin/_gateway_transfer.php:206
+msgid "Remove payment"
+msgstr ""
+
+#: admin/_gateway_backup.php:1664 admin/_gateway_transfer.php:206
+msgid "Are you sure you want to remove this transfer? Action cannot be undone."
+msgstr ""
+
+#: admin/_gateway_settings.php:412
+#, php-format
+msgid "Setup your webhook at: %s"
+msgstr ""
+
+#: admin/_gateway_settings.php:413
+#, php-format
+msgid "Webhook must point to: %s"
+msgstr ""
+
+#: admin/_gateway_settings.php:414
+#, php-format
+msgid "Webhook events: %s"
+msgstr ""
+
+#: admin/_gateway_settings.php:433
+msgid "Stripe Webhook Secret Key"
+msgstr ""
+
+#: admin/_gateway_settings.php:453
+msgid "Stripe Test Webhook Secret Key"
+msgstr ""
+
+#: admin/_gateway_settings.php:1000
+msgid ""
+"This payment method require PHP 7.0 or older (mcrypt_module_open function "
+"dependency)."
+msgstr ""
+
+#: admin/_gateway_settings.php:1064
+msgid ""
+"Paystack operates in USD, GHS, ZAR & NGN currency only, plugin must be set "
+"to one of listed currency, otherwise payment will not be available."
+msgstr ""
+
+#: admin/_gateway_settings.php:1304
+msgid "YooKassa Payments"
+msgstr ""
+
+#: admin/_gateway_settings.php:1310
+msgid "Open YooKassa page"
+msgstr ""
+
+#: admin/_gateway_settings.php:1311
+msgid "Open Testing Guide"
+msgstr ""
+
+#: admin/_gateway_settings.php:1316
+msgid ""
+"YooKassa is not available, currency must be set to RUB to be able to use "
+"this gateway."
+msgstr ""
+
+#: admin/_gateway_settings.php:1321
+msgid "In your YooKassa account setup notification URL into following:"
+msgstr ""
+
+#: admin/_gateway_settings.php:1326
+msgid "Enable YooKassa Money Payments"
+msgstr ""
+
+#: admin/_gateway_settings.php:1331
+msgid "YooKassa Shop ID (Account/Merchant)"
+msgstr ""
+
+#: admin/_gateway_settings.php:1336
+msgid "YooKassa Api Secret Key"
+msgstr ""
+
+#: admin/_gateway_settings.php:1485
+msgid "MakeCommerce Payments (by Maksekeskus.ee)"
+msgstr ""
+
+#: admin/_gateway_settings.php:1491
+msgid "Open MakeCommerce Home"
+msgstr ""
+
+#: admin/_gateway_settings.php:1492
+msgid "Open API documentation"
+msgstr ""
+
+#: admin/_gateway_settings.php:1497
+msgid "Enable MakeCommerce Payments"
+msgstr ""
+
+#: admin/_gateway_settings.php:1502
+msgid "MakeCommerce Shop Id"
+msgstr ""
+
+#: admin/_gateway_settings.php:1509
+msgid "MakeCommerce Shop Secret Key"
+msgstr ""
+
+#: admin/_gateway_settings.php:1516
+msgid "MakeCommerce Shop Public Key"
+msgstr ""
+
+#: admin/_gateway_transfer.php:121
+msgid ""
+"Bank transfers are disabled! You can enable bank transfer payment method in "
+"Gateway Settings section."
+msgstr ""
+
+#: admin/_gateway_transfer.php:198
+msgid "Accept"
+msgstr ""
+
+#: admin/_group.php:70
+msgid ""
+"Value for Periodical bonus was not entered correctly. It must be integer "
+"larger or equal to 0."
+msgstr ""
+
+#: admin/_group.php:76
+#, php-format
+msgid "Group with name %s already exist and was not created."
+msgstr ""
+
+#: admin/_group.php:81
+msgid "Groups successfully updated"
+msgstr ""
+
+#: admin/_group.php:105
+#, php-format
+msgid "%s (%s) successfully assigned to group %s."
+msgstr ""
+
+#: admin/_group.php:108 admin/_group.php:128
+msgid "User successfully removed from group"
+msgstr ""
+
+#: admin/_group.php:121
+msgid "Groups successfully removed"
+msgstr ""
+
+#: admin/_group.php:153 admin/_group.php:247 admin/user.php:8
+msgid "User Groups"
+msgstr ""
+
+#: admin/_group.php:169
+msgid "Enable User Groups"
+msgstr ""
+
+#: admin/_group.php:172
+msgid ""
+"Enable user groups (memberships) and promote your regular users with extra "
+"benefits."
+msgstr ""
+
+#: admin/_group.php:176
+msgid "Restrict Categories for User Groups"
+msgstr ""
+
+#: admin/_group.php:179
+msgid ""
+"Restrict selected categories to be available just for group members. Note "
+"that selected categories and it's listings will be available only and only "
+"for group members specified bellow!"
+msgstr ""
+
+#: admin/_group.php:183
+msgid "Add new user to group"
+msgstr ""
+
+#: admin/_group.php:185
+msgid "No group"
+msgstr ""
+
+#: admin/_group.php:192
+msgid "When new user register, add this user automatically to group."
+msgstr ""
+
+#: admin/_group.php:197
+msgid "Limit User Items"
+msgstr ""
+
+#: admin/_group.php:200
+msgid ""
+"When enabled, maximum number of listings those can user create will be "
+"limited. In order to increase this count, it is required to be member of "
+"group."
+msgstr ""
+
+#: admin/_group.php:204
+msgid "Default Max Items"
+msgstr ""
+
+#: admin/_group.php:207 admin/_group.php:305
+msgid "items"
+msgstr ""
+
+#: admin/_group.php:210
+msgid "in"
+msgstr ""
+
+#: admin/_group.php:214 admin/_group.php:312 user/group.php:88
+msgid "days"
+msgstr ""
+
+#: admin/_group.php:217
+msgid ""
+"Define default maximum items count that can be published in selected period. "
+"I.e. 10 listings in 30 days for \"free\". This value will be used for users "
+"those are not logged in or for those that are not member of any group."
+msgstr ""
+
+#: admin/_group.php:221
+msgid "Max Items Count Method"
+msgstr ""
+
+#: admin/_group.php:223
+msgid "Count all items"
+msgstr ""
+
+#: admin/_group.php:224
+msgid "Count active items"
+msgstr ""
+
+#: admin/_group.php:225
+msgid "Count all items except premiums"
+msgstr ""
+
+#: admin/_group.php:226
+msgid "Count active items except premiums"
+msgstr ""
+
+#: admin/_group.php:229
+msgid "Select how would you like to count user items."
+msgstr ""
+
+#: admin/_group.php:262
+msgid ""
+"Enable user groups to provide better experience and extra content to your "
+"regular customers."
+msgstr ""
+
+#: admin/_group.php:263
+msgid ""
+"You can define price for membership, membership discount and also that "
+"content of some categories is available just to members of specified group."
+msgstr ""
+
+#: admin/_group.php:264
+msgid ""
+"Set periodical bonus if you want to send more credits to members of group "
+"using functionality \"Add credits to users once per period\". Value must be "
+"integer, i.e. setting 50 will cause to send 50% more credits to user."
+msgstr ""
+
+#: admin/_group.php:265
+msgid ""
+"Attr can be used for integration with different plugins or functionalities. "
+"Plugin itself does not use them and you do not need to define them."
+msgstr ""
+
+#: admin/_group.php:275
+msgid "Group Name"
+msgstr ""
+
+#: admin/_group.php:278
+msgid "Discount"
+msgstr ""
+
+#: admin/_group.php:279
+msgid ""
+"Expiration days - for how many days is price set. User can choose different "
+"expiration days and price will be lineary recalculated."
+msgstr ""
+
+#: admin/_group.php:279
+msgid "Exp. Days"
+msgstr ""
+
+#: admin/_group.php:280 admin/_wallet.php:219
+msgid "Color"
+msgstr ""
+
+#: admin/_group.php:290
+msgid "Enter group name"
+msgstr ""
+
+#: admin/_group.php:294 admin/_group.php:366 admin/_group.php:382
+msgid "d"
+msgstr ""
+
+#: admin/_group.php:296 admin/_group.php:368 admin/_group.php:384
+msgid "More details"
+msgstr ""
+
+#: admin/_group.php:297
+msgid "Are you sure you want to delete this group?"
+msgstr ""
+
+#: admin/_group.php:297 admin/_group.php:369 admin/_group.php:385
+msgid "Remove group"
+msgstr ""
+
+#: admin/_group.php:300
+msgid "Detail group settings"
+msgstr ""
+
+#: admin/_group.php:303
+msgid "Max. Items"
+msgstr ""
+
+#: admin/_group.php:306
+msgid ""
+"How many items can member of this group publish in certain period (days)."
+msgstr ""
+
+#: admin/_group.php:310
+msgid "Item Period"
+msgstr ""
+
+#: admin/_group.php:313
+msgid ""
+"Max Items Days Expiration - enter period for calculation max items. I.e 10 "
+"items in 30 days. When user want to publish more, it is required to upgrade "
+"membership"
+msgstr ""
+
+#: admin/_group.php:317
+msgid "Categories"
+msgstr ""
+
+#: admin/_group.php:319
+msgid ""
+"Enter category IDs delimited by comma that should be restricted just to "
+"selected user group. Only members of this group will be allowed to see "
+"content of those categories. Example: 1,3,7"
+msgstr ""
+
+#: admin/_group.php:323
+msgid "Periodical Bonus"
+msgstr ""
+
+#: admin/_group.php:325
+msgid "Bonus (wallet credits) sent periodically to users as motivation."
+msgstr ""
+
+#: admin/_group.php:329
+msgid "Custom Text"
+msgstr ""
+
+#: admin/_group.php:331
+msgid "Text shown on group card."
+msgstr ""
+
+#: admin/_group.php:335
+msgid "Rank"
+msgstr ""
+
+#: admin/_group.php:337
+msgid ""
+"Rank is used to give \"weight\" to groups and how they rank across each "
+"other."
+msgstr ""
+
+#: admin/_group.php:341
+msgid "Attribute"
+msgstr ""
+
+#: admin/_group.php:343
+msgid "Can be used by plugin (ie. Business Profile plugin)."
+msgstr ""
+
+#: admin/_group.php:347
+msgid "Pay Per Publish Free Limit"
+msgstr ""
+
+#: admin/_group.php:349
+msgid ""
+"Number of items user may have active for free (without paying Publish Fee). "
+"When this limit is reached, user has to pay Publish fee to have more active "
+"listings."
+msgstr ""
+
+#: admin/_group.php:362 admin/_group.php:378
+msgid "Create new group"
+msgstr ""
+
+#: admin/_group.php:391
+msgid "Add new line for group"
+msgstr ""
+
+#: admin/_group.php:405
+msgid "Add User to Group"
+msgstr ""
+
+#: admin/_group.php:430
+msgid "You can check to what group user belongs."
+msgstr ""
+
+#: admin/_group.php:431
+msgid "You can also add or remove user from group."
+msgstr ""
+
+#: admin/_group.php:457
+msgid "Update user group"
+msgstr ""
+
+#: admin/_group.php:459
+msgid "No Group"
+msgstr ""
+
+#: admin/_group.php:470
+msgid "Membership Expire on"
+msgstr ""
+
+#: admin/_group.php:472
+msgid ""
+"If no date is entered, it is calculated by default number of days for group."
+msgstr ""
+
+#: admin/_group.php:483
+msgid "List users in group"
+msgstr ""
+
+#: admin/_group.php:494 admin/_group.php:496
+msgid "Select Group"
+msgstr ""
+
+#: admin/_group.php:502
+msgid "List Users"
+msgstr ""
+
+#: admin/_group.php:504
+msgid "Select group to list users."
+msgstr ""
+
+#: admin/_group.php:515
+msgid "User Name"
+msgstr ""
+
+#: admin/_group.php:517
+msgid "Group"
+msgstr ""
+
+#: admin/_group.php:518 user/item.php:64
+msgid "Expire on"
+msgstr ""
+
+#: admin/_group.php:524
+msgid "No users has been found in selected group"
+msgstr ""
+
+#: admin/_group.php:536
+msgid "Are you sure you want to delete this user from group?"
+msgstr ""
+
+#: admin/_group.php:536
+msgid "Remove user"
+msgstr ""
+
+#: admin/_group.php:553
+msgid ""
+"When enabled, users can purchase membership in different groups. You can set "
+"privileges to groups or integrate them with different plugins."
+msgstr ""
+
+#: admin/_group.php:554
+msgid ""
+"When enabled, categories selected in definition of groups will be visible "
+"only and only to members of these groups. Care! For everyone else will be "
+"content of category hidden. Even member without access to category can "
+"publish listing inside it."
+msgstr ""
+
+#: admin/_group.php:555
+msgid "Select group where newly registered user is automatically added."
+msgstr ""
+
+#: admin/_group.php:556
+msgid ""
+"When enabled, users will be able to publish just XX items in YY days. Note "
+"that if you have enabled publishing items for unregistered, these people can "
+"avoid this limit by using multiple email addresses."
+msgstr ""
+
+#: admin/_group.php:557
+msgid ""
+"Enter what is maximum count of listings published in selected period. Period "
+"is used as (Today) <-> (Today - YY days)."
+msgstr ""
+
+#: admin/_group.php:558
+msgid ""
+"Select methodology to calulate user items. It is recommended to count all "
+"active items."
+msgstr ""
+
+#: admin/_highlight.php:23 admin/_premium.php:21 admin/_republish.php:24
+msgid ""
+"You have not selected any duration, this is not possible. Default duration "
+"per 24 hours has been used."
+msgstr ""
+
+#: admin/_highlight.php:49 admin/_image.php:31 admin/_movetotop.php:31
+#: admin/_premium.php:47 admin/_publish.php:31 admin/_republish.php:61
+msgid "Fees for categories were successfully saved"
+msgstr ""
+
+#: admin/_highlight.php:75 admin/_image.php:57 admin/_movetotop.php:57
+#: admin/_premium.php:73 admin/_publish.php:57 admin/_republish.php:87
+msgid "Fees for locations were successfully saved"
+msgstr ""
+
+#: admin/_highlight.php:78 admin/_image.php:60 admin/_movetotop.php:60
+#: admin/_premium.php:76 admin/_publish.php:60 admin/_republish.php:90
+msgid ""
+"Some uplifts were not updated due to their format or range. Note that only "
+"integer values between -90 and 300 are accepted."
+msgstr ""
+
+#: admin/_highlight.php:110 admin/_image.php:91 admin/_movetotop.php:91
+#: admin/_premium.php:108 admin/_publish.php:91 admin/_republish.php:122
+#: admin/ecommerce.php:12 admin/gateway.php:8
+msgid "Settings"
+msgstr ""
+
+#: admin/_highlight.php:127
+msgid ""
+"Highlight functionality bring possibility to make listings more visible and "
+"attractive"
+msgstr ""
+
+#: admin/_highlight.php:128
+msgid ""
+"If listing is highlighted, it looks different than other listings. You can "
+"define styles for highlighted listings bellow."
+msgstr ""
+
+#: admin/_highlight.php:133
+msgid "Enable Pay per Highlight"
+msgstr ""
+
+#: admin/_highlight.php:136
+msgid "When enabled, users can pay to mark their listings as highlight."
+msgstr ""
+
+#: admin/_highlight.php:141 admin/_premium.php:139 admin/_republish.php:154
+msgid "Default fee per 24 hours"
+msgstr ""
+
+#: admin/_highlight.php:145 admin/_premium.php:143 admin/_republish.php:158
+msgid ""
+"Define default fee per 24 hours of duration. Price for other durations is "
+"recalculated via formula."
+msgstr ""
+
+#: admin/_highlight.php:150
+msgid "Duration of highlights"
+msgstr ""
+
+#: admin/_highlight.php:159
+msgid ""
+"Select at least 1 duration to make Pay per Highlight functional (Press CTRL "
+"to select multiple)."
+msgstr ""
+
+#: admin/_highlight.php:163
+msgid "Highlight Background Color"
+msgstr ""
+
+#: admin/_highlight.php:167
+msgid "Color must be in HEX, RGB or RGBA form. Examples:"
+msgstr ""
+
+#: admin/_highlight.php:171
+msgid "Highlight CSS Code"
+msgstr ""
+
+#: admin/_highlight.php:174
+msgid "Extra CSS styles. Example:"
+msgstr ""
+
+#: admin/_highlight.php:188 admin/_image.php:139 admin/_movetotop.php:137
+#: admin/_premium.php:171 admin/_publish.php:144 admin/_republish.php:207
+msgid "Category Prices"
+msgstr ""
+
+#: admin/_highlight.php:193 admin/_image.php:144 admin/_movetotop.php:142
+#: admin/_premium.php:176 admin/_publish.php:149 admin/_republish.php:212
+msgid ""
+"If you do not want to set different prices per category, skip this section. "
+"Prices will be then calculated based on default price."
+msgstr ""
+
+#: admin/_highlight.php:194 admin/_image.php:145 admin/_movetotop.php:143
+#: admin/_premium.php:177 admin/_publish.php:150 admin/_republish.php:213
+msgid ""
+"If price on parent category is changed, this change is applied to all "
+"subcategories of this category."
+msgstr ""
+
+#: admin/_highlight.php:195 admin/_image.php:146 admin/_movetotop.php:144
+#: admin/_premium.php:178 admin/_publish.php:151 admin/_republish.php:214
+msgid ""
+"If same price as default price is set, price is cleared (default is used). "
+"If price field is left blank, default price is used."
+msgstr ""
+
+#: admin/_highlight.php:196 admin/_image.php:147 admin/_movetotop.php:145
+#: admin/_premium.php:179 admin/_publish.php:152 admin/_republish.php:215
+msgid "Do not modify too many categories at once."
+msgstr ""
+
+#: admin/_highlight.php:200 admin/_image.php:151 admin/_movetotop.php:149
+#: admin/_premium.php:183 admin/_publish.php:156 admin/_republish.php:219
+msgid ""
+"Set price to 0 (zero) to disable selection. Set price to blank (empty) to "
+"use default price."
+msgstr ""
+
+#: admin/_highlight.php:212 admin/_highlight.php:316 admin/_image.php:163
+#: admin/_image.php:252 admin/_movetotop.php:160 admin/_movetotop.php:246
+#: admin/_premium.php:195 admin/_premium.php:299 admin/_publish.php:167
+#: admin/_publish.php:255 admin/_republish.php:230 admin/_republish.php:334
+msgid "Show only prices different to default"
+msgstr ""
+
+#: admin/_highlight.php:213 admin/_highlight.php:317 admin/_image.php:164
+#: admin/_image.php:253 admin/_movetotop.php:161 admin/_movetotop.php:247
+#: admin/_premium.php:196 admin/_premium.php:300 admin/_publish.php:168
+#: admin/_publish.php:256 admin/_republish.php:231 admin/_republish.php:335
+msgid "Show all prices"
+msgstr ""
+
+#: admin/_highlight.php:214 admin/_highlight.php:318 admin/_image.php:165
+#: admin/_image.php:254 admin/_movetotop.php:162 admin/_movetotop.php:248
+#: admin/_premium.php:197 admin/_premium.php:301 admin/_publish.php:169
+#: admin/_publish.php:257 admin/_republish.php:232 admin/_republish.php:336
+msgid "Clear prices"
+msgstr ""
+
+#: admin/_highlight.php:232 admin/_image.php:170 admin/_movetotop.php:167
+#: admin/_premium.php:215 admin/_publish.php:174 admin/_republish.php:250
+#: user/banner_form.php:54
+msgid "Category"
+msgstr ""
+
+#: admin/_highlight.php:242 admin/_image.php:177 admin/_movetotop.php:174
+#: admin/_premium.php:225 admin/_publish.php:181 admin/_republish.php:260
+msgid "No categories has been added yet"
+msgstr ""
+
+#: admin/_highlight.php:250 admin/_image.php:185 admin/_movetotop.php:182
+#: admin/_premium.php:233 admin/_publish.php:189 admin/_republish.php:268
+msgid "Main category"
+msgstr ""
+
+#: admin/_highlight.php:262 admin/_image.php:196 admin/_movetotop.php:193
+#: admin/_premium.php:245 admin/_publish.php:200 admin/_republish.php:280
+msgid "This option is disabled"
+msgstr ""
+
+#: admin/_highlight.php:272 admin/_image.php:207 admin/_movetotop.php:203
+#: admin/_premium.php:255 admin/_publish.php:210 admin/_republish.php:290
+msgid "Default price is used"
+msgstr ""
+
+#: admin/_highlight.php:278 admin/_highlight.php:362 admin/_image.php:213
+#: admin/_image.php:298 admin/_movetotop.php:209 admin/_movetotop.php:292
+#: admin/_premium.php:261 admin/_premium.php:345 admin/_publish.php:216
+#: admin/_publish.php:301 admin/_republish.php:296 admin/_republish.php:380
+#: admin/tax.php:101 admin/tax.php:106 admin/tax.php:112 admin/tax.php:119
+#: admin/tax.php:125 admin/tax.php:131 admin/tax.php:138 admin/tax.php:144
+#: admin/tax.php:150
+msgid "Click to unlock field"
+msgstr ""
+
+#: admin/_highlight.php:298 admin/_image.php:234 admin/_movetotop.php:228
+#: admin/_premium.php:281 admin/_publish.php:237 admin/_republish.php:316
+msgid "Location Prices"
+msgstr ""
+
+#: admin/_highlight.php:303 admin/_image.php:239 admin/_movetotop.php:233
+#: admin/_premium.php:286 admin/_publish.php:242 admin/_republish.php:321
+msgid ""
+"You can set there uplift of price per country or region in range -90% to "
+"+300%. If you set +100%, fee in selected location will be doubled."
+msgstr ""
+
+#: admin/_highlight.php:304 admin/_image.php:240 admin/_movetotop.php:234
+#: admin/_premium.php:287 admin/_publish.php:243 admin/_republish.php:322
+msgid ""
+"Note that to get final fee amount, there are 3 variables: category, "
+"location, user membership."
+msgstr ""
+
+#: admin/_highlight.php:305 admin/_image.php:241 admin/_movetotop.php:235
+#: admin/_premium.php:288 admin/_publish.php:244 admin/_republish.php:323
+msgid "Leave blank or set to 0 to disable."
+msgstr ""
+
+#: admin/_highlight.php:323 admin/_image.php:259 admin/_movetotop.php:253
+#: admin/_premium.php:306 admin/_publish.php:262 admin/_republish.php:341
+msgid "Location"
+msgstr ""
+
+#: admin/_highlight.php:324 admin/_image.php:260 admin/_movetotop.php:254
+#: admin/_premium.php:307 admin/_publish.php:263 admin/_republish.php:342
+msgid "Uplift percentage"
+msgstr ""
+
+#: admin/_highlight.php:330 admin/_image.php:266 admin/_movetotop.php:260
+#: admin/_premium.php:313 admin/_publish.php:269 admin/_republish.php:348
+msgid "No locations has been added yet"
+msgstr ""
+
+#: admin/_highlight.php:366 admin/_image.php:302 admin/_movetotop.php:296
+#: admin/_premium.php:349 admin/_publish.php:305 admin/_republish.php:384
+msgid ""
+"Enter integer values only! It can be negative or possitive in range from -90 "
+"to 300."
+msgstr ""
+
+#: admin/_highlight.php:387 admin/_image.php:323
+#, php-format
+msgid ""
+"For \"Highlight\" and \"Show image\" features please make sure your theme "
+"contains hook %s. Some theme like bender already contains it, but some of "
+"them may not."
+msgstr ""
+
+#: admin/_highlight.php:388 admin/_image.php:324
+msgid ""
+"If Highligh / Show image does not work for you, please go to your theme "
+"folder."
+msgstr ""
+
+#: admin/_highlight.php:389 admin/_image.php:325
+msgid ""
+"If your theme has files loop-single.php and loop-single-premium.php, "
+"continue with section 1, otherwise go to section 2."
+msgstr ""
+
+#: admin/_highlight.php:391 admin/_image.php:327
+msgid "Section 1"
+msgstr ""
+
+#: admin/_highlight.php:392 admin/_image.php:328
+#, php-format
+msgid ""
+"Open files loop-single.php and loop-single-premium.php  and check if "
+"contains string %s"
+msgstr ""
+
+#: admin/_highlight.php:393 admin/_highlight.php:402 admin/_image.php:329
+#: admin/_image.php:338
+msgid ""
+"If you can see this code here, everything is setup correctly and no action "
+"is required. If not, continue with next step."
+msgstr ""
+
+#: admin/_highlight.php:394 admin/_image.php:330
+msgid "Locate first html element in this file. It could be"
+msgstr ""
+
+#: admin/_highlight.php:395 admin/_highlight.php:404 admin/_image.php:331
+#: admin/_image.php:340
+msgid ""
+"If it contains class element, before second apostrophe insert following code:"
+msgstr ""
+
+#: admin/_highlight.php:396 admin/_highlight.php:405 admin/_image.php:332
+#: admin/_image.php:341
+msgid "After that class element will looks like:"
+msgstr ""
+
+#: admin/_highlight.php:397 admin/_highlight.php:406 admin/_image.php:333
+#: admin/_image.php:342
+msgid ""
+"If it does not contain class element and let's say it is div element, before "
+"first > sign insert following code:"
+msgstr ""
+
+#: admin/_highlight.php:398 admin/_highlight.php:407 admin/_image.php:334
+#: admin/_image.php:343
+msgid "So element will look like (div, p, li, ...) following:"
+msgstr ""
+
+#: admin/_highlight.php:400 admin/_image.php:336
+msgid "Section 2"
+msgstr ""
+
+#: admin/_highlight.php:401 admin/_image.php:337
+#, php-format
+msgid ""
+"Open files search_list.php and search_gallery.php and check if contains "
+"string %s"
+msgstr ""
+
+#: admin/_highlight.php:403 admin/_image.php:339
+#, php-format
+msgid ""
+"Locate first html element in this file right after line that contains %s. It "
+"could be"
+msgstr ""
+
+#: admin/_highlight.php:419 admin/_movetotop.php:316 admin/_premium.php:370
+#: admin/_republish.php:404 admin/banner.php:359 admin/tax.php:175
+#, php-format
+msgid "When enabled, users can %s their listings."
+msgstr ""
+
+#: admin/_highlight.php:419
+msgid "highlight"
+msgstr ""
+
+#: admin/_highlight.php:420 admin/_premium.php:371 admin/_republish.php:405
+#: admin/tax.php:176
+msgid ""
+"Set default fee per 24 hours. This fee will be used to calculate fee for "
+"other durations."
+msgstr ""
+
+#: admin/_highlight.php:421 admin/_premium.php:372 admin/_republish.php:406
+#: admin/tax.php:177
+#, php-format
+msgid ""
+"Select available durations of %s item. You can define different prices for "
+"different durations, i.e. price per 24 hours set to $1.0, but price for 48 "
+"hours set to $1.5. Use CTRL to select more than one duration."
+msgstr ""
+
+#: admin/_highlight.php:421
+msgid "highlighted"
+msgstr ""
+
+#: admin/_highlight.php:422
+#, php-format
+msgid ""
+"Select color that will be used as background for highlighted listings (HEX, "
+"RGBA or RGB colors). You can define also own CSS styles for highlighted "
+"boxes. Listing that is highlighted has class %s, you can use it in your "
+"theme style sheet."
+msgstr ""
+
+#: admin/_highlight.php:423
+msgid ""
+"Define your own CSS code for highlighted boxes. Note that you need to use "
+"valid CSS rules. This code will be placed into style attribute of box."
+msgstr ""
+
+#: admin/_image.php:104
+msgid ""
+"Pay to Show Images functionality enables to charge your users for showing "
+"pictures on listings."
+msgstr ""
+
+#: admin/_image.php:105
+msgid ""
+"When enabled, users are able to upload pictures to listings, however in "
+"order to show pictures it is required to pay fee."
+msgstr ""
+
+#: admin/_image.php:106
+msgid "When fee is not paid, in front listing behave like without pictures."
+msgstr ""
+
+#: admin/_image.php:107
+msgid ""
+"Enabling functionality does not affect existing listings, however it is "
+"possible from oc-admin > items to require to pay image fee additionally."
+msgstr ""
+
+#: admin/_image.php:113
+msgid "Enable Pay per Show Image"
+msgstr ""
+
+#: admin/_image.php:116
+msgid "When enabled, users must pay to show images on their listings."
+msgstr ""
+
+#: admin/_image.php:121 admin/_movetotop.php:119 admin/_publish.php:126
+msgid "Default fee"
+msgstr ""
+
+#: admin/_image.php:125
+msgid "Define default show image fee."
+msgstr ""
+
+#: admin/_image.php:217
+msgid ""
+"Setting price to 0 (zero) will remove unpaid image fee payment requests "
+"(pictures will be visible) in selected categories."
+msgstr ""
+
+#: admin/_image.php:355
+msgid ""
+"When enabled, users must pay image fee in order to show images on their "
+"listings."
+msgstr ""
+
+#: admin/_image.php:356
+msgid "Select default fee for showing images on listings."
+msgstr ""
+
+#: admin/_movetotop.php:104
+msgid ""
+"Move to Top functionality bring possibility to move listings to top in "
+"search."
+msgstr ""
+
+#: admin/_movetotop.php:105
+msgid "If listing is moved to top, it looks newly published."
+msgstr ""
+
+#: admin/_movetotop.php:106
+msgid ""
+"Move to top is 1-time action, for regular moving to top it is possible to "
+"use republish that has same attributes, but is for repeating actions."
+msgstr ""
+
+#: admin/_movetotop.php:111
+msgid "Enable Pay per Move to Top"
+msgstr ""
+
+#: admin/_movetotop.php:114
+msgid ""
+"When enabled, users can move their listings to top. Listing will behave like "
+"newly published."
+msgstr ""
+
+#: admin/_movetotop.php:123
+msgid "Define default movetotop fee."
+msgstr ""
+
+#: admin/_movetotop.php:316
+msgid "move to top"
+msgstr ""
+
+#: admin/_movetotop.php:317
+msgid "Set default fee for moving listing to top."
+msgstr ""
+
+#: admin/_premium.php:125
+msgid "Make Premium functionality allows to mark listings as premium."
+msgstr ""
+
+#: admin/_premium.php:126
+msgid ""
+"Based on theme, premium listing may be shown in special block where only "
+"premium listings are shown, has special more attractive background color or "
+"label that identifies listing as premium."
+msgstr ""
+
+#: admin/_premium.php:131
+msgid "Enable Pay per Premium"
+msgstr ""
+
+#: admin/_premium.php:134
+msgid "When enabled, users can pay to mark their listings as premium."
+msgstr ""
+
+#: admin/_premium.php:148
+msgid "Duration of premiums"
+msgstr ""
+
+#: admin/_premium.php:157
+msgid ""
+"Select at least 1 duration to make Pay per Premium functional (Press CTRL to "
+"select multiple)."
+msgstr ""
+
+#: admin/_premium.php:370 admin/banner.php:359 admin/tax.php:175
+msgid "make premium"
+msgstr ""
+
+#: admin/_premium.php:372 admin/tax.php:177
+msgid "premium"
+msgstr ""
+
+#: admin/_publish.php:104
+msgid ""
+"Pay per Publish functionality enables to charge users for publishing "
+"listings."
+msgstr ""
+
+#: admin/_publish.php:105
+msgid ""
+"When publish fee is not paid, listing is not shown in front and behaves like "
+"not activated."
+msgstr ""
+
+#: admin/_publish.php:106
+msgid ""
+"Enabling functionality does not affect existing listings, however it is "
+"possible from oc-admin > items to require to pay publish fee additionally."
+msgstr ""
+
+#: admin/_publish.php:111
+msgid "Enable Pay per Publish"
+msgstr ""
+
+#: admin/_publish.php:114
+msgid "When enabled, users must pay in order to publish their listing."
+msgstr ""
+
+#: admin/_publish.php:118
+msgid "Deactivate not paid Items"
+msgstr ""
+
+#: admin/_publish.php:121
+msgid ""
+"When enabled, some plugins may not be used like More Edit or Item "
+"Validation. When disabled, not paid items are not visible on search page, "
+"but may be visible on homepage in latest items or in related items. Test "
+"before using on live."
+msgstr ""
+
+#: admin/_publish.php:130
+msgid "Define default publish fee."
+msgstr ""
+
+#: admin/_publish.php:220
+msgid ""
+"Setting price to 0 (zero) will remove unpaid publish fee payment requests "
+"(items will be visible) in selected categories."
+msgstr ""
+
+#: admin/_publish.php:324
+msgid ""
+"When enabled, users must pay publish fee in order to show their listings in "
+"front."
+msgstr ""
+
+#: admin/_publish.php:325
+msgid ""
+"Disable to improve compatibility of Osclass Pay plugin with plugins like "
+"More Edit or Item Validation that use active field of listing. Care! Make "
+"sure to check if not paid items are really not shown in front or if you are "
+"ok with such behaviour. Make sure your theme use highlight_class hook (check "
+"highlight section) to improve functionality."
+msgstr ""
+
+#: admin/_publish.php:326
+msgid "Select default fee for publishing listings."
+msgstr ""
+
+#: admin/_republish.php:32
+msgid ""
+"You have not selected any repeat, this is not possible. Default 1 repeat has "
+"been used."
+msgstr ""
+
+#: admin/_republish.php:139
+msgid ""
+"Republish functionality enables to users to renew/republish their listings "
+"in selected intervals multiple times."
+msgstr ""
+
+#: admin/_republish.php:140
+msgid ""
+"Listing that is republished behaves like newly published listing and will be "
+"in top on search page."
+msgstr ""
+
+#: admin/_republish.php:141
+msgid ""
+"When republish paid, listing is instaltnly renewed and then republished in "
+"selected intervals."
+msgstr ""
+
+#: admin/_republish.php:146
+msgid "Enable Pay per Republish"
+msgstr ""
+
+#: admin/_republish.php:149
+msgid "When enabled, users can pay to mark their listings as republish."
+msgstr ""
+
+#: admin/_republish.php:163
+msgid "Duration of republish"
+msgstr ""
+
+#: admin/_republish.php:172
+msgid ""
+"Select at least 1 duration to make Pay per Republish functional (Press CTRL "
+"to select multiple)."
+msgstr ""
+
+#: admin/_republish.php:176
+msgid "Available repeats of republish"
+msgstr ""
+
+#: admin/_republish.php:185
+msgid ""
+"Select at least 1 repeat to make Pay per Republish functional (Press CTRL to "
+"select multiple)."
+msgstr ""
+
+#: admin/_republish.php:189
+msgid "Discount for multi-republish purchase"
+msgstr ""
+
+#: admin/_republish.php:193
+msgid ""
+"Discount is applied to purchase for each extra republish. If 5 republish of "
+"listing is bought, discount is applied 5 times."
+msgstr ""
+
+#: admin/_republish.php:404
+msgid "republish"
+msgstr ""
+
+#: admin/_republish.php:406
+msgid "republishing"
+msgstr ""
+
+#: admin/_republish.php:407
+msgid ""
+"Select available repeats of republish. I.e. when user purchase republish 24 "
+"hours with 3 repeats, listing will be republished 3 times, first time after "
+"24 hours from purchase and then 2 more times each after 24 hours."
+msgstr ""
+
+#: admin/_republish.php:408
+msgid ""
+"Set discount in integer format. This can motivate users to buy multi-repeat "
+"republish option. Let's say you set discount to 5. If user purchase 1 "
+"repeat, there will be applied no discount. For 2 repeats there will be "
+"discount of 5% applied. For 3 repeats there will be discount 1 - 0.95*0.95 "
+"applied (9.75%)."
+msgstr ""
+
+#: admin/_republish.php:411
+msgid "Duration means after how long will be listing republished."
+msgstr ""
+
+#: admin/_wallet.php:60
+#, php-format
+msgid "Pack with name %s already exist and was not created."
+msgstr ""
+
+#: admin/_wallet.php:65
+msgid "Packages successfully updated"
+msgstr ""
+
+#: admin/_wallet.php:72
+msgid "Package successfully removed"
+msgstr ""
+
+#: admin/_wallet.php:85
+#, php-format
+msgid "Credit for user %s (%s) at %s by Admin"
+msgstr ""
+
+#: admin/_wallet.php:90
+#, php-format
+msgid "%s successfully assigned to %s (%s). This user has now %s in wallet."
+msgstr ""
+
+#: admin/_wallet.php:118
+msgid "User Wallet"
+msgstr ""
+
+#: admin/_wallet.php:134
+msgid "Enable User Wallet"
+msgstr ""
+
+#: admin/_wallet.php:137
+msgid "User can purchase credit packs and pay using credits."
+msgstr ""
+
+#: admin/_wallet.php:141
+msgid "Add credits to new user"
+msgstr ""
+
+#: admin/_wallet.php:144
+msgid ""
+"Add credits to each registered user. Set to 0 or leave blank to disable."
+msgstr ""
+
+#: admin/_wallet.php:148
+msgid "Add credits to referral users"
+msgstr ""
+
+#: admin/_wallet.php:151
+msgid ""
+"When newly registered user use referral code provided by other users, both "
+"of them will get bonus credits. Set to 0 or leave blank to disable."
+msgstr ""
+
+#: admin/_wallet.php:155
+msgid "Add credits to users once per period"
+msgstr ""
+
+#: admin/_wallet.php:157
+msgid "once per"
+msgstr ""
+
+#: admin/_wallet.php:160
+msgid "Week"
+msgstr ""
+
+#: admin/_wallet.php:161
+msgid "Month"
+msgstr ""
+
+#: admin/_wallet.php:162
+msgid "Quarter"
+msgstr ""
+
+#: admin/_wallet.php:165
+msgid ""
+"As bonus to registered users, provide them extra credits once per selected "
+"period. Credits are sent in first day of period. Set to 0 or leave blank to "
+"disable."
+msgstr ""
+
+#: admin/_wallet.php:169
+msgid "Design packs as"
+msgstr ""
+
+#: admin/_wallet.php:171
+msgid "Gallery - boxes"
+msgstr ""
+
+#: admin/_wallet.php:172
+msgid "List - stripes"
+msgstr ""
+
+#: admin/_wallet.php:175
+msgid "In front office, select what kind of design you prefer for packs."
+msgstr ""
+
+#: admin/_wallet.php:190 user/pack.php:141
+msgid "Credit Packs"
+msgstr ""
+
+#: admin/_wallet.php:205
+msgid ""
+"You can specify credit packs users can purchase and replace numerous number "
+"of small transations with less larger transactions."
+msgstr ""
+
+#: admin/_wallet.php:206
+msgid ""
+"Using packages is more suitable for users as well as they do not need to "
+"checkout each time they promote their listing."
+msgstr ""
+
+#: admin/_wallet.php:214
+msgid "Pack Name"
+msgstr ""
+
+#: admin/_wallet.php:217
+msgid "Bonus"
+msgstr ""
+
+#: admin/_wallet.php:218
+msgid "User Group"
+msgstr ""
+
+#: admin/_wallet.php:228
+msgid "Enter package name"
+msgstr ""
+
+#: admin/_wallet.php:235 admin/_wallet.php:261 admin/_wallet.php:286
+msgid "All groups"
+msgstr ""
+
+#: admin/_wallet.php:244
+msgid "Are you sure you want to delete this pack?"
+msgstr ""
+
+#: admin/_wallet.php:244 admin/_wallet.php:270 admin/_wallet.php:295
+msgid "Remove pack"
+msgstr ""
+
+#: admin/_wallet.php:254 admin/_wallet.php:279
+msgid "Create new package"
+msgstr ""
+
+#: admin/_wallet.php:300
+msgid "Add new line for pack"
+msgstr ""
+
+#: admin/_wallet.php:313
+msgid "Credits on User Account"
+msgstr ""
+
+#: admin/_wallet.php:339
+msgid ""
+"You can check how much funds has each user in wallet, just start typing user "
+"name into name field."
+msgstr ""
+
+#: admin/_wallet.php:340
+msgid "You can also add or withdraw funds to user account."
+msgstr ""
+
+#: admin/_wallet.php:364
+msgid "Wallet Amount"
+msgstr ""
+
+#: admin/_wallet.php:371
+msgid "Add/withdraw credits"
+msgstr ""
+
+#: admin/_wallet.php:374
+msgid "You can place positive (add) or negative (withdraw) amount."
+msgstr ""
+
+#: admin/_wallet.php:387
+msgid ""
+"When enabled, users can buy credit packs and get bonus for registration or "
+"referral of friend. Wallet should help you to reduce amount of small "
+"payments."
+msgstr ""
+
+#: admin/_wallet.php:388
+msgid ""
+"Select preferred design for packs - show as gallery (boxes) or show as list "
+"(stripes)."
+msgstr ""
+
+#: admin/_wallet.php:389
+msgid ""
+"Provide credits for registration. User will get credits automatically after "
+"registration."
+msgstr ""
+
+#: admin/_wallet.php:390
+msgid ""
+"Provide credits for friend referral. When newly registered user used "
+"referral code of existing user, both users will get credits to their wallet. "
+"Credits are added to wallet after newly registered user activate it's "
+"account, if required."
+msgstr ""
+
+#: admin/_wallet.php:391
+msgid ""
+"Provide credits to registered users periodically. This helps to keep users "
+"active and attract their attention."
+msgstr ""
+
+#: admin/banner.php:3
+msgid "Banner & Advertisement"
+msgstr ""
+
+#: admin/banner.php:30
+msgid ""
+"Banner approved successfully. Notification email to pay banner was send to "
+"customer."
+msgstr ""
+
+#: admin/banner.php:38
+msgid "Banner rejected successfully."
+msgstr ""
+
+#: admin/banner.php:44
+msgid "Banner removed successfully."
+msgstr ""
+
+#: admin/banner.php:46
+msgid "This is demo site, you cannot remove banner."
+msgstr ""
+
+#: admin/banner.php:71
+msgid "Banner Settings"
+msgstr ""
+
+#: admin/banner.php:84
+msgid ""
+"This functionality require usage of plugin BANNER ADS. You must install this "
+"plugin in order to use banner functionality."
+msgstr ""
+
+#: admin/banner.php:90
+msgid ""
+"Banner Ads plugin may use different currency, make sure to use same currency "
+"in both plugins to avoid missunderstandings."
+msgstr ""
+
+#: admin/banner.php:96
+msgid "Enable Banners"
+msgstr ""
+
+#: admin/banner.php:99
+msgid "When enabled, users can pay for banners."
+msgstr ""
+
+#: admin/banner.php:104
+msgid "Hook Advertise Button to Banner"
+msgstr ""
+
+#: admin/banner.php:107
+msgid ""
+"When enabled, \"Advertise here!\" button is automatically hooked to each "
+"banner created by Banner Ads Plugin."
+msgstr ""
+
+#: admin/banner.php:112
+msgid "Fee for 1 view"
+msgstr ""
+
+#: admin/banner.php:119
+msgid "Fee for 1 click"
+msgstr ""
+
+#: admin/banner.php:137 functions.php:1627 index.php:799 index.php:826
+msgid "Banners"
+msgstr ""
+
+#: admin/banner.php:141
+msgid "Bellow are shown all banners ordered by status and creation date."
+msgstr ""
+
+#: admin/banner.php:148 user/banner_form.php:32
+msgid "Banner Name"
+msgstr ""
+
+#: admin/banner.php:149
+msgid "BA ID"
+msgstr ""
+
+#: admin/banner.php:150
+msgid "Key"
+msgstr ""
+
+#: admin/banner.php:151
+msgid "1 view fee"
+msgstr ""
+
+#: admin/banner.php:152
+msgid "1 click fee"
+msgstr ""
+
+#: admin/banner.php:153 user/banner.php:33
+msgid "Budget"
+msgstr ""
+
+#: admin/banner.php:155
+msgid "Action"
+msgstr ""
+
+#: admin/banner.php:162
+msgid "No banners has been found"
+msgstr ""
+
+#: admin/banner.php:178
+#, php-format
+msgid "User #%d removed"
+msgstr ""
+
+#: admin/banner.php:183
+msgid "Click to show linked advert in Banner Ads Plugin"
+msgstr ""
+
+#: admin/banner.php:185
+msgid "Open Advert"
+msgstr ""
+
+#: admin/banner.php:191
+msgid "Click to show banner stats"
+msgstr ""
+
+#: admin/banner.php:206 user/banner.php:81
+msgid "Pending review"
+msgstr ""
+
+#: admin/banner.php:208 user/banner.php:84
+msgid "Pending payment"
+msgstr ""
+
+#: admin/banner.php:212 user/banner.php:95
+msgid "Rejected"
+msgstr ""
+
+#: admin/banner.php:220
+msgid "Approve banner"
+msgstr ""
+
+#: admin/banner.php:231 admin/banner.php:249
+msgid "Comment for author (optional) ..."
+msgstr ""
+
+#: admin/banner.php:232
+msgid "Approve"
+msgstr ""
+
+#: admin/banner.php:237
+msgid "Reject banner"
+msgstr ""
+
+#: admin/banner.php:250
+msgid "Reject"
+msgstr ""
+
+#: admin/banner.php:255 user/banner.php:112
+msgid "Remove banner"
+msgstr ""
+
+#: admin/banner.php:255
+msgid "Are you sure you want to remove this banner? Action cannot be undone."
+msgstr ""
+
+#: admin/banner.php:260
+msgid "Details"
+msgstr ""
+
+#: admin/banner.php:267
+msgid "Banner code"
+msgstr ""
+
+#: admin/banner.php:272
+msgid "Showcase"
+msgstr ""
+
+#: admin/banner.php:282
+msgid "Visible in categories"
+msgstr ""
+
+#: admin/banner.php:286 admin/banner.php:298
+msgid "All categories"
+msgstr ""
+
+#: admin/banner.php:307 user/banner_form.php:40
+msgid "On Click URL"
+msgstr ""
+
+#: admin/banner.php:312
+msgid "Banner size (width x height)"
+msgstr ""
+
+#: admin/banner.php:317
+msgid "Reviewer comment"
+msgstr ""
+
+#: admin/banner.php:338
+msgid ""
+"If you have disabled \"Hook Advertise Button to Banner\", you must add "
+"button to submit user banner manually to theme files."
+msgstr ""
+
+#: admin/banner.php:339
+msgid ""
+"Make sure you understand basic terms. Banner created in Osclass Pay Plugin "
+"will result in creating Advert in Banner Ads Plugin. Term Banner in Banner "
+"Ads Plugin is container for showing adverts."
+msgstr ""
+
+#: admin/banner.php:341
+msgid ""
+"First create banner in Banner Ads Plugin that will be container for client "
+"buttons. Follow guide in this plugin how to show banners in theme. You can "
+"create banner on following link:"
+msgstr ""
+
+#: admin/banner.php:344
+msgid ""
+"When banner is created, get it's ID and to show \"Advertise Here!\" button "
+"in your theme, place anywhere you like or need following code."
+msgstr ""
+
+#: admin/banner.php:348
+msgid "Make sure to replace {banner_id} with ID of your banner. Example:"
+msgstr ""
+
+#: admin/banner.php:360
+msgid "Price for 1 view of banner."
+msgstr ""
+
+#: admin/banner.php:361
+msgid "Price for 1 click on banner."
+msgstr ""
+
+#: admin/banner.php:362
+msgid ""
+"Enable to add \"Advertise here!\" button under each banner created by Banner "
+"Ads Plugin. No theme modifications are required, however it can break design "
+"of banners. If it does not work for you, check setup guide above."
+msgstr ""
+
+#: admin/configure.php:3 admin/configure.php:44 index.php:523 index.php:531
+#: index.php:602
+msgid "Configure"
+msgstr ""
+
+#: admin/configure.php:61
+#, php-format
+msgid "Some files in folder %s are not readable!"
+msgstr ""
+
+#: admin/configure.php:62
+msgid ""
+"In order to make plugin fully functional, all the plugin files must be "
+"readable. Please contact your hosting provider for help."
+msgstr ""
+
+#: admin/configure.php:63
+msgid "Make sure correct CHMOD settings are set on all plugin files."
+msgstr ""
+
+#: admin/configure.php:77
+msgid "Select default currency for payments."
+msgstr ""
+
+#: admin/configure.php:81
+msgid "Price Decimal Numbers"
+msgstr ""
+
+#: admin/configure.php:84
+msgid "How many decimal numbers show in price. Default is 2."
+msgstr ""
+
+#: admin/configure.php:88
+msgid "Position of Currency Symbol"
+msgstr ""
+
+#: admin/configure.php:90
+msgid "After price (1.0$)"
+msgstr ""
+
+#: admin/configure.php:91
+msgid "Before price ($1.0)"
+msgstr ""
+
+#: admin/configure.php:96
+msgid "Space Between Price and Symbol"
+msgstr ""
+
+#: admin/configure.php:99
+msgid "By default there is no space. Usually white space can be added."
+msgstr ""
+
+#: admin/configure.php:103
+msgid "Decimal Sybmol"
+msgstr ""
+
+#: admin/configure.php:106
+msgid "By default it is dot (.)"
+msgstr ""
+
+#: admin/configure.php:110
+msgid "Thousands Separator"
+msgstr ""
+
+#: admin/configure.php:113
+msgid "By default there is white space ( )"
+msgstr ""
+
+#: admin/configure.php:117
+msgid "Sample price"
+msgstr ""
+
+#: admin/configure.php:120
+msgid "This is price format defined by you that plugin will use"
+msgstr ""
+
+#: admin/configure.php:124
+msgid "Links in User sidebar"
+msgstr ""
+
+#: admin/configure.php:126
+msgid "Only promotion link"
+msgstr ""
+
+#: admin/configure.php:127
+msgid "All links"
+msgstr ""
+
+#: admin/configure.php:130
+msgid "Select what links are added into user sidebar"
+msgstr ""
+
+#: admin/configure.php:134
+msgid "Horizonal Navigation Menu"
+msgstr ""
+
+#: admin/configure.php:136
+msgid "Shown"
+msgstr ""
+
+#: admin/configure.php:137
+msgid "Hidden"
+msgstr ""
+
+#: admin/configure.php:140
+msgid ""
+"Select if horizontal menu of plugin in user section will be visible or not."
+msgstr ""
+
+#: admin/configure.php:144
+msgid "Default Price Calculation"
+msgstr ""
+
+#: admin/configure.php:146
+msgid "Progressive"
+msgstr ""
+
+#: admin/configure.php:147
+msgid "Linear"
+msgstr ""
+
+#: admin/configure.php:150
+msgid ""
+"Select how to calculate default price (item features). Progressive has more "
+"complex formula, linear is simply [price] = [fee]*[hours]/24."
+msgstr ""
+
+#: admin/configure.php:172
+msgid "Osclass Wizards theme require modication in it's file."
+msgstr ""
+
+#: admin/configure.php:173
+msgid "Go to file"
+msgstr ""
+
+#: admin/configure.php:174
+msgid "Find code"
+msgstr ""
+
+#: admin/configure.php:175
+msgid "Replace it with"
+msgstr ""
+
+#: admin/configure.php:180
+msgid ""
+"There are no changes required in your theme files in order to make plugin "
+"fully functional."
+msgstr ""
+
+#: admin/configure.php:181
+#, php-format
+msgid ""
+"For \"Highlight\" and \"Show image\" features please make sure your theme "
+"contains hook %s. More info about integration can be found in Items > "
+"Highlight > Plugin Setup section."
+msgstr ""
+
+#: admin/configure.php:193
+msgid ""
+"There can be just one currency for all payments and customers. Note that "
+"some payment gateway may not be available in selected currency, i.e. "
+"Instamojo or PayUMoney are available just for India Rupee (INR) currency."
+msgstr ""
+
+#: admin/ecommerce.php:3
+msgid "E-commerce"
+msgstr ""
+
+#: admin/ecommerce.php:7
+msgid "Orders Management"
+msgstr ""
+
+#: admin/ecommerce.php:8
+msgid "Product Management"
+msgstr ""
+
+#: admin/ecommerce.php:9
+msgid "User Management"
+msgstr ""
+
+#: admin/gateway.php:7
+msgid "Bank Transfers Management"
+msgstr ""
+
+#: admin/item.php:3
+msgid "Items Promotion"
+msgstr ""
+
+#: admin/item.php:7 user/item_post.php:188
+msgid "Mark as Premium"
+msgstr ""
+
+#: admin/item.php:8
+msgid "Pay per Publish"
+msgstr ""
+
+#: admin/item.php:9 functions.php:2248
+msgid "Highlight"
+msgstr ""
+
+#: admin/item.php:10
+msgid "Pay to Show Images"
+msgstr ""
+
+#: admin/item.php:11 functions.php:1351 functions.php:1528 functions.php:2262
+#: user/item_post.php:153
+msgid "Move to Top"
+msgstr ""
+
+#: admin/item.php:12
+msgid "Pay for Republish"
+msgstr ""
+
+#: admin/log.php:3 admin/log.php:21
+msgid "Payment Logs"
+msgstr ""
+
+#: admin/log.php:35 admin/log.php:95
+msgid "Concept"
+msgstr ""
+
+#: admin/log.php:55 admin/log.php:102 user/payments.php:31
+msgid "Source"
+msgstr ""
+
+#: admin/log.php:99
+msgid "Cur"
+msgstr ""
+
+#: admin/log.php:109
+msgid "No payment logs has been found"
+msgstr ""
+
+#: admin/log.php:131
+msgid "Active membership in"
+msgstr ""
+
+#: admin/log.php:133
+msgid "Not member of any group"
+msgstr ""
+
+#: admin/log.php:137 functions.php:3491 functions.php:3499 functions.php:3507
+msgid "Wallet"
+msgstr ""
+
+#: admin/log.php:172
+msgid "Unique database order number of log."
+msgstr ""
+
+#: admin/log.php:173
+msgid "Concept is short description what was paid, like \"Pay 2 cart items\"."
+msgstr ""
+
+#: admin/log.php:174
+msgid "Date of payment."
+msgstr ""
+
+#: admin/log.php:175
+msgid ""
+"Code is transaction ID provided by payment gateway or generated by plugin "
+"(for wallet operations)."
+msgstr ""
+
+#: admin/log.php:176
+msgid "Total amount of order - how much was paid to your account."
+msgstr ""
+
+#: admin/log.php:177
+msgid "Currency used for transaction (USD, EUR, INR, ...)."
+msgstr ""
+
+#: admin/log.php:178
+msgid "Payer email."
+msgstr ""
+
+#: admin/log.php:179
+msgid ""
+"User details - available just in case order was done by logged in customer."
+msgstr ""
+
+#: admin/log.php:180
+msgid ""
+"Source identify what gateway was used for payment, it can be external or "
+"internal (like Referral, Wallet, ...)."
+msgstr ""
+
+#: admin/mark.php:13
+msgid "Publish fee marked as paid successfully."
+msgstr ""
+
+#: admin/mark.php:18
+msgid "Item has been moved to top successfully."
+msgstr ""
+
+#: admin/mark.php:21
+msgid "Image fee marked as paid successfully."
+msgstr ""
+
+#: admin/mark.php:27
+msgid "Listing has been marked/promoted successfully with no expiration date."
+msgstr ""
+
+#: admin/mark.php:31
+msgid "Listing has been unmarked successfully."
+msgstr ""
+
+#: admin/mark.php:35
+msgid "Payment requirement has been created."
+msgstr ""
+
+#: admin/mark.php:46
+msgid ""
+"Item has been deactivated and will be visible after publish fee is paid. "
+"Email has been send to item owner."
+msgstr ""
+
+#: admin/tax.php:3
+msgid "Tax Settings"
+msgstr ""
+
+#: admin/tax.php:33
+msgid "Tax for regions were successfully saved"
+msgstr ""
+
+#: admin/tax.php:59
+msgid "Tax Setup"
+msgstr ""
+
+#: admin/tax.php:64
+msgid "Set tax value between 0 and 100."
+msgstr ""
+
+#: admin/tax.php:78 payments/2checkout/TwoCheckoutPayment.php:85
+#: payments/worldpay/WorldpayPayment.php:81
+msgid "Country"
+msgstr ""
+
+#: admin/tax.php:79
+msgid "Region"
+msgstr ""
+
+#: admin/tax.php:81
+msgid "Tax ID #1"
+msgstr ""
+
+#: admin/tax.php:82
+msgid "Tax ID #2"
+msgstr ""
+
+#: admin/tax.php:83
+msgid "Tax ID #3"
+msgstr ""
+
+#: admin/tax.php:85
+msgid "Tax Name #1"
+msgstr ""
+
+#: admin/tax.php:86
+msgid "Tax Name #2"
+msgstr ""
+
+#: admin/tax.php:87
+msgid "Tax Name #3"
+msgstr ""
+
+#: admin/tax.php:89
+msgid "Tax Value #1"
+msgstr ""
+
+#: admin/tax.php:90
+msgid "Tax Value #2"
+msgstr ""
+
+#: admin/tax.php:91
+msgid "Tax Value #3"
+msgstr ""
+
+#: admin/tax.php:99
+msgid "Default"
+msgstr ""
+
+#: admin/user.php:3
+msgid "User Settings"
+msgstr ""
+
+#: admin/user.php:7 functions.php:1619 index.php:791 index.php:818
+#: index.php:1041
+msgid "Wallet & Packs"
+msgstr ""
+
+#: email.php:82 email.php:175 email.php:235 email.php:279
+msgid "My account - Promotions section"
+msgstr ""
+
+#: email.php:282
+#, php-format
+msgid "For your membership in %s we added to you %s more credits!"
+msgstr ""
+
+#: email.php:328
+msgid "APPROVED"
+msgstr ""
+
+#: email.php:330
+msgid "REJECTED"
+msgstr ""
+
+#: email.php:361
+msgid "Customer"
+msgstr ""
+
+#: email.php:393
+msgid "My account - Orders section"
+msgstr ""
+
+#: email.php:448
+msgid "Total amount"
+msgstr ""
+
+#: functions.php:41
+msgid "1 day"
+msgstr ""
+
+#: functions.php:43 functions.php:89 functions.php:1949
+#, php-format
+msgid "%d days"
+msgstr ""
+
+#: functions.php:48
+msgid "1 week"
+msgstr ""
+
+#: functions.php:50 functions.php:1953
+#, php-format
+msgid "%d weeks"
+msgstr ""
+
+#: functions.php:55 functions.php:72
+msgid "1 month"
+msgstr ""
+
+#: functions.php:57 functions.php:74 functions.php:79 functions.php:1957
+#, php-format
+msgid "%d months"
+msgstr ""
+
+#: functions.php:62 functions.php:83
+msgid "1 year"
+msgstr ""
+
+#: functions.php:64 functions.php:85 functions.php:1961
+#, php-format
+msgid "%d years"
+msgstr ""
+
+#: functions.php:364
+msgid "Page:"
+msgstr ""
+
+#: functions.php:448
+msgid "All listings"
+msgstr ""
+
+#: functions.php:449
+msgid "\"Buy now\" listings"
+msgstr ""
+
+#: functions.php:450
+msgid "Other listings"
+msgstr ""
+
+#: functions.php:557
+msgid "Invalid code, no voucher has been found"
+msgstr ""
+
+#: functions.php:560
+msgid "Invalid voucher type, this type of voucher cannot be added into cart"
+msgstr ""
+
+#: functions.php:563
+msgid "Invalid voucher type, this type of voucher is not credit type"
+msgstr ""
+
+#: functions.php:566
+#, php-format
+msgid "Voucher is not valid yet, promotion starts on %s"
+msgstr ""
+
+#: functions.php:569
+#, php-format
+msgid "Voucher is not valid anymore, promotion has ended on %s"
+msgstr ""
+
+#: functions.php:572
+msgid "Voucher is not valid anymore, it has reached maximum usage already"
+msgstr ""
+
+#: functions.php:575
+msgid "Voucher is not valid anymore, promotion has been cancelled"
+msgstr ""
+
+#: functions.php:578
+msgid ""
+"Voucher is not available for you as it is restricted just to certain "
+"customers"
+msgstr ""
+
+#: functions.php:581
+msgid ""
+"Voucher is not available for you as it is restricted just to certain "
+"membership groups"
+msgstr ""
+
+#: functions.php:584
+#, php-format
+msgid "Voucher could not be used, minimum order amount for voucher is %s"
+msgstr ""
+
+#: functions.php:587
+#, php-format
+msgid ""
+"You have used voucher %dx already, that is maximum allowed usage per customer"
+msgstr ""
+
+#: functions.php:601
+#, php-format
+msgid ""
+"Voucher could not be used, as cart contains one or more restricted products "
+"for this voucher (%s)"
+msgstr ""
+
+#: functions.php:620
+#, php-format
+msgid "%s discount has been applied"
+msgstr ""
+
+#: functions.php:622
+#, php-format
+msgid "%s has been added into your wallet"
+msgstr ""
+
+#: functions.php:745
+#, php-format
+msgid ""
+"An account limit has been introduced where you can have up to %s ads live at "
+"any moment. If you need more, you can become premium member to unlock "
+"further benefits. To read more about it please visit our FAQ page or contact "
+"us. You have currently active %s listings out of your limit %s listings "
+"(published in %s days)."
+msgstr ""
+
+#: functions.php:751
+msgid "Premium membership and account limit"
+msgstr ""
+
+#: functions.php:753
+msgid "Buy"
+msgstr ""
+
+#: functions.php:785
+#, php-format
+msgid "You have %s in your wallet. %s to promote your listings!"
+msgstr ""
+
+#: functions.php:785
+msgid "Click here"
+msgstr ""
+
+#: functions.php:855
+msgid "This is your product, you cannot buy it!"
+msgstr ""
+
+#: functions.php:858 functions.php:860 functions.php:1452 user/pack.php:164
+msgid "Add to cart"
+msgstr ""
+
+#: functions.php:865
+msgid "In stock"
+msgstr ""
+
+#: functions.php:867
+msgid "Sold out!"
+msgstr ""
+
+#: functions.php:914 user/banner.php:24
+msgid "Advertise here!"
+msgstr ""
+
+#: functions.php:1007 functions.php:1048
+msgid "Enable Sale"
+msgstr ""
+
+#: functions.php:1013 functions.php:1054
+msgid "Enable online sales for this item. Payment goes to site owner account."
+msgstr ""
+
+#: functions.php:1025 functions.php:1066
+msgid "Require shipping for this item."
+msgstr ""
+
+#: functions.php:1025 functions.php:1066
+msgid "Manage my shipping options"
+msgstr ""
+
+#: functions.php:1032 functions.php:1073
+msgid "Available Quantity"
+msgstr ""
+
+#: functions.php:1035 functions.php:1076
+msgid "Enter how much quantity of this product is available."
+msgstr ""
+
+#: functions.php:1131 functions.php:1139
+msgid "Referral code"
+msgstr ""
+
+#: functions.php:1134 functions.php:1142
+#, php-format
+msgid "Get %s for using referral code from your friend"
+msgstr ""
+
+#: functions.php:1204
+#, php-format
+msgid "Credit for using referral code %s to user %s (%s) at %s"
+msgstr ""
+
+#: functions.php:1209
+#, php-format
+msgid "Credit for providing referral code %s to user %s (%s) at %s"
+msgstr ""
+
+#: functions.php:1212
+#, php-format
+msgid ""
+"Referral code %s successfully used. You and your friend got bonus %s to "
+"wallet"
+msgstr ""
+
+#: functions.php:1214
+#, php-format
+msgid "Referral code %s was not recognized."
+msgstr ""
+
+#: functions.php:1259
+msgid "Listing will not be visible until administrator approves it"
+msgstr ""
+
+#: functions.php:1316
+#, php-format
+msgid ""
+"Item ID %s has not been paid yet, you cannot activate item until publish fee "
+"%s is paid. In order to show listing click on \"Pay Publish Fee\" link."
+msgstr ""
+
+#: functions.php:1338 user/item_post.php:99
+msgid "In order to show your listing it is required to pay publish fee"
+msgstr ""
+
+#: functions.php:1338 user/item_post.php:90
+msgid "Publish Fee"
+msgstr ""
+
+#: functions.php:1340 functions.php:2244
+msgid "Publish fee"
+msgstr ""
+
+#: functions.php:1351 user/item_post.php:154
+msgid "Your listings will be moved to top position in search results"
+msgstr ""
+
+#: functions.php:1353
+msgid "Move to top fee"
+msgstr ""
+
+#: functions.php:1364 user/item_post.php:129
+msgid "In order to show images on your listing it is required to pay fee"
+msgstr ""
+
+#: functions.php:1364 user/item_post.php:128
+msgid "Show Images Fee"
+msgstr ""
+
+#: functions.php:1366
+msgid "Show images fee"
+msgstr ""
+
+#: functions.php:1377 functions.php:2246
+msgid "Make Premium"
+msgstr ""
+
+#: functions.php:1379
+msgid "Extend Premium"
+msgstr ""
+
+#: functions.php:1382 user/item_post.php:189
+msgid "Make your listing unique on home and search page!"
+msgstr ""
+
+#: functions.php:1388 user/item_post.php:240
+msgid "Highlight Item"
+msgstr ""
+
+#: functions.php:1390
+msgid "Extend Highlight"
+msgstr ""
+
+#: functions.php:1393 user/item_post.php:241
+msgid "Make listing more visible and attract more people!"
+msgstr ""
+
+#: functions.php:1414
+msgid "Automatically Republish Item"
+msgstr ""
+
+#: functions.php:1416
+msgid "Extend Republish"
+msgstr ""
+
+#: functions.php:1425
+msgid ""
+"Listing will be instantly renewed and then republished multiple times in "
+"selected intervals"
+msgstr ""
+
+#: functions.php:1427
+msgid "How often republish item?"
+msgstr ""
+
+#: functions.php:1437
+msgid "How many times?"
+msgstr ""
+
+#: functions.php:1440
+msgid "Repeat"
+msgstr ""
+
+#: functions.php:1455
+msgid "No promotion options available"
+msgstr ""
+
+#: functions.php:1498
+msgid "Unpaid"
+msgstr ""
+
+#: functions.php:1504
+msgid "Show image paid"
+msgstr ""
+
+#: functions.php:1504
+msgid "Highlight paid"
+msgstr ""
+
+#: functions.php:1504
+msgid "Republish paid"
+msgstr ""
+
+#: functions.php:1505
+msgid "Show image not paid"
+msgstr ""
+
+#: functions.php:1505
+msgid "Highlight pending payment"
+msgstr ""
+
+#: functions.php:1505
+msgid "Republish pending payment"
+msgstr ""
+
+#: functions.php:1528
+msgid "Pay Show Image"
+msgstr ""
+
+#: functions.php:1528
+msgid "Pay Highlight"
+msgstr ""
+
+#: functions.php:1528
+msgid "Pay Publish Fee"
+msgstr ""
+
+#: functions.php:1529
+msgid "Disable Show Image"
+msgstr ""
+
+#: functions.php:1529
+msgid "Unhighlight"
+msgstr ""
+
+#: functions.php:1530
+msgid "Require Pay Show Image"
+msgstr ""
+
+#: functions.php:1530
+msgid "Require Pay Publish Fee"
+msgstr ""
+
+#: functions.php:1589
+#, php-format
+msgid "Credit for registration to user %s (%s) at %s"
+msgstr ""
+
+#: functions.php:1589
+msgid "Registration bonus credits"
+msgstr ""
+
+#: functions.php:1590
+#, php-format
+msgid ""
+"As a bonus for registration we have just boost your wallet with %s. Feel "
+"free to use them for promotion of your listings!"
+msgstr ""
+
+#: functions.php:1623 functions.php:2256 index.php:795 index.php:822
+#: index.php:1042 model/ModelOSP.php:1507
+msgid "Membership"
+msgstr ""
+
+#: functions.php:1631 index.php:803 index.php:830 index.php:1054 index.php:1055
+msgid "Orders & Sales"
+msgstr ""
+
+#: functions.php:1634 index.php:806
+msgid "Cart"
+msgstr ""
+
+#: functions.php:1635
+msgid "Payments"
+msgstr ""
+
+#: functions.php:1760
+#, php-format
+msgid ""
+"Important! Osclass Pay plugin has restricted this category and it's content "
+"to members of following user groups: %s. You see this message because you "
+"are logged in as admin in same browser. This message is not visible to your "
+"customers."
+msgstr ""
+
+#: functions.php:1938 functions.php:1945
+#, php-format
+msgid "%d hours"
+msgstr ""
+
+#: functions.php:1941
+#, php-format
+msgid "%d minutes"
+msgstr ""
+
+#: functions.php:1943
+#, php-format
+msgid "%d hour"
+msgstr ""
+
+#: functions.php:1947
+#, php-format
+msgid "%d day"
+msgstr ""
+
+#: functions.php:1951
+#, php-format
+msgid "%d week"
+msgstr ""
+
+#: functions.php:1955
+#, php-format
+msgid "%d month"
+msgstr ""
+
+#: functions.php:1959
+#, php-format
+msgid "%d year"
+msgstr ""
+
+#: functions.php:2203 functions.php:2234
+msgid "Promotion services"
+msgstr ""
+
+#: functions.php:2250
+msgid "Show Image"
+msgstr ""
+
+#: functions.php:2252
+msgid "Credit Pack"
+msgstr ""
+
+#: functions.php:2254 functions.php:2260
+msgid "Republish"
+msgstr ""
+
+#: functions.php:2258
+msgid "Pay Items"
+msgstr ""
+
+#: functions.php:2264 index.php:527 index.php:606
+msgid "Banner"
+msgstr ""
+
+#: functions.php:2270
+msgid "Pay booking"
+msgstr ""
+
+#: functions.php:2272 functions.php:2274 functions.php:2276 functions.php:2278
+msgid "Auction"
+msgstr ""
+
+#: functions.php:2280 user/pack.php:95
+msgid "Voucher"
+msgstr ""
+
+#: functions.php:2282
+msgid "Offer"
+msgstr ""
+
+#: functions.php:2438
+msgid ""
+"You have selected same or lower membership group, your remaining expiration "
+"days of group were transfered."
+msgstr ""
+
+#: functions.php:2440
+msgid "Your remaining expiration days of group were transfered."
+msgstr ""
+
+#: functions.php:2447
+msgid ""
+"You have selected same or higher membership group, we have moved remaining "
+"expiration days to your new group."
+msgstr ""
+
+#: functions.php:2528
+#, php-format
+msgid "Invalid offer! Offer #%d does not exists."
+msgstr ""
+
+#: functions.php:2532
+#, php-format
+msgid "Offer #%d has already been paid."
+msgstr ""
+
+#: functions.php:2750 functions.php:2882 user/products.php:120
+msgid "Title"
+msgstr ""
+
+#: functions.php:2750 functions.php:2882 user/products.php:121
+msgid "Price"
+msgstr ""
+
+#: functions.php:2756
+#, php-format
+msgid "Item %s"
+msgstr ""
+
+#: functions.php:2759
+#, php-format
+msgid "Item %s (%s)"
+msgstr ""
+
+#: functions.php:2762
+#, php-format
+msgid "Item %s (%s, repeat %sx)"
+msgstr ""
+
+#: functions.php:2766
+#, php-format
+msgid "Credit pack %s (get %s, pay %s)"
+msgstr ""
+
+#: functions.php:2778
+#, php-format
+msgid "Membership in %s (%s days)"
+msgstr ""
+
+#: functions.php:2783
+#, php-format
+msgid "Banner %s (budget %s)"
+msgstr ""
+
+#: functions.php:2798
+msgid "Unknown seller"
+msgstr ""
+
+#: functions.php:2802
+#, php-format
+msgid "Delivery by %s from %s"
+msgstr ""
+
+#: functions.php:2809
+msgid "Change"
+msgstr ""
+
+#: functions.php:2811
+msgid "Available delivery options"
+msgstr ""
+
+#: functions.php:2824 functions.php:2965
+msgid "Unknown shipping"
+msgstr ""
+
+#: functions.php:2829 model/ModelOSP.php:3663
+#, php-format
+msgid "Standard shipping from %s"
+msgstr ""
+
+#: functions.php:2841
+#, php-format
+msgid "Voucher %s (-%s)"
+msgstr ""
+
+#: functions.php:2845
+#, php-format
+msgid "Booking / Reservation #%s"
+msgstr ""
+
+#: functions.php:2851
+#, php-format
+msgid "Pay custom offer #%d (%s)"
+msgstr ""
+
+#: functions.php:2857
+#, php-format
+msgid "Buy auctioned item #%d (%s, +shipping)"
+msgstr ""
+
+#: functions.php:2863
+#, php-format
+msgid "Buyout auctioned item #%d (%s, +shipping)"
+msgstr ""
+
+#: functions.php:2869
+#, php-format
+msgid "Auction fee #%d (%s)"
+msgstr ""
+
+#: functions.php:2875
+#, php-format
+msgid "Auction win bid fee #%d (%s)"
+msgstr ""
+
+#: functions.php:2885
+#, php-format
+msgid "Purchase %s for %s"
+msgstr ""
+
+#: functions.php:2888 functions.php:3024
+msgid "Pay cart items"
+msgstr ""
+
+#: functions.php:2891
+msgid "Not recognized"
+msgstr ""
+
+#: functions.php:2920
+#, php-format
+msgid "%sx Publish fee for item %s"
+msgstr ""
+
+#: functions.php:2922
+#, php-format
+msgid "%sx Image fee for item %s"
+msgstr ""
+
+#: functions.php:2924
+#, php-format
+msgid "%sx Move to top fee for item %s"
+msgstr ""
+
+#: functions.php:2926
+#, php-format
+msgid "%sx Premium fee for item %s, expire in %s"
+msgstr ""
+
+#: functions.php:2928
+#, php-format
+msgid "%sx Highlight fee for item %s, expire in %s"
+msgstr ""
+
+#: functions.php:2930
+#, php-format
+msgid "%sx Republish fee for item %s, expire in %s, repeat %sx"
+msgstr ""
+
+#: functions.php:2934
+#, php-format
+msgid "%sx Membership in group %s, expire in %s days"
+msgstr ""
+
+#: functions.php:2939
+#, php-format
+msgid "%sx Credit pack %s (get %s, pay %s)"
+msgstr ""
+
+#: functions.php:2944
+#, php-format
+msgid "%sx Banner %s (budget %s)"
+msgstr ""
+
+#: functions.php:2950
+#, php-format
+msgid "%sx Shipping %s (%s)"
+msgstr ""
+
+#: functions.php:2952
+#, php-format
+msgid "%sx Unknown shipping"
+msgstr ""
+
+#: functions.php:2963
+#, php-format
+msgid "%sx Shipping %s (%s) from %s"
+msgstr ""
+
+#: functions.php:2970
+#, php-format
+msgid "%sx Standard shipping from %s"
+msgstr ""
+
+#: functions.php:2982
+#, php-format
+msgid "%sx Voucher %s (-%s)"
+msgstr ""
+
+#: functions.php:2986
+#, php-format
+msgid "%sx Booking / Reservation %s"
+msgstr ""
+
+#: functions.php:2992
+#, php-format
+msgid "%sx Pay custom offer #%d (%s)"
+msgstr ""
+
+#: functions.php:2999
+#, php-format
+msgid "%sx Auctioned item #%d (%s, +shipping)"
+msgstr ""
+
+#: functions.php:3005
+#, php-format
+msgid "%sx Buyout auctioned item #%d (%s, +shipping)"
+msgstr ""
+
+#: functions.php:3011
+#, php-format
+msgid "%sx Auction fee #%d (%s)"
+msgstr ""
+
+#: functions.php:3017
+#, php-format
+msgid "%sx Auction win bid fee #%d (%s)"
+msgstr ""
+
+#: functions.php:3021
+#, php-format
+msgid "%sx Purchase item %s, regular unit price %s"
+msgstr ""
+
+#: functions.php:3027
+#, php-format
+msgid "Not recognized (%s)"
+msgstr ""
+
+#: functions.php:3042
+msgid "In order to show your listing, it is required to pay publish fee."
+msgstr ""
+
+#: functions.php:3045
+msgid "To show images on your listing, it is required to pay image fee."
+msgstr ""
+
+#: functions.php:3048
+msgid ""
+"Your listing will be moved to top position and will look like newly "
+"published."
+msgstr ""
+
+#: functions.php:3051
+msgid "Make your listing more visible on home and search page."
+msgstr ""
+
+#: functions.php:3054
+msgid ""
+"Listing will be highlighted between other listings and attract more people."
+msgstr ""
+
+#: functions.php:3057
+msgid ""
+"Your item will be instantly renewed and then automatically republished in "
+"selected period repeatedly."
+msgstr ""
+
+#: functions.php:3060
+msgid "Save time with transaction and get credits on your account."
+msgstr ""
+
+#: functions.php:3063
+msgid "Get access to unique content or use global discounts for promotions."
+msgstr ""
+
+#: functions.php:3066
+msgid "Pay banner budget and advertise on our site."
+msgstr ""
+
+#: functions.php:3069
+msgid "Pay shipping fee related to delivery of product."
+msgstr ""
+
+#: functions.php:3072
+msgid "Purchase item."
+msgstr ""
+
+#: functions.php:3075
+msgid "Pay cart items."
+msgstr ""
+
+#: functions.php:3078
+msgid "Get discount on your order."
+msgstr ""
+
+#: functions.php:3081
+msgid "Pay for reservation/booking."
+msgstr ""
+
+#: functions.php:3084
+msgid "Pay custom offer."
+msgstr ""
+
+#: functions.php:3087
+msgid "Pay for auctioned item (+shipping)."
+msgstr ""
+
+#: functions.php:3090
+msgid "Buyout auctioned item (+shipping)."
+msgstr ""
+
+#: functions.php:3093
+msgid "Pay auction fee."
+msgstr ""
+
+#: functions.php:3096
+msgid "Pay auction win bid fee."
+msgstr ""
+
+#: functions.php:3100
+msgid "Not recognized."
+msgstr ""
+
+#: functions.php:3123
+#, php-format
+msgid ""
+"Not enough products in stock, only %s pieces are available. This product has "
+"been removed from cart."
+msgstr ""
+
+#: functions.php:3145
+msgid "Publish Paid"
+msgstr ""
+
+#: functions.php:3147
+msgid "Image Paid"
+msgstr ""
+
+#: functions.php:3149
+msgid "Premium Paid"
+msgstr ""
+
+#: functions.php:3149
+#, php-format
+msgid "Premium mark will expire on %s"
+msgstr ""
+
+#: functions.php:3151
+msgid "Highlight Paid"
+msgstr ""
+
+#: functions.php:3151
+#, php-format
+msgid "Highlight will expire on %s"
+msgstr ""
+
+#: functions.php:3153
+msgid "Republish Paid"
+msgstr ""
+
+#: functions.php:3153
+#, php-format
+msgid "Replubish every %s, repeat %s more time(s). Next republish on %s"
+msgstr ""
+
+#: functions.php:3156
+msgid "Moved to Top"
+msgstr ""
+
+#: functions.php:3156
+#, php-format
+msgid "Last move to top on %s"
+msgstr ""
+
+#: functions.php:3264
+#, php-format
+msgid ""
+"Membership in %s has been removed from cart and replaced with membership in "
+"%s."
+msgstr ""
+
+#: functions.php:3277
+#, php-format
+msgid "Voucher %s has been removed from cart and replaced with %s."
+msgstr ""
+
+#: functions.php:3299
+#, php-format
+msgid "Not enough products in stock, only %s products has been added to cart."
+msgstr ""
+
+#: functions.php:3488
+msgid "Click to complete order"
+msgstr ""
+
+#: functions.php:3493
+msgid "Complete order"
+msgstr ""
+
+#: functions.php:3496
+msgid "Funds will be withdrawn from your wallet (credits)"
+msgstr ""
+
+#: functions.php:3501 functions.php:3509
+msgid "Pay with credits"
+msgstr ""
+
+#: functions.php:3504
+msgid "You do not have enough funds in your wallet"
+msgstr ""
+
+#: functions.php:3527
+msgid ""
+"This button is visible just in case you are logged in as admin in browser."
+msgstr ""
+
+#: functions.php:3530
+msgid "AdminPay"
+msgstr ""
+
+#: functions.php:3532
+msgid "Pay as Admin"
+msgstr ""
+
+#: functions.php:3549
+msgid ""
+"Payment will be accepted after administrator confirms funds delivered to our "
+"account."
+msgstr ""
+
+#: functions.php:3552 functions.php:3560
+msgid "Transfer"
+msgstr ""
+
+#: functions.php:3554 functions.php:3562
+msgid "Pay via Bank Transfer"
+msgstr ""
+
+#: functions.php:3557
+#, php-format
+msgid "Minimum amount for Bank Transfer is %s."
+msgstr ""
+
+#: functions.php:3772
+msgid ""
+"This category require to pay fee to show listing images. In order to show "
+"images to customers, go to your account and pay fee."
+msgstr ""
+
+#: functions.php:3858
+msgid "Last 10 cron runs"
+msgstr ""
+
+#: functions.php:3865
+msgid ""
+"Following expirations were checked: Premium, Highlight, Republish, User "
+"Membership."
+msgstr ""
+
+#: functions.php:3868
+msgid ""
+"Hourly cron was not executed yet. If problem persist, check osclass "
+"documentation and contact your hosting provider."
+msgstr ""
+
+#: functions.php:3871
+msgid "Last cron run"
+msgstr ""
+
+#: functions.php:3871
+msgid "none"
+msgstr ""
+
+#: functions.php:3878
+msgid "Last per. bonus issued"
+msgstr ""
+
+#: functions.php:3878 functions.php:3881
+msgid "never"
+msgstr ""
+
+#: functions.php:3881
+msgid "Last periodical bonus has been send to users on"
+msgstr ""
+
+#: functions.php:3883
+msgid ""
+"Periodical bonus has not been sent yet, check your cron settings and ensure "
+"it is working properly."
+msgstr ""
+
+#: functions.php:4380
+msgid "lowest"
+msgstr ""
+
+#: functions.php:4382
+msgid "highest"
+msgstr ""
+
+#: functions.php:4404
+msgid "Extend Membership"
+msgstr ""
+
+#: functions.php:4406
+msgid "Downgrade Plan"
+msgstr ""
+
+#: functions.php:4408 functions.php:4415
+msgid "Become Member"
+msgstr ""
+
+#: functions.php:4410
+msgid "Upgrade Plan"
+msgstr ""
+
+#: index.php:240
+msgid "Success! Go to cart"
+msgstr ""
+
+#: index.php:241
+msgid "Select promotions"
+msgstr ""
+
+#: index.php:310 index.php:329 index.php:341
+#, php-format
+msgid ""
+"You have reached maximum number of listings you can publish (%s items in %s "
+"days). Please upgrade your membership in order to increase your limits."
+msgstr ""
+
+#: index.php:446
+msgid ""
+"Publish fee for listing has not been paid. Please pay publish fee in order "
+"to enable it and make visible to other users."
+msgstr ""
+
+#: index.php:450
+msgid ""
+"Show image fee for listing has not been paid. Please pay this fee in order "
+"to show images on your listings."
+msgstr ""
+
+#: index.php:481
+#, php-format
+msgid "Periodical credits to user %s (%s) at %s"
+msgstr ""
+
+#: index.php:497
+#, php-format
+msgid "Create a new account and get bonus %s!"
+msgstr ""
+
+#: index.php:524 index.php:603
+msgid "Gateways"
+msgstr ""
+
+#: index.php:525 index.php:604
+msgid "Item"
+msgstr ""
+
+#: index.php:528 index.php:607
+msgid "eCommerce"
+msgstr ""
+
+#: index.php:529
+msgid "Logs"
+msgstr ""
+
+#: index.php:576
+msgid ""
+"This is demo site, you may not be able to change settings and update / "
+"remove elements."
+msgstr ""
+
+#: index.php:588
+msgid "Report Bug"
+msgstr ""
+
+#: index.php:589
+msgid "Support Forums"
+msgstr ""
+
+#: index.php:590
+msgid "Contact Us"
+msgstr ""
+
+#: index.php:608
+msgid "Log"
+msgstr ""
+
+#: index.php:707
+#, php-format
+msgid "Free group publish limit usage of %s on item #%s (%s) at %s"
+msgstr ""
+
+#: index.php:785 index.php:812
+msgid "Promotions"
+msgstr ""
+
+#: index.php:807 index.php:834
+msgid "Payments History"
+msgstr ""
+
+#: index.php:833
+msgid "Shopping Cart"
+msgstr ""
+
+#: index.php:849
+msgid "Listing has been unmarked as premium in Osclass Pay plugin as well."
+msgstr ""
+
+#: index.php:856
+msgid ""
+"Listing has been marked as premium in Osclass Pay plugin as well as non-"
+"expiring"
+msgstr ""
+
+#: index.php:942
+msgid "Pending bank transfer"
+msgstr ""
+
+#: index.php:942
+msgid "Pending bank transfers"
+msgstr ""
+
+#: index.php:967
+msgid "Pending banner"
+msgstr ""
+
+#: index.php:967
+msgid "Pending banners"
+msgstr ""
+
+#: index.php:989
+msgid "New order"
+msgstr ""
+
+#: index.php:989
+msgid "New orders"
+msgstr ""
+
+#: index.php:1032 index.php:1033 index.php:1036 index.php:1037
+msgid "Listings promotion"
+msgstr ""
+
+#: index.php:1038 index.php:1039 index.php:1040
+msgid "Shopping cart"
+msgstr ""
+
+#: index.php:1043 index.php:1044 user/banner_form.php:5
+msgid "Advertisement"
+msgstr ""
+
+#: index.php:1048 index.php:1049
+msgid "Orders management"
+msgstr ""
+
+#: index.php:1050 index.php:1051
+msgid "Products management"
+msgstr ""
+
+#: index.php:1052 index.php:1053 user/manager.php:72 user/order.php:26
+#: user/products.php:65 user/sales.php:32 user/shipping.php:93
+msgid "Sales"
+msgstr ""
+
+#: index.php:1056
+msgid "Payments history"
+msgstr ""
+
+#: index.php:1057
+msgid "Restricted access"
+msgstr ""
+
+#: model/ModelOSP.php:1425
+msgid "Listings section"
+msgstr ""
+
+#: model/ModelOSP.php:1438
+msgid "Remove premium mark"
+msgstr ""
+
+#: model/ModelOSP.php:1443
+msgid "Remove highlight mark"
+msgstr ""
+
+#: model/ModelOSP.php:1449
+msgid "Remove repblish options (all were used)"
+msgstr ""
+
+#: model/ModelOSP.php:1466
+#, php-format
+msgid "Republish item, %d repeats left, next republish on %s."
+msgstr ""
+
+#: model/ModelOSP.php:1496
+msgid "Users section"
+msgstr ""
+
+#: model/ModelOSP.php:1507
+#, php-format
+msgid "Membership in %s expired"
+msgstr ""
+
+#: model/ModelOSP.php:3572
+#, php-format
+msgid "Membership discount %s%% of user group %s has been applied."
+msgstr ""
+
+#: model/ModelOSP.php:3663
+#, php-format
+msgid "Unknown (#%s)"
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutInlinePayment.php:56
+msgid "You will be redirected to 2Checkout"
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutInlinePayment.php:58
+#: payments/2checkout/TwoCheckoutPayment.php:17
+msgid "Pay with 2Checkout"
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutInlinePayment.php:89
+msgid "Fail - Hash Mismatch"
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutInlinePayment.php:93
+msgid "Checkout price has been modified and does not match."
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutPayment.php:15
+#: payments/authorizenet/AuthorizenetPayment.php:15
+#: payments/braintree/BraintreePayment.php:19
+#: payments/stripe/StripePayment.php:76
+#: payments/worldpay/WorldpayPayment.php:14
+msgid "Form to enter credit card details will pop-up"
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutPayment.php:16
+#: payments/2checkout/TwoCheckoutPayment.php:28
+#: payments/worldpay/WorldpayPayment.php:24
+msgid "2Checkout Payment"
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutPayment.php:48
+#: payments/authorizenet/AuthorizenetPayment.php:39
+#: payments/braintree/BraintreePayment.php:39
+#: payments/worldpay/WorldpayPayment.php:44
+msgid "Card number"
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutPayment.php:56
+#: payments/authorizenet/AuthorizenetPayment.php:47
+#: payments/braintree/BraintreePayment.php:47
+#: payments/worldpay/WorldpayPayment.php:52
+msgid "Expiration (MM/YYYY)"
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutPayment.php:66
+#: payments/authorizenet/AuthorizenetPayment.php:57
+#: payments/braintree/BraintreePayment.php:57
+#: payments/worldpay/WorldpayPayment.php:62
+msgid "CVV"
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutPayment.php:73
+#: payments/worldpay/WorldpayPayment.php:69
+msgid "Your personal information"
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutPayment.php:77
+#: payments/worldpay/WorldpayPayment.php:73
+msgid "Your name"
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutPayment.php:93
+#: payments/worldpay/WorldpayPayment.php:89
+msgid "State"
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutPayment.php:101
+#: payments/przelewy24/Przelewy24Payment.php:129
+#: payments/worldpay/WorldpayPayment.php:97
+msgid "City"
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutPayment.php:109
+#: payments/przelewy24/Przelewy24Payment.php:136
+#: payments/worldpay/WorldpayPayment.php:105
+msgid "ZIP"
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutPayment.php:140
+#: payments/authorizenet/AuthorizenetPayment.php:64
+#: payments/braintree/BraintreePayment.php:64
+#: payments/payumoney/PayumoneyPayment.php:130
+#: payments/przelewy24/Przelewy24Payment.php:150
+#: payments/worldpay/WorldpayPayment.php:136
+msgid "Pay"
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutPayment.php:144
+#: payments/2checkout/TwoCheckoutPayment.php:152
+#: payments/authorizenet/AuthorizenetPayment.php:68
+#: payments/authorizenet/AuthorizenetPayment.php:75
+#: payments/braintree/BraintreePayment.php:68
+#: payments/braintree/BraintreePayment.php:92
+#: payments/payumoney/PayumoneyPayment.php:133
+#: payments/payumoney/PayumoneyPayment.php:170
+#: payments/worldpay/WorldpayPayment.php:140
+#: payments/worldpay/WorldpayPayment.php:148
+msgid "Processing the payment, please wait..."
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutPayment.php:235
+#: payments/2checkout/return.php:13
+#: payments/authorizenet/AuthorizenetPayment.php:130
+#: payments/begateway/success.php:12
+#: payments/braintree/BraintreePayment.php:124
+#: payments/btcpayserver/success.php:12 payments/cardinity/return.php:13
+#: payments/ccavenue/response.php:13 payments/euplatesc/return.php:12
+#: payments/instamojo/return.php:17 payments/liqpay/return.php:12
+#: payments/makecommerce/return.php:29 payments/pagseguro/return.php:22
+#: payments/paypl/return.php:25 payments/payscz/confirm.php:14
+#: payments/paystack/PaystackPayment.php:48 payments/payulatam/response.php:12
+#: payments/payumoney/success.php:35 payments/revenuemonster/success.php:26
+#: payments/securionpay/return.php:12 payments/skrill/status.php:13
+#: payments/stripe/success.php:13 payments/weaccept/return.php:13
+#: payments/worldpay/WorldpayPayment.php:230 payments/yandex/return.php:13
+#: payments/yookassa/return.php:12
+#, php-format
+msgid ""
+"Success! Please write down this transaction ID in case you have any problem: "
+"%s"
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutPayment.php:237
+#: payments/2checkout/return.php:15
+#: payments/authorizenet/AuthorizenetPayment.php:132
+#: payments/braintree/BraintreePayment.php:126
+#: payments/btcpayserver/success.php:14 payments/cardinity/return.php:15
+#: payments/ccavenue/response.php:15 payments/euplatesc/return.php:14
+#: payments/liqpay/return.php:14 payments/makecommerce/return.php:31
+#: payments/payscz/confirm.php:16 payments/paystack/PaystackPayment.php:52
+#: payments/payulatam/response.php:14 payments/payumoney/success.php:37
+#: payments/revenuemonster/success.php:28 payments/securionpay/return.php:14
+#: payments/skrill/status.php:15 payments/stripe/success.php:15
+#: payments/weaccept/return.php:15 payments/worldpay/WorldpayPayment.php:232
+msgid "Warning! This payment was already paid."
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutPayment.php:239
+#: payments/2checkout/return.php:17
+#: payments/authorizenet/AuthorizenetPayment.php:134
+#: payments/braintree/BraintreePayment.php:128
+#: payments/btcpayserver/success.php:18 payments/cardinity/return.php:17
+#: payments/ccavenue/response.php:17 payments/euplatesc/return.php:16
+#: payments/liqpay/return.php:18 payments/makecommerce/return.php:33
+#: payments/pagseguro/return.php:29 payments/payscz/confirm.php:18
+#: payments/paystack/PaystackPayment.php:54 payments/payulatam/response.php:16
+#: payments/payumoney/success.php:39 payments/revenuemonster/success.php:30
+#: payments/securionpay/return.php:16 payments/skrill/status.php:17
+#: payments/stripe/success.php:17 payments/weaccept/return.php:17
+#: payments/worldpay/WorldpayPayment.php:234 payments/yandex/return.php:17
+#: payments/yookassa/return.php:14
+msgid "You are trying to pay zero amount."
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutPayment.php:241
+#: payments/worldpay/WorldpayPayment.php:236
+msgid ""
+"You are trying to pay too small amount. 2Checkout accept only payments "
+"larger than 0.5."
+msgstr ""
+
+#: payments/2checkout/TwoCheckoutPayment.php:243
+#: payments/2checkout/return.php:21
+#: payments/authorizenet/AuthorizenetPayment.php:136
+#: payments/braintree/BraintreePayment.php:130
+#: payments/btcpayserver/success.php:22 payments/cardinity/return.php:21
+#: payments/ccavenue/response.php:21 payments/euplatesc/return.php:20
+#: payments/liqpay/return.php:22 payments/makecommerce/return.php:39
+#: payments/pagseguro/return.php:31 payments/pagseguro/return.php:34
+#: payments/paypl/notify_url.php:63 payments/payscz/confirm.php:22
+#: payments/paystack/PaystackPayment.php:56 payments/payulatam/response.php:20
+#: payments/payza/ipn.php:93 payments/revenuemonster/success.php:36
+#: payments/securionpay/return.php:20 payments/skrill/status.php:19
+#: payments/stripe/success.php:23 payments/weaccept/return.php:21
+#: payments/worldpay/WorldpayPayment.php:238 payments/yandex/return.php:21
+#: payments/yookassa/return.php:18
+msgid "There were an error processing your payment."
+msgstr ""
+
+#: payments/2checkout/return.php:19 payments/btcpayserver/success.php:20
+#: payments/cardinity/return.php:19 payments/ccavenue/response.php:19
+#: payments/euplatesc/return.php:18 payments/liqpay/return.php:20
+#: payments/makecommerce/return.php:35 payments/payscz/confirm.php:20
+#: payments/revenuemonster/success.php:32 payments/securionpay/return.php:18
+#: payments/stripe/success.php:19 payments/weaccept/return.php:19
+#: payments/yandex/return.php:19 payments/yookassa/return.php:16
+msgid "Invalid payment."
+msgstr ""
+
+#: payments/authorizenet/AuthorizenetPayment.php:17
+msgid "Pay with Authorize.net"
+msgstr ""
+
+#: payments/authorizenet/AuthorizenetPayment.php:22
+msgid "Authorize.Net"
+msgstr ""
+
+#: payments/authorizenet/AuthorizenetPayment.php:27
+#: payments/braintree/BraintreePayment.php:28
+#: payments/payumoney/PayumoneyPayment.php:102
+#: payments/przelewy24/Przelewy24Payment.php:82
+msgid "Payment amount"
+msgstr ""
+
+#: payments/begateway/BeGatewayPayment.php:71
+#, php-format
+msgid "Error to get a payment token. Reason: %s"
+msgstr ""
+
+#: payments/begateway/BeGatewayPayment.php:71
+#: payments/begateway/BeGatewayPayment.php:73
+msgid "Pay with BeGateway"
+msgstr ""
+
+#: payments/begateway/BeGatewayPayment.php:73
+msgid "Form to complete payment will pop-up"
+msgstr ""
+
+#: payments/begateway/BeGatewayPayment.php:104
+msgid "Failed - unable to authorize webhook"
+msgstr ""
+
+#: payments/begateway/BeGatewayPayment.php:117
+#: payments/btcpayserver/BtcpayserverPayment.php:192
+#: payments/cardinity/CardinityPayment.php:118
+#: payments/komfortkasse/KomfortkassePayment.php:130
+#: payments/liqpay/LiqpayPayment.php:98
+#: payments/makecommerce/MakeCommercePayment.php:138
+#: payments/payherelk/PayherelkPayment.php:81
+#: payments/payscz/PaysczPayment.php:66
+#: payments/przelewy24/Przelewy24Payment.php:231
+#: payments/revenuemonster/RevenuemonsterPayment.php:161
+#: payments/securionpay/SecurionpayPayment.php:152
+#: payments/stripe/StripePayment.php:143 payments/stripe/webhook.php:94
+#: payments/weaccept/WeacceptPayment.php:100
+#: payments/yandex/YandexPayment.php:97
+#: payments/yookassa/YookassaPayment.php:107
+msgid ""
+"Failed - unable to find data related to this order (Pending item missing)"
+msgstr ""
+
+#: payments/begateway/BeGatewayPayment.php:163
+msgid "Payment does not have successful status in BEGATEWAY system"
+msgstr ""
+
+#: payments/begateway/BeGatewayPayment.php:172
+#: payments/btcpayserver/success.php:16
+#: payments/euplatesc/EuPlatescPayment.php:79
+#: payments/liqpay/LiqpayPayment.php:118 payments/liqpay/return.php:16
+#: payments/payherelk/PayherelkPayment.php:95 payments/payherelk/return.php:11
+#: payments/securionpay/SecurionpayPayment.php:192
+msgid "We are processing your payment!"
+msgstr ""
+
+#: payments/begateway/cancel.php:15 payments/cardinity/cancel.php:17
+#: payments/makecommerce/cancel.php:20 payments/payherelk/cancel.php:11
+#: payments/paypl/cancel.php:26 payments/paypl/cancel.php:33
+#: payments/paypl/cancel.php:35 payments/payscz/cancel.php:14
+#: payments/payza/cancel.php:19 payments/skrill/cancel.php:15
+#: payments/stripe/cancel.php:14
+msgid "Payment has been canceled"
+msgstr ""
+
+#: payments/begateway/success.php:14 payments/instamojo/return.php:19
+#, php-format
+msgid ""
+"We are processing your payment %s, if it did not finish in a few seconds, "
+"please contact us"
+msgstr ""
+
+#: payments/begateway/success.php:16 payments/paypl/return.php:108
+msgid ""
+"There was a problem processing your payment. Please contact the "
+"administrators"
+msgstr ""
+
+#: payments/blockchain/Blockchain.php:29
+msgid "You will get link to send funds"
+msgstr ""
+
+#: payments/blockchain/Blockchain.php:33
+msgid "Pay with Blockchain"
+msgstr ""
+
+#: payments/blockchain/Blockchain.php:39
+msgid "Blockchain Payment"
+msgstr ""
+
+#: payments/blockchain/Blockchain.php:54
+#, php-format
+msgid "Please send <strong>%f BTC</strong> to <br /> <b>[[address]]</b></p>"
+msgstr ""
+
+#: payments/blockchain/Blockchain.php:60
+msgid "Payment Received <b>[[value]] BTC</b>. Thank You."
+msgstr ""
+
+#: payments/blockchain/Blockchain.php:107
+msgid "Missing product"
+msgstr ""
+
+#: payments/blockchain/Blockchain.php:123
+msgid "Error API"
+msgstr ""
+
+#: payments/blockchain/Blockchain.php:135
+msgid "Test payment received, such payments cannot be accepted."
+msgstr ""
+
+#: payments/blockchain/Blockchain.php:160
+msgid "Product has already been paid"
+msgstr ""
+
+#: payments/blockchain/Blockchain.php:168
+#, php-format
+msgid "Pay cart items for %sBTC"
+msgstr ""
+
+#: payments/blockchain/Blockchain.php:184
+msgid "Payment completed"
+msgstr ""
+
+#: payments/blockchain/Blockchain.php:187
+msgid "Waiting for more confirmations (need 3)."
+msgstr ""
+
+#: payments/braintree/BraintreePayment.php:19
+msgid "Pay with BrainTree"
+msgstr ""
+
+#: payments/braintree/BraintreePayment.php:23
+msgid "Braintree"
+msgstr ""
+
+#: payments/btcpayserver/BtcpayserverPayment.php:99
+#: payments/pagseguro/PagseguroPayment.php:20
+msgid "Form to enter payment details will pop-up"
+msgstr ""
+
+#: payments/btcpayserver/BtcpayserverPayment.php:99
+msgid "Pay with BTCPayServer"
+msgstr ""
+
+#: payments/btcpayserver/BtcpayserverPayment.php:128
+msgid ""
+"Could not read from the php://input stream or invalid BTCPayServer payload "
+"received."
+msgstr ""
+
+#: payments/btcpayserver/BtcpayserverPayment.php:134
+msgid "Could not decode the JSON payload from BitPay."
+msgstr ""
+
+#: payments/btcpayserver/BtcpayserverPayment.php:151
+msgid ""
+"Invalid BTCPayServer payment notification message received - signature did "
+"not match."
+msgstr ""
+
+#: payments/btcpayserver/BtcpayserverPayment.php:156
+msgid ""
+"Invalid BTCPayServer payment notification message received - did not receive "
+"invoice ID."
+msgstr ""
+
+#: payments/btcpayserver/BtcpayserverPayment.php:161
+msgid ""
+"Invalid payload message type. Only InvoiceSettled is supported, check the "
+"configuration of the webhook."
+msgstr ""
+
+#: payments/btcpayserver/BtcpayserverPayment.php:184
+msgid "Failed - invoice ID is empty"
+msgstr ""
+
+#: payments/cardinity/CardinityPayment.php:72
+msgid "You will be redirected to Cardinity"
+msgstr ""
+
+#: payments/cardinity/CardinityPayment.php:74
+msgid "Pay with Cardinity"
+msgstr ""
+
+#: payments/cardinity/CardinityPayment.php:158
+msgid "Payment failed"
+msgstr ""
+
+#: payments/cardinity/CardinityPayment.php:162
+msgid "Response validation has failed"
+msgstr ""
+
+#: payments/ccavenue/CcavenuePayment.php:47
+msgid "You will be redirected to CCAvenue"
+msgstr ""
+
+#: payments/ccavenue/CcavenuePayment.php:49
+msgid "Pay with CCAvenue"
+msgstr ""
+
+#: payments/euplatesc/EuPlatescPayment.php:54
+msgid "You will be redirected to EuPlatesc.ro"
+msgstr ""
+
+#: payments/euplatesc/EuPlatescPayment.php:56
+msgid "Pay with EuPlatesc.ro"
+msgstr ""
+
+#: payments/euplatesc/return.php:22 payments/makecommerce/return.php:37
+#: payments/revenuemonster/success.php:34 payments/stripe/success.php:21
+#, php-format
+msgid ""
+"We are processing your order. Please write down this transaction ID in case "
+"you have any problem: %s"
+msgstr ""
+
+#: payments/instamojo/InstamojoPayment.php:22
+msgid "You will be redirected to Instamojo"
+msgstr ""
+
+#: payments/instamojo/InstamojoPayment.php:24
+msgid "Pay with Instamojo"
+msgstr ""
+
+#: payments/instamojo/InstamojoPayment.php:73
+#, php-format
+msgid "There is problem with payment button, please try again later. (%s)"
+msgstr ""
+
+#: payments/instamojo/InstamojoPayment.php:131
+#: payments/instamojo/webhook.php:40
+#, php-format
+msgid "Pay cart items for %s"
+msgstr ""
+
+#: payments/komfortkasse/KomfortkassePayment.php:21
+msgid "Komfortkasse payment will be initiated"
+msgstr ""
+
+#: payments/komfortkasse/KomfortkassePayment.php:23
+#: payments/komfortkasse/KomfortkassePayment.php:28
+msgid "Pay with KomfortKasse"
+msgstr ""
+
+#: payments/komfortkasse/KomfortkassePayment.php:26
+#, php-format
+msgid "Minimum order about for Komfortkasse.eu is %s%s"
+msgstr ""
+
+#: payments/komfortkasse/KomfortkassePayment.php:65
+msgid "Payment by Bank Transfer"
+msgstr ""
+
+#: payments/komfortkasse/KomfortkassePayment.php:126 user/order.php:185
+#: user/sales.php:136
+msgid "Order has been cancelled"
+msgstr ""
+
+#: payments/komfortkasse/prepare.php:14
+#, php-format
+msgid "There was error while creating order: %s"
+msgstr ""
+
+#: payments/komfortkasse/prepare.php:16
+#, php-format
+msgid ""
+"Your order has been created, you will receive email from Komfortkasse.eu "
+"with details about payment instructions. Your transaction ID is: %s"
+msgstr ""
+
+#: payments/liqpay/LiqpayPayment.php:50
+msgid "Liqpay button could not be generated"
+msgstr ""
+
+#: payments/liqpay/LiqpayPayment.php:62
+msgid "You will be redirected to LiqPay.ua"
+msgstr ""
+
+#: payments/liqpay/LiqpayPayment.php:64
+msgid "Pay with LiqPay.ua"
+msgstr ""
+
+#: payments/liqpay/LiqpayPayment.php:127
+msgid "Failed - security check (signature) does not match"
+msgstr ""
+
+#: payments/makecommerce/MakeCommercePayment.php:99
+msgid "You will be redirected to MakeCommerce"
+msgstr ""
+
+#: payments/makecommerce/MakeCommercePayment.php:99
+msgid "Pay with MakeCommerce"
+msgstr ""
+
+#: payments/makecommerce/MakeCommercePayment.php:105
+#: payments/yookassa/YookassaPayment.php:68
+#, php-format
+msgid "Payment gateway <u>%s</u> returned error!"
+msgstr ""
+
+#: payments/makecommerce/MakeCommercePayment.php:129
+msgid "Failed - unable to verify authenticity of payment data"
+msgstr ""
+
+#: payments/makecommerce/MakeCommercePayment.php:152
+#: payments/revenuemonster/RevenuemonsterPayment.php:176
+#: payments/stripe/StripePayment.php:161
+msgid "Pending record does not have properly filled transaction ID (is empty)"
+msgstr ""
+
+#: payments/makecommerce/MakeCommercePayment.php:194
+msgid "Payment has been canceled or failed"
+msgstr ""
+
+#: payments/pagseguro/PagseguroPayment.php:20
+msgid "You will be redirected to PagSeguro"
+msgstr ""
+
+#: payments/pagseguro/PagseguroPayment.php:20
+msgid "Pay with PagSeguro"
+msgstr ""
+
+#: payments/pagseguro/PagseguroPayment.php:95
+#, php-format
+msgid "Invalid transaction status: %s"
+msgstr ""
+
+#: payments/pagseguro/return.php:24
+#, php-format
+msgid ""
+"We are processing your payment %s, if it did not finish in a few seconds, "
+"please contact us."
+msgstr ""
+
+#: payments/pagseguro/return.php:34
+msgid "Invalid or missing transaction ID"
+msgstr ""
+
+#: payments/payherelk/PayherelkPayment.php:63
+msgid "You will be redirected to Payhere.lk"
+msgstr ""
+
+#: payments/payherelk/PayherelkPayment.php:65
+msgid "Pay with PayHere.lk"
+msgstr ""
+
+#: payments/payherelk/PayherelkPayment.php:109
+msgid "Failed - security check (hash) does not match"
+msgstr ""
+
+#: payments/paypl/Paypl.php:57 payments/skrill/SkrillPayment.php:42
+msgid "Listing Promotion"
+msgstr ""
+
+#: payments/paypl/Paypl.php:77
+msgid "Payment form will popup on click"
+msgstr ""
+
+#: payments/paypl/Paypl.php:79 payments/paypl/Paypl.php:138
+msgid "Pay with PayPal"
+msgstr ""
+
+#: payments/paypl/Paypl.php:136
+msgid "You will be redirected to PayPal"
+msgstr ""
+
+#: payments/paypl/cancel.php:33
+msgid "If you do not want to continue the process"
+msgstr ""
+
+#: payments/paypl/cancel.php:33
+msgid "click here"
+msgstr ""
+
+#: payments/paypl/return.php:27 payments/paypl/return.php:106
+msgid ""
+"We are processing your payment, if it did not finish in a few seconds, "
+"please contact us"
+msgstr ""
+
+#: payments/paypl/return.php:102 payments/paypl/return.php:103
+#: payments/payza/ipn.php:76 user/admin_pay.php:43 user/wallet_pay.php:49
+msgid "Payment processed correctly"
+msgstr ""
+
+#: payments/paypl/return.php:103 payments/paypl/return.php:106
+#: payments/paypl/return.php:109
+msgid "Click here to continue"
+msgstr ""
+
+#: payments/paypl/return.php:105 payments/payza/ipn.php:78
+#: payments/payza/return.php:8 payments/payza/return.php:19
+#: payments/skrill/return.php:8
+msgid ""
+"We are processing your payment, if we did not finish in a few seconds, "
+"please contact us"
+msgstr ""
+
+#: payments/paypl/return.php:109
+msgid ""
+"There was a problem processing your payment. Please contact the "
+"administrators and"
+msgstr ""
+
+#: payments/payscz/PaysczPayment.php:39
+msgid "You will be redirected to Pays.cz"
+msgstr ""
+
+#: payments/payscz/PaysczPayment.php:41
+msgid "Pay with Pays.cz"
+msgstr ""
+
+#: payments/payscz/PaysczPayment.php:77
+msgid "Amounts does not match"
+msgstr ""
+
+#: payments/payscz/PaysczPayment.php:111
+msgid "Hash does not match, invalid payment"
+msgstr ""
+
+#: payments/payscz/PaysczPayment.php:114
+msgid "Payment status from gateway has not COMPLETED state"
+msgstr ""
+
+#: payments/payscz/success.php:14
+msgid ""
+"Your payment was successfully processed and will be finished in few moments."
+msgstr ""
+
+#: payments/payulatam/PayulatamPayment.php:55
+msgid "You will be redirected to PayULatam"
+msgstr ""
+
+#: payments/payulatam/PayulatamPayment.php:57
+msgid "Pay with PayULatam"
+msgstr ""
+
+#: payments/payulatam/response.php:18 payments/payumoney/failure.php:30
+#: payments/payumoney/success.php:30
+msgid "Invalid Transaction. Please try again."
+msgstr ""
+
+#: payments/payumoney/PayumoneyPayment.php:13
+msgid "Form to enter your personal details will pop-up"
+msgstr ""
+
+#: payments/payumoney/PayumoneyPayment.php:13
+msgid "Pay with PayUMoney"
+msgstr ""
+
+#: payments/payumoney/PayumoneyPayment.php:82
+msgid "PayUMoney"
+msgstr ""
+
+#: payments/payumoney/PayumoneyPayment.php:95
+msgid "Please fill all mandatory fields"
+msgstr ""
+
+#: payments/payumoney/PayumoneyPayment.php:107
+msgid "First Name"
+msgstr ""
+
+#: payments/payumoney/PayumoneyPayment.php:197
+msgid "Processing..."
+msgstr ""
+
+#: payments/payumoney/failure.php:32
+msgid "Your transaction has been cancelled."
+msgstr ""
+
+#: payments/payumoney/success.php:41
+#, php-format
+msgid "There were an error processing your payment (%s)."
+msgstr ""
+
+#: payments/payza/PayzaPayment.php:23
+#, php-format
+msgid "Listing Promotion (%s)"
+msgstr ""
+
+#: payments/payza/PayzaPayment.php:41
+msgid "You will be redirected to Payza"
+msgstr ""
+
+#: payments/payza/PayzaPayment.php:43
+msgid "Pay with Payza"
+msgstr ""
+
+#: payments/payza/cancel.php:8 payments/revenuemonster/success.php:7
+msgid ""
+"You cancel the payment process or there was an error. If the error continue, "
+"please contact the administrator"
+msgstr ""
+
+#: payments/payza/ipn.php:42
+msgid "There were an error processing your payment (Invalid token)."
+msgstr ""
+
+#: payments/przelewy24/Przelewy24Payment.php:69
+msgid "Form to submit your details will pop-up"
+msgstr ""
+
+#: payments/przelewy24/Przelewy24Payment.php:71
+msgid "Pay with Przelewy24"
+msgstr ""
+
+#: payments/przelewy24/Przelewy24Payment.php:76
+msgid "Przelewy24"
+msgstr ""
+
+#: payments/przelewy24/Przelewy24Payment.php:112
+msgid "Country Code"
+msgstr ""
+
+#: payments/przelewy24/Przelewy24Payment.php:215
+msgid "There was error processing payment:"
+msgstr ""
+
+#: payments/przelewy24/Przelewy24Payment.php:301
+msgid "Payment verification has failed:"
+msgstr ""
+
+#: payments/przelewy24/return.php:5
+msgid ""
+"Thank you, we are processing your payment. Once it is confirmed, your order "
+"will be completed."
+msgstr ""
+
+#: payments/revenuemonster/RevenuemonsterPayment.php:84
+msgid "You will be redirected to RevenueMonster"
+msgstr ""
+
+#: payments/revenuemonster/RevenuemonsterPayment.php:86
+msgid "Pay with RevenueMonster"
+msgstr ""
+
+#: payments/revenuemonster/RevenuemonsterPayment.php:219
+msgid "Could not identify transaction ID"
+msgstr ""
+
+#: payments/revenuemonster/success.php:11
+msgid "Your order has exprired"
+msgstr ""
+
+#: payments/securionpay/SecurionpayPayment.php:74
+msgid "Charge ID is missing, payment could not be processed."
+msgstr ""
+
+#: payments/securionpay/SecurionpayPayment.php:95
+msgid "Pop-up payment window will be opened"
+msgstr ""
+
+#: payments/securionpay/SecurionpayPayment.php:97
+msgid "Pay with SecurionPay"
+msgstr ""
+
+#: payments/skrill/SkrillPayment.php:44
+msgid "Thanks for publishing on our site!"
+msgstr ""
+
+#: payments/skrill/SkrillPayment.php:52
+msgid "You will be redirected to Skrill"
+msgstr ""
+
+#: payments/skrill/SkrillPayment.php:54
+msgid "Pay with Skrill"
+msgstr ""
+
+#: payments/stripe/StripePayment.php:76 payments/stripe/StripePayment.php:79
+msgid "Pay with Stripe"
+msgstr ""
+
+#: payments/stripe/StripePayment.php:79
+#, php-format
+msgid "Stripe accept only payments with amount larger than %s"
+msgstr ""
+
+#: payments/weaccept/WeacceptPayment.php:77
+msgid "WeAccept pop-up will be shown"
+msgstr ""
+
+#: payments/weaccept/WeacceptPayment.php:79
+msgid "Pay with WeAccept"
+msgstr ""
+
+#: payments/weaccept/WeacceptPayment.php:92
+#, php-format
+msgid "Failed - %s"
+msgstr ""
+
+#: payments/weaccept/WeacceptPayment.php:92
+msgid "There was problem on gateway side"
+msgstr ""
+
+#: payments/worldpay/WorldpayPayment.php:14
+msgid "WorldPay Payment"
+msgstr ""
+
+#: payments/worldpay/WorldpayPayment.php:14
+msgid "Pay with WorldPay"
+msgstr ""
+
+#: payments/yandex/YandexPayment.php:72
+msgid "You will be redirected to money.yandex.ru"
+msgstr ""
+
+#: payments/yandex/YandexPayment.php:74
+msgid "Pay with Yandex"
+msgstr ""
+
+#: payments/yandex/YandexPayment.php:121
+#: payments/yookassa/YookassaPayment.php:131
+#, php-format
+msgid ""
+"Payment has not been successfully signed to our account yet. Current payment "
+"status is %s"
+msgstr ""
+
+#: payments/yookassa/YookassaPayment.php:81
+msgid "You will be redirected to yookassa.ru"
+msgstr ""
+
+#: payments/yookassa/YookassaPayment.php:83
+msgid "Pay with YooKassa"
+msgstr ""
+
+#: user/admin_pay.php:48 user/wallet_pay.php:54
+msgid ""
+"There were some errors, please try again later or contact the administrators"
+msgstr ""
+
+#: user/banner.php:12
+msgid "Banner successfully removed."
+msgstr ""
+
+#: user/banner.php:20
+msgid "Your banners"
+msgstr ""
+
+#: user/banner.php:24
+#, php-format
+msgid ""
+"If you are looking forward to have your advertisement on our site, anywhere "
+"you see button \"%s\" you can submit own banner. After admin approval and "
+"budget payment your advert will be visible on our site."
+msgstr ""
+
+#: user/banner.php:30
+msgid "Views"
+msgstr ""
+
+#: user/banner.php:31
+msgid "Clicks"
+msgstr ""
+
+#: user/banner.php:32
+msgid "Spent"
+msgstr ""
+
+#: user/banner.php:56
+msgid "Click here to show banner details"
+msgstr ""
+
+#: user/banner.php:62
+msgid "Review comment"
+msgstr ""
+
+#: user/banner.php:82
+msgid "Pending review by admin"
+msgstr ""
+
+#: user/banner.php:85
+msgid "Pending payment by user"
+msgstr ""
+
+#: user/banner.php:88
+msgid "Budget spent"
+msgstr ""
+
+#: user/banner.php:89
+msgid "Budget has been spent and banner is not active anymore"
+msgstr ""
+
+#: user/banner.php:91
+msgid "Paid & Active"
+msgstr ""
+
+#: user/banner.php:92
+msgid "Banner is paid and active, visible in front"
+msgstr ""
+
+#: user/banner.php:96
+msgid "Rejected by admin, check review title for details"
+msgstr ""
+
+#: user/banner.php:106
+msgid "Pay now"
+msgstr ""
+
+#: user/banner.php:112
+msgid "Are you sure you want to delete this banner? Action cannot be undone."
+msgstr ""
+
+#: user/banner.php:119
+msgid "You have no banners"
+msgstr ""
+
+#: user/banner_form.php:13
+msgid "You must be logged in!"
+msgstr ""
+
+#: user/banner_form.php:14
+msgid "Only logged in users can submit banner."
+msgstr ""
+
+#: user/banner_form.php:15
+msgid "Log in"
+msgstr ""
+
+#: user/banner_form.php:20
+msgid "Your banner has been submitted successfully!"
+msgstr ""
+
+#: user/banner_form.php:21
+msgid ""
+"First, our team will validate your banner. After validation we will send you "
+"link to pay for this banner."
+msgstr ""
+
+#: user/banner_form.php:48
+msgid "HTML Code"
+msgstr ""
+
+#: user/banner_form.php:50
+msgid "No links are allowed in HTML code. Place link into On Click URL field."
+msgstr ""
+
+#: user/banner_form.php:67
+msgid "Price per 1 view"
+msgstr ""
+
+#: user/banner_form.php:68
+msgid "Price per 1 click"
+msgstr ""
+
+#: user/banner_form.php:72
+msgid "Your Budget"
+msgstr ""
+
+#: user/banner_form.php:79
+msgid "Submit Banner"
+msgstr ""
+
+#: user/cart.php:19
+msgid "Cart updated"
+msgstr ""
+
+#: user/cart.php:26 user/cart.php:81
+msgid "Product removed from cart"
+msgstr ""
+
+#: user/cart.php:38
+#, php-format
+msgid "Voucher %s has not been added into cart: %s"
+msgstr ""
+
+#: user/cart.php:46
+#, php-format
+msgid "Voucher %s has been added into cart: %s"
+msgstr ""
+
+#: user/cart.php:95
+#, php-format
+msgid "You have %s products in your cart"
+msgstr ""
+
+#: user/cart.php:97
+msgid "Your cart is empty"
+msgstr ""
+
+#: user/cart.php:107 user/item_pay.php:92
+msgid "Qty"
+msgstr ""
+
+#: user/cart.php:108 user/item_pay.php:93
+msgid "Total Price"
+msgstr ""
+
+#: user/cart.php:127
+msgid "Some products has been removed from your cart due to incorrect price"
+msgstr ""
+
+#: user/cart.php:136
+msgid ""
+"Booking/Reservation has already been paid or it was removed. Booking/"
+"Reservation has been removed from cart."
+msgstr ""
+
+#: user/cart.php:177
+#, php-format
+msgid "Voucher %s removed from cart: %s"
+msgstr ""
+
+#: user/cart.php:200
+msgid "Click to update quantity"
+msgstr ""
+
+#: user/cart.php:201
+msgid "Unit price"
+msgstr ""
+
+#: user/cart.php:205
+msgid ""
+"Shipping is required and cannot be removed. If you remove all products those "
+"require shipping, shipping will be removed from cart automatically"
+msgstr ""
+
+#: user/cart.php:224 user/item_pay.php:150
+msgid "Cart summary"
+msgstr ""
+
+#: user/cart.php:231
+msgid "No products in your cart"
+msgstr ""
+
+#: user/cart.php:243 user/cart.php:244
+msgid "Add a promo code"
+msgstr ""
+
+#: user/cart.php:246 user/pack.php:104
+msgid "Apply"
+msgstr ""
+
+#: user/cart.php:260
+msgid "City is missing"
+msgstr ""
+
+#: user/cart.php:262
+msgid "Address is missing"
+msgstr ""
+
+#: user/cart.php:268
+msgid ""
+"Phone number is missing, you must enter at least one phone number (mobile or "
+"land)"
+msgstr ""
+
+#: user/cart.php:276
+msgid ""
+"One or more products in your cart require shipping. In order to complete "
+"order, you must fill city, address and at least 1 phone number in your "
+"profile."
+msgstr ""
+
+#: user/cart.php:277
+msgid "Errors:"
+msgstr ""
+
+#: user/cart.php:278
+msgid "Update profile"
+msgstr ""
+
+#: user/cart.php:282
+msgid ""
+"One or more products in your cart require shipping, these will be shipped to:"
+msgstr ""
+
+#: user/cart.php:295
+msgid ""
+"You cannot pay with your credits as your cart contains Credit Pack. In order "
+"to pay with your credits, please remove Credit Pack from your cart."
+msgstr ""
+
+#: user/cart.php:299
+msgid ""
+"You cannot pay with your credits as your cart contains Product. Payments for "
+"products using credits are not allowed."
+msgstr ""
+
+#: user/cart.php:303
+msgid ""
+"You cannot pay with your credits as your cart contains Booking/Reservation. "
+"Payments for bookings/reservations using credits are not allowed."
+msgstr ""
+
+#: user/cart.php:307
+msgid ""
+"You cannot pay with your credits as your cart contains Auctioned item. "
+"Payments for auctioned items using credits are not allowed."
+msgstr ""
+
+#: user/cart.php:311
+msgid ""
+"You cannot pay with your credits as your cart contains Customer item offer. "
+"Payments for custom offers using credits are not allowed."
+msgstr ""
+
+#: user/cart.php:315
+msgid "You cannot pay auction buyout using bank transfer."
+msgstr ""
+
+#: user/cart.php:325
+msgid "Click on preferred method to initiate payment"
+msgstr ""
+
+#: user/cart.php:330
+#, php-format
+msgid "Pay %s cart items for %s by admin"
+msgstr ""
+
+#: user/cart.php:334 user/cart.php:339 user/cart.php:343
+#, php-format
+msgid "Pay %s cart items for %s"
+msgstr ""
+
+#: user/cart.php:351
+msgid "Click on button to complete order"
+msgstr ""
+
+#: user/cart.php:352
+#, php-format
+msgid "Free checkout for %s cart items"
+msgstr ""
+
+#: user/group.php:45
+msgid "You are not member of any group"
+msgstr ""
+
+#: user/group.php:48
+msgid "with no expiration"
+msgstr ""
+
+#: user/group.php:51
+msgid "until"
+msgstr ""
+
+#: user/group.php:54
+#, php-format
+msgid ""
+"You are member of %s group %s. This group has flat discount %s on all "
+"promotion products!"
+msgstr ""
+
+#: user/group.php:61 user/pack.php:172
+#, php-format
+msgid ""
+"Your membershipt discount %s is not applied on packages as it would lead to "
+"double discount."
+msgstr ""
+
+#: user/group.php:78
+msgid "You are member of this group"
+msgstr ""
+
+#: user/group.php:88
+msgid "user"
+msgstr ""
+
+#: user/group.php:104
+msgid "Flat discount"
+msgstr ""
+
+#: user/group.php:106
+msgid "No additional discount"
+msgstr ""
+
+#: user/group.php:115 user/pack.php:70
+msgid "week"
+msgstr ""
+
+#: user/group.php:117 user/pack.php:72
+msgid "month"
+msgstr ""
+
+#: user/group.php:119 user/pack.php:74
+msgid "quarter"
+msgstr ""
+
+#: user/group.php:122
+#, php-format
+msgid "Get %s more credits each %s!"
+msgstr ""
+
+#: user/group.php:127
+msgid "No extra credits"
+msgstr ""
+
+#: user/group.php:140
+#, php-format
+msgid "%s free listings in %s days"
+msgstr ""
+
+#: user/group.php:142
+#, php-format
+msgid ""
+"Members of %s group can publish %s listings in %s days. By default you can "
+"only publish %s items in %s days."
+msgstr ""
+
+#: user/group.php:145
+msgid "Premium listings are not counted"
+msgstr ""
+
+#: user/group.php:178
+msgid "Exclusive credit packs:"
+msgstr ""
+
+#: user/group.php:178
+msgid "Exclusive packs:"
+msgstr ""
+
+#: user/group.php:180
+msgid "No exclusive credit packs"
+msgstr ""
+
+#: user/group.php:185
+msgid "Free active listings:"
+msgstr ""
+
+#: user/group.php:206
+msgid "Exclusive access to categories:"
+msgstr ""
+
+#: user/group.php:208
+msgid "No exclusive access to categories"
+msgstr ""
+
+#: user/group.php:214
+msgid "Duration"
+msgstr ""
+
+#: user/item.php:24
+#, php-format
+msgid ""
+"As a member of %s group, you can publish %s listings for free. Your "
+"remaining limit is %s free items."
+msgstr ""
+
+#: user/item.php:27
+msgid "Your listings"
+msgstr ""
+
+#: user/item.php:33
+msgid "You don't have any listing yet"
+msgstr ""
+
+#: user/item.php:59
+msgid "Inactive"
+msgstr ""
+
+#: user/item.php:62
+msgid "Published on"
+msgstr ""
+
+#: user/item.php:66
+msgid "Never expire"
+msgstr ""
+
+#: user/item.php:98
+msgid "Publish fee not paid"
+msgstr ""
+
+#: user/item.php:99
+msgid "This listing will not be visible until Publish Fee is paid!"
+msgstr ""
+
+#: user/item.php:101
+msgid "Image fee not paid"
+msgstr ""
+
+#: user/item.php:102
+msgid "Images on this listing will not be visible until Image Fee is paid!"
+msgstr ""
+
+#: user/item.php:111
+msgid "No promotions"
+msgstr ""
+
+#: user/item.php:117
+msgid "Promote"
+msgstr ""
+
+#: user/item_pay.php:9
+msgid "Item does not exist!"
+msgstr ""
+
+#: user/item_pay.php:31
+msgid "Promotion removed"
+msgstr ""
+
+#: user/item_pay.php:37
+msgid "Item promotions has been updated"
+msgstr ""
+
+#: user/item_pay.php:61
+msgid ""
+"Your listing was published successfully, you can now promote it and make it "
+"more visible."
+msgstr ""
+
+#: user/item_pay.php:63
+msgid ""
+"Your listing was published successfully, however in order to make it visible "
+"you must pay publish fee. You can also promote this listing and make it more "
+"visible."
+msgstr ""
+
+#: user/item_pay.php:68
+msgid "Promote your listing and make it more visible."
+msgstr ""
+
+#: user/item_pay.php:70
+msgid ""
+"This category is paid and is required to pay publish fee, you can also "
+"promote your listing and make it more visible."
+msgstr ""
+
+#: user/item_pay.php:74
+#, php-format
+msgid ""
+"If you would like to change promotion options, you can do it in section "
+"below or login to your account and promote listing in %s of user account."
+msgstr ""
+
+#: user/item_pay.php:74
+msgid "Promotions section"
+msgstr ""
+
+#: user/item_pay.php:78
+msgid "Open listing"
+msgstr ""
+
+#: user/item_pay.php:137
+msgid "You cannot remove this fee as it is required"
+msgstr ""
+
+#: user/item_pay.php:156
+msgid "No promotions has been selected"
+msgstr ""
+
+#: user/item_pay.php:165
+msgid "Click on method to initiate payment"
+msgstr ""
+
+#: user/item_pay.php:171
+#, php-format
+msgid "Pay fee %s for item %s by admin"
+msgstr ""
+
+#: user/item_pay.php:175 user/item_pay.php:180 user/item_pay.php:184
+#: user/item_pay.php:188
+#, php-format
+msgid "Pay fee %s for item %s"
+msgstr ""
+
+#: user/item_pay.php:198
+msgid "There was problem showing promote options"
+msgstr ""
+
+#: user/item_pay.php:199
+msgid "This is not your listing or it has not been activated yet."
+msgstr ""
+
+#: user/item_post.php:39
+msgid "Promote your listing to make it more attractive"
+msgstr ""
+
+#: user/item_post.php:40
+msgid "This section is visible only to owner of this listing and admins"
+msgstr ""
+
+#: user/item_post.php:42
+msgid "Click to show promotion options for your listing"
+msgstr ""
+
+#: user/item_post.php:59
+msgid ""
+"This feature is already paid, if you would like to extend it, login to your "
+"account and prolong promotion from user account section"
+msgstr ""
+
+#: user/item_post.php:94
+msgid "Free of charge!"
+msgstr ""
+
+#: user/item_post.php:102
+#, php-format
+msgid "You have %s remaining items published for free (group bonus)."
+msgstr ""
+
+#: user/item_post.php:204 user/item_post.php:256 user/item_post.php:331
+msgid "for"
+msgstr ""
+
+#: user/item_post.php:315
+msgid "Auto-Republish"
+msgstr ""
+
+#: user/item_post.php:316
+msgid "Listing will be renewed multiple times in selected intervals"
+msgstr ""
+
+#: user/item_post.php:339
+#, php-format
+msgid ""
+"Get stacked discount for repeating republish %s%% for each extra repeat!"
+msgstr ""
+
+#: user/item_post.php:342
+msgid "repeats"
+msgstr ""
+
+#: user/item_post.php:363
+msgid "Update promotions"
+msgstr ""
+
+#: user/item_post.php:363
+msgid "Process promotions"
+msgstr ""
+
+#: user/manager.php:33
+msgid "Orders has been successfully updated"
+msgstr ""
+
+#: user/manager.php:61 user/products.php:54 user/sales.php:21
+#: user/shipping.php:82
+msgid "This section is not available for you"
+msgstr ""
+
+#: user/manager.php:69 user/order.php:23 user/products.php:62 user/sales.php:29
+#: user/shipping.php:90
+msgid "Purchases"
+msgstr ""
+
+#: user/manager.php:73 user/order.php:27 user/products.php:66 user/sales.php:33
+#: user/shipping.php:94
+msgid "Products mng."
+msgstr ""
+
+#: user/manager.php:74 user/order.php:28 user/products.php:67 user/sales.php:34
+#: user/shipping.php:95
+msgid "Orders mng."
+msgstr ""
+
+#: user/manager.php:81
+msgid ""
+"Update status of order items once ordered items were shipped or delivered to "
+"customer. If order has been cancelled, update status of all items to "
+"cancelled."
+msgstr ""
+
+#: user/manager.php:90 user/products.php:83
+msgid "Keyword"
+msgstr ""
+
+#: user/manager.php:91
+msgid "Customer name, email, item title, ..."
+msgstr ""
+
+#: user/manager.php:118
+msgid "Order details"
+msgstr ""
+
+#: user/manager.php:120
+msgid "Qt"
+msgstr ""
+
+#: user/manager.php:150
+msgid "Unknown address"
+msgstr ""
+
+#: user/manager.php:156
+#, php-format
+msgid "%s from %s"
+msgstr ""
+
+#: user/manager.php:156
+#, php-format
+msgid "Order #%s"
+msgstr ""
+
+#: user/manager.php:162
+#, php-format
+msgid "Deliver to %s (%s): %s"
+msgstr ""
+
+#: user/manager.php:164
+#, php-format
+msgid "Customer %s, shipping is not required."
+msgstr ""
+
+#: user/manager.php:190 user/order.php:136 user/sales.php:96
+msgid "Removed"
+msgstr ""
+
+#: user/manager.php:194
+msgid "Status cannot be updated."
+msgstr ""
+
+#: user/manager.php:224
+msgid "Update orders"
+msgstr ""
+
+#: user/manager.php:229
+msgid "No orders found"
+msgstr ""
+
+#: user/order.php:35
+msgid ""
+"List of all products you have bought (does not mean promotions, membership "
+"or credit packs)."
+msgstr ""
+
+#: user/order.php:36
+#, php-format
+msgid "If you want to cancel order, please contact us via %s."
+msgstr ""
+
+#: user/order.php:36
+msgid "Contact form"
+msgstr ""
+
+#: user/order.php:44
+#, php-format
+msgid "Ordered products will be delivered to address stored in %s section."
+msgstr ""
+
+#: user/order.php:44
+msgid "your profile"
+msgstr ""
+
+#: user/order.php:47
+#, php-format
+msgid "Your current delivery address: %s"
+msgstr ""
+
+#: user/order.php:49
+msgid "You have not entered your address!"
+msgstr ""
+
+#: user/order.php:55
+#, php-format
+msgid "Your current phone number: %s"
+msgstr ""
+
+#: user/order.php:57
+msgid "You have not entered any phone number!"
+msgstr ""
+
+#: user/order.php:65
+msgid "Order status"
+msgstr ""
+
+#: user/order.php:71
+msgid "Our team is preparing your order"
+msgstr ""
+
+#: user/order.php:77
+msgid "Your order is on way to you"
+msgstr ""
+
+#: user/order.php:83 user/order.php:182 user/sales.php:133
+msgid "Order is delivered and completed"
+msgstr ""
+
+#: user/order.php:96 user/sales.php:50
+msgid "Order Status"
+msgstr ""
+
+#: user/order.php:107 user/sales.php:63
+msgid "Order ID"
+msgstr ""
+
+#: user/order.php:109 user/sales.php:65
+msgid "Provider"
+msgstr ""
+
+#: user/order.php:126 user/sales.php:86
+#, php-format
+msgid "Regular price: %s"
+msgstr ""
+
+#: user/order.php:146
+#, php-format
+msgid "Shipping: %s from %s"
+msgstr ""
+
+#: user/order.php:173 user/sales.php:124
+msgid "Order completed"
+msgstr ""
+
+#: user/order.php:176 user/sales.php:127
+msgid "We are processing this order"
+msgstr ""
+
+#: user/order.php:179 user/sales.php:130
+msgid "We have shipped products to buyer's address"
+msgstr ""
+
+#: user/order.php:200
+msgid "You have no orders yet."
+msgstr ""
+
+#: user/pack.php:19 user/pack.php:24
+#, php-format
+msgid "Buy Credit pack to save time with checkout. Your current credit is %s"
+msgstr ""
+
+#: user/pack.php:26
+msgid "Your wallet is empty. Buy some credits."
+msgstr ""
+
+#: user/pack.php:36
+#, php-format
+msgid "Voucher %s has not been processed: %s"
+msgstr ""
+
+#: user/pack.php:47
+#, php-format
+msgid "Credit for user %s (%s) at %s by voucher %s"
+msgstr ""
+
+#: user/pack.php:52
+#, php-format
+msgid ""
+"Voucher %s has been processed correctly, your wallet now has %s credits: %s"
+msgstr ""
+
+#: user/pack.php:83
+#, php-format
+msgid "%s more based on your membership in %s"
+msgstr ""
+
+#: user/pack.php:89
+#, php-format
+msgid ""
+"We value our customers, as bonus for your registration we boost your wallet "
+"with %s each %s!"
+msgstr ""
+
+#: user/pack.php:96
+msgid "Boost your wallet credits with voucher if you've received one!"
+msgstr ""
+
+#: user/pack.php:101
+msgid "Enter voucher code"
+msgstr ""
+
+#: user/pack.php:102
+msgid "Example: WALLET50"
+msgstr ""
+
+#: user/pack.php:113
+msgid "Affiliate program"
+msgstr ""
+
+#: user/pack.php:114
+#, php-format
+msgid "Invite your friend and both get bonus %s!"
+msgstr ""
+
+#: user/pack.php:115
+#, php-format
+msgid "Your referral code is %s"
+msgstr ""
+
+#: user/pack.php:116
+msgid "Share it with your friends or send them your Invite link."
+msgstr ""
+
+#: user/pack.php:117
+msgid "Your invite link:"
+msgstr ""
+
+#: user/pack.php:119
+msgid "Click to share your invite link:"
+msgstr ""
+
+#: user/pack.php:122
+msgid "Share on Facebook"
+msgstr ""
+
+#: user/pack.php:126
+msgid "Share on Whatsapp"
+msgstr ""
+
+#: user/pack.php:130
+msgid "Share on Twitter"
+msgstr ""
+
+#: user/pack.php:133
+#, php-format
+msgid "Register and get bonus %s!"
+msgstr ""
+
+#: user/pack.php:134
+msgid "Share on LinkedIn"
+msgstr ""
+
+#: user/pack.php:150
+#, php-format
+msgid "Exclusive for %s members!"
+msgstr ""
+
+#: user/pack.php:156
+msgid "Pay just"
+msgstr ""
+
+#: user/payments.php:12
+msgid "Last month"
+msgstr ""
+
+#: user/payments.php:13
+msgid "Last year"
+msgstr ""
+
+#: user/payments.php:14
+msgid "All payments"
+msgstr ""
+
+#: user/payments.php:20
+msgid "List of all payments you have made on our site in last month."
+msgstr ""
+
+#: user/payments.php:22
+msgid "List of all payments you have made on our site in last year."
+msgstr ""
+
+#: user/payments.php:24
+msgid "List of all payments you have made on our site."
+msgstr ""
+
+#: user/payments.php:32
+msgid "Transaction ID"
+msgstr ""
+
+#: user/payments.php:42
+msgid "Initiated bank transfer payments - AWAITING YOUR PAYMENT!"
+msgstr ""
+
+#: user/payments.php:43
+#, php-format
+msgid "Bank account / IBAN: %s"
+msgstr ""
+
+#: user/payments.php:48 user/transfer_pay.php:42
+#, php-format
+msgid ""
+"Payment in progress. We are awaiting your bank transfer to our account. <br/"
+">Transaction ID: %s <br/>IBAN: %s <br/>Variable Symbol: %s <br/> Amount: %s "
+"<br/>Once funds are on our account, we complete your payment. Note that bank "
+"transfer can take up to 3 days."
+msgstr ""
+
+#: user/payments.php:52
+msgid "Awaiting"
+msgstr ""
+
+#: user/payments.php:64
+#, php-format
+msgid ""
+"Transfer amount <b>%s</b> to account <b>%s</b> with variable symbol <b>%s</b>"
+msgstr ""
+
+#: user/payments.php:73
+msgid "Completed payments"
+msgstr ""
+
+#: user/payments.php:94
+msgid "No payments has been found"
+msgstr ""
+
+#: user/products.php:33
+msgid "Products has been successfully updated"
+msgstr ""
+
+#: user/products.php:74
+msgid ""
+"You can manage your items/products availabilities, quantities, shipping "
+"requirements here."
+msgstr ""
+
+#: user/products.php:84
+msgid "Item title, description, ..."
+msgstr ""
+
+#: user/products.php:112
+msgid "Low stock (<= 3 qty)"
+msgstr ""
+
+#: user/products.php:122
+msgid "Available"
+msgstr ""
+
+#: user/products.php:155 user/products.php:162 user/products.php:169
+msgid "Product with \"Free\" and \"Check with seller\" price cannot be sold."
+msgstr ""
+
+#: user/products.php:157
+msgid "Not available"
+msgstr ""
+
+#: user/products.php:179
+msgid "Update products"
+msgstr ""
+
+#: user/products.php:184
+msgid "You have no products"
+msgstr ""
+
+#: user/restrict.php:21
+msgid "This content is for premium members only!"
+msgstr ""
+
+#: user/restrict.php:24
+msgid ""
+"You need to be member of one of following user groups to be able to see "
+"content."
+msgstr ""
+
+#: user/restrict.php:35
+msgid "Become a premium member"
+msgstr ""
+
+#: user/sales.php:41
+msgid "List of all your product sales."
+msgstr ""
+
+#: user/sales.php:151
+msgid "You have not sold products yet"
+msgstr ""
+
+#: user/shipping.php:21
+msgid "Shipping has been successfully removed"
+msgstr ""
+
+#: user/shipping.php:32
+msgid ""
+"Shipping fee cannot be 0, shipping option has been disabled until price is "
+"fixed."
+msgstr ""
+
+#: user/shipping.php:38 user/shipping.php:164
+msgid "Standard"
+msgstr ""
+
+#: user/shipping.php:54
+msgid "Shipping option has been successfully updated"
+msgstr ""
+
+#: user/shipping.php:57
+msgid "Shipping option has been successfully created"
+msgstr ""
+
+#: user/shipping.php:111
+msgid "Edit shipping option"
+msgstr ""
+
+#: user/shipping.php:113
+msgid "Create a new shipping option"
+msgstr ""
+
+#: user/shipping.php:119
+msgid "Currier name"
+msgstr ""
+
+#: user/shipping.php:129
+msgid "Delivery time"
+msgstr ""
+
+#: user/shipping.php:130
+msgid "2-4 days"
+msgstr ""
+
+#: user/shipping.php:134
+msgid "Fee for shipping"
+msgstr ""
+
+#: user/shipping.php:142
+msgid "Country restriction"
+msgstr ""
+
+#: user/shipping.php:147
+msgid "All countries"
+msgstr ""
+
+#: user/shipping.php:159
+msgid "Speed index"
+msgstr ""
+
+#: user/shipping.php:164
+msgid "Fastest"
+msgstr ""
+
+#: user/shipping.php:164
+msgid "Slowest"
+msgstr ""
+
+#: user/shipping.php:175
+msgid "Enabled"
+msgstr ""
+
+#: user/shipping.php:176
+msgid "Disabled"
+msgstr ""
+
+#: user/shipping.php:183
+msgid "Update shipping option"
+msgstr ""
+
+#: user/shipping.php:185
+msgid "Add shipping option"
+msgstr ""
+
+#: user/shipping.php:193
+#, php-format
+msgid ""
+"List of your shipping options. Default shipping price, if no option is "
+"defined, will be %s"
+msgstr ""
+
+#: user/shipping.php:237
+#, php-format
+msgid "Index: %s"
+msgstr ""
+
+#: user/shipping.php:244
+msgid "Edit"
+msgstr ""
+
+#: user/shipping.php:251
+msgid "You have shipping options"
+msgstr ""
+
+#: user/shipping.php:257
+msgid "Add a new shipping"
+msgstr ""
+
+#: user/transfer_pay.php:17
+msgid "Data checksum has failed, payment was cancelled."
+msgstr ""
+
+#: user/transfer_pay.php:20
+msgid ""
+"Bank transfer data are related to different user, payment was cancelled."
+msgstr ""
+
+#: user/transfer_pay.php:49
+msgid ""
+"There was problem recognizing your product, please try bank transfer payment "
+"again from your cart."
+msgstr ""

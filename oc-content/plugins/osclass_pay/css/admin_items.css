@@ -1,0 +1,5 @@
+.osp-pay-line {background:rgba(0,0,0,0.25);font-size:10px;font-weight:500;color:rgba(0,0,0,0.6);padding:3px 4px;border-radius:3px;}
+.osp-pay-line.osp-is-paid {background-color:#6ec46b;font-weight:600;}
+.osp-st-line {position: absolute; right: -1px; top: -1px; width: 15px; height: 17px; color: rgba(0,0,0,0.5); line-height: 17px; font-size: 9px; background: rgba(255,255,255,0.4); text-align: center; border: 1px solid rgba(0,0,0,0.1);}
+.osp-st-line.pt501 {top:17px;}
+.osp-st-line.pt601 {top:34px;}
