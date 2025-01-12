@@ -527,12 +527,10 @@
 
   <?php osc_current_web_theme_path('footer.php') ; ?>
   <style>
-    .home-search h1 div {
-  position: relative;
-  top: -20px; /* Shift the city names upwards */
 
+.home-search h1 div {
+  transform: translateY(-2px); /* Shift the city names upwards */
 }
-
       .city_icons {
           width:100px  !important;
           height:74px !important;
