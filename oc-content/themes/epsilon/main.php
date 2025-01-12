@@ -78,87 +78,104 @@
 
         <h2><?php _e('Top Cities', 'epsilon'); ?></h2>
         
-        <div id="home-cat">
+        <div id="home-cat" class="city-container">
           <?php 
             osc_goto_first_category(); 
             $new_categories = explode(',', eps_param('categories_new'));
             $hot_categories = explode(',', eps_param('categories_hot'));
           ?>
           
-          <?php /*<a href="<?php echo osc_search_url(array('page' => 'search')); ?>" class="all">
+          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235021','sLocation'=>'Addis+Ababa')); ?>" class="city-box">
             <div>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="64px" height="64px"><path d="M116.65 219.35a15.68 15.68 0 0 0 22.65 0l96.75-99.83c28.15-29 26.5-77.1-4.91-103.88C203.75-7.7 163-3.5 137.86 22.44L128 32.58l-9.85-10.14C93.05-3.5 52.25-7.7 24.86 15.64c-31.41 26.78-33 74.85-5 103.88zm143.92 100.49h-48l-7.08-14.24a27.39 27.39 0 0 0-25.66-17.78h-71.71a27.39 27.39 0 0 0-25.66 17.78l-7 14.24h-48A27.45 27.45 0 0 0 0 347.3v137.25A27.44 27.44 0 0 0 27.43 512h233.14A27.45 27.45 0 0 0 288 484.55V347.3a27.45 27.45 0 0 0-27.43-27.46zM144 468a52 52 0 1 1 52-52 52 52 0 0 1-52 52zm355.4-115.9h-60.58l22.36-50.75c2.1-6.65-3.93-13.21-12.18-13.21h-75.59c-6.3 0-11.66 3.9-12.5 9.1l-16.8 106.93c-1 6.3 4.88 11.89 12.5 11.89h62.31l-24.2 83c-1.89 6.65 4.2 12.9 12.23 12.9a13.26 13.26 0 0 0 10.92-5.25l92.4-138.91c4.88-6.91-1.16-15.7-10.87-15.7zM478.08.33L329.51 23.17C314.87 25.42 304 38.92 304 54.83V161.6a83.25 83.25 0 0 0-16-1.7c-35.35 0-64 21.48-64 48s28.65 48 64 48c35.2 0 63.73-21.32 64-47.66V99.66l112-17.22v47.18a83.25 83.25 0 0 0-16-1.7c-35.35 0-64 21.48-64 48s28.65 48 64 48c35.2 0 63.73-21.32 64-47.66V32c0-19.48-16-34.42-33.92-31.67z"/></svg>
-            </div>
-
-            <h3><span><?php _e('All', 'epsilon'); ?></span></h3>
-          </a>*/?>
-          
-          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235021','sLocation'=>'Addis+Ababa')); ?>" class="all">
-            <div>
-             <img class="city_icons" style="" src="https://connecthabesha.com/oc-content/themes/epsilon/images/addis-ababa.PNG" />
+             <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/ababa_addis.jpeg" />
             </div>
             <h3><span><?php _e('Addis Ababa', 'epsilon'); ?></span></h3>
           </a>
           
-          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235080','sLocation'=>'Hawassa+(Awassa)')); ?>" class="all">
+          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235080','sLocation'=>'Hawassa+(Awassa)')); ?>" class="city-box">
             <div>
-             <img class="city_icons" src="https://connecthabesha.com/oc-content/themes/epsilon/images/awasa.jpeg" />
+             <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/hawassa.jpeg" />
             </div>
             <h3><span><?php _e('Hawassa', 'epsilon'); ?></span></h3>
           </a>
           
-          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235017','sLocation'=>'Adama')); ?>" class="all">
+          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235017','sLocation'=>'Adama')); ?>" class="city-box">
             <div>
-             <img style="width:100px;height:74px;max-width:auto;max-height:auto;" src="https://connecthabesha.com/oc-content/themes/epsilon/images/adama.PNG" />
+             <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/adama_2.jpeg" />
             </div>
             <h3><span><?php _e('Adama', 'epsilon'); ?></span></h3>
           </a>
           
-          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235043','sLocation'=>'Dire+Dawa')); ?>" class="all">
+          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235043','sLocation'=>'Dire+Dawa')); ?>" class="city-box">
             <div>
-             <img style="width:100px;height:74px;max-width:auto;max-height:auto;" src="https://connecthabesha.com/oc-content/themes/epsilon/images/addis-ababa.PNG" />
+             <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/dawa_dire.jpeg" />
             </div>
             <h3><span><?php _e('Dire Dawa', 'epsilon'); ?></span></h3>
           </a>
-          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235089','sLocation'=>'Arba+Minch')); ?>" class="all">
+          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235089','sLocation'=>'Arba+Minch')); ?>" class="city-box">
             <div>
-             <img style="width:100px;height:74px;max-width:auto;max-height:auto;" src="https://connecthabesha.com/oc-content/themes/epsilon/images/addis-ababa.PNG" />
+             <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/minch_arba.jpeg" />
             </div>
             <h3><span><?php _e('Arba Minch', 'epsilon'); ?></span></h3>
           </a>
-        
-            
-          <?php /*while(osc_has_categories()) { ?>
-            <?php $color = eps_get_cat_color(osc_category_id(), osc_category()); ?>
-     
-            <a href="<?php echo osc_search_url(array('page' => 'search', 'sCategory' => osc_category_id())); ?>" data-id="<?php echo osc_category_id(); ?>">
-              <div <?php if($color <> '' && eps_param('cat_icons') != 1) { ?>style="background-color:<?php echo eps_hex_to_rgb($color, 0.15); ?>;"<?php } ?>>
-                <?php if(in_array(osc_category_id(), $new_categories)) { ?>
-                  <span class="lab new"><?php _e('New', 'epsilon'); ?></span>
-                <?php } else if(in_array(osc_category_id(), $hot_categories)) { ?>
-                  <span class="lab hot"><?php _e('Hot', 'epsilon'); ?></span>
-                <?php } ?>
-                
-                <?php if(eps_param('cat_icons') == 1) { ?>
-                  <?php 
-                    $icon = eps_get_cat_icon(osc_category_id(), osc_category(), true);
-                    $icon_ = explode(' ', $icon);
-                    
-                    $has_type = false;
-                    if(in_array($icon_, array('fas', 'far', 'fab'))) {
-                      $has_type = true;
-                    }
-                  ?>
-                  <i class="<?php echo ($has_type ? '' : 'fas'); ?> <?php echo $icon; ?>" <?php if($color <> '') { ?>style="color:<?php echo $color; ?>;"<?php } ?>></i>
-                <?php } else { ?>
-                  <img src="<?php echo eps_get_cat_image(osc_category_id()); ?>" alt="<?php echo osc_esc_html(osc_category_name()); ?>" class="<?php echo (eps_is_lazy() ? 'lazy' : ''); ?>"/>
-                <?php } ?>
-              </div>
-
-              <h3><span><?php echo osc_category_name(); ?></span></h3>
-            </a>
-          <?php } */?>
         </div>
+
+        <style>
+  .city-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 780px;
+    margin: 0px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #home-cat a {
+    width: 100%;
+    height: 184px;
+  }
+  
+  .city-box {
+    flex: 1 1 calc(20% - 10px);
+    box-sizing: border-box;
+    margin: 5px 0; /* Adjusted margin to remove left and right margin */
+    text-align: center;
+    max-width: calc(20% - 10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .city-box img {
+    width: 100%;
+    height: auto;
+  }
+  @media (max-width: 1200px) {
+    .city-box {
+      flex: 1 1 calc(25% - 10px);
+      max-width: calc(25% - 10px);
+    }
+  }
+  @media (max-width: 992px) {
+    .city-box {
+      flex: 1 1 calc(33.33% - 10px);
+      max-width: calc(33.33% - 10px);
+    }
+  }
+  @media (max-width: 768px) {
+    .city-box {
+      flex: 1 1 calc(50% - 10px);
+      max-width: calc(50% - 10px);
+    }
+  }
+  @media (max-width: 480px) {
+    .city-box {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+  }
+</style>
       </div>
     </div>
   </section>
