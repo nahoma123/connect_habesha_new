@@ -997,8 +997,19 @@ body#home h2 .btn svg {margin-right: 5px;fill:#3b49df;}
 .home-search h1 div {display:inline-block;height:36px;overflow:hidden;vertical-align: -12px;}
 .home-search h1 div span {display:block;font-weight:800;height:36px;background-color: #3b49df; background-image: linear-gradient(135deg, #3b49df, #7c58d0); background-size: 100%; -webkit-background-clip: text; -moz-background-clip: text; -webkit-text-fill-color: transparent; -moz-text-fill-color: transparent;}
 .home-search h1 div span.l1 {animation: h1slide 8s cubic-bezier(.8,0,.2,1) infinite;animation-delay:1.5s;}
-@keyframes h1slide {0% {margin-top:0;} 15% {margin-top:0;} 20% {margin-top:-36px;} 40% {margin-top:-36px;} 45% {margin-top:-72px;} 65% {margin-top:-72px;} 70% {margin-top:-108px;} 90% {margin-top:-108px;} 95% {margin-top:-144px;} 100% {margin-top:-144px;}}
-
+@keyframes h1slide {
+  0% { margin-top: 0; }
+  10% { margin-top: 0; }
+  20% { margin-top: -36px; }
+  30% { margin-top: -36px; }
+  40% { margin-top: -72px; }
+  50% { margin-top: -72px; }
+  60% { margin-top: -108px; }
+  70% { margin-top: -108px; }
+  80% { margin-top: -144px; }
+  90% { margin-top: -144px; }
+  100% { margin-top: -144px; }
+}
 .home-search .input-box {width:calc(100% - 162px);margin:0 12px 0 0;}
 .home-search .btn {width:150px;height:48px;border-radius:7px;float:right;line-height:16px;}
 .home-search .btn i {vertical-align:-1px;}
