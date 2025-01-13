@@ -158,7 +158,9 @@ class UserForm extends Form {
   static public function zip_text($user = null) {
     parent::generic_input_text('zip', (isset($user['s_zip'])) ? $user['s_zip'] : null);
   }
-
+  static public function show_on_profile($user = null) {
+    parent::generic_input_text('show_on_profile', (isset($user['show_on_profile'])) ? $user['show_on_profile'] : null);
+  }
   static public function is_company_select($user = null, $user_label = null, $company_label = null) {
     $options = array(
       array( 'i_value' => '0', 's_text' => ($user_label?$user_label:__('User')) )

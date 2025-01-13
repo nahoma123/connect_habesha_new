@@ -3,6 +3,9 @@
   $user = osc_user();
   $location_type = eps_param('profile_location');
 
+$show_on_profile = isset($user['show_on_profile']) ? $user['show_on_profile'] : 'no'; // Default to 'no' if not set
+
+
   if(osc_profile_img_users_enabled()) {
     osc_enqueue_script('cropper');
     osc_enqueue_style('cropper', osc_assets_url('js/cropper/cropper.min.css'));
@@ -79,8 +82,21 @@
                 <label for="phoneMobile"><?php _e('Mobile phone', 'epsilon'); ?> <span class="req">*</span></label>
                 <div class="input-box"><?php UserForm::mobile_text(osc_user()); ?></div>
               </div>
+              <div class="radio-group">
+  <p>Show on profile?</p>
+  <label>
+    <input type="radio" name="show_on_profile" value="yes" <?php echo ($show_on_profile === 'yes') ? 'checked' : ''; ?>>
+    <span class="custom-radio"></span> Yes (visible to all registered users)
+  </label>
+  <label>
+    <input type="radio" name="show_on_profile" value="no" <?php echo ($show_on_profile === 'no') ? 'checked' : ''; ?>>
+    <span class="custom-radio"></span> No (not visible to anyone)
+  </label>
+  <small>* You can change this later in your settings.</small>
+</div>
 
-              <div class="row">
+
+              <div class="row" style="margin-top:20px">
                 <label for="phoneLand"><?php _e('Land Phone', 'epsilon'); ?></label>
                 <div class="input-box"><?php UserForm::phone_land_text(osc_user()); ?></div>
               </div>                        
