@@ -121,6 +121,9 @@
         </div>
 
         <style>
+
+.home-search h1 div span.l5 { animation-delay: 4.5s; }
+
   .city-container {
     display: flex;
     flex-wrap: wrap;
