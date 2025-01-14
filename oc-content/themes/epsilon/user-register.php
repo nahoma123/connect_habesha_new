@@ -119,7 +119,7 @@
         </div>
 
 <!-- Account Name Input -->
-<input type="text" id="accountName" name="primary_accounts" class="account-input" placeholder="Ex:- +251 911002244, @Merry_26" required><br><br>
+<input type="text" id="accountName" name="primary_accounts" class="account-input" placeholder="Ex:- +251 911002244, @Merry_26" ><br><br>
 
 <!-- Add/Remove Button Container -->
 <div id="addRemoveButtonContainer"></div>
