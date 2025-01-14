@@ -86,7 +86,11 @@ class User extends DAO {
       'dt_login_fail_date',
       's_profile_img',
       'fk_c_locale_code',
-      'show_on_profile'
+      'show_on_profile',
+      'primary_methods',
+      'primary_accounts',
+      'additional_methods',
+      'additional_accounts',
     );
     $this->setFields($array_fields);
   }

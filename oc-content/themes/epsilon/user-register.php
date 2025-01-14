@@ -64,13 +64,13 @@
         </div>
 
         <?php /*<div class="row nm">
-     <label for="name"><?php _e('Verification Method', 'epsilon'); ?> <span class="req">*</span></label>
-     <select name="s_method" id="s_method" >
-         <option value="">Select verification method</option>
-         <option value="1">Phone</option>
-         <option value="2">Email</option>
-     </select>
-   </div>*/ ?>
+<label for="name"><?php _e('Verification Method', 'epsilon'); ?> <span class="req">*</span></label>
+<select name="s_method" id="s_method" >
+    <option value="">Select verification method</option>
+    <option value="1">Phone</option>
+    <option value="2">Email</option>
+</select>
+</div>*/ ?>
 
         <div class="row em" style="display:none;">
           <?php /*<label for="email"><?php _e('E-mail', 'epsilon'); ?> <span class="req">*</span></label>*/ ?>
@@ -86,19 +86,65 @@
             Email registration will be available soon.</div>
         </div>
 
-        <div class="radio-group">
-          <p>Show on profile?</p>
-          <label>
-            <input type="radio" name="show_on_profile" value="yes">
-            <span class="custom-radio"></span> Yes (visible to all registered users)
-          </label>
-          <label>
-            <input type="radio" name="show_on_profile" value="no" checked>
-            <span class="custom-radio"></span> No (not visible to anyone)
-          </label>
-          <small>* You can change this later in your settings.</small>
+        <div class="row p1">
+          <div class="radio-group">
+            <p>Show on profile?</p>
+            <label>
+              <input type="radio" name="show_on_profile" value="yes">
+              <span class="custom-radio"></span> Yes (visible to all registered users)
+            </label>
+            <label>
+              <input type="radio" name="show_on_profile" value="no" checked>
+              <span class="custom-radio"></span> No (not visible to anyone)
+            </label>
+            <small>* You can change this later in your settings.</small>
+          </div>
         </div>
 
+        
+        <!-- Communication Method Selection -->
+        <div class="checkbox-container">
+          <label>
+            <input type="checkbox" name="primary_methods[]" value="Telegram"> Telegram
+          </label>
+          <label>
+            <input type="checkbox" name="primary_methods[]" value="WhatsApp"> WhatsApp
+          </label>
+          <label>
+            <input type="checkbox" name="primary_methods[]" value="SMS"> SMS (text)
+          </label>
+          <label>
+            <input type="checkbox" name="primary_methods[]" value="DirectCall"> Direct call
+          </label>
+        </div>
+
+<!-- Account Name Input -->
+<input type="text" id="accountName" name="primary_accounts" class="account-input" placeholder="Ex:- +251 911002244, @Merry_26" required><br><br>
+
+<!-- Add/Remove Button Container -->
+<div id="addRemoveButtonContainer"></div>
+
+<!-- Additional Account Container -->
+<div id="additionalAccountContainer">
+    <!-- Communication Method Selection for Additional Account -->
+    <div class="checkbox-container">
+        <label>
+            <input type="checkbox" name="additional_methods[]" value="Telegram"> Telegram
+        </label>
+        <label>
+            <input type="checkbox" name="additional_methods[]" value="WhatsApp"> WhatsApp
+        </label>
+        <label>
+            <input type="checkbox" name="additional_methods[]" value="SMS"> SMS (text)
+        </label>
+        <label>
+            <input type="checkbox" name="additional_methods[]" value="DirectCall"> Direct call
+        </label>
+    </div>
+
+    <!-- Additional Account Name Input -->
+    <input type="text" id="additionalAccountName" name="additional_accounts" class="account-input" placeholder="Ex:- +251 911002244, @Merry_26"><br><br>
+</div>
 
         <div class="row p1">
           <?php /*<label for="password"><?php _e('Password', 'epsilon'); ?> <span class="req">*</span></label>*/ ?>
@@ -143,6 +189,57 @@
     <?php osc_current_web_theme_path('footer.php'); ?>
 
     <script type="text/javascript">
+      // JavaScript to handle dynamic button and additional account field
+      const accountNameInput = document.getElementById('accountName');
+      const addRemoveButtonContainer = document.getElementById('addRemoveButtonContainer');
+      const additionalAccountContainer = document.getElementById('additionalAccountContainer');
+      const additionalAccountInput = document.getElementById('additionalAccountName');
+      const additionalCheckboxes = additionalAccountContainer.querySelectorAll('input[type="checkbox"]');
+
+      // Function to create the "Add Additional Account" button
+      const createAddRemoveButton = () => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'add-remove-button';
+        button.textContent = 'Add Additional Account';
+        button.addEventListener('click', toggleAdditionalAccount);
+        return button;
+      };
+
+      // Function to toggle additional account field
+      const toggleAdditionalAccount = () => {
+        const isVisible = additionalAccountContainer.style.display === 'block';
+        additionalAccountContainer.style.display = isVisible ? 'none' : 'block';
+        addRemoveButtonContainer.querySelector('button').textContent = isVisible ? 'Add Additional Account' : 'Remove Additional Account';
+
+        // Reset additional account field if hiding it
+        if (isVisible) {
+          additionalAccountInput.value = ''; // Reset input field
+          additionalCheckboxes.forEach(checkbox => (checkbox.checked = false)); // Uncheck all checkboxes
+        }
+      };
+
+      // Function to handle input changes in the first account field
+      const handleAccountInput = () => {
+        if (accountNameInput.value.trim() !== '') {
+          // If the button doesn't exist, create it
+          if (!addRemoveButtonContainer.querySelector('button')) {
+            const button = createAddRemoveButton();
+            addRemoveButtonContainer.appendChild(button);
+          }
+        } else {
+          // If the field is empty, remove the button and hide the additional account field
+          addRemoveButtonContainer.innerHTML = ''; // Remove the button
+          additionalAccountContainer.style.display = 'none'; // Hide additional account field
+        }
+      };
+
+      // Add event listeners to the first account field
+      accountNameInput.addEventListener('input', handleAccountInput);
+      accountNameInput.addEventListener('change', handleAccountInput);
+
+
+
       $(document).ready(function () {
 
         $('#choose_mobile').on('click', function () {
@@ -216,6 +313,98 @@
 
     </script>
     <style>
+      /* Style for the Add/Remove button */
+      .add-remove-button {
+        margin-top: 10px;
+        /* Space above the button */
+        margin-bottom: 20px;
+        /* Space below the button */
+        padding: 8px 16px;
+        /* Padding for better proportions */
+        font-size: 14px;
+        /* Slightly larger font size */
+        color: #fff;
+        /* White text */
+        background-color: #007bff;
+        /* Blue background */
+        border: none;
+        /* Remove default border */
+        border-radius: 5px;
+        /* Rounded corners */
+        cursor: pointer;
+        /* Pointer cursor on hover */
+        transition: background-color 0.3s ease;
+        /* Smooth hover effect */
+      }
+
+      /* Hover effect for the button */
+      .add-remove-button:hover {
+        background-color: #0056b3;
+        /* Darker blue on hover */
+      }
+
+      /* Active effect for the button */
+      .add-remove-button:active {
+        background-color: #004080;
+        /* Even darker blue on click */
+      }
+
+
+      /* Style for the checkbox container */
+      .checkbox-container {
+        display: flex;
+        gap: 1px;
+        /* Space between checkboxes */
+        margin-bottom: 5px;
+        /* Space below the checkboxes */
+        align-items: center;
+        /* Align checkboxes and labels vertically */
+      }
+
+      /* Style for the checkbox labels */
+      .checkbox-container label {
+        font-size: 14px;
+        /* Smaller text size */
+        display: flex;
+        align-items: center;
+        /* Align checkbox and text properly */
+        gap: 5px;
+        /* Space between checkbox and text */
+      }
+
+      /* Style for the input field */
+      .account-input {
+        width: 300px;
+        /* Adjust width as needed */
+        padding: 8px;
+        margin-top: 10px;
+        /* Space above the input */
+      }
+
+      /* Style to make checkboxes smaller */
+      .checkbox-container input[type="checkbox"] {
+        width: 14px;
+        /* Adjust width as needed */
+        height: 14px;
+        /* Adjust height as needed */
+      }
+
+      /* Style for the Add/Remove button */
+      .add-remove-button {
+        margin-top: 10px;
+        padding: 5px 10px;
+        font-size: 12px;
+        cursor: pointer;
+      }
+
+      /* Hide the additional account field by default */
+      #additionalAccountContainer {
+        display: none;
+        margin-top: 10px;
+      }
+
+
+
       .radio-group {
         font-family: Arial, sans-serif;
         margin-bottom: 16px;
