@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Contact Methods</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px 30px;
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #555;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        .form-group input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .contact-methods {
+            display: none;
+            margin-top: 15px;
+        }
+        .contact-input {
+            margin-top: 10px;
+        }
+        .contact-input input {
+            width: calc(100% - 10px);
+            padding: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .submit-button {
+            display: block;
+            width: 100%;
+            background: #4CAF50;
+            color: white;
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background: #45a049;
+        }
+        .show-methods-button {
+            display: block;
+            background: #007BFF;
+            color: white;
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .show-methods-button:hover {
+            background: #0056b3;
+        }
+    </style>
+    <script>
+        function toggleContactMethods() {
+            const methodsContainer = document.getElementById('contact-methods');
+            methodsContainer.style.display = methodsContainer.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function toggleInput(checkbox, inputId) {
+            const input = document.getElementById(inputId);
+            const phoneField = document.getElementById('phone-number');
+            if (checkbox.checked) {
+                input.style.display = 'block';
+                input.querySelector('input').value = phoneField.value;
+            } else {
+                input.style.display = 'none';
+                input.querySelector('input').value = '';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Add Contact Methods</h1>
+        <form>
+            <div class="form-group">
+                <label for="phone-number">Phone Number (Mandatory)</label>
+                <input type="text" id="phone-number" placeholder="Enter your phone number" required>
+            </div>
+
+            <button type="button" class="show-methods-button" onclick="toggleContactMethods()">Show/Hide contact Methods</button>
+
+            <div class="contact-methods" id="contact-methods">
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" onchange="toggleInput(this, 'telegram-input')"> Telegram
+                    </label>
+                    <div class="contact-input" id="telegram-input" style="display: none;">
+                        <input type="text" placeholder="Enter your Telegram username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" onchange="toggleInput(this, 'whatsapp-input')"> WhatsApp
+                    </label>
+                    <div class="contact-input" id="whatsapp-input" style="display: none;">
+                        <input type="text" placeholder="Enter your WhatsApp number">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" onchange="toggleInput(this, 'sms-input')"> SMS (text)
+                    </label>
+                    <div class="contact-input" id="sms-input" style="display: none;">
+                        <input type="text" placeholder="Enter your phone number for SMS">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" onchange="toggleInput(this, 'call-input')"> Direct Call
+                    </label>
+                    <div class="contact-input" id="call-input" style="display: none;">
+                        <input type="text" placeholder="Enter your phone number for calls">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
