@@ -10,10 +10,7 @@ services:
       - db
     environment:
       - MYSQLI_ENABLED=true
-      - XDEBUG_MODE=debug
-      - XDEBUG_CONFIG=client_host=host.docker.internal client_port=9005 log=/var/www/html/xdebug.log
-      - XDEBUG_LOG=/var/www/html/xdebug.log
-    command: /bin/bash -c "docker-php-ext-install mysqli && pecl install xdebug-2.9.8 && echo 'zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20190902/xdebug.so' >> /usr/local/etc/php/php.ini && docker-php-ext-enable xdebug && apache2-foreground"
+    command: /bin/bash -c "docker-php-ext-install mysqli && apache2-foreground"
 
   db:
     image: mysql:5.7
