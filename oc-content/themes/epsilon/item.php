@@ -277,9 +277,7 @@
             </div>
           <?php } ?>      
 
-          <div id="item-hook">
-              <?php osc_run_hook('item_detail', osc_item()); ?>
-          </div>
+
         </div>
         
         <?php osc_run_hook('item_meta'); ?>
@@ -514,12 +512,7 @@
       <div id="item-side">
         <?php osc_run_hook('item_sidebar_top'); ?>
         
-        <?php if($phone_data['found']) { ?>
-          <a class="master-button phone <?php echo $phone_data['class']; ?>" title="<?php echo osc_esc_html($phone_data['title']); ?>" data-prefix="tel" href="<?php echo $phone_data['url']; ?>" data-part1="<?php echo osc_esc_html($phone_data['part1']); ?>" data-part2="<?php echo osc_esc_html($phone_data['part2']); ?>">
-            <i class="fas fa-phone-alt"></i>
-            <span><?php echo $phone_data['masked']; ?></span>
-          </a>
-        <?php } ?>
+        
 
         <?php if($email_data['visible']) { ?>
           <a class="master-button email <?php echo $email_data['class']; ?>" title="<?php echo osc_esc_html($email_data['title']); ?>" href="#" data-prefix="mailto" data-part1="<?php echo osc_esc_html($email_data['part1']); ?>" data-part2="<?php echo osc_esc_html($email_data['part2']); ?>">
@@ -709,17 +702,6 @@
     ?>
   </div>
 
-  <?php if($phone_data['found']) { ?>
-    <a class="sticky-button btn phone <?php echo $phone_data['class']; ?> isMobile" title="<?php echo osc_esc_html($phone_data['title']); ?>" data-prefix="tel" href="<?php echo $phone_data['url']; ?>" data-part1="<?php echo osc_esc_html($phone_data['part1']); ?>" data-part2="<?php echo osc_esc_html($phone_data['part2']); ?>">
-      <i class="fas fa-phone-alt"></i>
-      <span><?php echo $phone_data['masked']; ?></span>
-    </a>
-  <?php } else { ?>
-    <a class="sticky-button btn disabled isMobile" title="<?php echo osc_esc_html($phone_data['title']); ?>" href="#" onclick="return false;">
-      <i class="fas fa-phone-alt"></i>
-      <span><?php echo $phone_data['title']; ?></span>
-    </a>
-  <?php } ?>
 
   <?php if(getBoolPreference('item_contact_form_disabled') != 1) { ?>
     <a href="<?php echo eps_item_fancy_url('contact'); ?>" class="open-form contact btn btn-secondary sticky-button isMobile" data-type="contact">
