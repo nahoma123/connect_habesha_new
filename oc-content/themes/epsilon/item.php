@@ -277,7 +277,9 @@
             </div>
           <?php } ?>      
 
-
+          <div id="item-hook">
+              <?php osc_run_hook('item_detail', osc_item()); ?>
+          </div>
         </div>
         
         <?php osc_run_hook('item_meta'); ?>
@@ -521,19 +523,6 @@
           </a>
         <?php } ?>
         
-        <?php if(eps_param('messenger_replace_button') == 1 && function_exists('im_contact_button') && im_contact_button(osc_item(), true) !== false) { ?>
-          <!--<a href="<?php echo im_contact_button(osc_item(), true); ?>" class="contact master-button">
-            <i class="fas fa-envelope-open"></i>
-            <span><?php _e('Send message', 'epsilon'); ?></span>
-          </a>-->
-          <?php if(function_exists('oc_chat_button')) { echo oc_chat_button(); } ?> 
-        <?php } else if(getBoolPreference('item_contact_form_disabled') != 1) { ?>
-          <!--<a href="<?php echo eps_item_fancy_url('contact'); ?>" class="open-form contact master-button" data-type="contact">
-            <i class="fas fa-envelope-open"></i>
-            <span><?php _e('Send message', 'epsilon'); ?></span>
-          </a>-->
-          <?php if(function_exists('oc_chat_button')) { echo oc_chat_button(); } ?> 
-        <?php } ?>
         
         <?php osc_run_hook('item_contact'); ?>
 
@@ -701,6 +690,7 @@
       }
     ?>
   </div>
+
 
 
   <?php if(getBoolPreference('item_contact_form_disabled') != 1) { ?>
