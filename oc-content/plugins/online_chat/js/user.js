@@ -426,7 +426,7 @@ $(document).ready(function(){
           
           // PLAY SOUND
           if(newMessage == 1) {
-            ocPlayBeep();
+            // ocPlayBeep();
             PageTitleNotification.On(ocNewMessage);
           }
         },
