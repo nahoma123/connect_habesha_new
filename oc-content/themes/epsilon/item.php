@@ -693,12 +693,12 @@
 
 
 
-  <?php if(getBoolPreference('item_contact_form_disabled') != 1) { ?>
+  <!-- <?php if(getBoolPreference('item_contact_form_disabled') != 1) { ?>
     <a href="<?php echo eps_item_fancy_url('contact'); ?>" class="open-form contact btn btn-secondary sticky-button isMobile" data-type="contact">
       <i class="fas fa-envelope-open"></i>
       <span><?php _e('Send message', 'epsilon'); ?></span>
     </a>
-  <?php } ?>
+  <?php } ?> -->
   
   <div class="share-item-data" style="display:none">
     <a class="whatsapp" href="whatsapp://send?text=<?php echo urlencode(osc_item_url()); ?>" data-action="share/whatsapp/share"><i class="fab fa-whatsapp"></i> <?php _e('Share on Whatsapp', 'epsilon'); ?></a></span>
