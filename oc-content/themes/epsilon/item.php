@@ -237,14 +237,14 @@
             <a href="#" id="mk-offer" class="make-offer-link" data-item-id="<?php echo osc_item_id(); ?>" data-item-currency="<?php echo osc_item_currency(); ?>" data-ajax-url="<?php echo mo_ajax_url(); ?>&moAjaxOffer=1&itemId=<?php echo osc_item_id(); ?>"><?php _e('Submit your offer', 'epsilon'); ?></a>
           <?php } ?>
 
-          <div class="row date">
+          <!-- <div class="row date">
             <p>
               <?php 
                 echo sprintf(__('Published on %s', 'epsilon'), osc_format_date(osc_item_pub_date()));
                 echo (osc_item_mod_date() <> '' ? '. ' . sprintf(__('Modified on %s', 'epsilon'), osc_format_date(osc_item_mod_date())) . '.' : '');
               ?>
             </p>
-          </div>
+          </div> -->
           
            <?php eps_make_favorite(); ?>
         </div>
