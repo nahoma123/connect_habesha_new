@@ -125,6 +125,63 @@ document.getElementById('s_phone_mobile').addEventListener('keyup', function () 
 });
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    const phoneInput = document.querySelector('#s_phone_mobile'); // Replace 'email' with your input field name or ID
+
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function () {
+            validateAndNormalizePhone(phoneInput);
+        });
+
+        phoneInput.addEventListener('blur', function () {
+            validateAndNormalizePhone(phoneInput, true); // Final validation on blur
+        });
+
+        // Ensure the space is removed before form submission
+        phoneInput.form.addEventListener('submit', function (e) {
+            phoneInput.value = phoneInput.value.replace(/\s/g, ''); // Remove all spaces
+        });
+    }
+
+    function validateAndNormalizePhone(input, isFinalValidation = false) {
+        let phoneValue = input.value.trim();
+
+        // Remove all spaces and invalid characters (only allow digits and "+")
+        phoneValue = phoneValue.replace(/[^+\d]/g, '');
+
+        // If the number doesn't start with "+", consider it invalid
+        if (!phoneValue.startsWith('+')) {
+            input.value = ''; // Reset the input or set to a default value
+            return;
+        }
+
+        // Extract the country code
+        const countryCode = phoneValue.substring(0, 4); // First 4 characters (e.g., "+251")
+
+        if (countryCode === '+251') {
+            // Handle Ethiopian numbers
+            const localNumber = phoneValue.substring(4).replace(/[^0-9]/g, ''); // Extract local part after "+251"
+
+            if (!isFinalValidation) {
+                // Allow partial typing for Ethiopian numbers
+                input.value = '+251 ' + localNumber.substring(0, 9); // Add a space after the country code
+                return;
+            }
+
+            // Final validation: Ensure the local part is exactly 9 digits and starts with "9"
+            if (localNumber.length === 9 && localNumber.startsWith('9')) {
+                input.value = '+251 ' + localNumber; // Add a space after the country code
+            } else {
+                // Invalid Ethiopian number: Reset or provide feedback
+                input.value = '+251';
+            }
+        } else {
+            // For other international numbers, leave unchanged
+            input.value = phoneValue;
+        }
+    }
+});
+
 
 
   </script>
