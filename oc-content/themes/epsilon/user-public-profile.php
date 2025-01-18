@@ -135,13 +135,13 @@ $user_phone_land_data = eps_get_phone($user['s_phone_land']);
         </div>
       </div>
 
-      <?php if (getBoolPreference('item_contact_form_disabled') != 1) { ?>
+      <!-- <?php if (getBoolPreference('item_contact_form_disabled') != 1) { ?>
         <a href="<?php echo eps_item_fancy_url('contact_public', array('userId' => osc_user_id())); ?>"
           class="open-form public-contact master-button" data-type="contact_public">
           <i class="fas fa-envelope-open"></i>
           <span><?php _e('Send message', 'epsilon'); ?></span>
         </a>
-      <?php } ?>
+      <?php } ?> -->
 
       <a href="<?php echo osc_search_url(array('page' => 'search', 'userId' => osc_user_id())); ?>"
         class="seller-button seller-items"><?php echo __('All seller items', 'epsilon') . ' (' . $user_item_count . ')'; ?></a>
