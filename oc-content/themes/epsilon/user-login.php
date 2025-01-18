@@ -100,6 +100,11 @@
         phoneInput.addEventListener('blur', function () {
             validateAndNormalizePhone(phoneInput, true); // Final validation on blur
         });
+
+        // Ensure the space is removed before form submission
+        phoneInput.form.addEventListener('submit', function (e) {
+            phoneInput.value = phoneInput.value.replace(/\s/g, ''); // Remove all spaces
+        });
     }
 
     function validateAndNormalizePhone(input, isFinalValidation = false) {
@@ -123,13 +128,13 @@
 
             if (!isFinalValidation) {
                 // Allow partial typing for Ethiopian numbers
-                input.value = '+251' + localNumber.substring(0, 9); // Limit to 9 digits for local part
+                input.value = '+251 ' + localNumber.substring(0, 9); // Add a space after the country code
                 return;
             }
 
             // Final validation: Ensure the local part is exactly 9 digits and starts with "9"
             if (localNumber.length === 9 && localNumber.startsWith('9')) {
-                input.value = '+251' + localNumber;
+                input.value = '+251 ' + localNumber; // Add a space after the country code
             } else {
                 // Invalid Ethiopian number: Reset or provide feedback
                 input.value = '+251';
@@ -140,7 +145,6 @@
         }
     }
 });
-
 
 
     
