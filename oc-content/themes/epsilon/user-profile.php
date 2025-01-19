@@ -607,7 +607,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
     display: flex;
     flex-direction: column; /* Stack radio options vertically */
     gap: 8px; /* Small gap between items */
-    font-size: 14px; /* Adjust font size */
+    
   }
 
   .radio-group label[for="show_on_profile"] {
@@ -628,20 +628,9 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
 
   .radio-label input[type="radio"] {
     margin: 0; /* Remove default margins for perfect alignment */
-  width: 18px; /* Ensure consistent size */
-  height: 18px; /* Ensure consistent size */
   line-height: 0; /* Remove any additional spacing inside the radio button */
   }
 
-  .custom-radio {
-    display: inline-flex; /* Ensure it behaves as a flex container */
-    align-items: center; /* Vertically center custom radio */
-    justify-content: center; /* Horizontally center content */
-    width: 16px;
-    height: 16px;
-    border: 2px solid #000; /* Custom border */
-    border-radius: 50%; /* Circular appearance */
-  }
 
   .radio-text {    margin-right: 4px;
     display: inline-flex
@@ -717,8 +706,8 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
 
     .checkbox-container input{
       margin-right:0px;
-      height: 11px !important;
-      width: 11px !important;
+      height: 9px !important;
+      width: 9px !important;
     }
     /* Style for the input field */
     .account-input {
@@ -729,13 +718,6 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
       /* Space above the input */
     }
 
-    /* Style to make checkboxes smaller */
-    .checkbox-container input[type="checkbox"] {
-      width: 14px;
-      /* Adjust width as needed */
-      height: 14px;
-      /* Adjust height as needed */
-    }
 
     /* Style for the Add/Remove button */
     .add-remove-button {
@@ -762,20 +744,12 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
     display: flex;
     align-items: center;
 }
-.custom-radio {
-  display: inline-block;
-  width: 16px; /* Make the radio button smaller */
-  height: 16px; /* Make the radio button smaller */
-  margin-right: 6px; /* Reduce space between radio button and text */
-  border: 1px solid #000; /* Add border for custom radio button */
-  border-radius: 50%; /* Make it circular */
-  position: relative;
-}
+
 
 /* Hide the default radio button */
 .radio-label input[type="radio"] {
-  width: 16px;
-  height: 16px;
+  width: 11px;
+  height: 11px;
   margin-left:0px;
 }
 
