@@ -102,16 +102,13 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
 
   <div class="radio-option">
     <label class="radio-label">
-      <input type="radio" name="show_on_profile" value="yes" <?php echo ($show_on_profile === 'yes') ? 'checked' : ''; ?>>
-      <span class="custom-radio"></span> 
-      <span class="radio-text">Yes (visible to all registered users)</span>
+    <input type="radio" name="show_on_profile" value="no" checked="">      <span class="radio-text">Yes (visible to all registered users)</span>
     </label>
   </div>
 
   <div class="radio-option" style="margin-top: 8px;">
     <label class="radio-label">
       <input type="radio" name="show_on_profile" value="no" <?php echo ($show_on_profile === 'no') ? 'checked' : ''; ?>>
-      <span class="custom-radio"></span> 
       <span class="radio-text" >No (not visible to anyone)</span>
     </label>
   </div>
@@ -777,8 +774,8 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
 
 /* Hide the default radio button */
 .radio-label input[type="radio"] {
-  opacity: 0; /* Hide the default radio button */
-  position: absolute;
+  width: 16px;
+  height: 16px;
   margin-left:0px;
 }
 
