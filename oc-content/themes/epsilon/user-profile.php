@@ -92,21 +92,21 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
               </div>
 
               <div class="row">
-                <label for="phoneMobile"><?php _e('Mobile phone', 'epsilon'); ?> <span class="req">*</span></label>
+                <label for="phoneMobile"><?php _e('Phone number', 'epsilon'); ?> <span class="req">*</span></label>
                 <div class="input-box"><?php UserForm::mobile_text(osc_user()); ?></div>
               </div>
               <div class="radio-group">
-                <p>Show on profile?</p>
-                <label>
-                  <input type="radio" name="show_on_profile" value="yes" <?php echo ($show_on_profile === 'yes') ? 'checked' : ''; ?>>
-                  <span class="custom-radio"></span> Yes (visible to all registered users)
-                </label>
-                <label>
-                  <input type="radio" name="show_on_profile" value="no" <?php echo ($show_on_profile === 'no') ? 'checked' : ''; ?>>
-                  <span class="custom-radio"></span> No (not visible to anyone)
-                </label>
-                <small>* You can change this later in your settings.</small>
-              </div>
+  <p>Show on profile?</p>
+  <label class="radio-label">
+    <input type="radio" name="show_on_profile" value="yes" <?php echo ($show_on_profile === 'yes') ? 'checked' : ''; ?>>
+    <span class="custom-radio"></span> Yes (visible to all registered users)
+  </label>
+  <label class="radio-label">
+    <input type="radio" name="show_on_profile" value="no" <?php echo ($show_on_profile === 'no') ? 'checked' : ''; ?>>
+    <span class="custom-radio"></span> No (not visible to anyone)
+  </label>
+  <small><em>* You can change this later in your settings.</em></small>
+</div>
 
               <div class="row p1" style="margin-top: 20px;">
                 <!-- Communication Method Selection -->
@@ -183,10 +183,10 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
 
               <div class="hooksrow"><?php osc_run_hook('user_form'); ?></div>
 
-              <div class="row">
+              <!-- <div class="row">
                 <label for="info"><?php _e('About you', 'epsilon'); ?></label>
                 <?php UserForm::multilanguage_info($locales, osc_user()); ?>
-              </div>
+              </div> -->
             </div>
 
             <div id="user-loc" class="right-block navigator-fill-selects">
@@ -285,7 +285,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
         </form>
       </div>
 
-      <div class="profile-box alt change-mail">
+      <!-- <div class="profile-box alt change-mail">
         <h2><?php _e('Change your email', 'epsilon'); ?></h2>
 
         <form action="<?php echo osc_base_url(true); ?>" method="post" id="user_email_change" class="user-change">
@@ -314,7 +314,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
             <?php } ?>
           </div>
         </form>
-      </div>
+      </div> -->
 
       <div class="profile-box alt change-pass">
         <h2><?php _e('Change your password', 'epsilon'); ?></h2>
@@ -677,6 +677,34 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
       display: none;
       margin-top: 10px;
     }
+
+      /* Align radio buttons with labels */
+  .radio-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px; /* Adjust spacing as needed */
+  }
+
+  .custom-radio {
+    margin-right: 8px; /* Space between radio button and text */
+  }
+
+  /* Italicize the bottom text */
+  small em {
+    font-style: italic;
+  }
+
+  /* Minimize padding on mobile */
+  @media (max-width: 767px) {
+    .radio-label {
+      padding: 4px 0; /* Reduce padding for mobile */
+    }
+
+    .custom-radio {
+      margin-right: 6px; /* Reduce spacing for mobile */
+    }
+  }
+
   </style>
 
   <?php
