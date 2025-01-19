@@ -91,7 +91,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
                     value="<?php echo osc_esc_html(osc_user_email()); ?>" /></div>
               </div>
 
-              <div class="row">
+              <div class="row" style="margin-top:20px">
                 <label for="phoneMobile"><?php _e('Phone number', 'epsilon'); ?> <span class="req">*</span></label>
                 <div class="input-box"><?php UserForm::mobile_text(osc_user()); ?></div>
               </div>
@@ -720,6 +720,8 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
 
     .checkbox-container input{
       margin-right:0px;
+      height: 11px !important;
+      width: 11px !important;
     }
     /* Style for the input field */
     .account-input {
