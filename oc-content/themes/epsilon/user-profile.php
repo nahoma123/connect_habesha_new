@@ -96,39 +96,55 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
                 <div class="input-box"><?php UserForm::mobile_text(osc_user()); ?></div>
               </div>
               <div class="radio-group">
-  <p>Show on profile?</p>
-  <label class="radio-label">
-    <input type="radio" name="show_on_profile" value="yes" <?php echo ($show_on_profile === 'yes') ? 'checked' : ''; ?>>
-    <span class="custom-radio"></span> Yes (visible to all registered users)
+  <label for="show_on_profile">
+    <?php _e('Show phone on profile?', 'epsilon'); ?> <span class="req">*</span>
   </label>
-  <label class="radio-label">
-    <input type="radio" name="show_on_profile" value="no" <?php echo ($show_on_profile === 'no') ? 'checked' : ''; ?>>
-    <span class="custom-radio"></span> No (not visible to anyone)
-  </label>
-  <small><em>* You can change this later in your settings.</em></small>
+
+  <div class="radio-option">
+    <label class="radio-label">
+      <input type="radio" name="show_on_profile" value="yes" <?php echo ($show_on_profile === 'yes') ? 'checked' : ''; ?>>
+      <span class="custom-radio"></span> 
+      <span class="radio-text">Yes (visible to all registered users)</span>
+    </label>
+  </div>
+
+  <div class="radio-option" style="margin-top: 8px;">
+    <label class="radio-label">
+      <input type="radio" name="show_on_profile" value="no" <?php echo ($show_on_profile === 'no') ? 'checked' : ''; ?>>
+      <span class="custom-radio"></span> 
+      <span class="radio-text" >No (not visible to anyone)</span>
+    </label>
+  </div>
 </div>
 
-              <div class="row p1" style="margin-top: 20px;">
-                <!-- Communication Method Selection -->
-                <div class="checkbox-container">
-                  <label>
-                    <input type="checkbox" name="primary_methods[]" value="Telegram" <?php echo in_array('Telegram', $primaryMethods) ? 'checked' : ''; ?>> Telegram
-                  </label>
-                  <label>
-                    <input type="checkbox" name="primary_methods[]" value="WhatsApp" <?php echo in_array('WhatsApp', $primaryMethods) ? 'checked' : ''; ?>> WhatsApp
-                  </label>
-                  <label>
-                    <input type="checkbox" name="primary_methods[]" value="SMS" <?php echo in_array('SMS', $primaryMethods) ? 'checked' : ''; ?>> SMS (text)
-                  </label>
-                  <label>
-                    <input type="checkbox" name="primary_methods[]" value="DirectCall" <?php echo in_array('DirectCall', $primaryMethods) ? 'checked' : ''; ?>> Direct call
-                  </label>
-                </div>
-              </div>
+
+
               <!-- Primary Account Name Input -->
-              <input type="text" id="accountName" name="primary_accounts" class="account-input"
+              <input type="text" id="accountName" name="primary_accounts" class="account-input" style="margin-top: 20px;"
                 placeholder="Ex:- +251 911002244, @Merry_26" value="<?php echo osc_esc_html($primaryAccounts); ?>"
                 ><br><br>
+                
+                <div class="row p1">
+  <!-- Communication Method Selection -->
+  <div class="checkbox-container">
+    <label>
+      <input type="checkbox" name="primary_methods[]" value="Telegram" <?php echo in_array('Telegram', $primaryMethods) ? 'checked' : ''; ?>> 
+      <span>Telegram</span>
+    </label>
+    <label>
+      <input type="checkbox" name="primary_methods[]" value="WhatsApp" <?php echo in_array('WhatsApp', $primaryMethods) ? 'checked' : ''; ?>> 
+      <span>WhatsApp</span>
+    </label>
+    <label>
+      <input type="checkbox" name="primary_methods[]" value="SMS" <?php echo in_array('SMS', $primaryMethods) ? 'checked' : ''; ?>> 
+      <span>SMS (text)</span>
+    </label>
+    <label>
+      <input type="checkbox" name="primary_methods[]" value="DirectCall" <?php echo in_array('DirectCall', $primaryMethods) ? 'checked' : ''; ?>> 
+      <span>Direct call</span>
+    </label>
+  </div>
+</div>
 
               <!-- Add/Remove Button Container -->
               <div id="addRemoveButtonContainer"
@@ -587,7 +603,62 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
     .hide-email {
   display: none;
 }
+  .input-box {
+    margin: 5px;
+  }
+  .radio-group {
+    display: flex;
+    flex-direction: column; /* Stack radio options vertically */
+    gap: 8px; /* Small gap between items */
+    font-size: 14px; /* Adjust font size */
+  }
 
+  .radio-group label[for="show_on_profile"] {
+    margin-bottom: 8px; /* Add spacing between main label and options */
+  }
+
+  .radio-option {
+    display: flex;
+    align-items: center;
+    margin: 0;
+  }
+
+  
+  .radio-label {
+    display: flex;
+    align-items: center; /* Ensure alignment of radio button and text */
+  }
+
+  .radio-label input[type="radio"] {
+    margin: 0; /* Remove default margins for perfect alignment */
+  width: 18px; /* Ensure consistent size */
+  height: 18px; /* Ensure consistent size */
+  line-height: 0; /* Remove any additional spacing inside the radio button */
+  }
+
+  .custom-radio {
+    display: inline-flex; /* Ensure it behaves as a flex container */
+    align-items: center; /* Vertically center custom radio */
+    justify-content: center; /* Horizontally center content */
+    width: 16px;
+    height: 16px;
+    border: 2px solid #000; /* Custom border */
+    border-radius: 50%; /* Circular appearance */
+  }
+
+  .radio-text {    margin-right: 4px;
+    display: inline-flex
+;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding-top: 0.5px;
+  }
+
+
+  .radio-group p{
+    margin-bottom: 10px;
+  }
     /* Style for the Add/Remove button */
     .add-remove-button {
       margin-top: 10px;
@@ -683,15 +754,19 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
 
     /* Align radio buttons with labels and reduce size */
 .radio-label {
-  display: flex;
-  align-items: center; /* Align radio button and text vertically */
+  display: flex !important;
+  align-items: center !important; /* Align radio button and text vertically */
   margin-bottom: 8px; /* Adjust spacing as needed */
 }
-
+.radio-label .radio-text{
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+}
 .custom-radio {
   display: inline-block;
-  width: 12px; /* Make the radio button smaller */
-  height: 12px; /* Make the radio button smaller */
+  width: 16px; /* Make the radio button smaller */
+  height: 16px; /* Make the radio button smaller */
   margin-right: 6px; /* Reduce space between radio button and text */
   border: 1px solid #000; /* Add border for custom radio button */
   border-radius: 50%; /* Make it circular */
@@ -726,6 +801,37 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
 small em {
   font-style: italic;
 }
+  .checkbox-container {
+    display: flex;
+    flex-direction: row; /* Arrange items in a row */
+    align-items: center; /* Vertically center items */
+    gap: 0; /* Ensure no gap between labels */
+  }
+
+  .checkbox-container label {
+    display: flex;
+    align-items: center; /* Vertically center checkbox and text */
+    margin: 0; /* Remove any default margins */
+    font-size: 12px; /* Reduced text size */
+  }
+
+  .checkbox-container input[type="checkbox"] {
+    margin: 0 0px 0 0; /* Minimal space between checkbox and text */
+  }
+
+  .checkbox-container input{
+    margin-right:0px;
+  }
+  .checkbox-container span{
+    margin-left: -4px;
+    margin-right: 4px;
+        display: inline-flex; /* Enable flexbox for the span */
+    align-items: center; /* Vertically center the text inside the span */
+    justify-content: center; /* Horizontally center the text (in case span width changes) */
+    line-height: 1; /* Ensure text is not stretched */
+    padding-top:0.5px;
+  }
+      
 
   </style>
 
