@@ -84,7 +84,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
               </div>
 
 
-              <div class="row">
+              <div class="row hide-email">
                 <label for="email"><?php _e('E-mail', 'epsilon'); ?> <a href="#"
                     class="change-email"><?php _e('Edit', 'epsilon'); ?></a></label>
                 <div class="input-box"><input type="text" disabled
@@ -261,7 +261,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
                 <div class="input-box"><?php UserForm::city_area_text(osc_user()); ?></div>
               </div>
 
-              <div class="row">
+              <!-- <div class="row">
                 <label for="address"><?php _e('Address', 'epsilon'); ?></label>
                 <div class="input-box"><?php UserForm::address_text(osc_user()); ?></div>
               </div>
@@ -269,7 +269,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
               <div class="row">
                 <label for="address"><?php _e('ZIP', 'epsilon'); ?></label>
                 <div class="input-box"><?php UserForm::zip_text(osc_user()); ?></div>
-              </div>
+              </div> -->
             </div>
           </div>
 
@@ -584,6 +584,10 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
 });
   </script>
   <style>
+    .hide-email {
+  display: none;
+}
+
     /* Style for the Add/Remove button */
     .add-remove-button {
       margin-top: 10px;
