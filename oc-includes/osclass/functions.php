@@ -1928,7 +1928,7 @@ function osc_admin_toolbar_menu() {
 function osc_admin_toolbar_logout() {
   AdminToolbar::newInstance()->add_menu(array(
     'id' => 'logout' ,
-    'title' => __('Logout') ,
+    'title' => __('Log out') ,
     'href' => osc_admin_base_url(true) . '?action=logout' ,
     'meta' => array ('class' => 'btn btn-dim ico ico-32 ico-power float-right')
  ));
@@ -2000,7 +2000,7 @@ function osc_admin_toolbar_edit_user() {
 function osc_admin_toolbar_logout2() {
   AdminToolbar::newInstance()->add_menu(array(
     'id' => 'logout' ,
-    'title' => '<i class="fa fa-sign-out"></i> <span>' . __('Logout admin') . '</span>',
+    'title' => '<i class="fa fa-sign-out"></i> <span>' . __('Log out admin') . '</span>',
     'href' => osc_admin_base_url(true) . '?action=logout' ,
     'meta' => array ('class' => '')
  ));

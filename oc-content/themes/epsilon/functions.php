@@ -2289,7 +2289,7 @@ function eps_user_menu() {
     ?>
   </div>
   
-  <a href="<?php echo osc_user_logout_url(); ?>" class="logout"><i class="fas fa-sign-out-alt"></i> <?php echo __('Logout', 'epsilon'); ?></a>
+  <a href="<?php echo osc_user_logout_url(); ?>" class="logout"><i class="fas fa-sign-out-alt"></i> <?php echo __('Log out', 'epsilon'); ?></a>
   <?php
 }
 

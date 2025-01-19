@@ -1937,7 +1937,7 @@ msgid "Expired listings"
 msgstr ""
 
 #: functions.php:2292
-msgid "Logout"
+msgid "Log out"
 msgstr ""
 
 #: functions.php:2376
