@@ -647,6 +647,9 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
       /* Space between checkbox and text */
     }
 
+    .checkbox-container input{
+      margin-right:0px;
+    }
     /* Style for the input field */
     .account-input {
       width: 300px;
@@ -678,32 +681,51 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
       margin-top: 10px;
     }
 
-      /* Align radio buttons with labels */
-  .radio-label {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px; /* Adjust spacing as needed */
-  }
+    /* Align radio buttons with labels and reduce size */
+.radio-label {
+  display: flex;
+  align-items: center; /* Align radio button and text vertically */
+  margin-bottom: 8px; /* Adjust spacing as needed */
+}
 
-  .custom-radio {
-    margin-right: 8px; /* Space between radio button and text */
-  }
+.custom-radio {
+  display: inline-block;
+  width: 12px; /* Make the radio button smaller */
+  height: 12px; /* Make the radio button smaller */
+  margin-right: 6px; /* Reduce space between radio button and text */
+  border: 1px solid #000; /* Add border for custom radio button */
+  border-radius: 50%; /* Make it circular */
+  position: relative;
+}
 
-  /* Italicize the bottom text */
-  small em {
-    font-style: italic;
-  }
+/* Hide the default radio button */
+.radio-label input[type="radio"] {
+  opacity: 0; /* Hide the default radio button */
+  position: absolute;
+  margin-left:0px;
+}
 
-  /* Minimize padding on mobile */
-  @media (max-width: 767px) {
-    .radio-label {
-      padding: 4px 0; /* Reduce padding for mobile */
-    }
+/* Style the custom radio button when checked */
+.radio-label input[type="radio"]:checked + .custom-radio::after {
+  content: '';
+  display: block;
+  width: 6px; /* Inner circle size */
+  height: 6px; /* Inner circle size */
+  background-color:  #0178d6; /* Inner circle color */
+  border-radius: 50%; /* Make it circular */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.radio-group .custom-radio{
+  margin: 0px;
+}
 
-    .custom-radio {
-      margin-right: 6px; /* Reduce spacing for mobile */
-    }
-  }
+/* Italicize the bottom text */
+small em {
+  font-style: italic;
+}
 
   </style>
 
