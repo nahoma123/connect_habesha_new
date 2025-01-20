@@ -4,7 +4,7 @@
   <?php osc_current_web_theme_path('head.php'); ?>
   <link rel="stylesheet" media="print" href="<?php echo osc_current_web_theme_url('css/print.css?v=' . date('YmdHis')); ?>">
   <style>
-    @media screen and (max-width: 767px) {
+    /* @media screen and (max-width: 767px) {
     body .oc-chat.oc-closed {
         left: auto; /* Reset left positioning */
         right: 10px; /* Move to the right */
@@ -13,11 +13,11 @@
         height: 46px;
         min-height: 46px;
     }
-}
-
+} */
+/* 
       .oc-chat-button {
         margin-right: 0 !important;
-      }
+      } */
       .contact-method {
     display: flex;
     width: fit-content; /* This will make the width fit the content */
