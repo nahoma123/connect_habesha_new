@@ -18,6 +18,22 @@
       .oc-chat-button {
         margin-right: 0 !important;
       }
+      .contact-method {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.contact-method i {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #007bff; /* Icon color */
+}
+
+.contact-method span {
+    color: #333; /* Text color */
+}
   </style>
   <?php
     $itemviewer = (Params::getParam('itemviewer') == 1 ? 1 : 0);
@@ -71,7 +87,7 @@
     $email_data = eps_get_item_email();
     $user_phone_mobile_data = eps_get_phone(isset($item_user['s_phone_mobile']) ? $item_user['s_phone_mobile'] : '');
     $user_phone_land_data = eps_get_phone(isset($item_user['s_phone_land']) ? $item_user['s_phone_land'] : '');
-
+    print_r($item_user);
     $has_cf = false;
     while(osc_has_item_meta()) {
       if(osc_item_meta_value() != '') {
@@ -605,6 +621,77 @@
               <?php } ?>
             </div>
           <?php } ?>
+          <?php
+// Parse primary and additional methods/accounts
+$primary_methods = !empty($item_user['primary_methods']) ? explode(',', $item_user['primary_methods']) : [];
+$primary_account = !empty($item_user['primary_accounts']) ? trim($item_user['primary_accounts']) : '';
+$additional_methods = !empty($item_user['additional_methods']) ? explode(',', $item_user['additional_methods']) : [];
+$additional_account = !empty($item_user['additional_accounts']) ? trim($item_user['additional_accounts']) : '';
+
+// Display primary methods with their shared account
+if (!empty($primary_account)) {
+    foreach ($primary_methods as $method) {
+        $method = trim($method);
+        $icon_class = '';
+        switch (strtolower($method)) {
+            case 'whatsapp':
+                $icon_class = 'fab fa-whatsapp';
+                break;
+            case 'telegram':
+                $icon_class = 'fab fa-telegram-plane';
+                break;
+            case 'sms':
+                $icon_class = 'fas fa-sms';
+                break;
+            case 'directcall':
+                $icon_class = 'fas fa-phone-alt';
+                break;
+            default:
+                $icon_class = 'fas fa-question-circle';
+                break;
+        }
+
+        if (!empty($icon_class)) {
+            echo '<div class="contact-method">';
+            echo '<i class="' . $icon_class . '" title="' . ucfirst($method) . '"></i>';
+            echo '<span>' . $primary_account . '</span>';
+            echo '</div>';
+        }
+    }
+}
+
+// Display additional methods with their shared account
+if (!empty($additional_account)) {
+    foreach ($additional_methods as $method) {
+        $method = trim($method);
+        $icon_class = '';
+        switch (strtolower($method)) {
+            case 'whatsapp':
+                $icon_class = 'fab fa-whatsapp';
+                break;
+            case 'telegram':
+                $icon_class = 'fab fa-telegram-plane';
+                break;
+            case 'sms':
+                $icon_class = 'fas fa-sms';
+                break;
+            case 'directcall':
+                $icon_class = 'fas fa-phone-alt';
+                break;
+            default:
+                $icon_class = 'fas fa-question-circle';
+                break;
+        }
+
+        if (!empty($icon_class)) {
+            echo '<div class="contact-method">';
+            echo '<i class="' . $icon_class . '" title="' . ucfirst($method) . '"></i>';
+            echo '<span>' . $additional_account . '</span>';
+            echo '</div>';
+        }
+    }
+}
+?>
         </div>
 
 
