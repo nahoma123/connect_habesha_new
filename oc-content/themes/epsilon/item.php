@@ -87,7 +87,7 @@
     $email_data = eps_get_item_email();
     $user_phone_mobile_data = eps_get_phone(isset($item_user['s_phone_mobile']) ? $item_user['s_phone_mobile'] : '');
     $user_phone_land_data = eps_get_phone(isset($item_user['s_phone_land']) ? $item_user['s_phone_land'] : '');
-    print_r($item_user);
+    // print_r($item_user);
     $has_cf = false;
     while(osc_has_item_meta()) {
       if(osc_item_meta_value() != '') {
@@ -628,69 +628,47 @@ $primary_account = !empty($item_user['primary_accounts']) ? trim($item_user['pri
 $additional_methods = !empty($item_user['additional_methods']) ? explode(',', $item_user['additional_methods']) : [];
 $additional_account = !empty($item_user['additional_accounts']) ? trim($item_user['additional_accounts']) : '';
 
-// Display primary methods with their shared account
-if (!empty($primary_account)) {
-    foreach ($primary_methods as $method) {
+// Function to generate icons for a given account and methods
+function generate_contact_methods($account, $methods) {
+    if (empty($account)) {
+        return;
+    }
+
+    $icons = [];
+    foreach ($methods as $method) {
         $method = trim($method);
-        $icon_class = '';
         switch (strtolower($method)) {
             case 'whatsapp':
-                $icon_class = 'fab fa-whatsapp';
+                $icons[] = '<i class="fab fa-whatsapp" title="WhatsApp"></i>';
                 break;
             case 'telegram':
-                $icon_class = 'fab fa-telegram-plane';
+                $icons[] = '<i class="fab fa-telegram-plane" title="Telegram"></i>';
                 break;
             case 'sms':
-                $icon_class = 'fas fa-sms';
+                $icons[] = '<i class="fas fa-sms" title="SMS"></i>';
                 break;
             case 'directcall':
-                $icon_class = 'fas fa-phone-alt';
+                $icons[] = '<i class="fas fa-phone-alt" title="DirectCall"></i>';
                 break;
             default:
-                $icon_class = 'fas fa-question-circle';
+                $icons[] = '<i class="fas fa-question-circle" title="Unknown"></i>';
                 break;
         }
+    }
 
-        if (!empty($icon_class)) {
-            echo '<div class="contact-method">';
-            echo '<i class="' . $icon_class . '" title="' . ucfirst($method) . '"></i>';
-            echo '<span>' . $primary_account . '</span>';
-            echo '</div>';
-        }
+    if (!empty($icons)) {
+        echo '<div class="contact-method">';
+        echo implode('', $icons); // Display all icons
+        echo '<span>' . $account . '</span>';
+        echo '</div>';
     }
 }
+
+// Display primary methods with their shared account
+generate_contact_methods($primary_account, $primary_methods);
 
 // Display additional methods with their shared account
-if (!empty($additional_account)) {
-    foreach ($additional_methods as $method) {
-        $method = trim($method);
-        $icon_class = '';
-        switch (strtolower($method)) {
-            case 'whatsapp':
-                $icon_class = 'fab fa-whatsapp';
-                break;
-            case 'telegram':
-                $icon_class = 'fab fa-telegram-plane';
-                break;
-            case 'sms':
-                $icon_class = 'fas fa-sms';
-                break;
-            case 'directcall':
-                $icon_class = 'fas fa-phone-alt';
-                break;
-            default:
-                $icon_class = 'fas fa-question-circle';
-                break;
-        }
-
-        if (!empty($icon_class)) {
-            echo '<div class="contact-method">';
-            echo '<i class="' . $icon_class . '" title="' . ucfirst($method) . '"></i>';
-            echo '<span>' . $additional_account . '</span>';
-            echo '</div>';
-        }
-    }
-}
+generate_contact_methods($additional_account, $additional_methods);
 ?>
         </div>
 
@@ -809,6 +787,26 @@ if (!empty($additional_account)) {
   <?php osc_run_hook('item_bottom'); ?>
 
   <script type="text/javascript">
+    function formatPhoneNumber(phoneNumber) {
+    // Check if the number is in the Ethiopian format
+    const ethiopianRegex1 = /^\+2519\d{8}$/; // +2519XXXXXXXX
+    const ethiopianRegex2 = /^09\d{8}$/; // 09XXXXXXXX
+
+    if (ethiopianRegex1.test(phoneNumber)) {
+        // Already in the correct format
+        return phoneNumber;
+    } else if (ethiopianRegex2.test(phoneNumber)) {
+        // Convert 09XXXXXXXX to +2519XXXXXXXX
+        return '+251' + phoneNumber.slice(1);
+    } else {
+        // Not an Ethiopian phone number, return as is
+        return phoneNumber;
+    }
+}
+document.querySelectorAll('.contact-method span').forEach(span => {
+    span.textContent = formatPhoneNumber(span.textContent);
+});
+
     $(document).ready(function(){
 
       // SHARE BUTTON
