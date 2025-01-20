@@ -429,7 +429,7 @@
                 <input type="checkbox" name="termsConditions" id="termsConditions" />
               </div>
               <!-- <div class="td-wrap d1 input-box terms-line">
-                <?php //_e('By clicking Submit, You agree our', 'epsilon'); ?> <a href="<?//php echo osc_base_url(); ?>index.php?page=page&id=33" target="_blank" ><?//php _e('Terms and Privacy policy', 'epsilon'); ?></a>
+                <?php //_e('By clicking Submit, You agree our', 'epsilon'); ?> <a href="<?//php echo osc_base_url(); ?>index.php?page=page&id=33" target="_blank" ><?php _e('Terms and Privacy policy', 'epsilon'); ?></a>
                 <span class="req">*</span>
               </div> -->
             </div>

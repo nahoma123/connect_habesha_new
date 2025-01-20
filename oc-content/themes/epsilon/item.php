@@ -20,19 +20,31 @@
       }
       .contact-method {
     display: flex;
+    width: fit-content; /* This will make the width fit the content */
     align-items: center;
     margin-bottom: 10px;
     font-size: 14px;
+    margin: 6px 0 2px 0;
+    font-weight: 600;
+        padding: 2px 8px;
+    border-radius: 8px;
+    background-color: rgba(1, 120, 214, 0.12);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    transition: 0.2s;
 }
 
 .contact-method i {
     margin-right: 10px;
     font-size: 18px;
-    color: #007bff; /* Icon color */
+    color: #0178d6; /* Icon color */
 }
 
 .contact-method span {
-    color: #333; /* Text color */
+    font-weight: 600;
+    color: #0178d6;
 }
   </style>
   <?php
@@ -87,6 +99,7 @@
     $email_data = eps_get_item_email();
     $user_phone_mobile_data = eps_get_phone(isset($item_user['s_phone_mobile']) ? $item_user['s_phone_mobile'] : '');
     $user_phone_land_data = eps_get_phone(isset($item_user['s_phone_land']) ? $item_user['s_phone_land'] : '');
+    $show_phone_on_profile = $item_user['show_on_profile'];
     // print_r($item_user);
     $has_cf = false;
     while(osc_has_item_meta()) {
@@ -606,14 +619,14 @@
                 <div class="address"><i class="fas fa-map-marked-alt"></i> <?php echo $item_user_location; ?></div>
               <?php } ?>
 
-              <?php if($user_phone_mobile_data['found']) { ?>
+              <?php if($user_phone_mobile_data['found'] && $show_phone_on_profile=="no" ) { ?>
                 <a class="phone-mobile phone <?php echo $user_phone_mobile_data['class']; ?>" title="<?php echo osc_esc_html($user_phone_mobile_data['title']); ?>" data-prefix="tel" href="<?php echo $user_phone_mobile_data['url']; ?>" data-part1="<?php echo osc_esc_html($user_phone_mobile_data['part1']); ?>" data-part2="<?php echo osc_esc_html($user_phone_mobile_data['part2']); ?>">
                   <i class="fas fa-phone-alt"></i>
                   <span><?php echo $user_phone_mobile_data['masked']; ?></span>
                 </a>
               <?php } ?>
 
-              <?php if($user_phone_land_data['found']) { ?>
+              <?php if($user_phone_land_data['found'] && $show_phone_on_profile=="no") { ?>
                 <a class="phone-land phone <?php echo $user_phone_land_data['class']; ?>" title="<?php echo osc_esc_html($user_phone_land_data['title']); ?>" data-prefix="tel" href="<?php echo $user_phone_land_data['url']; ?>" data-part1="<?php echo osc_esc_html($user_phone_land_data['part1']); ?>" data-part2="<?php echo osc_esc_html($user_phone_land_data['part2']); ?>">
                   <i class="fas fa-phone-alt"></i>
                   <span><?php echo $user_phone_land_data['masked']; ?></span>
@@ -657,7 +670,7 @@ function generate_contact_methods($account, $methods) {
     }
 
     if (!empty($icons)) {
-        echo '<div class="contact-method">';
+        echo '<div class="contact-method phone-mobile phone">';
         echo implode('', $icons); // Display all icons
         echo '<span>' . $account . '</span>';
         echo '</div>';
