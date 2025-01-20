@@ -1092,7 +1092,7 @@ class ItemForm extends Form {
         rules: {
           "title[<?php echo osc_current_user_locale(); ?>]": {
               required: true,
-              minlength: 5
+              minlength: 4
           },
           "description[<?php echo osc_current_user_locale(); ?>]": {
               required: true,
