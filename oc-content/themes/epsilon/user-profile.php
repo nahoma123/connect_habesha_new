@@ -83,7 +83,6 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
                 <?php } ?>
               </div>
 
-              <hr style="opacity:50%;"/>
               <div class="row hide-email">
                 <label for="email"><?php _e('E-mail', 'epsilon'); ?> <a href="#"
                     class="change-email"><?php _e('Edit', 'epsilon'); ?></a></label>
@@ -92,7 +91,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
               </div>
 
               <div class="row" style="margin-top:20px">
-                <label for="phoneMobile"><?php _e('Phone number', 'epsilon'); ?> <span class="req">*</span></label>
+                <label for="phoneMobile"><?php _e("Phone number (you'll receive a four-digit code)", 'epsilon'); ?> <span class="req">*</span></label>
                 <div class="input-box"><?php UserForm::mobile_text(osc_user()); ?></div>
               </div>
               <div class="radio-group">
@@ -115,6 +114,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
 </div>
 
 
+<label for="additionalAccountContainer" style="margin-top:10px;"><?php _e('Add your Telegram and WhatsApp numbers (optional).', 'epsilon'); ?></label>
 
               <!-- Primary Account Name Input -->
               <input type="text" id="accountName" name="primary_accounts" class="account-input" style="margin-top: 20px;"
@@ -150,6 +150,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
                   class="add-remove-button"><?php echo !empty($additionalAccounts) ? 'Remove Additional Account' : 'Add Additional Account'; ?></button>
               </div>
 
+
               <!-- Additional Account Container -->
               <div id="additionalAccountContainer"
                 style="display: <?php echo !empty($additionalAccounts) ? 'block' : 'none'; ?>;">
@@ -168,6 +169,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
                     <input type="checkbox" name="additional_methods[]" value="DirectCall" <?php echo in_array('DirectCall', $additionalMethods) ? 'checked' : ''; ?>> Direct call
                   </label>
                 </div>
+
 
                 <!-- Additional Account Name Input -->
                 <input type="text" id="additionalAccountName" name="additional_accounts" class="account-input"
@@ -599,7 +601,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
   </script>
   <style>
     .row.p1{
-      width: 110%;
+      width: 100%;
     }
     .hide-email {
   display: none;
@@ -686,29 +688,25 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
     }
 
 
-    /* Style for the checkbox container */
-    .checkbox-container {
-      display: flex;
-      gap: 1px;
-      /* Space between checkboxes */
-      margin-bottom: 5px;
-      /* Space below the checkboxes */
-      align-items: center;
-      /* Align checkboxes and labels vertically */
-    }
+/* Style for the checkbox container */
+.checkbox-container {
+  display: flex;
+  justify-content: space-between; /* Distribute space between labels */
+  margin-left: -5px;
+  margin-bottom: 5px;
+  align-items: center;
+}
 
-    /* Style for the checkbox labels */
-    .checkbox-container label {
-      font-size: 14px;
-      margin-right: 3px;
-      /* Smaller text size */
-      display: flex;
-      align-items: center;
-      /* Align checkbox and text properly */
-      gap: 5px;
-      margin-right: 3.5px !important;
-      /* Space between checkbox and text */
-    }
+/* Style for the checkbox labels */
+.checkbox-container label {
+  font-size: 14px;
+  /* margin-right: 11px !important; */
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  /* margin-right: 5px !important; */
+  /* margin-left: 3px !important; */
+}
 
     .checkbox-container input{
       margin-right:0px;
@@ -812,6 +810,14 @@ small em {
     padding-top:0.5px;
   }
       
+  #addRemoveButtonContainer button{
+    font-size: 13px !important;
+    font-family: "Comfortaa", sans-serif;
+  }
+
+  #s_name{
+    max-width: 100% !important;
+  }
 
   </style>
 
