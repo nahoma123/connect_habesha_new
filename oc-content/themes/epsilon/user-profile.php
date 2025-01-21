@@ -83,7 +83,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
                 <?php } ?>
               </div>
 
-
+              <hr style="opacity:50%;"/>
               <div class="row hide-email">
                 <label for="email"><?php _e('E-mail', 'epsilon'); ?> <a href="#"
                     class="change-email"><?php _e('Edit', 'epsilon'); ?></a></label>
@@ -205,6 +205,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
             <div id="user-loc" class="right-block navigator-fill-selects">
               <?php osc_run_hook('user_profile_sidebar'); ?>
 
+              
               <h2><?php _e('Location information', 'epsilon'); ?></h2>
 
               <?php if (eps_param('default_location') == 1) { ?>
@@ -597,6 +598,9 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
 });
   </script>
   <style>
+    .row.p1{
+      width: 110%;
+    }
     .hide-email {
   display: none;
 }
@@ -653,7 +657,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
       /* Space below the button */
       padding: 8px 16px;
       /* Padding for better proportions */
-      font-size: 14px;
+      font-size: 14px !important;
       /* Slightly larger font size */
       color: #fff;
       /* White text */
@@ -696,11 +700,13 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
     /* Style for the checkbox labels */
     .checkbox-container label {
       font-size: 14px;
+      margin-right: 3px;
       /* Smaller text size */
       display: flex;
       align-items: center;
       /* Align checkbox and text properly */
       gap: 5px;
+      margin-right: 3.5px !important;
       /* Space between checkbox and text */
     }
 
@@ -798,6 +804,7 @@ small em {
   .checkbox-container span{
     margin-left: -4px;
     margin-right: 4px;
+    font-size: 12.3px;
         display: inline-flex; /* Enable flexbox for the span */
     align-items: center; /* Vertically center the text inside the span */
     justify-content: center; /* Horizontally center the text (in case span width changes) */
