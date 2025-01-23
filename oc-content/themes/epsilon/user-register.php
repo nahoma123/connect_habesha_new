@@ -66,9 +66,9 @@
         <?php /*<div class="row nm">
 <label for="name"><?php _e('Verification Method', 'epsilon'); ?> <span class="req">*</span></label>
 <select name="s_method" id="s_method" >
-    <option value="">Select verification method</option>
-    <option value="1">Phone</option>
-    <option value="2">Email</option>
+<option value="">Select verification method</option>
+<option value="1">Phone</option>
+<option value="2">Email</option>
 </select>
 </div>*/ ?>
 
@@ -83,68 +83,56 @@
           <div class="input-box"><?php UserForm::mobile_text(osc_user()); ?></div>
           <div
             style="text-align:left;font-style:italic;font-size:12px;margin-top:-13px;margin-bottom:15px;color:#0178d6;">
-            Email registration will be available soon.</div>
+            * Your phone number is private. You can change this later in your settings.</div>
         </div>
+        
+        <div id="communicationMethodContainer" style="display: none;">
+          <label id="socialNetworkLabel" for="additionalAccountContainer"
+            style="margin-top: 12px;"><?php _e('Social Networking numbers', 'epsilon'); ?></label>
 
-        <div class="row p1">
-          <div class="radio-group">
-            <p>Show on profile?</p>
+          <!-- Account Name Input -->
+          <input type="text" id="accountName" name="primary_accounts" class="account-input"
+            placeholder="Ex:- +251 911002244, @Merry_26">
+          <!-- Communication Method Selection -->
+          <div class="checkbox-container">
             <label>
-              <input type="radio" name="show_on_profile" value="yes">
-              <span class="custom-radio"></span> Yes (visible to all registered users)
+              <input type="checkbox" name="primary_methods[]" value="Telegram"> <span>Telegram</span>
             </label>
             <label>
-              <input type="radio" name="show_on_profile" value="no" checked>
-              <span class="custom-radio"></span> No (not visible to anyone)
+              <input type="checkbox" name="primary_methods[]" value="WhatsApp"> <span>WhatsApp</span>
             </label>
-            <small>* You can change this later in your settings.</small>
+            <label>
+              <input type="checkbox" name="primary_methods[]" value="SMS"> <span>SMS (text)</span>
+            </label>
+            <label>
+              <input type="checkbox" name="primary_methods[]" value="DirectCall"> <span> Direct call</span>
+            </label>
+          </div>
+
+
+          <!-- Additional Account Container -->
+          <div id="additionalAccountContainer">
+            <!-- Additional Account Name Input -->
+            <input type="text" id="additionalAccountName" name="additional_accounts" class="account-input"
+              placeholder="Ex:- +251 911002244, @Merry_26">
+
+            <!-- Communication Method Selection for Additional Account -->
+            <div class="checkbox-container">
+              <label>
+                <input type="checkbox" name="additional_methods[]" value="Telegram"> <span>Telegram</span>
+              </label>
+              <label>
+                <input type="checkbox" name="additional_methods[]" value="WhatsApp"> <span>WhatsApp</span>
+              </label>
+              <label>
+                <input type="checkbox" name="additional_methods[]" value="SMS"> <span>SMS (text)</span>
+              </label>
+              <label>
+                <input type="checkbox" name="additional_methods[]" value="DirectCall"> <span>Direct call</span>
+              </label>
+            </div>
           </div>
         </div>
-
-        
-        <!-- Communication Method Selection -->
-        <div class="checkbox-container">
-          <label>
-            <input type="checkbox" name="primary_methods[]" value="Telegram"> Telegram
-          </label>
-          <label>
-            <input type="checkbox" name="primary_methods[]" value="WhatsApp"> WhatsApp
-          </label>
-          <label>
-            <input type="checkbox" name="primary_methods[]" value="SMS"> SMS (text)
-          </label>
-          <label>
-            <input type="checkbox" name="primary_methods[]" value="DirectCall"> Direct call
-          </label>
-        </div>
-
-<!-- Account Name Input -->
-<input type="text" id="accountName" name="primary_accounts" class="account-input" placeholder="Ex:- +251 911002244, @Merry_26" ><br><br>
-
-<!-- Add/Remove Button Container -->
-<div id="addRemoveButtonContainer"></div>
-
-<!-- Additional Account Container -->
-<div id="additionalAccountContainer">
-    <!-- Communication Method Selection for Additional Account -->
-    <div class="checkbox-container">
-        <label>
-            <input type="checkbox" name="additional_methods[]" value="Telegram"> Telegram
-        </label>
-        <label>
-            <input type="checkbox" name="additional_methods[]" value="WhatsApp"> WhatsApp
-        </label>
-        <label>
-            <input type="checkbox" name="additional_methods[]" value="SMS"> SMS (text)
-        </label>
-        <label>
-            <input type="checkbox" name="additional_methods[]" value="DirectCall"> Direct call
-        </label>
-    </div>
-
-    <!-- Additional Account Name Input -->
-    <input type="text" id="additionalAccountName" name="additional_accounts" class="account-input" placeholder="Ex:- +251 911002244, @Merry_26"><br><br>
-</div>
 
         <div class="row p1">
           <?php /*<label for="password"><?php _e('Password', 'epsilon'); ?> <span class="req">*</span></label>*/ ?>
@@ -206,18 +194,6 @@
         return button;
       };
 
-      // Function to toggle additional account field
-      const toggleAdditionalAccount = () => {
-        const isVisible = additionalAccountContainer.style.display === 'block';
-        additionalAccountContainer.style.display = isVisible ? 'none' : 'block';
-        addRemoveButtonContainer.querySelector('button').textContent = isVisible ? 'Add Additional Account' : 'Remove Additional Account';
-
-        // Reset additional account field if hiding it
-        if (isVisible) {
-          additionalAccountInput.value = ''; // Reset input field
-          additionalCheckboxes.forEach(checkbox => (checkbox.checked = false)); // Uncheck all checkboxes
-        }
-      };
 
       // Function to handle input changes in the first account field
       const handleAccountInput = () => {
@@ -312,61 +288,79 @@
       });
 
       document.addEventListener('DOMContentLoaded', function () {
-    const phoneInput = document.querySelector('#s_phone_mobile'); // Replace 'email' with your input field name or ID
+        const phoneInput = document.querySelector('#s_phone_mobile'); // Replace 'email' with your input field name or ID
 
-    if (phoneInput) {
-        phoneInput.addEventListener('input', function () {
+        if (phoneInput) {
+          phoneInput.addEventListener('input', function () {
             validateAndNormalizePhone(phoneInput);
-        });
+          });
 
-        phoneInput.addEventListener('blur', function () {
+          phoneInput.addEventListener('blur', function () {
             validateAndNormalizePhone(phoneInput, true); // Final validation on blur
-        });
+          });
 
-        // Ensure the space is removed before form submission
-        phoneInput.form.addEventListener('submit', function (e) {
+          // Ensure the space is removed before form submission
+          phoneInput.form.addEventListener('submit', function (e) {
             phoneInput.value = phoneInput.value.replace(/\s/g, ''); // Remove all spaces
-        });
-    }
-
-    function validateAndNormalizePhone(input, isFinalValidation = false) {
-        let phoneValue = input.value.trim();
-
-        // Remove all spaces and invalid characters (only allow digits and "+")
-        phoneValue = phoneValue.replace(/[^+\d]/g, '');
-
-        // If the number doesn't start with "+", consider it invalid
-        if (!phoneValue.startsWith('+')) {
-            input.value = ''; // Reset the input or set to a default value
-            return;
+          });
         }
 
-        // Extract the country code
-        const countryCode = phoneValue.substring(0, 4); // First 4 characters (e.g., "+251")
+        function validateAndNormalizePhone(input, isFinalValidation = false) {
+          let phoneValue = input.value.trim();
 
-        if (countryCode === '+251') {
+          // Remove all spaces and invalid characters (only allow digits and "+")
+          phoneValue = phoneValue.replace(/[^+\d]/g, '');
+
+          // If the number doesn't start with "+", consider it invalid
+          if (!phoneValue.startsWith('+')) {
+            input.value = ''; // Reset the input or set to a default value
+            return;
+          }
+
+          // Extract the country code
+          const countryCode = phoneValue.substring(0, 4); // First 4 characters (e.g., "+251")
+
+          if (countryCode === '+251') {
             // Handle Ethiopian numbers
             const localNumber = phoneValue.substring(4).replace(/[^0-9]/g, ''); // Extract local part after "+251"
 
             if (!isFinalValidation) {
-                // Allow partial typing for Ethiopian numbers
-                input.value = '+251 ' + localNumber.substring(0, 9); // Add a space after the country code
-                return;
+              // Allow partial typing for Ethiopian numbers
+              input.value = '+251 ' + localNumber.substring(0, 9); // Add a space after the country code
+              return;
             }
 
             // Final validation: Ensure the local part is exactly 9 digits and starts with "9"
             if (localNumber.length === 9 && localNumber.startsWith('9')) {
-                input.value = '+251 ' + localNumber; // Add a space after the country code
+              input.value = '+251 ' + localNumber; // Add a space after the country code
             } else {
-                // Invalid Ethiopian number: Reset or provide feedback
-                input.value = '+251';
+              // Invalid Ethiopian number: Reset or provide feedback
+              input.value = '+251';
             }
-        } else {
+          } else {
             // For other international numbers, leave unchanged
             input.value = phoneValue;
+          }
         }
-    }
-});
+      });
+      document.addEventListener('DOMContentLoaded', function () {
+        const phoneInput = document.querySelector('input[name="s_phone_mobile"]');
+        const communicationMethodContainer = document.getElementById('communicationMethodContainer');
+
+        if (phoneInput) {
+          phoneInput.addEventListener('input', function () {
+            const value = phoneInput.value.trim();
+
+            // Reveal the container if the phone number field is not empty
+            if (value.length > 0) {
+              communicationMethodContainer.style.display = 'block';
+            } else {
+              communicationMethodContainer.style.display = 'none';
+            }
+          });
+        }
+      });
+
     </script>
     <style>
       /* Style for the Add/Remove button */
@@ -406,43 +400,91 @@
       }
 
 
+      #additionalAccountName,
+      #AccountName {
+        margin-top: 10px;
+        ;
+      }
+
+      .checkbox-container {
+        margin-top: 8px;
+        display: flex;
+        flex-direction: row;
+        /* Arrange items in a row */
+        align-items: center;
+        /* Vertically center items */
+        gap: 0;
+        padding-left: 5px;
+        margin-left: 3px;
+        /* Ensure no gap between labels */
+      }
+
+
+      .checkbox-container label {
+        display: flex;
+        align-items: center;
+        /* Vertically center checkbox and text */
+        margin: 0;
+        /* Remove any default margins */
+        font-size: 12px;
+        /* Reduced text size */
+      }
+
+      .checkbox-container input[type="checkbox"] {
+        margin: 0 0px 0 0;
+        /* Minimal space between checkbox and text */
+      }
+
+      .checkbox-container input {
+        margin-right: 0px;
+      }
+
+      .checkbox-container span {
+        margin-left: -4px;
+        margin-right: 4px;
+        font-size: 12.3px;
+        display: inline-flex;
+        /* Enable flexbox for the span */
+        align-items: center;
+        /* Vertically center the text inside the span */
+        justify-content: center;
+        /* Horizontally center the text (in case span width changes) */
+        line-height: 1;
+        /* Ensure text is not stretched */
+        padding-top: 0.5px;
+      }
+
+
       /* Style for the checkbox container */
       .checkbox-container {
         display: flex;
-        gap: 1px;
-        /* Space between checkboxes */
+        justify-content: space-between;
+        /* Distribute space between labels */
+        margin-left: -5px;
         margin-bottom: 5px;
-        /* Space below the checkboxes */
         align-items: center;
-        /* Align checkboxes and labels vertically */
       }
 
       /* Style for the checkbox labels */
       .checkbox-container label {
         font-size: 14px;
-        /* Smaller text size */
+        /* margin-right: 11px !important; */
         display: flex;
         align-items: center;
-        /* Align checkbox and text properly */
         gap: 5px;
-        /* Space between checkbox and text */
+        /* margin-right: 5px !important; */
+        /* margin-left: 3px !important; */
       }
 
-      /* Style for the input field */
-      .account-input {
-        width: 300px;
-        /* Adjust width as needed */
-        padding: 8px;
+      .checkbox-container input {
+        margin-right: 0px;
+        height: 9px !important;
+        width: 9px !important;
+      }
+
+      #communicationMethodContainer {
         margin-top: 10px;
-        /* Space above the input */
-      }
-
-      /* Style to make checkboxes smaller */
-      .checkbox-container input[type="checkbox"] {
-        width: 14px;
-        /* Adjust width as needed */
-        height: 14px;
-        /* Adjust height as needed */
+        margin-bottom: 20px;
       }
 
       /* Style for the Add/Remove button */
@@ -455,7 +497,6 @@
 
       /* Hide the additional account field by default */
       #additionalAccountContainer {
-        display: none;
         margin-top: 10px;
       }
 
@@ -512,6 +553,11 @@
       .radio-group small {
         font-size: 12px;
         color: #666;
+      }
+
+      #socialNetworkLabel {
+        margin-bottom: 10px;
+        color: #0178d6;
       }
     </style>
 </body>

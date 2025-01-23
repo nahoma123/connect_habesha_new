@@ -35,7 +35,7 @@
 }
 
 .contact-method i {
-    margin-right: 10px;
+    /* margin-right: 10px; */
     font-size: 18px;
     color: #0178d6; /* Icon color */
 }
@@ -43,6 +43,10 @@
 .contact-method span {
     font-weight: 600;
     color: #0178d6;
+    margin-right: 1px;
+}
+.phone-mobile span{
+    margin-right: 10px;
 }
   </style>
   <?php
@@ -619,15 +623,15 @@
 
               <?php if($user_phone_mobile_data['found'] && $show_phone_on_profile=="no" ) { ?>
                 <a class="phone-mobile phone <?php echo $user_phone_mobile_data['class']; ?>" title="<?php echo osc_esc_html($user_phone_mobile_data['title']); ?>" data-prefix="tel" href="<?php echo $user_phone_mobile_data['url']; ?>" data-part1="<?php echo osc_esc_html($user_phone_mobile_data['part1']); ?>" data-part2="<?php echo osc_esc_html($user_phone_mobile_data['part2']); ?>">
-                  <i class="fas fa-phone-alt"></i>
                   <span><?php echo $user_phone_mobile_data['masked']; ?></span>
+                  <i class="fas fa-phone-alt"></i>
                 </a>
               <?php } ?>
 
               <?php if($user_phone_land_data['found'] && $show_phone_on_profile=="no") { ?>
                 <a class="phone-land phone <?php echo $user_phone_land_data['class']; ?>" title="<?php echo osc_esc_html($user_phone_land_data['title']); ?>" data-prefix="tel" href="<?php echo $user_phone_land_data['url']; ?>" data-part1="<?php echo osc_esc_html($user_phone_land_data['part1']); ?>" data-part2="<?php echo osc_esc_html($user_phone_land_data['part2']); ?>">
-                  <i class="fas fa-phone-alt"></i>
                   <span><?php echo $user_phone_land_data['masked']; ?></span>
+                  <i class="fas fa-phone-alt"></i>
                 </a>
               <?php } ?>
             </div>
@@ -669,8 +673,8 @@ function generate_contact_methods($account, $methods) {
 
     if (!empty($icons)) {
         echo '<div class="contact-method phone-mobile phone">';
-        echo implode('', $icons); // Display all icons
         echo '<span>' . $account . '</span>';
+        echo implode('', $icons); // Display all icons
         echo '</div>';
     }
 }
@@ -798,24 +802,31 @@ generate_contact_methods($additional_account, $additional_methods);
   <?php osc_run_hook('item_bottom'); ?>
 
   <script type="text/javascript">
-    function formatPhoneNumber(phoneNumber) {
+function formatPhoneNumber(phoneNumber) {
     // Check if the number is in the Ethiopian format
     const ethiopianRegex1 = /^\+2519\d{8}$/; // +2519XXXXXXXX
     const ethiopianRegex2 = /^09\d{8}$/; // 09XXXXXXXX
 
     if (ethiopianRegex1.test(phoneNumber)) {
-        // Already in the correct format
-        return phoneNumber;
+        // Already in the correct format, just add a space for readability
+        return phoneNumber.slice(0, 4) + ' ' + phoneNumber.slice(4);
     } else if (ethiopianRegex2.test(phoneNumber)) {
-        // Convert 09XXXXXXXX to +2519XXXXXXXX
-        return '+251' + phoneNumber.slice(1);
+        // Convert 09XXXXXXXX to +251 9XXXXXXXX
+        return '+251 ' + phoneNumber.slice(1);
     } else {
         // Not an Ethiopian phone number, return as is
-        return phoneNumber;
+        return phoneNumber.slice(0, 4) + ' ' + phoneNumber.slice(4);
+
     }
 }
-document.querySelectorAll('.contact-method span').forEach(span => {
-    span.textContent = formatPhoneNumber(span.textContent);
+
+
+document.querySelectorAll('.contact-method span, .phone-mobile span, .phone-land span').forEach(span => {
+    const originalValue = span.textContent.trim();
+    const formattedValue = formatPhoneNumber(originalValue);
+    console.log('Before:', originalValue);
+    console.log('After:', formattedValue);
+    span.textContent = formattedValue;
 });
 
     $(document).ready(function(){
