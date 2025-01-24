@@ -152,9 +152,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
                 <button type="button"
                   class="add-remove-button"><?php echo !empty($additionalAccounts) ? 'Remove Additional Account' : 'Add Additional Account'; ?></button>
               </div> -->
-            </div>
-
-
+              
             <!-- Additional Account Container -->
             <div id="additionalAccountContainer" style="display: block;">
               <!-- Additional Account Name Input -->
@@ -206,6 +204,9 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
                 <?php UserForm::multilanguage_info($locales, osc_user()); ?>
               </div> -->
             </div>
+            </div>
+
+
 
             <div id="user-loc" class="right-block navigator-fill-selects">
               <?php osc_run_hook('user_profile_sidebar'); ?>
@@ -237,48 +238,52 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
                   </a>
                 </div>
               <?php } ?>
-
               <?php if ($location_type == 0) { ?>
-                <div class="row">
-                  <label for="country"><?php _e('Country', 'epsilon'); ?></label>
-                  <div class="input-box"><?php UserForm::country_select(osc_get_countries(), osc_user()); ?></div>
-                </div>
+  <div class="row">
+    <label for="country"><?php _e('Country', 'epsilon'); ?></label>
+    <div class="input-box">
+      <?php 
+      // Disable the country select dropdown
+      $country_select = UserForm::country_select(osc_get_countries(), osc_user(), true);
+      $country_select = str_replace('<select', '<select disabled', $country_select);
+      echo $country_select;
+      ?>
+      <!-- Hidden input to submit the country value -->
+      <input type="hidden" name="countryId" value="<?php echo osc_esc_html($user['fk_c_country_code']); ?>" />
+    </div>
+  </div>
 
-                <div class="row">
-                  <label for="region"><?php _e('Region', 'epsilon'); ?></label>
-                  <div class="input-box"><?php UserForm::region_select(osc_get_regions(), osc_user()); ?></div>
-                </div>
+  <div class="row">
+    <label for="region"><?php _e('Region', 'epsilon'); ?></label>
+    <div class="input-box"><?php UserForm::region_select(osc_get_regions(), osc_user()); ?></div>
+  </div>
 
-                <div class="row">
-                  <label for="city"><?php _e('City', 'epsilon'); ?></label>
-                  <div class="input-box"><?php UserForm::city_select(osc_get_cities(), osc_user()); ?></div>
-                </div>
+  <div class="row">
+    <label for="city"><?php _e('City', 'epsilon'); ?></label>
+    <div class="input-box"><?php UserForm::city_select(osc_get_cities(), osc_user()); ?></div>
+  </div>
 
-              <?php } else if ($location_type == 1) { ?>
-                  <input type="hidden" name="countryId" id="sCountry"
-                    value="<?php echo osc_esc_html($user['fk_c_country_code']); ?>" />
-                  <input type="hidden" name="regionId" id="sRegion"
-                    value="<?php echo osc_esc_html($user['fk_i_region_id']); ?>" />
-                  <input type="hidden" name="cityId" id="sCity"
-                    value="<?php echo osc_esc_html($user['fk_i_city_id']); ?>" />
+<?php } else if ($location_type == 1) { ?>
+  <input type="hidden" name="countryId" id="sCountry" value="<?php echo osc_esc_html($user['fk_c_country_code']); ?>" />
+  <input type="hidden" name="regionId" id="sRegion" value="<?php echo osc_esc_html($user['fk_i_region_id']); ?>" />
+  <input type="hidden" name="cityId" id="sCity" value="<?php echo osc_esc_html($user['fk_i_city_id']); ?>" />
 
-                  <div class="row">
-                    <label for="sLocation" class="auto-width"><?php _e('Location', 'epsilon'); ?></label>
+  <div class="row">
+    <label for="sLocation" class="auto-width"><?php _e('Location', 'epsilon'); ?></label>
+    <div class="input-box picker location only-search">
+      <input name="sLocation" type="text" class="location-pick" id="sLocation"
+        placeholder="<?php echo osc_esc_html(__('Start typing region, city...', 'epsilon')); ?>"
+        value="<?php echo osc_esc_html($location_text); ?>" autocomplete="off" />
+      <i class="clean fas fa-times-circle"></i>
+      <div class="results"></div>
+    </div>
+  </div>
+<?php } ?>
 
-                    <div class="input-box picker location only-search">
-                      <input name="sLocation" type="text" class="location-pick" id="sLocation"
-                        placeholder="<?php echo osc_esc_html(__('Start typing region, city...', 'epsilon')); ?>"
-                        value="<?php echo osc_esc_html($location_text); ?>" autocomplete="off" />
-                      <i class="clean fas fa-times-circle"></i>
-                      <div class="results"></div>
-                    </div>
-                  </div>
-              <?php } ?>
-
-              <div class="row">
-                <label for="cityArea"><?php _e('City Area', 'epsilon'); ?></label>
-                <div class="input-box"><?php UserForm::city_area_text(osc_user()); ?></div>
-              </div>
+<div class="row">
+  <label for="cityArea"><?php _e('City Area', 'epsilon'); ?></label>
+  <div class="input-box"><?php UserForm::city_area_text(osc_user()); ?></div>
+</div>
 
               <!-- <div class="row">
                 <label for="address"><?php _e('Address', 'epsilon'); ?></label>
@@ -598,29 +603,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
       margin-bottom: 10px;
     }
 
-    /* Style for the Add/Remove button */
-    .add-remove-button {
-      margin-top: 10px;
-      /* Space above the button */
-      margin-bottom: 20px;
-      /* Space below the button */
-      padding: 8px 16px;
-      /* Padding for better proportions */
-      font-size: 14px !important;
-      /* Slightly larger font size */
-      color: #fff;
-      /* White text */
-      background-color: #007bff;
-      /* Blue background */
-      border: none;
-      /* Remove default border */
-      border-radius: 5px;
-      /* Rounded corners */
-      cursor: pointer;
-      /* Pointer cursor on hover */
-      transition: background-color 0.3s ease;
-      /* Smooth hover effect */
-    }
+
 
     /* Hover effect for the button */
     .add-remove-button:hover {
@@ -796,6 +779,10 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
     #socialNetworkLabel{
       color: #0178d6;
     }
+
+
+    /* Style for the additional account field */
+    
   </style>
 
   <?php

@@ -41,6 +41,10 @@ if ($show_phone == 'no') {
 }
 
 $user_phone_land_data = eps_get_phone($user['s_phone_land']);
+$user_phone_mobile_data = eps_get_phone(isset($user['s_phone_mobile']) ? $user['s_phone_mobile'] : '');
+$user_phone_land_data = eps_get_phone(isset($user['s_phone_land']) ? $user['s_phone_land'] : '');
+$show_phone_on_profile = $user['show_on_profile'];
+
 ?>
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -111,28 +115,70 @@ $user_phone_land_data = eps_get_phone($user['s_phone_land']);
             <div class="address"><i class="fas fa-map-marked-alt"></i> <?php echo $user_location; ?></div>
           <?php } ?>
 
-          <?php if ($user_phone_mobile_data['found']) { ?>
-            <a class="phone-mobile phone <?php echo $user_phone_mobile_data['class']; ?>"
-              title="<?php echo osc_esc_html($user_phone_mobile_data['title']); ?>" data-prefix="tel"
-              href="<?php echo $user_phone_mobile_data['url']; ?>"
-              data-part1="<?php echo osc_esc_html($user_phone_mobile_data['part1']); ?>"
-              data-part2="<?php echo osc_esc_html($user_phone_mobile_data['part2']); ?>">
-              <i class="fas fa-phone-alt"></i>
-              <span><?php echo $user_phone_mobile_data['masked']; ?></span>
-            </a>
-          <?php } ?>
+          <?php if($user_phone_mobile_data['found'] && $show_phone_on_profile=="no" ) { ?>
+                <a class="phone-mobile phone <?php echo $user_phone_mobile_data['class']; ?>" title="<?php echo osc_esc_html($user_phone_mobile_data['title']); ?>" data-prefix="tel" href="<?php echo $user_phone_mobile_data['url']; ?>" data-part1="<?php echo osc_esc_html($user_phone_mobile_data['part1']); ?>" data-part2="<?php echo osc_esc_html($user_phone_mobile_data['part2']); ?>">
+                  <span><?php echo $user_phone_mobile_data['masked']; ?></span>
+                  <i class="fas fa-phone-alt"></i>
+                </a>
+              <?php } ?>
 
-          <?php if ($user_phone_land_data['found']) { ?>
-            <a class="phone-land phone <?php echo $user_phone_land_data['class']; ?>"
-              title="<?php echo osc_esc_html($user_phone_land_data['title']); ?>" data-prefix="tel"
-              href="<?php echo $user_phone_land_data['url']; ?>"
-              data-part1="<?php echo osc_esc_html($user_phone_land_data['part1']); ?>"
-              data-part2="<?php echo osc_esc_html($user_phone_land_data['part2']); ?>">
-              <i class="fas fa-phone-alt"></i>
-              <span><?php echo $user_phone_land_data['masked']; ?></span>
-            </a>
-          <?php } ?>
+              <?php if($user_phone_land_data['found'] && $show_phone_on_profile=="no") { ?>
+                <a class="phone-land phone <?php echo $user_phone_land_data['class']; ?>" title="<?php echo osc_esc_html($user_phone_land_data['title']); ?>" data-prefix="tel" href="<?php echo $user_phone_land_data['url']; ?>" data-part1="<?php echo osc_esc_html($user_phone_land_data['part1']); ?>" data-part2="<?php echo osc_esc_html($user_phone_land_data['part2']); ?>">
+                  <span><?php echo $user_phone_land_data['masked']; ?></span>
+                  <i class="fas fa-phone-alt"></i>
+                </a>
+              <?php } ?>
         </div>
+
+        <?php
+// Parse primary and additional methods/accounts
+$primary_methods = !empty($user['primary_methods']) ? explode(',', $user['primary_methods']) : [];
+$primary_account = !empty($user['primary_accounts']) ? trim($user['primary_accounts']) : '';
+$additional_methods = !empty($user['additional_methods']) ? explode(',', $user['additional_methods']) : [];
+$additional_account = !empty($user['additional_accounts']) ? trim($user['additional_accounts']) : '';
+
+// Function to generate icons for a given account and methods
+function generate_contact_methods($account, $methods) {
+    if (empty($account)) {
+        return;
+    }
+
+    $icons = [];
+    foreach ($methods as $method) {
+        $method = trim($method);
+        switch (strtolower($method)) {
+            case 'whatsapp':
+                $icons[] = '<i class="icon-spacing fab fa-whatsapp" title="WhatsApp"></i>';
+                break;
+            case 'telegram':
+                $icons[] = '<i class="icon-spacing fab fa-telegram-plane" title="Telegram"></i>';
+                break;
+            case 'sms':
+                $icons[] = '<i class="icon-spacing fas fa-sms" title="SMS"></i>';
+                break;
+            case 'directcall':
+                $icons[] = '<i class="icon-spacing fas fa-phone-alt" title="DirectCall"></i>';
+                break;
+            default:
+                $icons[] = '<i class="icon-spacing fas fa-question-circle" title="Unknown"></i>';
+                break;
+        }
+    }
+
+    if (!empty($icons)) {
+        echo '<div class="contact-method phone-mobile phone">';
+        echo '<span>' . $account . '</span>';
+        echo implode('', $icons); // Display all icons
+        echo '</div>';
+    }
+}
+
+// Display primary methods with their shared account
+generate_contact_methods($primary_account, $primary_methods);
+
+// Display additional methods with their shared account
+generate_contact_methods($additional_account, $additional_methods);
+?>
       </div>
 
       <?php if (getBoolPreference('item_contact_form_disabled') != 1) { ?>
@@ -218,6 +264,90 @@ $user_phone_land_data = eps_get_phone($user['s_phone_land']);
   </div>
 
   <?php osc_current_web_theme_path('footer.php'); ?>
+  <script>
+    function formatPhoneNumber(phoneNumber) {
+    // Check if the number is in the Ethiopian format
+    const ethiopianRegex1 = /^\+2519\d{8}$/; // +2519XXXXXXXX
+    const ethiopianRegex2 = /^09\d{8}$/; // 09XXXXXXXX
+
+    if (ethiopianRegex1.test(phoneNumber)) {
+        // Already in the correct format, just add a space for readability
+        return phoneNumber.slice(0, 4) + ' ' + phoneNumber.slice(4);
+    } else if (ethiopianRegex2.test(phoneNumber)) {
+        // Convert 09XXXXXXXX to +251 9XXXXXXXX
+        return '+251 ' + phoneNumber.slice(1);
+    } else {
+        // Not an Ethiopian phone number, return as is
+        return phoneNumber.slice(0, 4) + ' ' + phoneNumber.slice(4);
+
+    }
+}
+document.querySelectorAll('.contact-method span, .phone-mobile span, .phone-land span').forEach(span => {
+    const originalValue = span.textContent.trim();
+    const formattedValue = formatPhoneNumber(originalValue);
+    console.log('Before:', originalValue);
+    console.log('After:', formattedValue);
+    span.textContent = formattedValue;
+});
+
+
+  </script>
+  <style>
+    /* Style for the additional account field */
+    @media screen and (max-width: 767px) {
+    body .oc-chat.oc-closed {
+        bottom: 55px !important; /* Adjust as needed */
+        width: 46px;
+        height: 46px;
+        min-height: 46px;
+    }
+}
+
+.icon-spacing {
+    margin-right: 3px;
+}/* 
+      .oc-chat-button {
+        margin-right: 0 !important;
+      } */
+      .contact-method {
+    display: flex;
+    width: fit-content; /* This will make the width fit the content */
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+    margin: 6px 0 2px 0;
+    font-weight: 600;
+        padding: 2px 8px;
+    border-radius: 8px;
+    background-color: rgba(1, 120, 214, 0.12);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    transition: 0.2s;
+}
+
+.contact-method i {
+    /* margin-right: 10px; */
+    font-size: 18px;
+    color: #0178d6; /* Icon color */
+}
+
+.contact-method span {
+    font-weight: 600;
+    color: #0178d6;
+    margin-right: 1px;
+}
+.phone-mobile span{
+    margin-right: 5px;
+}
+
+.contact-method span{
+  font-family: "Comfortaa", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+    </style>
 </body>
 
 </html>

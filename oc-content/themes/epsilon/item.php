@@ -12,7 +12,10 @@
         min-height: 46px;
     }
 }
-/* 
+
+.icon-spacing {
+    margin-right: 3px;
+}/* 
       .oc-chat-button {
         margin-right: 0 !important;
       } */
@@ -44,10 +47,14 @@
     font-weight: 600;
     color: #0178d6;
     margin-right: 1px;
+    font-family: "Comfortaa", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
 }
 .phone-mobile span{
-    margin-right: 10px;
+    margin-right: 5px;
 }
+
   </style>
   <?php
     $itemviewer = (Params::getParam('itemviewer') == 1 ? 1 : 0);
@@ -654,19 +661,19 @@ function generate_contact_methods($account, $methods) {
         $method = trim($method);
         switch (strtolower($method)) {
             case 'whatsapp':
-                $icons[] = '<i class="fab fa-whatsapp" title="WhatsApp"></i>';
+                $icons[] = '<i class="icon-spacing fab fa-whatsapp" title="WhatsApp"></i>';
                 break;
             case 'telegram':
-                $icons[] = '<i class="fab fa-telegram-plane" title="Telegram"></i>';
+                $icons[] = '<i class="icon-spacing fab fa-telegram-plane" title="Telegram"></i>';
                 break;
             case 'sms':
-                $icons[] = '<i class="fas fa-sms" title="SMS"></i>';
+                $icons[] = '<i class="icon-spacing fas fa-sms" title="SMS"></i>';
                 break;
             case 'directcall':
-                $icons[] = '<i class="fas fa-phone-alt" title="DirectCall"></i>';
+                $icons[] = '<i class="icon-spacing fas fa-phone-alt" title="DirectCall"></i>';
                 break;
             default:
-                $icons[] = '<i class="fas fa-question-circle" title="Unknown"></i>';
+                $icons[] = '<i class="icon-spacing fas fa-question-circle" title="Unknown"></i>';
                 break;
         }
     }
