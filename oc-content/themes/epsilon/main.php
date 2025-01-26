@@ -1,6 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="<?php echo eps_language_dir(); ?>" lang="<?php echo str_replace('_', '-', osc_current_user_locale()) ; ?>">
 <head>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
+
   <?php osc_current_web_theme_path('head.php') ; ?>
 </head>
 
@@ -113,35 +116,59 @@
     width: 100%;
     height: auto;
   }
-  @media (max-width: 1200px) {
-    .city-box {
-      flex: 1 1 calc(25% - 10px);
-      max-width: calc(25% - 10px);
-    }
-  }
-  @media (max-width: 992px) {
-    .city-box {
-      flex: 1 1 calc(33.33% - 10px);
-      max-width: calc(33.33% - 10px);
-    }
-  }
-  @media (max-width: 768px) {
-    .city-box {
-      flex: 1 1 calc(50% - 10px);
-      max-width: calc(50% - 10px);
-    }
-  }
-  @media (max-width: 480px) {
-    .city-box {
-      flex: 1 1 100%;
-      max-width: 100%;
-    }
-  }
+       /* Mobile Version */
+       #mobile-version {
+            display: none;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        #mobile-slider {
+            width: 100%;
+        }
+
+        #mobile-slider .city-box_mobile {
+            text-align: center;
+        }
+
+        /* Responsive Behavior */
+        @media (max-width: 768px) {
+            #desktop-version {
+                display: none;
+            }
+
+            #mobile-version {
+                display: block;
+            }
+        }
+
+        .city_icons_mobile {
+            width: 150px;
+            height: 100px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .city-container_mobile {
+            display: flex;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .city-box_mobile {
+            flex: 0 0 auto;
+            text-align: center;
+            cursor: pointer;
+        }
+
+
+
 </style>
       </div>
     </div>
          
-    <div id="home-cat" class="city-container">
+    <!-- Desktop Version -->
+<div id="desktop-version">
+<div id="home-cat" class="city-container">
           <?php 
             osc_goto_first_category(); 
             $new_categories = explode(',', eps_param('categories_new'));
@@ -182,6 +209,44 @@
             <h3><span><?php _e('Arba Minch', 'epsilon'); ?></span></h3>
           </a>
         </div>
+      </div> 
+
+      <!-- Mobile Version -->
+<div id="mobile-version">
+    <div id="mobile-slider">
+        <a href="https://example.com/addis-ababa" class="city-box_mobile">
+            <div>
+                <img class="city_icons_mobile" src="https://connecthabesha.net/oc-content/themes/epsilon/images/ababa_addis.jpeg" />
+            </div>
+            <h3>Addis Ababa</h3>
+        </a>
+        <a href="https://example.com/hawassa" class="city-box_mobile">
+            <div>
+                <img class="city_icons_mobile" src="https://connecthabesha.net/oc-content/themes/epsilon/images/hawassa.jpeg" />
+            </div>
+            <h3>Hawassa</h3>
+        </a>
+        <a href="https://example.com/adama" class="city-box_mobile">
+            <div>
+                <img class="city_icons_mobile" src="https://connecthabesha.net/oc-content/themes/epsilon/images/adama_2.jpeg" />
+            </div>
+            <h3>Adama</h3>
+        </a>
+        <a href="https://example.com/dire-dawa" class="city-box_mobile">
+            <div>
+                <img class="city_icons_mobile" src="https://connecthabesha.net/oc-content/themes/epsilon/images/dawa_dire.jpeg" />
+            </div>
+            <h3>Dire Dawa</h3>
+        </a>
+        <a href="https://example.com/arba-minch" class="city-box_mobile">
+            <div>
+                <img class="city_icons_mobile" src="https://connecthabesha.net/oc-content/themes/epsilon/images/minch_arba.jpeg" />
+            </div>
+            <h3>Arba Minch</h3>
+        </a>
+    </div>
+</div>
+
   </section>
 
   <?php osc_run_hook('home_search_after'); ?>
@@ -530,7 +595,52 @@
   <?php osc_run_hook('home_bottom'); ?>
 
   <?php osc_current_web_theme_path('footer.php') ; ?>
+  <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+  <script>
+    $(document).ready(function () {
+        // Mobile version carousel
+        $('#mobile-slider').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            arrows: true        });
+    });
+</script>
+
   <style>
+
+/* City names animation */
+#mobile-slider img {
+            width: 100%;
+            
+            /* height: 90vh; */
+            object-fit: cover;
+            display: block;
+            /* margin: 0 auto; */
+        }
+        .slick-prev, .slick-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.slick-prev {
+    left: 10px;
+}
+
+.slick-next {
+    right: 10px;
+}
+/* end of city names animation */
 
 .home-search h1 div {
   transform: translateY(-2px); /* Shift the city names upwards */

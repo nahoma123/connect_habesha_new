@@ -3,155 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Contact Methods</title>
+    <title>Responsive Horizontal Swipe</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
     <style>
+        /* General Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .form-container {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px 30px;
-            width: 100%;
-            max-width: 400px;
-        }
-        h1 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: #555;
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-        }
-        .form-group input[type="checkbox"] {
-            margin-right: 10px;
-        }
-        .contact-methods {
-            display: none;
-            margin-top: 15px;
-        }
-        .contact-input {
-            margin-top: 10px;
-        }
-        .contact-input input {
-            width: calc(100% - 10px);
-            padding: 8px;
-            font-size: 0.9rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .submit-button {
-            display: block;
-            width: 100%;
-            background: #4CAF50;
-            color: white;
-            padding: 10px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .submit-button:hover {
-            background: #45a049;
-        }
-        .show-methods-button {
-            display: block;
-            background: #007BFF;
-            color: white;
-            padding: 10px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .show-methods-button:hover {
-            background: #0056b3;
-        }
-    </style>
-    <script>
-        function toggleContactMethods() {
-            const methodsContainer = document.getElementById('contact-methods');
-            methodsContainer.style.display = methodsContainer.style.display === 'block' ? 'none' : 'block';
         }
 
-        function toggleInput(checkbox, inputId) {
-            const input = document.getElementById(inputId);
-            const phoneField = document.getElementById('phone-number');
-            if (checkbox.checked) {
-                input.style.display = 'block';
-                input.querySelector('input').value = phoneField.value;
-            } else {
-                input.style.display = 'none';
-                input.querySelector('input').value = '';
+        /* Desktop Version */
+        #desktop-version {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            display: block;
+        }
+
+        .city-container {
+            display: flex;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .city-box {
+            flex: 0 0 auto;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .city_icons {
+            width: 150px;
+            height: 100px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .navigation-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        #prev-btn {
+            left: 10px;
+        }
+
+        #next-btn {
+            right: 10px;
+        }
+
+        /* Mobile Version */
+        #mobile-version {
+            display: none;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        #mobile-slider {
+            width: 100%;
+        }
+
+        #mobile-slider .city-box {
+            text-align: center;
+        }
+
+        /* Responsive Behavior */
+        @media (max-width: 768px) {
+            #desktop-version {
+                display: none;
+            }
+
+            #mobile-version {
+                display: block;
             }
         }
-    </script>
+    </style>
 </head>
 <body>
-    <div class="form-container">
-        <h1>Add Contact Methods</h1>
-        <form>
-            <div class="form-group">
-                <label for="phone-number">Phone Number (Mandatory)</label>
-                <input type="text" id="phone-number" placeholder="Enter your phone number" required>
+
+<!-- Desktop Version -->
+<div id="desktop-version">
+    <button id="prev-btn" class="navigation-button">&#9664;</button>
+    <div id="home-cat" class="city-container">
+        <a href="https://example.com/addis-ababa" class="city-box">
+            <div>
+                <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/ababa_addis.jpeg" />
             </div>
-
-            <button type="button" class="show-methods-button" onclick="toggleContactMethods()">Show/Hide contact Methods</button>
-
-            <div class="contact-methods" id="contact-methods">
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" onchange="toggleInput(this, 'telegram-input')"> Telegram
-                    </label>
-                    <div class="contact-input" id="telegram-input" style="display: none;">
-                        <input type="text" placeholder="Enter your Telegram username">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" onchange="toggleInput(this, 'whatsapp-input')"> WhatsApp
-                    </label>
-                    <div class="contact-input" id="whatsapp-input" style="display: none;">
-                        <input type="text" placeholder="Enter your WhatsApp number">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" onchange="toggleInput(this, 'sms-input')"> SMS (text)
-                    </label>
-                    <div class="contact-input" id="sms-input" style="display: none;">
-                        <input type="text" placeholder="Enter your phone number for SMS">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" onchange="toggleInput(this, 'call-input')"> Direct Call
-                    </label>
-                    <div class="contact-input" id="call-input" style="display: none;">
-                        <input type="text" placeholder="Enter your phone number for calls">
-                    </div>
-                </div>
+            <h3>Addis Ababa</h3>
+        </a>
+        <a href="https://example.com/hawassa" class="city-box">
+            <div>
+                <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/hawassa.jpeg" />
             </div>
-
-            <button type="submit" class="submit-button">Submit</button>
-        </form>
+            <h3>Hawassa</h3>
+        </a>
+        <a href="https://example.com/adama" class="city-box">
+            <div>
+                <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/adama_2.jpeg" />
+            </div>
+            <h3>Adama</h3>
+        </a>
+        <a href="https://example.com/dire-dawa" class="city-box">
+            <div>
+                <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/dawa_dire.jpeg" />
+            </div>
+            <h3>Dire Dawa</h3>
+        </a>
+        <a href="https://example.com/arba-minch" class="city-box">
+            <div>
+                <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/minch_arba.jpeg" />
+            </div>
+            <h3>Arba Minch</h3>
+        </a>
     </div>
+    <button id="next-btn" class="navigation-button">&#9654;</button>
+</div>
+
+<!-- Mobile Version -->
+<div id="mobile-version">
+    <div id="mobile-slider">
+        <a href="https://example.com/addis-ababa" class="city-box">
+            <div>
+                <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/ababa_addis.jpeg" />
+            </div>
+            <h3>Addis Ababa</h3>
+        </a>
+        <a href="https://example.com/hawassa" class="city-box">
+            <div>
+                <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/hawassa.jpeg" />
+            </div>
+            <h3>Hawassa</h3>
+        </a>
+        <a href="https://example.com/adama" class="city-box">
+            <div>
+                <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/adama_2.jpeg" />
+            </div>
+            <h3>Adama</h3>
+        </a>
+        <a href="https://example.com/dire-dawa" class="city-box">
+            <div>
+                <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/dawa_dire.jpeg" />
+            </div>
+            <h3>Dire Dawa</h3>
+        </a>
+        <a href="https://example.com/arba-minch" class="city-box">
+            <div>
+                <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/minch_arba.jpeg" />
+            </div>
+            <h3>Arba Minch</h3>
+        </a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Mobile version carousel
+        $('#mobile-slider').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            arrows: true,
+            prevArrow: '<button class="slick-prev">&#9664;</button>',
+            nextArrow: '<button class="slick-next">&#9654;</button>',
+        });
+    });
+</script>
+
 </body>
 </html>
