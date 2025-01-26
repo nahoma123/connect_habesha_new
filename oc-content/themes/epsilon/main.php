@@ -77,48 +77,7 @@
 
 
         <h2><?php _e('Top Cities', 'epsilon'); ?></h2>
-        
-        <div id="home-cat" class="city-container">
-          <?php 
-            osc_goto_first_category(); 
-            $new_categories = explode(',', eps_param('categories_new'));
-            $hot_categories = explode(',', eps_param('categories_hot'));
-          ?>
-          
-          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235021','sLocation'=>'Addis+Ababa')); ?>" class="city-box">
-            <div>
-             <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/ababa_addis.jpeg" />
-            </div>
-            <h3><span><?php _e('Addis Ababa', 'epsilon'); ?></span></h3>
-          </a>
-          
-          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235080','sLocation'=>'Hawassa+(Awassa)')); ?>" class="city-box">
-            <div>
-             <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/hawassa.jpeg" />
-            </div>
-            <h3><span><?php _e('Hawassa', 'epsilon'); ?></span></h3>
-          </a>
-          
-          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235017','sLocation'=>'Adama')); ?>" class="city-box">
-            <div>
-             <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/adama_2.jpeg" />
-            </div>
-            <h3><span><?php _e('Adama', 'epsilon'); ?></span></h3>
-          </a>
-          
-          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235043','sLocation'=>'Dire+Dawa')); ?>" class="city-box">
-            <div>
-             <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/dawa_dire.jpeg" />
-            </div>
-            <h3><span><?php _e('Dire Dawa', 'epsilon'); ?></span></h3>
-          </a>
-          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235089','sLocation'=>'Arba+Minch')); ?>" class="city-box">
-            <div>
-             <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/minch_arba.jpeg" />
-            </div>
-            <h3><span><?php _e('Arba Minch', 'epsilon'); ?></span></h3>
-          </a>
-        </div>
+   
 
         <style>
 
@@ -181,6 +140,48 @@
 </style>
       </div>
     </div>
+         
+    <div id="home-cat" class="city-container">
+          <?php 
+            osc_goto_first_category(); 
+            $new_categories = explode(',', eps_param('categories_new'));
+            $hot_categories = explode(',', eps_param('categories_hot'));
+          ?>
+          
+          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235021','sLocation'=>'Addis+Ababa')); ?>" class="city-box">
+            <div>
+             <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/ababa_addis.jpeg" />
+            </div>
+            <h3><span><?php _e('Addis Ababa', 'epsilon'); ?></span></h3>
+          </a>
+          
+          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235080','sLocation'=>'Hawassa+(Awassa)')); ?>" class="city-box">
+            <div>
+             <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/hawassa.jpeg" />
+            </div>
+            <h3><span><?php _e('Hawassa', 'epsilon'); ?></span></h3>
+          </a>
+          
+          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235017','sLocation'=>'Adama')); ?>" class="city-box">
+            <div>
+             <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/adama_2.jpeg" />
+            </div>
+            <h3><span><?php _e('Adama', 'epsilon'); ?></span></h3>
+          </a>
+          
+          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235043','sLocation'=>'Dire+Dawa')); ?>" class="city-box">
+            <div>
+             <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/dawa_dire.jpeg" />
+            </div>
+            <h3><span><?php _e('Dire Dawa', 'epsilon'); ?></span></h3>
+          </a>
+          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235089','sLocation'=>'Arba+Minch')); ?>" class="city-box">
+            <div>
+             <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/minch_arba.jpeg" />
+            </div>
+            <h3><span><?php _e('Arba Minch', 'epsilon'); ?></span></h3>
+          </a>
+        </div>
   </section>
 
   <?php osc_run_hook('home_search_after'); ?>
@@ -535,10 +536,26 @@
   transform: translateY(-2px); /* Shift the city names upwards */
 }
       .city_icons {
-          width:100px  !important;
-          height:74px !important;
+          width:100% !important;
+          height:74p% !important;
           max-width:max-content !important;
           max-height:max-content !important;
+      }
+      .city-container{
+        max-width: 100%;
+      }
+      .city-box img, .city_icons, .city-box div{
+        width: 100% !important;
+        height: 100%;
+      }
+      
+      #home-cat a > div{
+        width: 100%;
+        height: 100%;
+      }
+      #home-cat a > div img {
+        width: 100%;
+        height: 130px;
       }
   </style>
 </body>
