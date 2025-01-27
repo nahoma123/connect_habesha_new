@@ -989,7 +989,7 @@ body#home h2 .btn {background:transparent;display:flex;align-items: center;box-s
 body#home h2 .btn:hover {color:#3b49df;box-shadow:0 0 0 1px #3b49df;}
 body#home h2 .btn svg {margin-right: 5px;fill:#3b49df;}
 .home-search > .container {position:relative;flex-direction: column;}
-.home-search > .container:after {opacity:0.55;position:absolute;top:-12px;right:3%;content:"";width:240px;height:260px;background:transparent url('../images/home-search.webp') no-repeat top right;background-size:contain;}
+.home-search > .container:after {opacity:0.55;position:absolute;top:-12px;right:3%;content:"";width:240px;height:260px;background:transparent no-repeat top right;background-size:contain;}
 .home-search .box {width:100%;position:relative;z-index:2;}
 .home-search h1, .home-search form, .home-search .latest-search {max-width:780px;}
 .home-search form {display:block;width:100%;margin:0 0 12px 0;}

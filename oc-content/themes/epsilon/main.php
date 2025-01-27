@@ -10,10 +10,9 @@
   <?php osc_current_web_theme_path('head.php'); ?>
 </head>
 
-<body id="home"
-  class="layout-<?php echo (eps_param('home_layout') <> '' ? eps_param('home_layout') : 'default'); ?><?php if (eps_device() <> '') {
-             echo ' dvc-' . eps_device();
-           } ?>">
+<body id="home" class="layout-<?php echo (eps_param('home_layout') <> '' ? eps_param('home_layout') : 'default'); ?><?php if (eps_device() <> '') {
+           echo ' dvc-' . eps_device();
+         } ?>">
   <?php osc_current_web_theme_path('header.php'); ?>
 
   <?php osc_run_hook('home_top'); ?>
@@ -37,8 +36,8 @@
               <span class="l1"><?php _e('Addis Ababa?', 'epsilon'); ?></span>
               <span class="l2"><?php _e('Hawassa?', 'epsilon'); ?></span>
               <span class="l3"><?php _e('Adama?', 'epsilon'); ?></span>
-              <span class="l5"><?php _e('Arba Minch?', 'epsilon'); ?></span>
               <span class="l4"><?php _e('Dire Dawa?', 'epsilon'); ?></span>
+              <span class="l5"><?php _e('Arba Minch?', 'epsilon'); ?></span>
             </div>
           </h1>
         <?php } else { ?>
@@ -100,7 +99,6 @@
 
 
         <style>
-
           /* Mobile Version */
           #mobile-version {
             display: none;
@@ -160,41 +158,49 @@
 
         <a href="<?php echo osc_search_url(array('page' => 'search', 'sCity' => '15235021', 'sLocation' => 'Addis+Ababa')); ?>"
           class="city-box">
-          
-            <img class="city_icons custom-crop"
+          <span class="img-city_icon">
+            <img class="city_icons custom-crop" style="object-fit: cover; object-position: 1px center;"
               src="https://connecthabesha.net/oc-content/themes/epsilon/images/ababa_addis.jpeg" />
-          
+          </span>
+
           <h3><span><?php _e('Addis Ababa', 'epsilon'); ?></span></h3>
         </a>
 
         <a href="<?php echo osc_search_url(array('page' => 'search', 'sCity' => '15235080', 'sLocation' => 'Hawassa+(Awassa)')); ?>"
           class="city-box">
-          
-            <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/hawassa.jpeg" />
-          
+          <span class="img-city_icon">
+            <img style="width: 100%; height: 100%; object-fit: cover;     object-position: -55px center;"
+              class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/hawassa.jpeg" />
+          </span>
+
           <h3><span><?php _e('Hawassa', 'epsilon'); ?></span></h3>
         </a>
 
         <a href="<?php echo osc_search_url(array('page' => 'search', 'sCity' => '15235017', 'sLocation' => 'Adama')); ?>"
           class="city-box">
-          
-            <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/adama_2.jpeg" />
-          
+          <span class="img-city_icon">
+            <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/adama_3.jpg" />
+          </span>
+
           <h3><span><?php _e('Adama', 'epsilon'); ?></span></h3>
         </a>
 
         <a href="<?php echo osc_search_url(array('page' => 'search', 'sCity' => '15235043', 'sLocation' => 'Dire+Dawa')); ?>"
           class="city-box">
-          
-            <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/dawa_dire.jpeg" />
-          
+          <span class="img-city_icon">
+            <img class="city_icons"
+              style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s ease; transform: scale(1.1);"
+              src="https://connecthabesha.net/oc-content/themes/epsilon/images/dawa_dire.jpeg" />
+          </span>
+
           <h3><span><?php _e('Dire Dawa', 'epsilon'); ?></span></h3>
         </a>
         <a href="<?php echo osc_search_url(array('page' => 'search', 'sCity' => '15235089', 'sLocation' => 'Arba+Minch')); ?>"
           class="city-box">
-          
+          <span class="img-city_icon">
             <img class="city_icons" src="https://connecthabesha.net/oc-content/themes/epsilon/images/minch_arba.jpeg" />
-          
+          </span>
+
           <h3><span><?php _e('Arba Minch', 'epsilon'); ?></span></h3>
         </a>
       </div>
@@ -203,35 +209,44 @@
     <!-- Mobile Version -->
     <div id="mobile-version">
       <div id="mobile-slider">
-        <a href="https://example.com/addis-ababa" class="city-box_mobile">
+        <a href="<?php echo osc_search_url(array('page' => 'search', 'sCity' => '15235021', 'sLocation' => 'Addis+Ababa')); ?>"
+          class="city-box_mobile">
           <div>
             <img class="city_icons_mobile"
+              style="width: 100%; height: 100%; object-fit: cover; object-position: 1px center;"
               src="https://connecthabesha.net/oc-content/themes/epsilon/images/ababa_addis.jpeg" />
           </div>
           <h3>Addis Ababa</h3>
         </a>
-        <a href="https://example.com/hawassa" class="city-box_mobile">
+        <a href="<?php echo osc_search_url(array('page' => 'search', 'sCity' => '15235080', 'sLocation' => 'Hawassa+(Awassa)')); ?>"
+          class="city-box_mobile">
           <div>
             <img class="city_icons_mobile"
+              style="width: 100%; height: 100%; object-fit: cover;     object-position: -65px center;"
               src="https://connecthabesha.net/oc-content/themes/epsilon/images/hawassa.jpeg" />
           </div>
           <h3>Hawassa</h3>
         </a>
-        <a href="https://example.com/adama" class="city-box_mobile">
+        <a href="<?php echo osc_search_url(array('page' => 'search', 'sCity' => '15235017', 'sLocation' => 'Adama')); ?>"
+          class="city-box_mobile">
           <div>
             <img class="city_icons_mobile"
-              src="https://connecthabesha.net/oc-content/themes/epsilon/images/adama_2.jpeg" />
+              src="https://connecthabesha.net/oc-content/themes/epsilon/images/adama_3.jpg" />
           </div>
           <h3>Adama</h3>
         </a>
-        <a href="https://example.com/dire-dawa" class="city-box_mobile">
+
+        <a href="<?php echo osc_search_url(array('page' => 'search', 'sCity' => '15235043', 'sLocation' => 'Dire+Dawa')); ?>"
+          class="city-box_mobile">
           <div>
             <img class="city_icons_mobile"
+              style="width: 100%; height: 100%; object-fit: cover;  transform: scale(1.1); /* Slightly zoom in */"
               src="https://connecthabesha.net/oc-content/themes/epsilon/images/dawa_dire.jpeg" />
           </div>
           <h3>Dire Dawa</h3>
         </a>
-        <a href="https://example.com/arba-minch" class="city-box_mobile">
+        <a href="<?php echo osc_search_url(array('page' => 'search', 'sCity' => '15235089', 'sLocation' => 'Arba+Minch')); ?>"
+          class="city-box_mobile">
           <div>
             <img class="city_icons_mobile"
               src="https://connecthabesha.net/oc-content/themes/epsilon/images/minch_arba.jpeg" />
@@ -316,35 +331,35 @@
     View::newInstance()->_exportVariableToView('items', $premium_items);
     ?>
     <?php /*<section class="home-premium">
-   <div class="container">
-     <div class="block">
-       <h2><?php _e('Today\'s premium selection', 'epsilon'); ?></h2>
-       
-       <div class="nice-scroll-wrap">
-         <div class="nice-scroll-prev"><i class="fas fa-caret-left"></i></div>
-         
-         <div id="premium-items" class="products grid nice-scroll no-visible-scroll">
-           <?php 
-             $c = 1; 
+<div class="container">
+  <div class="block">
+    <h2><?php _e('Today\'s premium selection', 'epsilon'); ?></h2>
+    
+    <div class="nice-scroll-wrap">
+      <div class="nice-scroll-prev"><i class="fas fa-caret-left"></i></div>
+      
+      <div id="premium-items" class="products grid nice-scroll no-visible-scroll">
+        <?php 
+          $c = 1; 
 
-             if($has_day_offer == 1) {
-               View::newInstance()->_exportVariableToView('item', $day_offer);
-               eps_draw_item($c, false, eps_param('premium_home_design'));
-               $c++;
-             }
-             
-             while(osc_has_items()) {
-               eps_draw_item($c, false, eps_param('premium_home_design'));
-               $c++;
-             }
-           ?>
-         </div>
-         
-         <div class="nice-scroll-next"><i class="fas fa-caret-right"></i></div>
-       </div>
-     </div>
-   </div>
- </section>*/ ?>
+          if($has_day_offer == 1) {
+            View::newInstance()->_exportVariableToView('item', $day_offer);
+            eps_draw_item($c, false, eps_param('premium_home_design'));
+            $c++;
+          }
+          
+          while(osc_has_items()) {
+            eps_draw_item($c, false, eps_param('premium_home_design'));
+            $c++;
+          }
+        ?>
+      </div>
+      
+      <div class="nice-scroll-next"><i class="fas fa-caret-right"></i></div>
+    </div>
+  </div>
+</div>
+</section>*/ ?>
 
     <?php View::newInstance()->_exportVariableToView('items', $default_items); ?>
   <?php } ?>
@@ -667,130 +682,184 @@
     }
 
     /* Container for the slider */
-#mobile-slider {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Adjust spacing between items */
-    justify-content: center;
-}
+    #mobile-slider {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      /* Adjust spacing between items */
+      justify-content: center;
+    }
 
-/* City box styling */
-.city-box_mobile {
-    text-align: center;
-    text-decoration: none;
-    color: inherit;
-}
+    /* City box styling */
+    .city-box_mobile {
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+    }
 
-/* Image container */
-.city-box_mobile div {
-    width: 200px; /* Adjust the size of the circle */
-    height: 200px; /* Must match the width for a perfect circle */
-    border-radius: 50%; /* Makes the container round */
-    overflow: hidden; /* Crops the image to fit the circle */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto; /* Centers the container */
-}
-
-/* Image styling */
-.city_icons_mobile {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures the image covers the container without distortion */
-    display: block;
-}
-
-/* Heading styling */
-.city-box_mobile h3 {
-    margin-top: 10px; /* Adjust spacing between image and text */
-    font-size: 16px; /* Adjust font size */
-    color: #333; /* Adjust text color */
-}
-
-@media (max-width: 768px) {
+    /* Image container */
     .city-box_mobile div {
+      width: 200px;
+      /* Adjust the size of the circle */
+      height: 200px;
+      /* Must match the width for a perfect circle */
+      border-radius: 50%;
+      /* Makes the container round */
+      overflow: hidden;
+      /* Crops the image to fit the circle */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      /* Centers the container */
+    }
+
+    /* Image styling */
+    .city_icons_mobile {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Ensures the image covers the container without distortion */
+      display: block;
+    }
+
+    /* Heading styling */
+    .city-box_mobile h3 {
+      margin-top: 10px;
+      /* Adjust spacing between image and text */
+      font-size: 16px;
+      /* Adjust font size */
+      color: #333;
+      /* Adjust text color */
+    }
+
+    @media (max-width: 768px) {
+      .city-box_mobile div {
         width: 200px;
         height: 200px;
-    }
-    .city-box_mobile h3 {
+      }
+
+      .city-box_mobile h3 {
         font-size: 14px;
+      }
     }
-}
 
     /* end of city names animation */
 
-/* Container for the city boxes */
-/* Container for the city boxes */
-#desktop-version {
-    width: 100%;
-    max-width: 100%;
-    margin: 10px;
-    padding: 0;
-}
+    /* Container for the city boxes */
+    /* Container for the city boxes */
+    #desktop-version {
+      width: 100%;
+      max-width: 100%;
+      margin: 10px;
+      padding: 0;
+    }
 
-#home-cat {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 10px;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 0;
-}
+    #home-cat {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 10px;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0;
+    }
 
-#home-cat a.city-box {
-    width: auto;
-    flex: 1 1 calc(20% - 8px); /* Adjust the width for responsive layout */
-    height: 200px; /* Fixed height for each item */
-    text-align: center;
-    margin: 0;
-    transition: transform 0.3s ease;
-}
+    #home-cat a.city-box {
+      width: auto;
+      flex: 1 1 calc(20% - 8px);
+      /* Adjust the width for responsive layout */
+      height: 200px;
+      /* Fixed height for each item */
+      text-align: center;
+      margin: 0;
+      transition: transform 0.3s ease;
+    }
 
-#home-cat a.city-box:hover {
-    transform: scale(1.05); /* Slight zoom effect on hover */
-}
+    #home-cat a.city-box:hover {
+      transform: scale(1.05);
+      /* Slight zoom effect on hover */
+    }
 
-#home-cat a.city-box > div {
-    position: relative;
-    width: 160px; /* Adjust the size of the circle */
-    height: 160px; /* Same as width to make it round */
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden; /* Ensures the image doesn't overflow the circle */
-    border-radius: 50%; /* Makes the container circular */
-}
+    #home-cat a.city-box>div {
+      position: relative;
+      width: 160px;
+      /* Adjust the size of the circle */
+      height: 160px;
+      /* Same as width to make it round */
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      /* Ensures the image doesn't overflow the circle */
+      border-radius: 50%;
+      /* Makes the container circular */
+    }
 
-/* Styling the image itself */
-.city_icons {
-    width: 160px; /* Ensure the image is as large as the container */
-    height: 160px; /* Same as width for circular aspect */
-    border-radius: 50%; /* Makes the image circular */
-    object-fit: cover; /* Ensures the image covers the circular frame without distortion */
-    object-position: center; /* Default cropping */
-    transition: transform 0.3s ease; /* Smooth transition for hover effects */
-}
+    /* Styling the image itself */
+    .city_icons {
+      width: 160px;
+      /* Ensure the image is as large as the container */
+      height: 160px;
+      /* Same as width for circular aspect */
+      border-radius: 50%;
+      /* Makes the image circular */
+      object-fit: cover;
+      /* Ensures the image covers the circular frame without distortion */
+      object-position: center;
+      /* Default cropping */
+      transition: transform 0.3s ease;
+      /* Smooth transition for hover effects */
+    }
 
-/* Add control for cropping the image */
-.city_icons.custom-crop {
-    object-position: top center; /* Custom cropping: aligns the top center of the image */
-}
+    /* Add control for cropping the image */
+    .city_icons.custom-crop {
+      object-position: top center;
+      /* Custom cropping: aligns the top center of the image */
+    }
 
-/* Optional hover effect for the image */
-.city_icons:hover {
-    transform: scale(1.1); /* Slight zoom effect on hover for the image */
-}
+    /* Optional hover effect for the image */
+    .city_icons:hover {
+      transform: scale(1.1);
+      /* Slight zoom effect on hover for the image */
+    }
 
-/* Heading styling */
-.city-box h3 {
-    font-size: 16px; /* Adjust font size */
-    color: #333; /* Adjust text color */
-    margin-bottom: 5px;
-}
+    /* Heading styling */
+    .city-box h3 {
+      font-size: 16px;
+      /* Adjust font size */
+      color: #333;
+      /* Adjust text color */
+      margin-top: 5px;
+    }
 
+    .img-container {
+      width: 160px;
+      /* Adjust the size */
+      height: 160px;
+      /* Keep it square */
+      border-radius: 50%;
+      /* Makes the container circular */
+      overflow: hidden;
+      /* Ensures image fits inside the circle */
+      margin: 0 auto;
+      /* Center the circle within the parent */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f0f0f0;
+      /* Optional: Add background to ensure a fallback for empty images */
+    }
+
+    .img-city_icon {
+      overflow: hidden;
+      display: inline-block;
+      height: 160px;
+      width: 160px;
+      border-radius: 50%;
+      /* Make the image round */
+    }
   </style>
 </body>
 
