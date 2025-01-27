@@ -786,9 +786,9 @@
 
 /* Heading styling */
 .city-box h3 {
-    margin-top: 10px; /* Spacing between image and text */
     font-size: 16px; /* Adjust font size */
     color: #333; /* Adjust text color */
+    margin-bottom: 5px;
 }
 
   </style>
