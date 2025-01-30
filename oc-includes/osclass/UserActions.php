@@ -251,7 +251,7 @@ class UserActions
       $phone = $input['s_phone_mobile'] ?: $input['s_phone_land'];
       Session::newInstance()->_set('userPhone', $phone);
     }
-
+    
     if (is_array(Params::getParam('s_info'))) {
       $pinfo = (osc_tinymce_users_enabled() == '1' ? Params::getParam('s_info', false, false) : Params::getParam('s_info'));   // update 420
 

@@ -102,7 +102,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
 
                 <div class="radio-option">
                   <label class="radio-label">
-                    <input type="radio" name="show_on_profile" value="no" checked=""> <span class="radio-text">Yes
+                    <input type="radio" name="show_on_profile" value="yes" checked=""> <span class="radio-text">Yes
                       (visible to all registered users)</span>
                   </label>
                 </div>
