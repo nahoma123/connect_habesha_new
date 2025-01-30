@@ -53,6 +53,7 @@
 }
 .phone-mobile span{
     margin-right: 5px;
+    color: #0178d6;
 }
 
   </style>
