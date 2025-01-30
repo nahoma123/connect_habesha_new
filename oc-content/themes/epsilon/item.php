@@ -628,14 +628,14 @@
                 <div class="address"><i class="fas fa-map-marked-alt"></i> <?php echo $item_user_location; ?></div>
               <?php } ?>
 
-              <?php if($user_phone_mobile_data['found'] && !$show_phone_on_profile=="no" ) { ?>
+              <?php if($user_phone_mobile_data['found'] && !($show_phone_on_profile == "no") ) { ?>
                 <a class="phone-mobile phone <?php echo $user_phone_mobile_data['class']; ?>" title="<?php echo osc_esc_html($user_phone_mobile_data['title']); ?>" data-prefix="tel" href="<?php echo $user_phone_mobile_data['url']; ?>" data-part1="<?php echo osc_esc_html($user_phone_mobile_data['part1']); ?>" data-part2="<?php echo osc_esc_html($user_phone_mobile_data['part2']); ?>">
                   <span><?php echo $user_phone_mobile_data['masked']; ?></span>
                   <i class="fas fa-phone-alt"></i>
                 </a>
               <?php } ?>
 
-              <?php if($user_phone_land_data['found'] && !$show_phone_on_profile=="no") { ?>
+              <?php if($user_phone_land_data['found'] && !($show_phone_on_profile == "no")) { ?>
                 <a class="phone-land phone <?php echo $user_phone_land_data['class']; ?>" title="<?php echo osc_esc_html($user_phone_land_data['title']); ?>" data-prefix="tel" href="<?php echo $user_phone_land_data['url']; ?>" data-part1="<?php echo osc_esc_html($user_phone_land_data['part1']); ?>" data-part2="<?php echo osc_esc_html($user_phone_land_data['part2']); ?>">
                   <span><?php echo $user_phone_land_data['masked']; ?></span>
                   <i class="fas fa-phone-alt"></i>
