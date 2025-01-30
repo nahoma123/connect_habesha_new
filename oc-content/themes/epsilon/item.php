@@ -653,11 +653,6 @@ $additional_account = !empty($item_user['additional_accounts']) ? trim($item_use
 
 // Function to generate icons for a given account and methods
 function generate_contact_methods($account, $methods, $show_phone_on_profilehow) {
-  if ($show_phone_on_profilehow=="no"){
-    return;
-  }
-
-
     $icons = [];
     foreach ($methods as $method) {
         $method = trim($method);

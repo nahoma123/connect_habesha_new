@@ -140,10 +140,6 @@ $additional_account = !empty($user['additional_accounts']) ? trim($user['additio
 
 // Function to generate icons for a given account and methods
 function generate_contact_methods($account, $methods, $show_phone_on_profilehow) {
-  if ($show_phone_on_profilehow=="no"){
-    return;
-  }
-
     if (empty($account)) {
         return;
     }
