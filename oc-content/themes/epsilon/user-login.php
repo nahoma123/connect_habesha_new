@@ -40,7 +40,7 @@
         </div>
       <?php } ?>
 
-      <a class="alt-action" href="<?php echo osc_register_account_url(); ?>"><?php _e('Dont have an account? Create a new account', 'epsilon'); ?> &#8594;</a>
+      <a class="alt-action" href="<?php echo osc_register_account_url(); ?>"><?php _e('Don\'t have an account? Create a new account', 'epsilon'); ?> &#8594;</a>
 
       <form action="<?php echo osc_base_url(true); ?>" method="post" >
         <input type="hidden" name="page" value="login" />
