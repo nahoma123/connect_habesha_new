@@ -13,7 +13,7 @@
 
   <section class="container">
     <div class="box">
-      <h1><?php _e('Sign-in to your account', 'epsilon'); ?></h1>
+      <h1><?php _e('Log into your account', 'epsilon'); ?></h1>
 
       <?php if(function_exists('fl_call_after_install') || function_exists('gc_login_button') || function_exists('fjl_login_button')) { ?>
         <div class="social">
@@ -40,7 +40,7 @@
         </div>
       <?php } ?>
 
-      <a class="alt-action" href="<?php echo osc_register_account_url(); ?>"><?php _e('No account yet? Register a new account', 'epsilon'); ?> &#8594;</a>
+      <a class="alt-action" href="<?php echo osc_register_account_url(); ?>"><?php _e('Dont have an account? Create a new account', 'epsilon'); ?> &#8594;</a>
 
       <form action="<?php echo osc_base_url(true); ?>" method="post" >
         <input type="hidden" name="page" value="login" />
