@@ -16,7 +16,7 @@
 
   <section class="container">
     <div class="box">
-      <h1><?php _e('Register a new account', 'epsilon'); ?></h1>
+      <h1><?php _e('Create a new account', 'epsilon'); ?></h1>
 
       <?php if (function_exists('fl_call_after_install') || function_exists('gc_login_button') || function_exists('fjl_login_button')) { ?>
         <div class="social">
@@ -47,7 +47,7 @@
       <?php } ?>
 
       <a class="alt-action"
-        href="<?php echo osc_user_login_url(); ?>"><?php _e('Already have account? Login', 'epsilon'); ?> &#8594;</a>
+        href="<?php echo osc_user_login_url(); ?>"><?php _e('Already have an account? Log in', 'epsilon'); ?> &#8594;</a>
 
       <form name="register" id="register" action="<?php echo osc_base_url(true); ?>" method="post">
         <input type="hidden" name="page" value="register" />
@@ -156,11 +156,12 @@
 
           <div class="td-wrap d1 input-box" style="width:100%;font-size:11px">
             <?php _e('By creating an account, you agree to our', 'epsilon'); ?>
-            <a href="<?php echo osc_base_url(); ?>index.php?page=page&id=33"
-              target="_blank"><?php _e('Terms of Use', 'epsilon'); ?></a>,
+            <a href="<?php echo osc_base_url(); ?>index.php?page=page&id=23"
+              target="_blank"><?php _e('Terms of Service', 'epsilon'); ?></a>,
             <a href="<?php echo osc_base_url(); ?>index.php?page=page&id=32"
               target="_blank"><?php _e('Privacy Policy', 'epsilon'); ?></a>, and
-            <a href="<?php echo osc_base_url(); ?>" target="_blank"><?php _e('Cookie Policy', 'epsilon'); ?></a>
+            <a href="<?php echo osc_base_url(); ?>index.php?page=page&id=33"
+              target="_blank"><?php _e('Cookie Use.', 'epsilon'); ?></a>
             <span class="req">*</span>
           </div>
         </div>
