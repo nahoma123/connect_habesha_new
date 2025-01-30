@@ -628,14 +628,14 @@
                 <div class="address"><i class="fas fa-map-marked-alt"></i> <?php echo $item_user_location; ?></div>
               <?php } ?>
 
-              <?php if($user_phone_mobile_data['found'] && $show_phone_on_profile=="no" ) { ?>
+              <?php if($user_phone_mobile_data['found'] && !$show_phone_on_profile=="no" ) { ?>
                 <a class="phone-mobile phone <?php echo $user_phone_mobile_data['class']; ?>" title="<?php echo osc_esc_html($user_phone_mobile_data['title']); ?>" data-prefix="tel" href="<?php echo $user_phone_mobile_data['url']; ?>" data-part1="<?php echo osc_esc_html($user_phone_mobile_data['part1']); ?>" data-part2="<?php echo osc_esc_html($user_phone_mobile_data['part2']); ?>">
                   <span><?php echo $user_phone_mobile_data['masked']; ?></span>
                   <i class="fas fa-phone-alt"></i>
                 </a>
               <?php } ?>
 
-              <?php if($user_phone_land_data['found'] && $show_phone_on_profile=="no") { ?>
+              <?php if($user_phone_land_data['found'] && !$show_phone_on_profile=="no") { ?>
                 <a class="phone-land phone <?php echo $user_phone_land_data['class']; ?>" title="<?php echo osc_esc_html($user_phone_land_data['title']); ?>" data-prefix="tel" href="<?php echo $user_phone_land_data['url']; ?>" data-part1="<?php echo osc_esc_html($user_phone_land_data['part1']); ?>" data-part2="<?php echo osc_esc_html($user_phone_land_data['part2']); ?>">
                   <span><?php echo $user_phone_land_data['masked']; ?></span>
                   <i class="fas fa-phone-alt"></i>
@@ -651,10 +651,11 @@ $additional_methods = !empty($item_user['additional_methods']) ? explode(',', $i
 $additional_account = !empty($item_user['additional_accounts']) ? trim($item_user['additional_accounts']) : '';
 
 // Function to generate icons for a given account and methods
-function generate_contact_methods($account, $methods) {
-    if (empty($account)) {
-        return;
-    }
+function generate_contact_methods($account, $methods, $show_phone_on_profilehow) {
+  if ($show_phone_on_profilehow=="no"){
+    return;
+  }
+
 
     $icons = [];
     foreach ($methods as $method) {
@@ -687,10 +688,10 @@ function generate_contact_methods($account, $methods) {
 }
 
 // Display primary methods with their shared account
-generate_contact_methods($primary_account, $primary_methods);
+generate_contact_methods($primary_account, $primary_methods, $user['show_on_profile']);
 
 // Display additional methods with their shared account
-generate_contact_methods($additional_account, $additional_methods);
+generate_contact_methods($additional_account, $additional_methods, $user['show_on_profile']);
 ?>
         </div>
 
