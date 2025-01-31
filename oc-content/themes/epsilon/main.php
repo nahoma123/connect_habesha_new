@@ -332,32 +332,32 @@
     ?>
     <?php /*<section class="home-premium">
 <div class="container">
-  <div class="block">
-    <h2><?php _e('Today\'s premium selection', 'epsilon'); ?></h2>
-    
-    <div class="nice-scroll-wrap">
-      <div class="nice-scroll-prev"><i class="fas fa-caret-left"></i></div>
-      
-      <div id="premium-items" class="products grid nice-scroll no-visible-scroll">
-        <?php 
-          $c = 1; 
+<div class="block">
+ <h2><?php _e('Today\'s premium selection', 'epsilon'); ?></h2>
+ 
+ <div class="nice-scroll-wrap">
+   <div class="nice-scroll-prev"><i class="fas fa-caret-left"></i></div>
+   
+   <div id="premium-items" class="products grid nice-scroll no-visible-scroll">
+     <?php 
+       $c = 1; 
 
-          if($has_day_offer == 1) {
-            View::newInstance()->_exportVariableToView('item', $day_offer);
-            eps_draw_item($c, false, eps_param('premium_home_design'));
-            $c++;
-          }
-          
-          while(osc_has_items()) {
-            eps_draw_item($c, false, eps_param('premium_home_design'));
-            $c++;
-          }
-        ?>
-      </div>
-      
-      <div class="nice-scroll-next"><i class="fas fa-caret-right"></i></div>
-    </div>
-  </div>
+       if($has_day_offer == 1) {
+         View::newInstance()->_exportVariableToView('item', $day_offer);
+         eps_draw_item($c, false, eps_param('premium_home_design'));
+         $c++;
+       }
+       
+       while(osc_has_items()) {
+         eps_draw_item($c, false, eps_param('premium_home_design'));
+         $c++;
+       }
+     ?>
+   </div>
+   
+   <div class="nice-scroll-next"><i class="fas fa-caret-right"></i></div>
+ </div>
+</div>
 </div>
 </section>*/ ?>
 
@@ -859,6 +859,10 @@
       width: 160px;
       border-radius: 50%;
       /* Make the image round */
+    }
+
+    .home-search h1 div {
+      vertical-align: -10px;
     }
   </style>
 </body>
