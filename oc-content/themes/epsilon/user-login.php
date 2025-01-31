@@ -4,6 +4,9 @@
   <?php osc_current_web_theme_path('head.php'); ?>
   <meta name="robots" content="noindex, nofollow" />
   <meta name="googlebot" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+
   <script type="text/javascript" src="<?php echo osc_current_web_theme_js_url('jquery.validate.min.js'); ?>"></script>
 </head>
 
