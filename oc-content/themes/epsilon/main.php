@@ -862,7 +862,7 @@
     }
 
     .home-search h1 div {
-      vertical-align: -10px;
+      vertical-align: -11px;
     }
   </style>
 </body>
