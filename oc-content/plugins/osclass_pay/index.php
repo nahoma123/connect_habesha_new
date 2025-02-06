@@ -307,7 +307,7 @@ function osp_limit_items($action = 'post') {
 
     // Activating new listing
     if($count > $max_items && $action == 'activate') {
-      osc_add_flash_error_message(sprintf(__('You have reached maximum number of listings you can publish (%s items in %s days). Please upgrade your membership in order to increase your limits.', 'osclass_pay'), $max_items, $max_items_days));
+      osc_add_flash_error_message(sprintf(__('You have reached the maximum number of Ads you can post (%s Ads in %s days). Please upgrade your membership to raise your limits.', 'osclass_pay'), $max_items, $max_items_days));
 
       $item_id = Params::getParam('id');
       ModelOSP::newInstance()->updateItemActive($item_id, 0);
@@ -326,7 +326,7 @@ function osp_limit_items($action = 'post') {
 
       // Block for inactive listings only
       if(isset($item['b_active']) && $item['b_active'] != 1) {
-        osc_add_flash_error_message(sprintf(__('You have reached maximum number of listings you can publish (%s items in %s days). Please upgrade your membership in order to increase your limits.', 'osclass_pay'), $max_items, $max_items_days));
+        osc_add_flash_error_message(sprintf(__('You have reached the maximum number of Ads you can post (%s Ads in %s days). Please upgrade your membership to raise your limits.', 'osclass_pay'), $max_items, $max_items_days));
 
         if(osc_is_web_user_logged_in()) {
           osp_redirect(osc_route_url('osp-membership'));
@@ -338,7 +338,7 @@ function osp_limit_items($action = 'post') {
       
     // Entering publish page
     } else if($count > $max_items && $action == 'post' || $count >= $max_items && $action == 'pre-post') {
-      osc_add_flash_error_message(sprintf(__('You have reached maximum number of listings you can publish (%s items in %s days). Please upgrade your membership in order to increase your limits.', 'osclass_pay'), $max_items, $max_items_days));
+      osc_add_flash_error_message(sprintf(__('You have reached the maximum number of Ads you can post (%s Ads in %s days). Please upgrade your membership to raise your limits.', 'osclass_pay'), $max_items, $max_items_days));
 
       if(osc_is_web_user_logged_in()) {
         osp_redirect(osc_route_url('osp-membership'));

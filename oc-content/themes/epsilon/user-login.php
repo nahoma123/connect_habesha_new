@@ -16,7 +16,7 @@
 
   <section class="container">
     <div class="box">
-      <h1><?php _e('Log into your account', 'epsilon'); ?></h1>
+      <h1><?php _e('Log in to your account', 'epsilon'); ?></h1>
 
       <?php if(function_exists('fl_call_after_install') || function_exists('gc_login_button') || function_exists('fjl_login_button')) { ?>
         <div class="social">
@@ -79,7 +79,7 @@
 
         <button type="submit" class="btn"><?php _e('Log in', 'epsilon');?></button>
 
-        <a class="alt-action2" href="<?php echo osc_recover_user_password_url(); ?>"><?php _e('I forgot my password', 'epsilon'); ?></a>
+        <a class="alt-action2" href="<?php echo osc_recover_user_password_url(); ?>"><?php _e('Forgot password?', 'epsilon'); ?></a>
       </form>
     </div>
   </section>
