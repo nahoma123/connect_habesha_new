@@ -49,7 +49,7 @@
             </div>
 
             <div class="header"><?php _e('Public profile', 'epsilon'); ?></div>
-            <div class="description"><?php _e('Your business profile visible to customers, where your information, address and listings are shown.', 'epsilon'); ?></div>
+            <div class="description"><?php _e('Your profile visible to customers, where your contact numbers, location, and adverts are displayed.', 'epsilon'); ?></div>
           </a>
         <?php } ?>
         
@@ -59,8 +59,8 @@
             <span class="count"><?php echo Item::newInstance()->countItemTypesByUserID($user_id, 'active'); ?></span>
           </div>
 
-          <div class="header"><?php _e('Active listings', 'epsilon'); ?></div>
-          <div class="description"><?php _e('Listings that are visible in front and customer can view and share them.', 'epsilon'); ?></div>
+          <div class="header"><?php _e('Active posts', 'epsilon'); ?></div>
+          <div class="description"><?php _e('A list of all your posts visible to other users. From here, you can edit, deactivate, or delete your posts.', 'epsilon'); ?></div>
         </a>
 
 
@@ -70,8 +70,8 @@
             <span class="count"><?php echo Item::newInstance()->countItemTypesByUserID($user_id, 'pending_validate'); ?></span>
           </div>
 
-          <div class="header"><?php _e('Validation pending listings', 'epsilon'); ?></div>
-          <div class="description"><?php _e('Listings that are hidden and waiting for yours or administrator\'s validation.', 'epsilon'); ?></div>
+          <div class="header"><?php _e('Validation pending posts', 'epsilon'); ?></div>
+          <div class="description"><?php _e('Posts that are hidden and waiting for your or the administrator\'s validation.', 'epsilon'); ?></div>
         </a>
 
 
@@ -81,8 +81,8 @@
             <span class="count"><?php echo Item::newInstance()->countItemTypesByUserID($user_id, 'expired'); ?></span>
           </div>
 
-          <div class="header"><?php _e('Expired listings', 'epsilon'); ?></div>
-          <div class="description"><?php _e('Listings that are expired and are not visible in front. You can renew or recreate them.', 'epsilon'); ?></div>
+          <div class="header"><?php _e('Expired posts', 'epsilon'); ?></div>
+          <div class="description"><?php _e('Expired posts are hidden from users. Here, you can either renew or recreate them.', 'epsilon'); ?></div>
         </a>
 
 
@@ -109,7 +109,7 @@
           <div class="icon">
             <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M358.9 433.3l-6.8 61c-1.1 10.2 7.5 18.8 17.6 17.6l60.9-6.8 137.9-137.9-71.7-71.7-137.9 137.8zM633 268.9L595.1 231c-9.3-9.3-24.5-9.3-33.8 0l-41.8 41.8 71.8 71.7 41.8-41.8c9.2-9.3 9.2-24.4-.1-33.8zM223.9 288c79.6.1 144.2-64.5 144.1-144.1C367.9 65.6 302.4.1 224.1 0 144.5-.1 79.9 64.5 80 144.1c.1 78.3 65.6 143.8 143.9 143.9zm-4.4-239.9c56.5-2.6 103 43.9 100.4 100.4-2.3 49.2-42.1 89.1-91.4 91.4-56.5 2.6-103-43.9-100.4-100.4 2.3-49.3 42.2-89.1 91.4-91.4zM134.4 352c14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 16.7 0 32.2 5 45.5 13.3l34.4-34.4c-22.4-16.7-49.8-26.9-79.9-26.9-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h258.3c-3.8-14.6-2.2-20.3.9-48H48v-25.6c0-47.6 38.8-86.4 86.4-86.4z"/></svg>
             <span class="count">
-              <?php if($c == 0) { ?><i class="fas fa-check"></i><?php } else { ?><i class="fas fa-exclamation"></i><?php } ?>
+                
             </span>
           </div>
 
@@ -118,7 +118,7 @@
             <?php if($c == 0) { ?>
               <?php _e('Your personal information, profile picture, location, business type and others', 'epsilon'); ?>
             <?php } else { ?>
-              <?php echo osc_esc_html( sprintf(__('Your profile is not complete, you did not filled %s or more important data about you.', 'epsilon'), $c) ); ?>
+              <?php echo osc_esc_html( sprintf(__('Update your Telegram, WhatsApp, and location details. This will be displayed on your profile.', 'epsilon'), $c) ); ?>
             <?php } ?>
           </div>
         </a>
@@ -174,7 +174,7 @@
             <i class="fas fa-envelope"></i>
           </div>
 
-          <div class="header"><?php _e('Contact us', 'epsilon'); ?></div>
+          <div class="header"><?php _e('Contact Us', 'epsilon'); ?></div>
           <div class="description"><?php _e('Do you have questions regarding our site or need help? Feel free to drop us a message.', 'epsilon'); ?></div>
         </a>
         

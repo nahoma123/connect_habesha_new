@@ -42,7 +42,7 @@
       $can_prolong = false;
 
       if(osp_get_user_group() == 0) {
-        _e('You are not member of any group', 'osclass_pay');
+        _e('You haven\'t purchased a membership yet.', 'osclass_pay');
       } else {
         if(date('Y', strtotime($ugroup['dt_expire'])) > 2090 || date('Y', strtotime($ugroup['dt_expire'])) < 1980) {
           $expire_string = __('with no expiration', 'osclass_pay');
@@ -51,7 +51,7 @@
           $expire_string = __('until', 'osclass_pay') . ' ' . osc_format_date($ugroup['dt_expire']);
         }
 
-        echo sprintf(__('You are member of %s group %s. This group has flat discount %s on all promotion products!', 'osclass_pay'), '<strong>' . $group['s_name'] . '</strong>', $expire_string, '<strong>' . $group['i_discount'] . '%</strong>');
+        echo sprintf(__('You have the %s membership %s.', 'osclass_pay'), '<strong>' . $group['s_name'] . '</strong>', $expire_string, '<strong>' . $group['i_discount'] . '%</strong>');
       }
     ?>
   </div>
