@@ -91,6 +91,7 @@ class User extends DAO {
       'primary_accounts',
       'additional_methods',
       'additional_accounts',
+      'category'
     );
     $this->setFields($array_fields);
   }

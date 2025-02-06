@@ -74,11 +74,18 @@ class UserActions
     //   $input['additional_methods'] = implode(',', $input['additional_methods']);
     // }
 
-    $show_on_profile = $input['show_on_profile'];
-    if (!in_array($show_on_profile, ['yes', 'no'])) {
-      $flash_error .= _m('You must choose whether or not you want to show your phone number.') . PHP_EOL;
+    // $show_on_profile = $input['show_on_profile'];
+    // if (!in_array($show_on_profile, ['yes', 'no'])) {
+    //   $flash_error .= _m('You must choose whether or not you want to show your phone number.') . PHP_EOL;
+    //   $error[] = 11; // Add a unique error code
+    // }
+
+    $category = $input['category'];
+    if (!in_array($category, ['male', 'female', 'massage'])) {
+      $flash_error .= _m('You must choose your category.') . PHP_EOL;
       $error[] = 11; // Add a unique error code
     }
+
 
     if ($input['s_name'] == '') {
       $flash_error .= _m('The name cannot be empty') . PHP_EOL;
@@ -426,6 +433,7 @@ class UserActions
     $input['d_coord_long'] = (Params::getParam('d_coord_long') != '') ? Params::getParam('d_coord_long') : @$city['d_coord_long'];
     $input['b_company'] = (Params::getParam('b_company') != '' && Params::getParam('b_company') != 0) ? 1 : 0;
     $input['show_on_profile'] = Params::getParam('show_on_profile');
+    $input['category'] = Params::getParam('category');
 
     if (Params::getParam('primary_methods') !== null) {
       $primaryMethods = Params::getParam('primary_methods');

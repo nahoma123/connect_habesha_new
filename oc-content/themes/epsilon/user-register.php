@@ -47,7 +47,8 @@
       <?php } ?>
 
       <a class="alt-action"
-        href="<?php echo osc_user_login_url(); ?>"><?php _e('Already have an account? Log in', 'epsilon'); ?> &#8594;</a>
+        href="<?php echo osc_user_login_url(); ?>"><?php _e('Already have an account? Log in', 'epsilon'); ?>
+        &#8594;</a>
 
       <form name="register" id="register" action="<?php echo osc_base_url(true); ?>" method="post">
         <input type="hidden" name="page" value="register" />
@@ -85,7 +86,33 @@
             style="text-align:left;font-style:italic;font-size:12px;margin-top:-13px;margin-bottom:15px;color:#0178d6;">
             * Your phone number is private. You can change this later in your settings.</div>
         </div>
-        
+
+        <div class="radio-group">
+          <label for="category">
+            <?php _e('Please show your category', 'epsilon'); ?> <span class="req">*</span>
+          </label>
+
+          <div class="radio-option">
+            <label class="radio-label">
+              <input type="radio" name="category" value="female" checked=""> <span class="radio-text">I am a female (Women)</span>
+            </label>
+          </div>
+
+          <div class="radio-option" style="margin-top: 8px;">
+            <label class="radio-label">
+              <input type="radio" name="category" value="male">
+              <span class="radio-text">I am a male (Man)</span>
+            </label>
+          </div>
+
+          <div class="radio-option" style="margin-top: 8px;">
+            <label class="radio-label">
+              <input type="radio" name="category" value="massage">
+              <span class="radio-text">Massage and Morrocan Spa</span>
+            </label>
+          </div>
+        </div>
+
         <div id="communicationMethodContainer" style="display: none;">
           <label id="socialNetworkLabel" for="additionalAccountContainer"
             style="margin-top: 12px;"><?php _e('Social Networking numbers', 'epsilon'); ?></label>
@@ -519,12 +546,15 @@
         margin-bottom: 8px;
         font-size: 14px;
         cursor: pointer;
+        font-family: "Comfortaa", sans-serif;
       }
 
-      .radio-group input[type="radio"] {
-        display: none;
-      }
 
+      .radio-label input[type="radio"] {
+    width: 11px;
+    height: 11px;
+    margin-left: 0px;
+}
       .radio-group .custom-radio {
         width: 18px;
         height: 18px;
@@ -560,6 +590,28 @@
         margin-bottom: 10px;
         color: #0178d6;
       }
+
+      .radio-group {
+      display: flex;
+      flex-direction: column;
+      /* Stack radio options vertically */
+      gap: 8px;
+      /* Small gap between items */
+
+    }
+    .radio-group label {
+    font-size: 14px;
+    margin: 0 0 3px 0;
+    display: block;
+}
+
+    .radio-group label[for="category"] {
+      margin-bottom: 8px;
+      /* Add spacing between main label and options */
+    }
+    label {
+    font-weight: 600;
+}
     </style>
 </body>
 
