@@ -9,6 +9,12 @@
   <meta name="googlebot" content="noindex, nofollow" />
   <script type="text/javascript" src="<?php echo osc_current_web_theme_js_url('jquery.validate.min.js'); ?>"></script>
 </head>
+<?php
+
+// Fetch all categories
+$categories = Category::newInstance()->findRootCategories();
+?>
+
 
 <body id="body-user-register" class="pre-account register">
   <?php UserForm::js_validation(); ?>
@@ -88,30 +94,23 @@
         </div>
 
         <div class="radio-group">
-          <label for="category">
-            <?php _e('Please show your category', 'epsilon'); ?> <span class="req">*</span>
-          </label>
+  <label for="category_id">
+    <?php _e('Please show your category', 'epsilon'); ?> <span class="req">*</span>
+  </label>
+  <?php if (!empty($categories)) { ?>
+    <?php foreach ($categories as $index => $category) { ?>
+      <div class="radio-option" style="margin-top: <?php echo ($index > 0) ? '8px' : '0'; ?>;">
+        <label class="radio-label">
+          <input type="radio" name="category_id" value="<?php echo $category['pk_i_id']; ?>" <?php echo ($index === 0) ? 'checked' : ''; ?>>
+          <span class="radio-text"><?php echo $category['s_name']; ?></span>
+        </label>
+      </div>
+    <?php } ?>
+  <?php } else { ?>
+    <p><?php _e('No categories available.', 'epsilon'); ?></p>
+  <?php } ?>
+</div>
 
-          <div class="radio-option">
-            <label class="radio-label">
-              <input type="radio" name="category" value="female" checked=""> <span class="radio-text">I am a female (Women)</span>
-            </label>
-          </div>
-
-          <div class="radio-option" style="margin-top: 8px;">
-            <label class="radio-label">
-              <input type="radio" name="category" value="male">
-              <span class="radio-text">I am a male (Man)</span>
-            </label>
-          </div>
-
-          <div class="radio-option" style="margin-top: 8px;">
-            <label class="radio-label">
-              <input type="radio" name="category" value="massage">
-              <span class="radio-text">Massage and Morrocan Spa</span>
-            </label>
-          </div>
-        </div>
 
         <div id="communicationMethodContainer" style="display: none;">
           <label id="socialNetworkLabel" for="additionalAccountContainer"
@@ -605,7 +604,7 @@
     display: block;
 }
 
-    .radio-group label[for="category"] {
+    .radio-group label[for="category_id"] {
       margin-bottom: 8px;
       /* Add spacing between main label and options */
     }

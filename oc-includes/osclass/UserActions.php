@@ -80,12 +80,11 @@ class UserActions
     //   $error[] = 11; // Add a unique error code
     // }
 
-    $category = $input['category'];
-    if (!in_array($category, ['male', 'female', 'massage'])) {
+    $category = $input['category_id'];
+    if ($category == '') {
       $flash_error .= _m('You must choose your category.') . PHP_EOL;
       $error[] = 11; // Add a unique error code
     }
-
 
     if ($input['s_name'] == '') {
       $flash_error .= _m('The name cannot be empty') . PHP_EOL;
@@ -96,8 +95,6 @@ class UserActions
       $flash_error .= _m('The email is not valid') . PHP_EOL;
       $error[] = 5;
     }
-
-
 
     if ($input['s_username'] != '') {
       $username_taken = $this->manager->findByUsername($input['s_username']);
@@ -110,6 +107,7 @@ class UserActions
         $error[] = 9;
       }
     }
+    // print_r($input);
 
     $flash_error = osc_apply_filter('user_add_flash_error', $flash_error);
     if ($flash_error != '') {
@@ -130,7 +128,13 @@ class UserActions
 
 
     // save user
-    $this->manager->insert($input);
+    try {
+      $this->manager->insert($input);
+      error_log("Step 2: Insert successful");
+  } catch (Exception $e) {
+      error_log("DB Insert Error: " . $e->getMessage());
+  }
+  
     $userId = $this->manager->dao->insertedId();
 
     if ($input['s_username'] == '') {
@@ -433,7 +437,9 @@ class UserActions
     $input['d_coord_long'] = (Params::getParam('d_coord_long') != '') ? Params::getParam('d_coord_long') : @$city['d_coord_long'];
     $input['b_company'] = (Params::getParam('b_company') != '' && Params::getParam('b_company') != 0) ? 1 : 0;
     $input['show_on_profile'] = Params::getParam('show_on_profile');
-    $input['category'] = Params::getParam('category');
+    $input['category_id'] = Params::getParam('category_id');
+    
+    
 
     if (Params::getParam('primary_methods') !== null) {
       $primaryMethods = Params::getParam('primary_methods');
