@@ -748,7 +748,7 @@ function osp_user_limit_message() {
       $html .= '<div class="osp-limit-box-wrap" style="display:none;">';
       $html .= '<div id="osp-limit-box">';
       $html .= '<a href="' . osc_base_url(true) . '?ospHideUserLimitBox=1" class="osp-box-close"><i class="fa fa-times"></i></a>';
-      $html .= '<strong>' . __('Premium membership and account limit', 'osclass_pay') . '</strong>';
+      $html .= '<strong>' . __('Upgrade your membership', 'osclass_pay') . '</strong>';
       $html .= '<span>' . $message . '</span>';
       $html .= '<a href="' . osc_route_url('osp-membership') . '" class="osp-purchase">' . __('Buy', 'osclass_pay') . '</a>';
 

@@ -728,34 +728,34 @@ generate_contact_methods($additional_account, $additional_methods, $user['show_o
 
         
         <div class="box" id="protection">
-          <h2><?php _e('Be careful!', 'epsilon'); ?></h2>
+          <h2><?php _e('Useful Tips:', 'epsilon'); ?></h2>
           
           <div class="point">
             <div class="icon i1"><i class="far fa-credit-card"></i></div>
-            <span><?php _e('Never pay down a deposit in a bank account until you have met the seller, seen signed a purchase agreement.', 'epsilon'); ?></span>
+            <span><?php _e('Don’t pay anyone before meeting them in person.', 'epsilon'); ?></span>
           </div>
           
           <div class="point">
             <div class="icon i2"><i class="fas fa-cash-register"></i></div>
-            <span><?php _e('No serious private advertisers ask for a down payment before you meet. ', 'epsilon'); ?></span>
+            <span><?php _e('Be careful with people who ask for payment before you meet them.', 'epsilon'); ?></span>
           </div>
           
           <div class="point">
             <div class="icon i3"><i class="fas fa-user-secret"></i></div>
-            <span><?php _e('Receiving an email with an in-scanned ID does not mean that you have identified the sender. You do this on the spot, when you sign a purchase agreement.', 'epsilon'); ?></span>
+            <span><?php _e('Don\'t meet someone you don\'t know in a secluded or unknown location; meet in a public place. Also, do not invite strangers into your home.', 'epsilon'); ?></span>
           </div>
         </div>
 
         <a href="#" class="report-button">
           <i class="fas fa-flag"></i>
-          <span><?php _e('Report listing', 'epsilon'); ?></span>
+          <span><?php _e('Report advert', 'epsilon'); ?></span>
         </a>
 
         <div class="report-wrap" style="display:none;">
           <div id="report">
             <img src="<?php echo osc_current_web_theme_url('images/report.png'); ?>" alt="<?php echo osc_esc_html(__('Report', 'epsilon')); ?>" />
-            <div class="header"><?php _e('Report listing', 'epsilon'); ?></div>
-            <div class="subheader"><?php _e('If you find this listing as inappropriate, offensive or spammy, please let us know about it. Select one of following reasons:', 'epsilon'); ?></div>
+            <div class="header"><?php _e('Report advert', 'epsilon'); ?></div>
+            <div class="subheader"><?php _e('If you think this Ad is inappropriate, offensive, or fake, please let us know. Select one of the following reasons:', 'epsilon'); ?></div>
             
             <div class="text">
               <a href="<?php echo osc_item_link_spam() ; ?>" rel="nofollow"><?php _e('Spam', 'epsilon') ; ?></a>

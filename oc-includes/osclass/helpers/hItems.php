@@ -1399,7 +1399,7 @@ function osc_reset_custom_items() {
  * @return string
  */
 function osc_format_price($price, $symbol = null) {
-  if ($price === null) return osc_apply_filter ('item_price_null', __('Check with seller'));
+  if ($price === null) return osc_apply_filter ('item_price_null', __(''));
   if ($price == 0) return osc_apply_filter ('item_price_zero', __('Free'));
 
   if($symbol==null) { $symbol = osc_item_currency_symbol(); }
