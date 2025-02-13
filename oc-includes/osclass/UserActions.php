@@ -74,9 +74,15 @@ class UserActions
     //   $input['additional_methods'] = implode(',', $input['additional_methods']);
     // }
 
-    $show_on_profile = $input['show_on_profile'];
-    if (!in_array($show_on_profile, ['yes', 'no'])) {
-      $flash_error .= _m('You must choose whether or not you want to show your phone number.') . PHP_EOL;
+    // $show_on_profile = $input['show_on_profile'];
+    // if (!in_array($show_on_profile, ['yes', 'no'])) {
+    //   $flash_error .= _m('You must choose whether or not you want to show your phone number.') . PHP_EOL;
+    //   $error[] = 11; // Add a unique error code
+    // }
+
+    $category = $input['category_id'];
+    if ($category == '') {
+      $flash_error .= _m('You must choose your category.') . PHP_EOL;
       $error[] = 11; // Add a unique error code
     }
 
@@ -90,8 +96,6 @@ class UserActions
       $error[] = 5;
     }
 
-
-
     if ($input['s_username'] != '') {
       $username_taken = $this->manager->findByUsername($input['s_username']);
       if (!$error && $username_taken != false) {
@@ -103,6 +107,7 @@ class UserActions
         $error[] = 9;
       }
     }
+    // print_r($input);
 
     $flash_error = osc_apply_filter('user_add_flash_error', $flash_error);
     if ($flash_error != '') {
@@ -123,7 +128,13 @@ class UserActions
 
 
     // save user
-    $this->manager->insert($input);
+    try {
+      $this->manager->insert($input);
+      error_log("Step 2: Insert successful");
+  } catch (Exception $e) {
+      error_log("DB Insert Error: " . $e->getMessage());
+  }
+  
     $userId = $this->manager->dao->insertedId();
 
     if ($input['s_username'] == '') {
@@ -426,6 +437,9 @@ class UserActions
     $input['d_coord_long'] = (Params::getParam('d_coord_long') != '') ? Params::getParam('d_coord_long') : @$city['d_coord_long'];
     $input['b_company'] = (Params::getParam('b_company') != '' && Params::getParam('b_company') != 0) ? 1 : 0;
     $input['show_on_profile'] = Params::getParam('show_on_profile');
+    $input['category_id'] = Params::getParam('category_id');
+    
+    
 
     if (Params::getParam('primary_methods') !== null) {
       $primaryMethods = Params::getParam('primary_methods');

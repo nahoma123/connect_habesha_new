@@ -9,7 +9,7 @@
   $user_id = osc_logged_user_id();
   $currency = osp_currency();
   $symbol = osp_currency_symbol();
-  $groups = ModelOSP::newInstance()->getGroups();
+  $groups = ModelOSP::newInstance()->getUserGroupsByCategory($user_id);
   $group = ModelOSP::newInstance()->getGroup(osp_get_user_group());
   $ugroup = ModelOSP::newInstance()->getUserGroupRecord($user_id);
   $repeat = array();
@@ -64,7 +64,9 @@
 
   <div class="osp-content">
     <?php foreach($groups as $g) { ?>
-      <?php if($restricted_cat <> 1 || ($restricted_cat == 1 && in_array($g['pk_i_id'], $restricted_groups))) { ?>
+      <!-- <?php print($g['s_name']); ?> -->
+          <!-- <?php print_r($restricted_groups); ?> -->
+
         <div class="osp-group <?php if(osp_get_user_group() == $g['pk_i_id']) {?>active<?php } ?> <?php echo $style; ?>" data-group="<?php echo $g['pk_i_id']; ?>" data-rank="<?php echo $g['i_rank']; ?>">
           <!-- Not used, can be removed in future -->
           <?php if(1==2) { ?>
@@ -222,7 +224,6 @@
           </div>
 
         </div>
-      <?php } ?>
     <?php } ?>
   </div>
 </div>

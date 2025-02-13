@@ -13,7 +13,9 @@ function __construct() {
   parent::__construct();
 }
 
-
+public function getTable_users(){
+  return DB_TABLE_PREFIX.'t_user';
+}
 public function getTable_log() {
   return DB_TABLE_PREFIX.'t_osp_log';
 }
@@ -50,7 +52,7 @@ public function getTable_voucher_stats() {
   return DB_TABLE_PREFIX.'t_vcr_voucher_stats';
 }
 
-public function getTable_category() {
+public function getTable_category(): string {
   return DB_TABLE_PREFIX.'t_category_description';
 }
 
@@ -1850,6 +1852,71 @@ public function updatePack($id, $name, $desc, $price, $bonus, $group, $color) {
 public function deletePack($pack_id) {
   return $this->dao->delete($this->getTable_pack(), array('pk_i_id' => $pack_id));
 }
+
+
+public function getUserGroupsByCategory($user_id, $is_admin = false) {
+  if (empty($user_id) || $user_id <= 0) {
+    return $this->getGroups($is_admin); // Fallback if user_id is invalid
+  }
+
+  // Step 1: Get the user's category ID (parent category)
+  $this->dao->select('category_id');
+  $this->dao->from($this->getTable_users());
+  $this->dao->where('pk_i_id', $user_id);
+  
+  $result = $this->dao->get();
+  
+  if (!$result || $result->numRows() == 0) {
+    return $this->getGroups($is_admin); // Fallback if user not found
+  }
+
+  $user = $result->row();
+  $category_id = $user['category_id'];
+
+  // Step 2: Get all subcategory IDs where fk_i_parent_id = user's category_id
+  $subcategories = array($category_id); // Include the parent category itself
+  $this->dao->select('pk_i_id');
+  $this->dao->from('osxw_t_category'); // Directly accessing the correct table
+  $this->dao->where('fk_i_parent_id', $category_id);
+  
+  $subcategories_result = $this->dao->get();
+  
+  if ($subcategories_result && $subcategories_result->numRows() > 0) {
+    foreach ($subcategories_result->result() as $sub) {
+      $subcategories[] = $sub['pk_i_id']; // Add subcategory IDs
+    }
+  }
+
+  // Step 3: Fetch user groups where s_category contains the parent or subcategories
+  $category_conditions = array();
+  foreach ($subcategories as $cat_id) {
+    $category_conditions[] = "FIND_IN_SET($cat_id, g.s_category) > 0";
+  }
+
+  $this->dao->select('g.*');
+  $this->dao->from($this->getTable_user_group() . ' g');
+  $this->dao->where('(' . implode(' OR ', $category_conditions) . ')');
+
+  $group_result = $this->dao->get();
+  
+  if ($group_result && $group_result->numRows() > 0) {
+    $output = array();
+    foreach ($group_result->result() as $d) {
+      $row = $d;
+      
+      $row['locale'] = $this->getUserGroupLocale($d['pk_i_id'], Params::getParam('ospLocale'));
+
+      $row['s_name'] = osp_locale($row, 's_name', $is_admin);
+      $row['s_description'] = osp_locale($row, 's_description', $is_admin);
+      $row['s_custom'] = osp_locale($row, 's_custom', $is_admin);
+      $output[] = $row;
+    }
+    return $output;
+  }
+
+  return $this->getGroups($is_admin); // Fallback if no matching groups found
+}
+
 
 
 
