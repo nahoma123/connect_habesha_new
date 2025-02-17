@@ -95,7 +95,7 @@ $categories = Category::newInstance()->findRootCategories();
 
         <div class="radio-group">
   <label for="category_id">
-    <?php _e('Please show your category', 'epsilon'); ?> <span class="req">*</span>
+    <?php _e('Please select your gender. I am a:', 'epsilon'); ?> <span class="req">*</span>
   </label>
   <?php if (!empty($categories)) { ?>
     <?php foreach ($categories as $index => $category) { ?>

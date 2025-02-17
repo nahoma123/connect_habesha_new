@@ -6,7 +6,7 @@ msgstr ""
 "Language-Team: Osclass Core\n"
 "Last-Translator: Administrator <admin@connecthabesha.com>\n"
 "MIME-Version: 1.0\n"
-"PO-Revision-Date: 2025-02-12 13:57:02\n"
+"PO-Revision-Date: 2025-02-15 20:45:04\n"
 "POT-Creation-Date: 2024-04-22 08:04+0200\n"
 "Project-Id-Version: Epsilon Osclass Theme\n"
 "Report-Msgid-Bugs-To: \n"
@@ -3315,7 +3315,7 @@ msgstr ""
 
 #: user-items.php:18
 msgid "Listings visible to customers on site."
-msgstr ""
+msgstr "Your list of posts visible to other members."
 
 #: user-items.php:22
 msgid "Listings pending approval. Unapproved listings are not visible on site."

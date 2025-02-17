@@ -92,7 +92,7 @@
     $last_online = '';
 
     if($item_user && $item_user['dt_reg_date'] <> '') { 
-      $reg_type = sprintf(__('Registered for %s', 'epsilon'), eps_smart_date2($item_user['dt_reg_date']));
+      $reg_type = sprintf(__('Member for %s', 'epsilon'), eps_smart_date2($item_user['dt_reg_date']));
     } else if ($item_user) { 
       $reg_type = __('Registered user', 'epsilon');
     } else {
@@ -597,7 +597,7 @@
                 <strong class="name"><?php echo $contact_name; ?></strong>
               <?php } ?>
 
-              <div class="items"><?php echo sprintf(__('%d active listings', 'epsilon'), $user_item_count); ?></div>
+              <div class="items"><?php echo sprintf(__('%d active adverts', 'epsilon'), $user_item_count); ?></div>
               
               <?php if($is_company) { ?>
                 <div class="pro"><?php _e('Pro', 'epsilon'); ?></div>

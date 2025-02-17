@@ -160,7 +160,7 @@
 
 
         <section class="location">
-          <h2><?php _e('Listing location', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
+          <h2><?php _e('Advert location', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
 
           <div class="in">
             <?php if($location_type == 0) { ?>
@@ -256,7 +256,7 @@
         
 
         <section class="about">
-          <h2><?php _e('Seller\'s information', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
+          <h2><?php _e('Contact Information', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
 
           <div class="in">
             <div class="seller<?php if(osc_is_web_user_logged_in() ) { ?> logged<?php } ?>">
@@ -266,41 +266,11 @@
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 408c-66.2 0-120-53.8-120-120s53.8-120 120-120 120 53.8 120 120-53.8 120-120 120zm0-192c-39.7 0-72 32.3-72 72s32.3 72 72 72 72-32.3 72-72-32.3-72-72-72zm-24 72c0-13.2 10.8-24 24-24 8.8 0 16-7.2 16-16s-7.2-16-16-16c-30.9 0-56 25.1-56 56 0 8.8 7.2 16 16 16s16-7.2 16-16zm110.7-145H464v288H48V143h121.3l24-64h125.5l23.9 64zM324.3 31h-131c-20 0-37.9 12.4-44.9 31.1L136 95H48c-26.5 0-48 21.5-48 48v288c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V143c0-26.5-21.5-48-48-48h-88l-14.3-38c-5.8-15.7-20.7-26-37.4-26z"/></svg>
                 </a>
                 
-                <label for="contactName"><?php _e('Contact Name', 'epsilon'); ?><?php if(strpos($required_fields, 'name') !== false) { ?><span class="req">*</span><?php } ?></label>
+                <label for="contactName"><?php _e('Your name', 'epsilon'); ?><?php if(strpos($required_fields, 'name') !== false) { ?><span class="req">*</span><?php } ?></label>
                 <div class="input-box"><?php ItemForm::contact_name_text($prepare); ?></div>
               </div>
             
-              <div class="row phone">
-                <label for="phone"><?php _e('Phone Number', 'epsilon'); ?><?php if(strpos($required_fields, 'phone') !== false) { ?><span class="req">*</span><?php } ?></label>
-                <div class="input-box">
-                  <?php if(method_exists('ItemForm', 'contact_phone_text')) { ?>
-                    <?php ItemForm::contact_phone_text($prepare); ?>
-                  <?php } else { ?>
-                    <input type="tel" id="sPhone" name="sPhone" value="<?php echo $prepare['s_phone']; ?>" />
-                  <?php } ?>
-                </div>
-                
-                <?php if(method_exists('ItemForm', 'show_phone_checkbox')) { ?>
-                  <div class="mail-show">
-                    <div class="input-box-check">
-                      <?php ItemForm::show_phone_checkbox() ; ?>
-                      <label for="showPhone" class="label-mail-show"><?php _e('Phone visible on ad', 'epsilon'); ?></label>
-                    </div>
-                  </div>
-                <?php } ?>
-              </div>
-
-              <div class="row user-email">
-                <label for="contactEmail"><?php _e('E-mail', 'epsilon'); ?> <span class="req">*</span></label>
-                <div class="input-box"><?php ItemForm::contact_email_text($prepare); ?></div>
-
-                <div class="mail-show">
-                  <div class="input-box-check">
-                    <?php ItemForm::show_email_checkbox() ; ?>
-                    <label for="showEmail" class="label-mail-show"><?php _e('Email visible on ad', 'epsilon'); ?></label>
-                  </div>
-                </div>
-              </div>
+              
             </div>
 
             <div class="row user-link">
@@ -400,7 +370,7 @@
 
 
         <section class="info">
-          <h2><?php _e('Listing description and attributes', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
+          <h2><?php _e('Advert description', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
 
           <div class="in">
             <div class="row ttle">
@@ -425,14 +395,7 @@
             <?php osc_run_hook('item_publish_hook'); ?>
             
             <div class="row dsc">
-              <div class="td-wrap d1 input-box" style="width:auto !important;">
-                <input type="checkbox" name="termsConditions" id="termsConditions" />
-              </div>
-              <!-- <div class="td-wrap d1 input-box terms-line">
-                <?php //_e('By clicking Submit, You agree our', 'epsilon'); ?> <a href="<?//php echo osc_base_url(); ?>index.php?page=page&id=33" target="_blank" ><?php _e('Terms and Privacy policy', 'epsilon'); ?></a>
-                <span class="req">*</span>
-              </div> -->
-            </div>
+              
             
           </div>
           
@@ -449,7 +412,7 @@
         <section class="buttons-block">
           <div class="row captcha"><?php osc_run_hook('item_publish_bottom'); eps_show_recaptcha(); ?></div>
 
-          <button type="submit" class="btn"><?php _e('Submit', 'epsilon'); ?></button>
+          <button type="submit" class="btn"><?php _e('Post advert', 'epsilon'); ?></button>
           
           <?php osc_run_hook('item_publish_buttons'); ?>
         </section>
@@ -531,7 +494,7 @@
   <script type="text/javascript">
   $(document).ready(function(){
     $('.item-publish input[name^="title"]').attr('placeholder', '<?php echo osc_esc_js(__('Summarize your offer', 'epsilon')); ?>');
-    $('.item-publish textarea[name^="description"]').attr('placeholder', '<?php echo osc_esc_js(__('Detailed description of your offer', 'epsilon')); ?>');
+    $('.item-publish textarea[name^="description"]').attr('placeholder', '<?php echo osc_esc_js(__('Describe your service, including pricing, availability, and other relevant details.', 'epsilon')); ?>');
     $('.item-publish input[name="contactPhone"]').prop('type', 'tel');
 
     // HIDE THEME EXTRA FIELDS (Transaction, Condition, Status) ON EXCLUDED CATEGORIES 

@@ -9,7 +9,7 @@ msgstr ""
 "Language-Team: Osclass Core\n"
 "Last-Translator: Administrator <admin@connecthabesha.com>\n"
 "MIME-Version: 1.0\n"
-"PO-Revision-Date: 2025-02-12 13:07:44\n"
+"PO-Revision-Date: 2025-02-15 19:57:57\n"
 "POT-Creation-Date: 2023-12-01 11:26+0100\n"
 "Project-Id-Version: Osclass by OsclassPoint.com\n"
 "Report-Msgid-Bugs-To: https://osclass-classifieds.com/\n"
@@ -1404,7 +1404,7 @@ msgstr ""
 #: oc-includes/osclass/ItemActions.php:146
 #: oc-includes/osclass/ItemActions.php:746
 msgid "Category invalid."
-msgstr ""
+msgstr "Invalid category."
 
 #: oc-includes/osclass/ItemActions.php:147
 #: oc-includes/osclass/ItemActions.php:747
@@ -1673,7 +1673,7 @@ msgstr ""
 
 #: oc-includes/osclass/controller/item.php:289
 msgid "Great! We've just updated your listing"
-msgstr ""
+msgstr "Your advert has been updated successfully!"
 
 #: oc-includes/osclass/controller/item.php:318
 msgid "The listing has been validated"
@@ -1715,7 +1715,7 @@ msgstr ""
 
 #: oc-includes/osclass/controller/item.php:497
 msgid "Thanks! That's very helpful"
-msgstr ""
+msgstr "Thanks for reporting! This will help us make our site a safer place for everyone."
 
 #: oc-includes/osclass/controller/item.php:512
 msgid "Sorry, send to friend form is disabled."

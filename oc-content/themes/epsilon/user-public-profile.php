@@ -208,22 +208,7 @@ generate_contact_methods($additional_account, $additional_methods, $user['show_o
         </div>
       <?php } ?>
 
-      <div class="box" id="share">
-        <?php osc_reset_resources(); ?>
-        <a class="whatsapp isMobile"
-          href="whatsapp://send?text=<?php echo urlencode(osc_user_public_profile_url(osc_user_id())); ?>"
-          data-action="share/whatsapp/share"><i class="fab fa-whatsapp"></i>
-          <?php _e('Whatsapp', 'epsilon'); ?></a></span>
-        <a class="facebook" title="<?php echo osc_esc_html(__('Share on Facebook', 'epsilon')); ?>" target="_blank"
-          href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(osc_user_public_profile_url(osc_user_id())); ?>"><i
-            class="fab fa-facebook"></i> <?php _e('Facebook', 'epsilon'); ?></a>
-        <a class="twitter" title="<?php echo osc_esc_html(__('Share on Twitter', 'epsilon')); ?>" target="_blank"
-          href="https://twitter.com/intent/tweet?text=<?php echo urlencode(meta_title()); ?>&url=<?php echo urlencode(osc_user_public_profile_url(osc_user_id())); ?>"><i
-            class="fab fa-twitter"></i> <?php _e('Twitter', 'epsilon'); ?></a>
-        <a class="pinterest" title="<?php echo osc_esc_html(__('Share on Pinterest', 'epsilon')); ?>" target="_blank"
-          href="https://pinterest.com/pin/create/button/?url=<?php echo urlencode(osc_user_public_profile_url(osc_user_id())); ?>&media=<?php echo eps_profile_picture(osc_user_id(), 'large'); ?>&description=<?php echo htmlspecialchars(meta_title()); ?>"><i
-            class="fab fa-pinterest"></i> <?php _e('Pinterest', 'epsilon'); ?></a>
-      </div>
+      
 
       <?php echo eps_banner('public_profile_sidebar'); ?>
       <?php osc_run_hook('user_public_profile_sidebar_bottom'); ?>
