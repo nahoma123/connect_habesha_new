@@ -64,6 +64,8 @@
 
   <div class="osp-content">
     <?php foreach($groups as $g) { ?>
+      <?php if($restricted_cat <> 1 || ($restricted_cat == 1 && in_array($g['pk_i_id'], $restricted_groups))) { ?>
+
       <!-- <?php print($g['s_name']); ?> -->
           <!-- <?php print_r($restricted_groups); ?> -->
 
@@ -222,8 +224,9 @@
               <?php } ?>
             </select>
           </div>
-
         </div>
+        <?php } ?>
+
     <?php } ?>
   </div>
 </div>

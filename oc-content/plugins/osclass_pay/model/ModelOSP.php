@@ -1873,6 +1873,13 @@ public function getUserGroupsByCategory($user_id, $is_admin = false) {
   $user = $result->row();
   $category_id = $user['category_id'];
 
+  // Define allowed user group IDs based on category_id
+  $allowed_groups = [
+    96 => [1, 2, 3, 4, 21, 22, 23, 24],  // If category_id is 96, only allow user group IDs 2, 4, 6
+    98 => [25, 26, 27, 28, 29, 30, 31, 32],   // If category_id is 101, only allow user group IDs 8, 10
+    100 => [33, 34, 35, 36],   // If category_id is 101, only allow user group IDs 8, 10
+  ];
+
   // Step 2: Get all subcategory IDs where fk_i_parent_id = user's category_id
   $subcategories = array($category_id); // Include the parent category itself
   $this->dao->select('pk_i_id');
@@ -1880,7 +1887,7 @@ public function getUserGroupsByCategory($user_id, $is_admin = false) {
   $this->dao->where('fk_i_parent_id', $category_id);
   
   $subcategories_result = $this->dao->get();
-  
+
   if ($subcategories_result && $subcategories_result->numRows() > 0) {
     foreach ($subcategories_result->result() as $sub) {
       $subcategories[] = $sub['pk_i_id']; // Add subcategory IDs
@@ -1897,9 +1904,16 @@ public function getUserGroupsByCategory($user_id, $is_admin = false) {
   $this->dao->from($this->getTable_user_group() . ' g');
   $this->dao->where('(' . implode(' OR ', $category_conditions) . ')');
 
+  // Step 4: Only include specific user group IDs
+  if (isset($allowed_groups[$category_id])) {
+    $this->dao->whereIn('g.pk_i_id', $allowed_groups[$category_id]);
+  } else {
+    return []; // If no allowed groups are defined, return an empty array
+  }
+
   $group_result = $this->dao->get();
-  
-  if ($group_result && $group_result->numRows() > 0) {
+  print_r($this->dao->lastQuery());
+  if ($group_result) {
     $output = array();
     foreach ($group_result->result() as $d) {
       $row = $d;
@@ -1913,10 +1927,9 @@ public function getUserGroupsByCategory($user_id, $is_admin = false) {
     }
     return $output;
   }
-
+  
   return $this->getGroups($is_admin); // Fallback if no matching groups found
 }
-
 
 
 
