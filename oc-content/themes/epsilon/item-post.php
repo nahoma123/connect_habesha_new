@@ -18,7 +18,8 @@
   $action = 'item_add_post';
   $edit = false;
 
-  if(Params::getParam('action') == 'item_edit') {
+
+if(Params::getParam('action') == 'item_edit') {
     $action = 'item_edit_post';
     $edit = true;
   }
@@ -35,6 +36,13 @@
     $loc_cook = eps_location_from_cookies();
 
     $prepare = array();
+    // Retrieve the user's default category ID
+$user_default_category = isset($user['category_id']) ? $user['category_id'] : null;
+
+// Set the default category in the $prepare array
+if (!$edit && $user_default_category) {
+    $prepare['i_category'] = $user_default_category;
+}
     $prepare['s_contact_name'] = osc_user_name();
     $prepare['s_contact_email'] = osc_user_email();
     $prepare['s_zip'] = osc_user_zip();
@@ -48,7 +56,6 @@
     $prepare['s_city'] = eps_get_session('sCity') <> '' ? eps_get_session('sCity') : osc_user_city();
     $prepare['s_phone'] = eps_get_session('sPhone') <> '' ? eps_get_session('sPhone') : osc_user_phone();
     $prepare['s_contact_phone'] = $prepare['s_phone'];
-    $prepare['i_category'] = eps_get_session('catId') <> '' ? eps_get_session('catId') : Params::getParam('catId');
     $location_text = @array_values(array_filter(array($prepare['s_city'], $prepare['s_region'], $prepare['s_country'])))[0];
   } else {
 
@@ -138,7 +145,7 @@
             <?php } else if($category_type == 2 || $category_type == '') { ?>
               <div class="row category multi">
                 <label for="catId"><?php _e('Select category for your listing', 'epsilon'); ?> <span class="req">*</span></label>
-                <?php ItemForm::category_multiple_selects(null, $prepare, __('Select a category', 'epsilon')); ?>
+                <?php ItemForm::category_multiple_selects_fixed(null, $prepare, __('Select a category', 'epsilon')); ?>
               </div>
             <?php } else if($category_type == 3) { ?>
               <div class="row category simple">

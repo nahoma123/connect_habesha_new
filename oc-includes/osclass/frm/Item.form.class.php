@@ -341,6 +341,136 @@ class ItemForm extends Form {
   <?php
   }
 
+  public static function category_multiple_selects_fixed($categories = null, $item = null, $default_item = null, $parent_selectable = false) {
+    $categoryID = Params::getParam('catId');
+    if( osc_item_category_id() != null ) {
+      $categoryID = osc_item_category_id();
+    }
+
+    if( Session::newInstance()->_getForm('catId') > 0 ) {
+      $categoryID = Session::newInstance()->_getForm('catId');
+    }
+
+    if ($item == null) { $item = osc_item(); }
+
+    if(isset($item['fk_i_category_id'])) {
+      $categoryID = $item['fk_i_category_id'];
+    }
+
+    $tmp_categories_tree = Category::newInstance()->toRootTree($categoryID);
+    $categories_tree = array();
+    
+    foreach($tmp_categories_tree as $t) {
+      $categories_tree[] = (isset($t['pk_i_id']) ? $t['pk_i_id'] : null);
+    }
+    
+    unset($tmp_categories_tree);
+
+    if($categories == null) {
+      $categories = Category::newInstance()->listEnabled();
+    }
+
+    parent::generic_input_hidden('catId', $categoryID);
+    ?>
+    <div id="select_holder"></div>
+    <script type="text/javascript" charset="utf-8">
+      <?php
+        $tmp_cat = array();
+        foreach($categories as $c) {
+          if($c['fk_i_parent_id']==null ) { 
+            $c['fk_i_parent_id'] = 0;
+          }
+          
+          $tmp_cat[$c['fk_i_parent_id']][] = array($c['pk_i_id'], $c['s_name']);
+        }
+        
+        // List of subcategories for each "parent" category
+        foreach($tmp_cat as $k => $v) {
+          echo 'var categories_'.$k.' = '.json_encode($v).';'.PHP_EOL;
+        }
+      ?>
+
+      if(osc == undefined) { 
+        var osc = {}; 
+      }
+      
+      if(osc.langs == undefined) { 
+        osc.langs = {}; 
+      }
+      
+      if(osc.langs.select_category == undefined) { 
+        osc.langs.select_category = '<?php echo osc_esc_js(__('Select category')); ?>'; 
+      }
+      
+      if(osc.langs.select_subcategory == undefined) { 
+        osc.langs.select_subcategory = '<?php echo osc_esc_js(__('Select subcategory')); ?>';
+      }
+      
+      osc.item_post = {};
+      osc.item_post.category_id  = '<?php echo $categoryID; ?>';
+      osc.item_post.category_tree_id  = <?php echo json_encode($categories_tree); ?>;
+
+      $(document).ready(function(){
+        draw_select(1,0, true);
+        <?php for($i=0; $i<count($categories_tree)-1; $i++) { ?>
+          draw_select(<?php echo ($i+2); ?> ,<?php echo $categories_tree[$i]; ?>);
+        <?php } ?>
+          
+        window.setTimeout(function() {
+          $('#select_<?php echo ($i+2-1); ?>').trigger('change');
+        }, 200);
+        
+        $('body').on('change', '[name^="select_"]', function() {
+          var depth = parseInt($(this).attr("depth"));
+          for(var d=(depth+1); d<=4; d++) {
+            $("#select_"+d).trigger('removed');
+            $("#select_"+d).remove();
+          }
+          
+          $("#catId").attr("value", $(this).val());
+          $("#catId").change();
+          
+          if(catPriceEnabled[$('#catId').val()] == 1) {
+            $('.price').show();
+          } else {
+            $('.price').hide();
+            $('#price').val('') ;
+          }
+          
+          if((depth==1 && $(this).val()!=0) || (depth>1 && $(this).val()!=$("#select_"+(depth-1)).val())) {
+            draw_select(depth+1, $(this).val());
+          }
+          
+          return true;
+        });
+      });
+
+      // Generate category select box
+      function draw_select(select, categoryID, disable = false) {
+        tmp_categories = window['categories_' + categoryID];    // list of subcategories for each "parent" category
+
+        if(tmp_categories != null && $.isArray(tmp_categories)) {
+          $("#select_holder").before('<select id="select_'+select+'" name="select_'+select+'" depth="'+select+'" '+(disable ? 'disabled' : '')+'></select>');
+
+          if(categoryID==0) {
+            var options = '<option value="' + categoryID + '" >' + osc.langs.select_category + '</option>';
+          } else {
+            var options = '<option value="' + categoryID + '" >' + osc.langs.select_subcategory + '</option>';
+          }
+          
+          $.each(tmp_categories, function(index, catRow){
+            options += '<option value="' + catRow[0] + '" ' + (osc.item_post.category_tree_id.indexOf(catRow[0]) >= 0 ? 'selected="selected"' : '') + '>' + catRow[1] + '</option>';
+          });
+          
+          $('#select_'+select).html(options);
+          $('#select_'+select).next("a").find(".select-box-label").text(osc.langs.select_subcategory);
+          $('#select_'+select).trigger("created");
+        };
+      }
+    </script>
+  <?php
+  }
+
 
   /**
   * @param    $categories
