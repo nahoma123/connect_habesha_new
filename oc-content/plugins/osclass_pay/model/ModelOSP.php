@@ -1875,9 +1875,9 @@ public function getUserGroupsByCategory($user_id, $is_admin = false) {
 
   // Define allowed user group IDs based on category_id
   $allowed_groups = [
-    96 => [1, 2, 3, 4, 21, 22, 23, 24],  // If category_id is 96, only allow user group IDs 2, 4, 6
-    98 => [25, 26, 27, 28, 29, 30, 31, 32],   // If category_id is 101, only allow user group IDs 8, 10
-    100 => [33, 34, 35, 36],   // If category_id is 101, only allow user group IDs 8, 10
+    96 => [1, 2, 3, 4, 21, 22, 23, 24],  // If category_id is 96, only allow
+    98 => [25, 26, 27, 28, 29, 30, 31, 32],   // If category_id is 101, only allow 
+    100 => [33, 34, 35, 36],   // If category_id is 101, only allow 
   ];
 
   // Step 2: Get all subcategory IDs where fk_i_parent_id = user's category_id
@@ -1912,7 +1912,6 @@ public function getUserGroupsByCategory($user_id, $is_admin = false) {
   }
 
   $group_result = $this->dao->get();
-  print_r($this->dao->lastQuery());
   if ($group_result) {
     $output = array();
     foreach ($group_result->result() as $d) {
