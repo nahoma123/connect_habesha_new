@@ -340,6 +340,8 @@ class UserActions
       $input['dt_mod_date'] = $date;
       $input['dt_access_date'] = $date;
       $input['s_secret'] = osc_genRandomPassword();
+      $input['show_on_profile'] = 'no';
+
       $input['s_access_ip'] = osc_get_ip(); //Params::getServerParam('REMOTE_ADDR');
     } else {
       $input['dt_mod_date'] = date('Y-m-d H:i:s');
@@ -436,7 +438,9 @@ class UserActions
     $input['d_coord_lat'] = (Params::getParam('d_coord_lat') != '') ? Params::getParam('d_coord_lat') : @$city['d_coord_lat'];   // maybe $city['d_coord_lat'] does not exists
     $input['d_coord_long'] = (Params::getParam('d_coord_long') != '') ? Params::getParam('d_coord_long') : @$city['d_coord_long'];
     $input['b_company'] = (Params::getParam('b_company') != '' && Params::getParam('b_company') != 0) ? 1 : 0;
-    $input['show_on_profile'] = Params::getParam('show_on_profile');
+    if (!$is_add){
+      $input['show_on_profile'] = Params::getParam('show_on_profile');
+    }
     $input['category_id'] = Params::getParam('category_id');
     
     
