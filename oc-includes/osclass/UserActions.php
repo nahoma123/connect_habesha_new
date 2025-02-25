@@ -65,7 +65,6 @@ class UserActions
 
     $input = $this->prepareData(true);
 
-
     // // Ensure methods are stored as comma-separated strings
     // if (isset($input['primary_methods']) && is_array($input['primary_methods'])) {
     //   $input['primary_methods'] = implode(',', $input['primary_methods']);
@@ -96,7 +95,7 @@ class UserActions
       $error[] = 5;
     }
 
-    if ($input['s_username'] != '') {
+    if ($input['s_username'] != '') {      
       $username_taken = $this->manager->findByUsername($input['s_username']);
       if (!$error && $username_taken != false) {
         $flash_error .= _m('Username is already taken') . PHP_EOL;
@@ -107,7 +106,6 @@ class UserActions
         $error[] = 9;
       }
     }
-    // print_r($input);
 
     $flash_error = osc_apply_filter('user_add_flash_error', $flash_error);
     if ($flash_error != '') {
@@ -123,8 +121,24 @@ class UserActions
 
     // hook pre add or edit
     osc_run_hook('pre_user_post');
+    
 
     $input = osc_apply_filter('user_insert_data', $input);
+
+    // Check if the email is already registered
+$baseEmail = $input['s_email'];
+$emailExists = $this->manager->findByEmail($baseEmail);
+
+$counter = 1;
+while ($emailExists) {
+    $emailParts = explode('@', $baseEmail);
+    $newEmail = $emailParts[0] . $counter . '@' . $emailParts[1]; // Append a number before '@'
+    $emailExists = $this->manager->findByEmail($newEmail);
+    $counter++;
+}
+
+// Assign the unique email back to the input
+$input['s_email'] = $newEmail;
 
 
     // save user
@@ -134,7 +148,7 @@ class UserActions
   } catch (Exception $e) {
       error_log("DB Insert Error: " . $e->getMessage());
   }
-  
+
     $userId = $this->manager->dao->insertedId();
 
     if ($input['s_username'] == '') {
