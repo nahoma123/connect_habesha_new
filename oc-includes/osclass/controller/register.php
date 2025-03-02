@@ -70,15 +70,17 @@ class CWebRegister extends BaseModel {
 
         require_once LIB_PATH . 'osclass/UserActions.php';
         $userActions = new UserActions(false);
-        $success = $userActions->add();
+        $result = $userActions->add();
+        $success = $result['success'];
+        $final_email = $result['email'];
         
         if($success == 1) {
           osc_add_flash_ok_message(_m('The user has been created. An activation email has been sent'));
           $this->redirectTo(osc_base_url());
-        } else if($success == 2) {
+        } else  if ($success == 2) {
           osc_add_flash_ok_message(_m('Your account has been created successfully'));
           Params::setParam('action', 'login_post');
-          Params::setParam('email', Params::getParam('s_email'));
+          Params::setParam('email', $final_email); // Use the processed email
           Params::setParam('password', Params::getParam('s_password', false, false));
           require_once osc_lib_path() . 'osclass/controller/login.php';
           $do = new CWebLogin();
@@ -87,7 +89,8 @@ class CWebRegister extends BaseModel {
           osc_add_flash_error_message($success);
           $this->redirectTo(osc_register_account_url());
         }
-        
+
+
         break;
         
       case('validate'):     // validate account

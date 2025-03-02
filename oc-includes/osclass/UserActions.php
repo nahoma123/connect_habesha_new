@@ -43,7 +43,7 @@ class UserActions
   /**
    * @return int
    */
-  public function add()
+  public function add(): array
   {
     $error = array();
     $flash_error = '';
@@ -95,7 +95,7 @@ class UserActions
       $error[] = 5;
     }
 
-    if ($input['s_username'] != '') {      
+    if ($input['s_username'] != '') {
       $username_taken = $this->manager->findByUsername($input['s_username']);
       if (!$error && $username_taken != false) {
         $flash_error .= _m('Username is already taken') . PHP_EOL;
@@ -121,33 +121,33 @@ class UserActions
 
     // hook pre add or edit
     osc_run_hook('pre_user_post');
-    
+
 
     $input = osc_apply_filter('user_insert_data', $input);
 
     // Check if the email is already registered
-$baseEmail = $input['s_email'];
-$emailExists = $this->manager->findByEmail($baseEmail);
+    $baseEmail = $input['s_email'];
+    $emailExists = $this->manager->findByEmail($baseEmail);
 
-$counter = 1;
-while ($emailExists) {
-    $emailParts = explode('@', $baseEmail);
-    $newEmail = $emailParts[0] . $counter . '@' . $emailParts[1]; // Append a number before '@'
-    $emailExists = $this->manager->findByEmail($newEmail);
-    $counter++;
-}
+    $counter = 1;
+    while ($emailExists) {
+      $emailParts = explode('@', $baseEmail);
+      $newEmail = $emailParts[0] . $counter . '@' . $emailParts[1]; // Append a number before '@'
+      $emailExists = $this->manager->findByEmail($newEmail);
+      $counter++;
+    }
 
-// Assign the unique email back to the input
-$input['s_email'] = $newEmail;
+    // Assign the unique email back to the input
+    $input['s_email'] = $newEmail;
 
 
     // save user
     try {
       $this->manager->insert($input);
       error_log("Step 2: Insert successful");
-  } catch (Exception $e) {
+    } catch (Exception $e) {
       error_log("DB Insert Error: " . $e->getMessage());
-  }
+    }
 
     $userId = $this->manager->dao->insertedId();
 
@@ -210,7 +210,7 @@ $input['s_email'] = $newEmail;
     }
 
     osc_run_hook('user_register_completed', $userId);
-    return $success;
+    return array('success' => $success, 'email' => $input['s_email']);
   }
 
   //edit...
@@ -276,7 +276,7 @@ $input['s_email'] = $newEmail;
       $phone = $input['s_phone_mobile'] ?: $input['s_phone_land'];
       Session::newInstance()->_set('userPhone', $phone);
     }
-    
+
     if (is_array(Params::getParam('s_info'))) {
       $pinfo = (osc_tinymce_users_enabled() == '1' ? Params::getParam('s_info', false, false) : Params::getParam('s_info'));   // update 420
 
@@ -452,12 +452,12 @@ $input['s_email'] = $newEmail;
     $input['d_coord_lat'] = (Params::getParam('d_coord_lat') != '') ? Params::getParam('d_coord_lat') : @$city['d_coord_lat'];   // maybe $city['d_coord_lat'] does not exists
     $input['d_coord_long'] = (Params::getParam('d_coord_long') != '') ? Params::getParam('d_coord_long') : @$city['d_coord_long'];
     $input['b_company'] = (Params::getParam('b_company') != '' && Params::getParam('b_company') != 0) ? 1 : 0;
-    if (!$is_add){
+    if (!$is_add) {
       $input['show_on_profile'] = Params::getParam('show_on_profile');
     }
     $input['category_id'] = Params::getParam('category_id');
-    
-    
+
+
 
     if (Params::getParam('primary_methods') !== null) {
       $primaryMethods = Params::getParam('primary_methods');
