@@ -85,6 +85,7 @@ class UserActions
       $error[] = 11; // Add a unique error code
     }
 
+    
     if ($input['s_name'] == '') {
       $flash_error .= _m('The name cannot be empty') . PHP_EOL;
       $error[] = 10;
