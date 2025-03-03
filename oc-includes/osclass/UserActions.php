@@ -130,16 +130,15 @@ class UserActions
     $emailExists = $this->manager->findByEmail($baseEmail);
 
     $counter = 1;
+    $newEmail = $baseEmail; // Default to the base email
     while ($emailExists) {
       $emailParts = explode('@', $baseEmail);
-      $newEmail = $emailParts[0] . $counter . '@' . $emailParts[1]; // Append a number before '@'
+      $newEmail = $emailParts[0] . $counter . '@' . $emailParts[1];
       $emailExists = $this->manager->findByEmail($newEmail);
       $counter++;
     }
-
-    // Assign the unique email back to the input
     $input['s_email'] = $newEmail;
-
+    
 
     // save user
     try {
