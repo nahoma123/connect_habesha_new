@@ -250,6 +250,7 @@ $additionalAccounts = $user['additional_accounts']; // Additional account detail
       ?>
       <!-- Hidden input to submit the country value -->
       <input type="hidden" name="countryId" value="<?php echo osc_esc_html($user['fk_c_country_code']); ?>" />
+      <input type="hidden" name="category_id" value="<?php echo osc_esc_html($user['category_id']); ?>" />
     </div>
   </div>
 
