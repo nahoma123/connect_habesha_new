@@ -423,51 +423,50 @@ class ItemForm extends Form {
       
       // Function to draw a select box for a given category level
       function draw_select(select, categoryID, disable = false) {
-        var tmp_categories = window['categories_' + categoryID];  // Get subcategories for this parent category
-  
-        if(tmp_categories != null && $.isArray(tmp_categories)) {
-          // Create the select element. The main category select (categoryID==0) remains unchanged.
-          $("#select_holder").before('<select id="select_' + select + '" name="select_' + select + '" depth="' + select + '" ' + (disable ? 'disabled' : '') + '></select>');
-  
-          // Set the default option text based on whether this is a main or sub category select
-          if(categoryID == 0) {
-            var options = '<option value="' + categoryID + '" >' + osc.langs.select_category + '</option>';
-          } else {
-            var options = '<option value="' + categoryID + '" >' + osc.langs.select_subcategory + '</option>';
-          }
-  
-          // Flag to indicate if any VIP (disabled) options are added
-          var has_disabled_option = false;
-  
-          // Loop through each subcategory and build the options list
-          $.each(tmp_categories, function(index, catRow) {
-            var catId   = catRow[0];
-            var catName = catRow[1];
-            var disabledAttr = "";
-            // For subcategory selects (categoryID != 0), check if the category is VIP and the user is not VIP.
-            if(categoryID != 0 && !is_vip_user && vip_categories.indexOf(parseInt(catId)) !== -1) {
-              disabledAttr = " disabled";
-              has_disabled_option = true;
-              // Append a note to the category name
-              catName += " (VIP only)";
-            }
-            options += '<option value="' + catId + '" ' + (osc.item_post.category_tree_id.indexOf(catId) >= 0 ? 'selected="selected"' : '') + disabledAttr + '>' + catName + '</option>';
-          });
-  
-          // Render the select options
-          $('#select_' + select).html(options);
-          $('#select_' + select).next("a").find(".select-box-label").text(osc.langs.select_subcategory);
-          $('#select_' + select).trigger("created");
-  
-          // If this is a subcategory select and at least one option is disabled, append the "Upgrade to VIP" button
-          if(categoryID != 0 && has_disabled_option) {
-            if($('#select_' + select).next('.upgrade-vip-button').length == 0) {
-              $('#select_' + select).after('<a class="upgrade-vip-button" href="<?php echo osc_route_url('custom-page', array('route' => 'osp-membership')); ?>" target="_blank" style="margin-left:10px;">Upgrade to VIP ?</a>');
-            }
-          }
-        }
+  var tmp_categories = window['categories_' + categoryID];  // Get subcategories for this parent category
+
+  if(tmp_categories != null && $.isArray(tmp_categories)) {
+    // Create the select element. The main category select (categoryID==0) remains unchanged.
+    $("#select_holder").before('<select id="select_' + select + '" name="select_' + select + '" depth="' + select + '" ' + (disable ? 'disabled' : '') + '></select>');
+
+    // Set the default option text based on whether this is a main or sub category select
+    if(categoryID == 0) {
+      var options = '<option value="' + categoryID + '" >' + osc.langs.select_category + '</option>';
+    } else {
+      var options = '<option value="' + categoryID + '" >' + osc.langs.select_subcategory + '</option>';
+    }
+
+    // Flag to indicate if any VIP (disabled) options are added
+    var has_disabled_option = false;
+
+    // Loop through each subcategory and build the options list
+    $.each(tmp_categories, function(index, catRow) {
+      var catId   = catRow[0];
+      var catName = catRow[1];
+      var disabledAttr = "";
+      // For subcategory selects (categoryID != 0), check if the category is VIP and the user is not VIP.
+      if(categoryID != 0 && !is_vip_user && vip_categories.indexOf(parseInt(catId)) !== -1) {
+        disabledAttr = " disabled";
+        has_disabled_option = true;
+        // Append a note to the category name
+        catName += " (VIP only)";
       }
-  
+      options += '<option value="' + catId + '" ' + (osc.item_post.category_tree_id.indexOf(catId) >= 0 ? 'selected="selected"' : '') + disabledAttr + '>' + catName + '</option>';
+    });
+
+    // Render the select options
+    $('#select_' + select).html(options);
+    $('#select_' + select).next("a").find(".select-box-label").text(osc.langs.select_subcategory);
+    $('#select_' + select).trigger("created");
+
+    // If this is a subcategory select and at least one option is disabled, append the "Upgrade to VIP" button
+    if(categoryID != 0 && has_disabled_option) {
+      if($('#select_' + select).next('.upgrade-vip-button').length == 0) {
+        $('#select_' + select).after('<a href="<?php echo osc_route_url("osp-membership"); ?>" class="osp-purchase" style="font-size: 12px; padding: 5px 10px; margin-top: 10px; margin-left: 10px;">Upgrade to VIP?</a>');
+      }
+    }
+  }
+}
       // On document ready, build the select boxes and add event handlers
       $(document).ready(function(){
         // Draw main category select (this one is not affected by VIP restrictions)
