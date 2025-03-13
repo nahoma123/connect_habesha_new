@@ -342,89 +342,149 @@ class ItemForm extends Form {
   }
 
   public static function category_multiple_selects_fixed($categories = null, $item = null, $default_item = null, $parent_selectable = false) {
+    // Determine the current category ID from various sources
     $categoryID = Params::getParam('catId');
     if( osc_item_category_id() != null ) {
       $categoryID = osc_item_category_id();
     }
-
     if( Session::newInstance()->_getForm('catId') > 0 ) {
       $categoryID = Session::newInstance()->_getForm('catId');
     }
-
     if ($item == null) { $item = osc_item(); }
-
     if(isset($item['fk_i_category_id'])) {
       $categoryID = $item['fk_i_category_id'];
     }
-
+    
+    // Build the category tree array
     $tmp_categories_tree = Category::newInstance()->toRootTree($categoryID);
     $categories_tree = array();
-    
     foreach($tmp_categories_tree as $t) {
       $categories_tree[] = (isset($t['pk_i_id']) ? $t['pk_i_id'] : null);
     }
-    
     unset($tmp_categories_tree);
-
+  
     if($categories == null) {
       $categories = Category::newInstance()->listEnabled();
     }
-
+  
+    // --------------------------------------------------------------------
+    // VIP Logic
+    // Get the current user group from the bridge table using the User model
+    $user_id   = osc_logged_user_id();
+    $user_group = User::newInstance()->getUserGroupId($user_id);
+    // Hardcoded VIP group IDs (placeholders—replace with your actual VIP group IDs)
+    $vip_groups = array(21, 22, 23, 24, 29, 30, 21, 22);
+    // Hardcoded VIP category IDs (placeholders—replace with your actual VIP category IDs)
+    $vip_categories = array(103, 105);
+    // Determine if the user is a VIP user
+    $is_vip = in_array($user_group, $vip_groups);
+    // --------------------------------------------------------------------
+  
     parent::generic_input_hidden('catId', $categoryID);
     ?>
     <div id="select_holder"></div>
     <script type="text/javascript" charset="utf-8">
+      // Pass PHP VIP info to JavaScript for use in the select builder
+      var is_vip_user = <?php echo ($is_vip ? 'true' : 'false'); ?>;
+      var vip_categories = <?php echo json_encode($vip_categories); ?>;
+      
       <?php
+        // Build an array of categories grouped by their parent id
         $tmp_cat = array();
         foreach($categories as $c) {
-          if($c['fk_i_parent_id']==null ) { 
+          if($c['fk_i_parent_id'] == null) { 
             $c['fk_i_parent_id'] = 0;
           }
-          
           $tmp_cat[$c['fk_i_parent_id']][] = array($c['pk_i_id'], $c['s_name']);
         }
         
-        // List of subcategories for each "parent" category
+        // Output the JavaScript variables for each parent id's subcategories
         foreach($tmp_cat as $k => $v) {
-          echo 'var categories_'.$k.' = '.json_encode($v).';'.PHP_EOL;
+          echo 'var categories_' . $k . ' = ' . json_encode($v) . ';' . PHP_EOL;
         }
       ?>
-
-      if(osc == undefined) { 
+  
+      if(typeof osc == 'undefined') { 
         var osc = {}; 
       }
-      
-      if(osc.langs == undefined) { 
+      if(typeof osc.langs == 'undefined') { 
         osc.langs = {}; 
       }
-      
-      if(osc.langs.select_category == undefined) { 
+      if(typeof osc.langs.select_category == 'undefined') { 
         osc.langs.select_category = '<?php echo osc_esc_js(__('Select category')); ?>'; 
       }
-      
-      if(osc.langs.select_subcategory == undefined) { 
+      if(typeof osc.langs.select_subcategory == 'undefined') { 
         osc.langs.select_subcategory = '<?php echo osc_esc_js(__('Select subcategory')); ?>';
       }
       
       osc.item_post = {};
-      osc.item_post.category_id  = '<?php echo $categoryID; ?>';
-      osc.item_post.category_tree_id  = <?php echo json_encode($categories_tree); ?>;
-
+      osc.item_post.category_id = '<?php echo $categoryID; ?>';
+      osc.item_post.category_tree_id = <?php echo json_encode($categories_tree); ?>;
+      
+      // Function to draw a select box for a given category level
+      function draw_select(select, categoryID, disable = false) {
+        var tmp_categories = window['categories_' + categoryID];  // Get subcategories for this parent category
+  
+        if(tmp_categories != null && $.isArray(tmp_categories)) {
+          // Create the select element. The main category select (categoryID==0) remains unchanged.
+          $("#select_holder").before('<select id="select_' + select + '" name="select_' + select + '" depth="' + select + '" ' + (disable ? 'disabled' : '') + '></select>');
+  
+          // Set the default option text based on whether this is a main or sub category select
+          if(categoryID == 0) {
+            var options = '<option value="' + categoryID + '" >' + osc.langs.select_category + '</option>';
+          } else {
+            var options = '<option value="' + categoryID + '" >' + osc.langs.select_subcategory + '</option>';
+          }
+  
+          // Flag to indicate if any VIP (disabled) options are added
+          var has_disabled_option = false;
+  
+          // Loop through each subcategory and build the options list
+          $.each(tmp_categories, function(index, catRow) {
+            var catId   = catRow[0];
+            var catName = catRow[1];
+            var disabledAttr = "";
+            // For subcategory selects (categoryID != 0), check if the category is VIP and the user is not VIP.
+            if(categoryID != 0 && !is_vip_user && vip_categories.indexOf(parseInt(catId)) !== -1) {
+              disabledAttr = " disabled";
+              has_disabled_option = true;
+              // Append a note to the category name
+              catName += " (VIP only)";
+            }
+            options += '<option value="' + catId + '" ' + (osc.item_post.category_tree_id.indexOf(catId) >= 0 ? 'selected="selected"' : '') + disabledAttr + '>' + catName + '</option>';
+          });
+  
+          // Render the select options
+          $('#select_' + select).html(options);
+          $('#select_' + select).next("a").find(".select-box-label").text(osc.langs.select_subcategory);
+          $('#select_' + select).trigger("created");
+  
+          // If this is a subcategory select and at least one option is disabled, append the "Upgrade to VIP" button
+          if(categoryID != 0 && has_disabled_option) {
+            if($('#select_' + select).next('.upgrade-vip-button').length == 0) {
+              $('#select_' + select).after('<a class="upgrade-vip-button" href="<?php echo osc_route_url('custom-page', array('route' => 'osp-membership')); ?>" target="_blank" style="margin-left:10px;">Upgrade to VIP ?</a>');
+            }
+          }
+        }
+      }
+  
+      // On document ready, build the select boxes and add event handlers
       $(document).ready(function(){
-        draw_select(1,0, true);
-        <?php for($i=0; $i<count($categories_tree)-1; $i++) { ?>
-          draw_select(<?php echo ($i+2); ?> ,<?php echo $categories_tree[$i]; ?>);
+        // Draw main category select (this one is not affected by VIP restrictions)
+        draw_select(1, 0, true);
+        <?php for($i = 0; $i < count($categories_tree) - 1; $i++) { ?>
+          draw_select(<?php echo ($i + 2); ?>, <?php echo $categories_tree[$i]; ?>);
         <?php } ?>
-          
+        
         window.setTimeout(function() {
-          $('#select_<?php echo ($i+2-1); ?>').trigger('change');
+          $('#select_<?php echo ($i + 2 - 1); ?>').trigger('change');
         }, 200);
         
         $('body').on('change', '[name^="select_"]', function() {
           var depth = parseInt($(this).attr("depth"));
-          for(var d=(depth+1); d<=4; d++) {
-            $("#select_"+d).trigger('removed');
-            $("#select_"+d).remove();
+          for(var d = (depth + 1); d <= 4; d++) {
+            $("#select_" + d).trigger('removed');
+            $("#select_" + d).remove();
           }
           
           $("#catId").attr("value", $(this).val());
@@ -434,42 +494,20 @@ class ItemForm extends Form {
             $('.price').show();
           } else {
             $('.price').hide();
-            $('#price').val('') ;
+            $('#price').val('');
           }
           
-          if((depth==1 && $(this).val()!=0) || (depth>1 && $(this).val()!=$("#select_"+(depth-1)).val())) {
-            draw_select(depth+1, $(this).val());
+          if((depth == 1 && $(this).val() != 0) || (depth > 1 && $(this).val() != $("#select_" + (depth - 1)).val())) {
+            draw_select(depth + 1, $(this).val());
           }
           
           return true;
         });
       });
-
-      // Generate category select box
-      function draw_select(select, categoryID, disable = false) {
-        tmp_categories = window['categories_' + categoryID];    // list of subcategories for each "parent" category
-
-        if(tmp_categories != null && $.isArray(tmp_categories)) {
-          $("#select_holder").before('<select id="select_'+select+'" name="select_'+select+'" depth="'+select+'" '+(disable ? 'disabled' : '')+'></select>');
-
-          if(categoryID==0) {
-            var options = '<option value="' + categoryID + '" >' + osc.langs.select_category + '</option>';
-          } else {
-            var options = '<option value="' + categoryID + '" >' + osc.langs.select_subcategory + '</option>';
-          }
-          
-          $.each(tmp_categories, function(index, catRow){
-            options += '<option value="' + catRow[0] + '" ' + (osc.item_post.category_tree_id.indexOf(catRow[0]) >= 0 ? 'selected="selected"' : '') + '>' + catRow[1] + '</option>';
-          });
-          
-          $('#select_'+select).html(options);
-          $('#select_'+select).next("a").find(".select-box-label").text(osc.langs.select_subcategory);
-          $('#select_'+select).trigger("created");
-        };
-      }
     </script>
   <?php
   }
+  
 
 
   /**
