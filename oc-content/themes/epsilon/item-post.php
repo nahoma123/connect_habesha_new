@@ -381,14 +381,14 @@ if (!$edit && $user_default_category) {
 
           <div class="in">
             <div class="row ttle">
-              <label for="title[<?php echo osc_current_user_locale(); ?>]"><?php _e('Title', 'epsilon'); ?> *</label>
+              <label for="title[<?php echo osc_current_user_locale(); ?>]"><?php _e('Title', 'epsilon'); ?> <span class="req">*</span></label>
               <div class="input-box">
                 <?php ItemForm::title_input('title', osc_current_user_locale(), osc_esc_html(eps_post_item_title())); ?>
               </div>
             </div>
             
             <div class="row dsc">
-              <label for="description[<?php echo osc_current_user_locale(); ?>]"><?php _e('Description', 'epsilon'); ?> *</label>
+              <label for="description[<?php echo osc_current_user_locale(); ?>]"><?php _e('Description', 'epsilon'); ?> <span class="req">*</span></label>
               <div class="td-wrap d1 input-box">
                 <?php ItemForm::description_textarea('description', osc_current_user_locale(), osc_esc_html(eps_post_item_description())); ?>
               </div>
