@@ -1019,7 +1019,7 @@ ul.osp-um-inside li:last-child a {border-top-right-radius:4px;}
 .osp-pay-button li a > span.osp-i2 svg {display:inline-block;width:40px;height:48px;fill:#999;padding:4px 0;margin:0 6px 0 0;}
 .osp-pay-button li a > span.osp-i2 em {display:inline-block;height:48px;padding:10px 0;line-height:28px;letter-spacing:0.5px;vertical-align:13px;font-size:26px;color:#999;font-family:"Impact";}
 .osp-pay-button li a > strong {transition:0.2s;height:16px;display: inline-block;letter-spacing:-0.2px; width: 100%; font-size: 13px; color: #777;line-height:16px;font-weight:bold; }
-.osp-pay-button li a img { width: auto; height: auto; max-width: 100%; max-height: 46px; float: none; padding: 0; }
+.osp-pay-button li a img { width: auto; height: auto; max-width: 100%; max-height: 24px; float: none; padding: 0; }
 .osp-pay-button li a > div:not(.osp-custom-dialog) {width:100%;height:100%;}
 .osp-pay-button li a:not(.osp-disabled):hover, .osp-pay-button li a:not(.osp-disabled):focus {border-color: #0d9ecc;}
 .osp-pay-button li a:not(.osp-disabled):after { transition:0.2s;opacity:0;text-indent:1px;content: "\f00c"; position: absolute; font-family:"FontAwesome","Font Awesome 5 Free"; right: -15px; top: -15px; font-size: 13px;width: 32px; height: 32px; border-radius: 100px; border: 2px solid #0d9ecc; background: #fff; color: #333; text-align: center; line-height: 30px; }

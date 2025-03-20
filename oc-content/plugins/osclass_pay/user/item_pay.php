@@ -170,9 +170,18 @@
           if(osc_is_admin_user_logged_in() && osc_apply_filter('osp_itempay_payment_admin', true) !== false) {
             osp_admin_button(round($total, 2), sprintf(__('Pay fee %s for item %s by admin', 'osclass_pay'), osp_format_price($total, 2), $item_id), '901x2x'.$item_id.'x'.round($total, 2), array('user' => @$user['pk_i_id'], 'itemid' => $item_id, 'email' => @$user['s_email'], 'amount' => round($total, 2)));
           }
-
+          $base_url = osc_base_url();
+          $image_path = $base_url . 'oc-content/themes/epsilon/images/';
+          $images = [
+            $image_path . 'abyssinia_logo.png',
+            $image_path . 'awash_bank_logo.webp',
+            $image_path . 'cbe_logo.webp',
+            $image_path . 'm_pesa_logo.png',
+            $image_path . 'telebirr_logo.png'
+          ];
+          
           if(osp_param('bt_enabled') == 1 && osc_apply_filter('osp_itempay_payment_transfer', true) !== false) {
-            osp_transfer_button(round($total, 2), sprintf(__('Pay fee %s for item %s', 'osclass_pay'), osp_format_price($total, 2), $item_id), '901x2x'.$item_id.'x'.round($total, 2), array('user' => @$user['pk_i_id'], 'itemid' => $item_id, 'name' => @$user['s_name'], 'email' => @$user['s_email'], 'amount' => round($total, 2), 'checksum' => $checksum));
+            osp_transfer_button(round($total, 2), sprintf(__('Pay fee %s for item %s', 'osclass_pay'), osp_format_price($total, 2), $item_id), '901x2x'.$item_id.'x'.round($total, 2), array('user' => @$user['pk_i_id'], 'itemid' => $item_id, 'name' => @$user['s_name'], 'email' => @$user['s_email'], 'amount' => round($total, 2), 'checksum' => $checksum), $images);
           }
 
           if(osc_is_web_user_logged_in()) {

@@ -334,9 +334,18 @@
         osp_wallet_button(round($total, 2), sprintf(__('Pay %s cart items for %s', 'osclass_pay'), $count, osp_format_price($total, 2)), '901x1x'.$user_id, array('user' => @$user['pk_i_id'], 'itemid' => @$user['pk_i_id'], 'email' => @$user['s_email'], 'amount' => round($total, 2)));
       } 
 
+      $base_url = osc_base_url();
+      $image_path = $base_url . 'oc-content/themes/epsilon/images/';
+      $images = [
+        $image_path . 'abyssinia_logo.png',
+        $image_path . 'awash_bank_logo.webp',
+        $image_path . 'cbe_logo.webp',
+        $image_path . 'm_pesa_logo.png',
+        $image_path . 'telebirr_logo.png'
+      ];
 
       if(osp_param('bt_enabled') == 1 && osc_apply_filter('osp_cart_payment_transfer', true) !== false && !$contains_auction_buyout) {
-        osp_transfer_button(round($total, 2), sprintf(__('Pay %s cart items for %s', 'osclass_pay'), $count, osp_format_price($total, 2)), '901x1x'.$user_id, array('user' => @$user['pk_i_id'], 'itemid' => @$user['pk_i_id'], 'email' => @$user['s_email'], 'name' => @$user['s_name'], 'amount' => round($total, 2), 'checksum' => $checksum));
+        osp_transfer_button(round($total, 2), sprintf(__('Pay %s cart items for %s', 'osclass_pay'), $count, osp_format_price($total, 2)), '901x1x'.$user_id, array('user' => @$user['pk_i_id'], 'itemid' => @$user['pk_i_id'], 'email' => @$user['s_email'], 'name' => @$user['s_name'], 'amount' => round($total, 2), 'checksum' => $checksum), $images);
       }
 
       if(osc_apply_filter('osp_cart_payment_money', true) !== false) {
@@ -354,3 +363,31 @@
 <?php } ?>
 
 <?php osc_run_hook('osp_cart_after_pay_buttons'); ?>
+
+<style>
+  /* Style the button container */
+.osp-btn-transfer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Style the images container */
+.osp-transfer-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px; /* Space between images */
+  margin-top: 10px; /* Space above images */
+  width: 100%; /* Ensure it fits within the button */
+}
+
+/* Style individual images */
+.osp-transfer-image {
+  width: 40px; /* Fixed width */
+  height: 40px; /* Fixed height */
+  object-fit: contain; /* Keeps aspect ratio without cropping */
+}
+</style>

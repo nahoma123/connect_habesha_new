@@ -1,32 +1,14 @@
-# Use official PHP CLI image
-FROM php:8.1-cli
+FROM php:7.4-apache
 
-# Set the working directory
-WORKDIR /var/www/html
+# Enable Apache mod_rewrite
+RUN a2enmod rewrite
 
-# Install dependencies and PHP extensions
-RUN apt-get update && apt-get install -y \
-    libpq-dev \
-    libzip-dev \
-    unzip \
-    && docker-php-ext-install \
-    pdo \
-    pdo_mysql \
-    mysqli \
-    && docker-php-ext-enable mysqli \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+# Install necessary PHP extensions
+RUN docker-php-ext-install mysqli
 
-# Verify installed extensions (debugging step)
-RUN php -m
+# Install Xdebug
+RUN pecl install xdebug-2.9.8 \
+    && docker-php-ext-enable xdebug
 
-# Optional: Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Copy your application files into the container (uncomment if needed)
-# COPY . /var/www/html
-
-# Expose a port for PHP's built-in server
-EXPOSE 8080
-
-# Command to run PHP's built-in server
-CMD ["php", "-S", "0.0.0.0:8080"]
+# Configure Xdebug for remote debugging
+COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
