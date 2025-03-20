@@ -449,7 +449,7 @@ class ItemForm extends Form {
         disabledAttr = " disabled";
         has_disabled_option = true;
         // Append a note to the category name
-        catName += " (VIP only)";
+        catName += " (VIP only)🔒";
       }
       options += '<option value="' + catId + '" ' + (osc.item_post.category_tree_id.indexOf(catId) >= 0 ? 'selected="selected"' : '') + disabledAttr + '>' + catName + '</option>';
     });

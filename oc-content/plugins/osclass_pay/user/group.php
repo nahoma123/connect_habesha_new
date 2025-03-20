@@ -215,14 +215,7 @@
             <?php } ?>
 
 
-            <label class="osp-label" for="osp-select-group"><?php _e('Duration', 'osclass_pay'); ?></label>
-            <select class="osp-select osp-select-group" id="osp-select-group" name="osp-select-group" data-group="<?php echo $g['pk_i_id']; ?>">
-              <?php $k = 0; ?>
-              <?php foreach($repeat[$g['pk_i_id']] as $r) { ?>
-                <option value="<?php echo $r['quantity']; ?>" data-days="<?php echo osc_esc_html($r['days']); ?>" data-price="<?php echo osc_esc_html($r['price']); ?>" data-price-formatted="<?php echo osc_esc_html($r['price_formatted']); ?>" <?php if($k == 0) { ?>selected="selected"<?php } ?>><?php echo osc_esc_html($r['title']); ?></option>
-                <?php $k++; ?>
-              <?php } ?>
-            </select>
+            
           </div>
         </div>
         <?php } ?>

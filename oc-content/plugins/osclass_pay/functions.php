@@ -2775,7 +2775,7 @@ function osp_product_cart_name($product) {
       }
     }
 
-    return sprintf(__('Membership in %s (%s days)', 'osclass_pay'), '<u>' . $group['s_name'] . '</u>', $duration);
+    return sprintf(__('%s (%s days)', 'osclass_pay'), '<u>' . $group['s_name'] . '</u>', $duration);
 
 
   } else if($type == OSP_TYPE_BANNER) {
