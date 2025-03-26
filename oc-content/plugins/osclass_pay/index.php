@@ -1060,7 +1060,12 @@ osc_add_route('osp-wallet', OSP_URL_DIR . '/wallet/([^\/]+)/([^\/]+)/(.+)', OSP_
 osc_add_route('osp-transfer', OSP_URL_DIR . '/transfer/([^\/]+)/([^\/]+)/(.+)', OSP_URL_DIR . '/transfer/{a}/{extra}/{desc}', osc_plugin_folder(__FILE__).'/user/transfer_pay.php');
 osc_add_route('osp-admin-pay', OSP_URL_DIR . '/adminpay/([^\/]+)/([^\/]+)/(.+)', OSP_URL_DIR . '/adminpay/{a}/{extra}/{desc}', osc_plugin_folder(__FILE__).'/user/admin_pay.php');
 osc_add_route('osp-admin-transfer', OSP_URL_DIR . '/admin/transfer/([0-9]+)/([0-9]+)', OSP_URL_DIR . '/admin/transfer/{btId}/{status}', osc_plugin_folder(__FILE__).'admin/_gateway_transfer.php');
-
+osc_add_route(
+  'osp-upload-evidence',              // Route ID
+  'upload-evidence',                  // URL slug (e.g., yoursite.com/upload-evidence)
+  'upload-evidence',                  // SEO-friendly URL (can match the slug)
+  osc_plugin_folder(__FILE__) . 'upload_evidence.php'  // Path to your script
+);
 
 // HOOKS
 osc_register_plugin(osc_plugin_path(__FILE__), 'osp_install');

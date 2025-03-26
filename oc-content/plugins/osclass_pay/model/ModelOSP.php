@@ -2487,6 +2487,13 @@ public function createBankTransfer($variable, $cart, $description, $price, $user
   return $transaction;
 }
 
+public function updateBankTransferEvidence($id, $image_path) {
+  return $this->dao->update(
+    DB_TABLE_PREFIX . 't_osp_bank_transfer',
+    ['s_evidence_image' => $image_path],
+    ['s_transaction' => $id]
+  );
+}
 
 // GET ALL TRANSFERS
 public function getBankTransfers($paid = -1) {

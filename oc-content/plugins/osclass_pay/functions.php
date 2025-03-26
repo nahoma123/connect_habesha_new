@@ -3542,39 +3542,34 @@ function osp_transfer_button($amount = '0.00', $description = '', $itemnumber = 
   $extra = osp_prepare_custom($extra_array) . '|';
   $extra .= 'concept,'.$description.'|';
   $extra .= 'product,'.$itemnumber;
-
   $min = (osp_param('bt_min') > 0 ? osp_param('bt_min') : 0);
 
-  // Generate HTML for the images
   $images_html = '';
   if (!empty($images)) {
-    $images_html .= '<div class="osp-transfer-images">';
-    foreach ($images as $image) {
-      $images_html .= '<img src="' . $image . '" alt="" class="osp-transfer-image">';
-    }
-    $images_html .= '</div>';
+      $images_html .= '<div class="osp-transfer-images" style="height: auto; display: flex !important; flex-wrap: wrap; justify-content: space-around;  margin-top: 15px; width: 100%; max-width: 500px;">';
+      foreach ($images as $image) {
+          $images_html .= '<img src="' . $image . '" alt="" class="osp-transfer-image" style="width: 40px !important; height: 40px !important; max-width: none !important; max-height: none !important; object-fit: contain;">';
+      }
+      $images_html .= '</div>';
   }
 
   if ($amount >= $min) {
-    $html  = '<li><a class="osp-btn-transfer osp-has-tooltip" href="' . osc_route_url('osp-transfer', array('a' => round($amount, 2), 'desc' => urlencode($description), 'extra' => urlencode($extra))) . '" title="' . osc_esc_html(__('Payment will be accepted after administrator confirms funds delivered to our account.', 'osclass_pay')) . '">';
-    $html .= '<span class="osp-i2 osp-i2-tr">';
-    $html .= '<svg x="0px" y="0px" width="48" height="48" viewBox="0 0 47.001 47.001" style="enable-background:new 0 0 47.001 47.001;" xml:space="preserve"> <g> <g> <g> <path d="M44.845,42.718H2.136C0.956,42.718,0,43.674,0,44.855c0,1.179,0.956,2.135,2.136,2.135h42.708 c1.18,0,2.136-0.956,2.136-2.135C46.979,43.674,46.023,42.718,44.845,42.718z"/> <path d="M4.805,37.165c-1.18,0-2.136,0.956-2.136,2.136s0.956,2.137,2.136,2.137h37.37c1.18,0,2.136-0.957,2.136-2.137 s-0.956-2.136-2.136-2.136h-0.533V17.945h0.533c0.591,0,1.067-0.478,1.067-1.067s-0.478-1.067-1.067-1.067H4.805 c-0.59,0-1.067,0.478-1.067,1.067s0.478,1.067,1.067,1.067h0.534v19.219H4.805z M37.37,17.945v19.219h-6.406V17.945H37.37z M26.692,17.945v19.219h-6.406V17.945H26.692z M9.609,17.945h6.406v19.219H9.609V17.945z"/> <path d="M2.136,13.891h42.708c0.007,0,0.015,0,0.021,0c1.181,0,2.136-0.956,2.136-2.136c0-0.938-0.604-1.733-1.443-2.021 l-21.19-9.535c-0.557-0.25-1.194-0.25-1.752,0L1.26,9.808c-0.919,0.414-1.424,1.412-1.212,2.396 C0.259,13.188,1.129,13.891,2.136,13.891z"/> </g> </g> </g> </svg>';
-    $html .= '<em>' . __('Transfer', 'osclass_pay') . '</em>';
-    $html .= '</span>';  
-    $html .= '<strong>' . __('Pay via Bank Transfer', 'osclass_pay') . '</strong>';
-    $html .= $images_html; // Moved images to the bottom
-    $html .= '</a></li>';
+      $html = '<li><a class="osp-btn-transfer osp-has-tooltip" href="' . osc_route_url('osp-transfer', array('a' => round($amount, 2), 'desc' => urlencode($description), 'extra' => urlencode($extra))) . '" title="' . osc_esc_html(__('Payment will be accepted after administrator confirms funds delivered to our account.', 'osclass_pay')) . '" style="display: flex !important; flex-direction: column; align-items: center; padding: 10px; text-align: center; width: 100%; box-sizing: border-box;">';
+      $html .= '<span class="osp-i2 osp-i2-tr">';
+      $html .= '<svg x="0px" y="0px" width="48" height="48" viewBox="0 0 47.001 47.001" style="enable-background:new 0 0 47.001 47.001;" xml:space="preserve"> ... </svg>';
+      $html .= '<em>' . __('Transfer', 'osclass_pay') . '</em>';
+      $html .= '</span>';
+      $html .= $images_html;
+      $html .= '</a></li>';
   } else {
-    $html  = '<li><a class="osp-btn-transfer osp-has-tooltip osp-disabled" disabled="disabled" href="#" onclick="return false;" title="' . osc_esc_html(sprintf(__('Minimum amount for Bank Transfer is %s.', 'osclass_pay'), osp_format_price($min))) . '">';
-    $html .= '<span class="osp-i2 osp-i2-tr">';
-    $html .= '<svg x="0px" y="0px" width="48" height="48" viewBox="0 0 47.001 47.001" style="enable-background:new 0 0 47.001 47.001;" xml:space="preserve"> <g> <g> <g> <path d="M44.845,42.718H2.136C0.956,42.718,0,43.674,0,44.855c0,1.179,0.956,2.135,2.136,2.135h42.708 c1.18,0,2.136-0.956,2.136-2.135C46.979,43.674,46.023,42.718,44.845,42.718z"/> <path d="M4.805,37.165c-1.18,0-2.136,0.956-2.136,2.136s0.956,2.137,2.136,2.137h37.37c1.18,0,2.136-0.957,2.136-2.137 s-0.956-2.136-2.136-2.136h-0.533V17.945h0.533c0.591,0,1.067-0.478,1.067-1.067s-0.478-1.067-1.067-1.067H4.805 c-0.59,0-1.067,0.478-1.067,1.067s0.478,1.067,1.067,1.067h0.534v19.219H4.805z M37.37,17.945v19.219h-6.406V17.945H37.37z M26.692,17.945v19.219h-6.406V17.945H26.692z M9.609,17.945h6.406v19.219H9.609V17.945z"/> <path d="M2.136,13.891h42.708c0.007,0,0.015,0,0.021,0c1.181,0,2.136-0.956,2.136-2.136c0-0.938-0.604-1.733-1.443-2.021 l-21.19-9.535c-0.557-0.25-1.194-0.25-1.752,0L1.26,9.808c-0.919,0.414-1.424,1.412-1.212,2.396 C0.259,13.188,1.129,13.891,2.136,13.891z"/> </g> </g> </g> </svg>';
-    $html .= '<em>' . __('Transfer', 'osclass_pay') . '</em>';
-    $html .= '</span>';  
-    $html .= '<strong>' . __('Pay via Bank Transfer', 'osclass_pay') . '</strong>';
-    $html .= $images_html; // Moved images to the bottom
-    $html .= '</a></li>';
+      $html = '<li><a class="osp-btn-transfer osp-has-tooltip osp-disabled" disabled="disabled" href="#" onclick="return false;" title="' . osc_esc_html(sprintf(__('Minimum amount for Bank Transfer is %s.', 'osclass_pay'), osp_format_price($min))) . '" style="display: flex !important; flex-direction: column; align-items: center; padding: 10px; text-align: center; width: 100%; box-sizing: border-box;">';
+      $html .= '<span class="osp-i2 osp-i2-tr">';
+      $html .= '<svg x="0px" y="0px" width="48" height="48" viewBox="0 0 47.001 47.001" style="enable-background:new 0 0 47.001 47.001;" xml:space="preserve"> ... </svg>';
+      $html .= '<em>' . __('Transfer', 'osclass_pay') . '</em>';
+      $html .= '</span>';
+      $html .= $images_html;
+      $html .= '</a></li>';
   }
-
   echo $html;
 }
 

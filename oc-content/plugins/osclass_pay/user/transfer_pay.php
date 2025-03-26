@@ -55,7 +55,6 @@
     echo '<body>';
 ?>
 
-<div class="osp-body osp-body-bank-selection">
   <div class="osp-container">
     <h2 class="osp-title"><?php _e('Complete Your Bank Transfer', 'osclass_pay'); ?></h2>
     <p class="osp-subtitle"><?php _e('Please select a bank to view payment instructions:', 'osclass_pay'); ?></p>
@@ -69,17 +68,26 @@
     </div>
 
     <div class="osp-transfer-detail">
-      <ul class="osp-detail-list">
-        <li><strong><?php _e('Transfer Amount:', 'osclass_pay'); ?></strong> <?php echo osp_format_price($amount); ?></li>
-        <li><strong><?php _e('To Account:', 'osclass_pay'); ?></strong> <span class="osp-account"></span></li>
-        <li><strong><?php _e('Variable Symbol:', 'osclass_pay'); ?></strong> <?php echo $variable_symbol; ?></li>
-        <li><strong><?php _e('Transaction ID:', 'osclass_pay'); ?></strong> <?php echo $transaction_id; ?></li>
-      </ul>
-      <p class="osp-note"><?php _e('Once funds are received, your payment will be completed. This may take up to 3 days.', 'osclass_pay'); ?></p>
-      <a href="<?php echo $url; ?>" class="osp-continue-btn"><?php _e('Continue', 'osclass_pay'); ?></a>
-    </div>
-  </div>
+  <ul class="osp-detail-list">
+    <li><strong><?php _e('Transfer Amount:', 'osclass_pay'); ?></strong> <?php echo osp_format_price($amount); ?></li>
+    <li><strong><?php _e('To Account:', 'osclass_pay'); ?></strong> <span class="osp-account"></span></li>
+    <li><strong><?php _e('Variable Symbol:', 'osclass_pay'); ?></strong> <?php echo $variable_symbol; ?></li>
+    <li><strong><?php _e('Transaction ID:', 'osclass_pay'); ?></strong> <?php echo $transaction_id; ?></li>
+  </ul>
+  <p class="osp-note"><?php _e('Once funds are received, your payment will be completed. This may take up to 3 days.', 'osclass_pay'); ?></p>
+
+  <!-- Upload Form -->
+  <form action="<?php echo osc_route_url('osp-upload-evidence'); ?>" method="post" enctype="multipart/form-data" class="osp-upload-form">
+    <input type="hidden" name="transaction_id" value="<?php echo $transaction_id; ?>">
+    <label for="evidence_image"><?php _e('Upload Evidence:', 'osclass_pay'); ?></label>
+    <input type="file" name="evidence_image" id="evidence_image" accept="image/*" required>
+    <input type="submit" value="<?php _e('Upload', 'osclass_pay'); ?>">
+</form>
+
+
+  <a href="<?php echo $url; ?>" class="osp-continue-btn"><?php _e('Continue', 'osclass_pay'); ?></a>
 </div>
+  </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -245,6 +253,35 @@ document.addEventListener('DOMContentLoaded', function() {
   .osp-detail-list strong {
     min-width: 100px;
   }
+}
+.osp-upload-form {
+  margin: 15px 0;
+  text-align: left;
+}
+
+.osp-upload-form label {
+  font-size: 14px;
+  color: #333;
+  margin-right: 10px;
+}
+
+.osp-upload-form input[type="file"] {
+  display: block;
+  margin: 10px auto;
+}
+
+.osp-upload-form input[type="submit"] {
+  padding: 8px 15px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.osp-upload-form input[type="submit"]:hover {
+  background-color: #0056b3;
 }
 </style>
 

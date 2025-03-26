@@ -133,83 +133,112 @@
       </div>
 
       <div class="mb-table mb-table-transfer">
-        <div class="mb-table-head">
-          <div class="mb-col-1"><?php _e('ID', 'osclass_pay');?></div>
-          <div class="mb-col-3"><?php _e('Transaction', 'osclass_pay'); ?></div>
-          <div class="mb-col-2"><?php _e('User', 'osclass_pay'); ?></div>
-          <div class="mb-col-3"><?php _e('Variable Symbol', 'osclass_pay'); ?></div>
-          <div class="mb-col-3"><?php _e('Amount', 'osclass_pay'); ?></div>
-          <div class="mb-col-1">&nbsp;</div>
-          <div class="mb-col-2"><?php _e('Status', 'osclass_pay'); ?></div>
-          <div class="mb-col-3"><?php _e('Date', 'osclass_pay'); ?></div>
-          <div class="mb-col-3"><?php _e('Accept Date', 'osclass_pay'); ?></div>
-          <div class="mb-col-3">&nbsp;</div>
+  <div class="mb-table-head">
+    <div class="mb-col-1"><?php _e('ID', 'osclass_pay'); ?></div>
+    <div class="mb-col-2"><?php _e('Evidence', 'osclass_pay'); ?></div>
+    <div class="mb-col-2"><?php _e('Transaction', 'osclass_pay'); ?></div> <!-- Reduced to mb-col-2 -->
+    <div class="mb-col-2"><?php _e('User', 'osclass_pay'); ?></div>
+    <div class="mb-col-2"><?php _e('Variable Symbol', 'osclass_pay'); ?></div> <!-- Reduced to mb-col-2 -->
+    <div class="mb-col-2"><?php _e('Amount', 'osclass_pay'); ?></div> <!-- Reduced to mb-col-2 -->
+    <div class="mb-col-1"> </div>
+    <div class="mb-col-2"><?php _e('Status', 'osclass_pay'); ?></div>
+    <div class="mb-col-3"><?php _e('Date', 'osclass_pay'); ?></div>
+    <div class="mb-col-3"><?php _e('Accept Date', 'osclass_pay'); ?></div>
+    <div class="mb-col-2"> </div> <!-- Reduced to mb-col-2 -->
+  </div>
+
+  <?php $transfers = ModelOSP::newInstance()->getBankTransfers(); ?>
+
+  <?php if(count($transfers) <= 0) { ?>
+    <div class="mb-table-row mb-row-empty">
+      <i class="fa fa-warning"></i><span><?php _e('No bank transfers has been found', 'osclass_pay'); ?></span>
+    </div>
+  <?php } else { ?>
+    <?php foreach($transfers as $t) { ?>
+      <?php 
+        $tdata = osp_get_custom($t['s_extra']);
+        $user = User::newInstance()->findByPrimaryKey($t['i_user_id']);
+      ?>
+
+      <div class="mb-table-row">
+        <!-- 1. ID -->
+        <div class="mb-col-1"><?php echo $t['pk_i_id']; ?></div>
+
+        <!-- 2. Evidence -->
+        <div class="mb-col-2">
+          <?php if (!empty($t['s_evidence_image'])) { ?>
+            <a href="<?php echo osc_base_url() . $t['s_evidence_image']; ?>" target="_blank">
+              <img src="<?php echo osc_base_url() . $t['s_evidence_image']; ?>" alt="Evidence" style="max-width: 25px; max-height: 25px;"  loading="lazy"/>
+            </a>
+          <?php } else { ?>
+            <?php _e('No image', 'osclass_pay'); ?>
+          <?php } ?>
         </div>
 
-        <?php $transfers = ModelOSP::newInstance()->getBankTransfers(); ?>
+        <!-- 3. Transaction -->
+        <div class="mb-col-2"><?php echo $t['s_transaction']; ?></div> <!-- Reduced to mb-col-2 -->
 
-        <?php if(count($transfers) <= 0) { ?>
-          <div class="mb-table-row mb-row-empty">
-            <i class="fa fa-warning"></i><span><?php _e('No bank transfers has been found', 'osclass_pay'); ?></span>
-          </div>
-        <?php } else { ?>
-          <?php foreach($transfers as $t) { ?>
-            <?php 
-              $tdata = osp_get_custom($t['s_extra']);
-              $user = User::newInstance()->findByPrimaryKey($t['i_user_id']);
-            ?>
-
-            <div class="mb-table-row">
-              <div class="mb-col-1"><?php echo $t['pk_i_id']; ?></div>
-              <div class="mb-col-3"><?php echo $t['s_transaction']; ?></div>
-              <div class="mb-col-2">
-                <?php if(@$user['pk_i_id'] > 0 && trim($user['s_name']) <> '') { ?>
-                  <?php echo '<a href="' . osc_admin_base_url(true) . '?page=users&action=edit&id=' . $user['pk_i_id'] . '" target="_blank">' . $user['s_name'] . '</a>'; ?>
-                <?php } else if(trim(@$tdata['email']) <> '') { ?>
-                  <span title="<?php echo osc_esc_html(@$tdata['email']); ?>" class="mb-has-tooltip"><?php echo (@$tdata['name'] <> '' ? @$tdata['name'] : @$tdata['email']); ?></span>
-                <?php } else { ?>
-                  <?php echo __('Unknown', 'osclass_pay'); ?>
-                <?php } ?>
-              </div>
-              <div class="mb-col-3"><span class="mb-has-tooltip" title="<?php echo osc_esc_html(__('This code should be used as variable symbol in transaction you have received', 'osclass_pay')); ?>"><?php echo $t['s_variable']; ?></span></div>
-              <div class="mb-col-3"><?php echo osp_format_price($t['f_price']); ?></div>
-              <div class="mb-col-1">
-                <?php if(osp_cart_string_to_title($t['s_cart']) <> '') { ?>
-                  <i class="fa fa-search mb-has-tooltip mb-log-details" title="<?php echo osc_esc_html(str_replace('<br/>', PHP_EOL, osp_cart_string_to_title($t['s_cart']))); ?>"></i>
-                <?php } ?>
-              </div>
-              <div class="mb-col-2 mb-bt-status">
-                <span class="st<?php echo $t['i_paid']; ?>">
-                  <?php
-                    if($t['i_paid'] == 0) {
-                      echo '<i class="fa fa-hourglass-half"></i> ' . __('Pending', 'osclass_pay');
-                    } else if($t['i_paid'] == 1) {
-                      echo '<i class="fa fa-check"></i> ' . __('Paid', 'osclass_pay');
-                    } else {
-                      echo '<i class="fa fa-times"></i> ' . __('Cancelled', 'osclass_pay');
-                    }
-                  ?>
-                </span>
-              </div>
-              <div class="mb-col-3"><?php echo $t['dt_date']; ?></div>
-              <div class="mb-col-3"><?php echo ($t['dt_date_paid'] <> '' ? $t['dt_date_paid'] : '-'); ?></div>
-              <div class="mb-col-3 mb-bt-buttons mb-align-right">
-                <?php if($t['i_paid'] <> 1) { ?>
-                  <a href="<?php echo osc_route_admin_url('osp-admin-transfer', array('btId' => $t['pk_i_id'], 'status' => 1)); ?>" class="mb-btn mb-bt-accept mb-button-green mb-has-tooltip-light" title="<?php echo osc_esc_html(__('Accept payment', 'osclass_pay')); ?>"><i class="fa fa-check"></i> <span><?php _e('Accept', 'osclass_pay'); ?></span></a>
-                <?php } ?>
-
-                <?php if($t['i_paid'] == 0) { ?>
-                  <a href="<?php echo osc_route_admin_url('osp-admin-transfer', array('btId' => $t['pk_i_id'], 'status' => 2)); ?>" class="mb-btn mb-bt-cancel mb-button-white mb-has-tooltip-light" title="<?php echo osc_esc_html(__('Cancel payment', 'osclass_pay')); ?>"><i class="fa fa-times"></i></a>
-                <?php } ?>
-
-                <?php if($t['i_paid'] == 2) { ?>
-                  <a href="<?php echo osc_route_admin_url('osp-admin-transfer', array('btId' => $t['pk_i_id'], 'status' => 9)); ?>" class="mb-btn mb-bt-remove mb-button-red mb-has-tooltip-light" title="<?php echo osc_esc_html(__('Remove payment', 'osclass_pay')); ?>" onclick="return confirm('<?php echo osc_esc_js(__('Are you sure you want to remove this transfer? Action cannot be undone.', 'osclass_pay')); ?>')"><i class="fa fa-trash"></i></a>
-                <?php } ?>
-              </div>
-            </div>
+        <!-- 4. User -->
+        <div class="mb-col-2">
+          <?php if(@$user['pk_i_id'] > 0 && trim($user['s_name']) <> '') { ?>
+            <?php echo '<a href="' . osc_admin_base_url(true) . '?page=users&action=edit&id=' . $user['pk_i_id'] . '" target="_blank">' . $user['s_name'] . '</a>'; ?>
+          <?php } else if(trim(@$tdata['email']) <> '') { ?>
+            <span title="<?php echo osc_esc_html(@$tdata['email']); ?>" class="mb-has-tooltip"><?php echo (@$tdata['name'] <> '' ? @$tdata['name'] : @$tdata['email']); ?></span>
+          <?php } else { ?>
+            <?php echo __('Unknown', 'osclass_pay'); ?>
           <?php } ?>
-        <?php } ?>
+        </div>
+
+        <!-- 5. Variable Symbol -->
+        <div class="mb-col-2"><span class="mb-has-tooltip" title="<?php echo osc_esc_html(__('This code should be used as variable symbol in transaction you have received', 'osclass_pay')); ?>"><?php echo $t['s_variable']; ?></span></div> <!-- Reduced to mb-col-2 -->
+
+        <!-- 6. Amount -->
+        <div class="mb-col-2"><?php echo osp_format_price($t['f_price']); ?></div> <!-- Reduced to mb-col-2 -->
+
+        <!-- 7. Cart Details Icon -->
+        <div class="mb-col-1">
+          <?php if(osp_cart_string_to_title($t['s_cart']) <> '') { ?>
+            <i class="fa fa-search mb-has-tooltip mb-log-details" title="<?php echo osc_esc_html(str_replace('<br/>', PHP_EOL, osp_cart_string_to_title($t['s_cart']))); ?>"></i>
+          <?php } ?>
+        </div>
+
+        <!-- 8. Status -->
+        <div class="mb-col-2 mb-bt-status">
+          <span class="st<?php echo $t['i_paid']; ?>">
+            <?php
+              if($t['i_paid'] == 0) {
+                echo '<i class="fa fa-hourglass-half"></i> ' . __('Pending', 'osclass_pay');
+              } else if($t['i_paid'] == 1) {
+                echo '<i class="fa fa-check"></i> ' . __('Paid', 'osclass_pay');
+              } else {
+                echo '<i class="fa fa-times"></i> ' . __('Cancelled', 'osclass_pay');
+              }
+            ?>
+          </span>
+        </div>
+
+        <!-- 9. Date -->
+        <div class="mb-col-3"><?php echo $t['dt_date']; ?></div>
+
+        <!-- 10. Accept Date -->
+        <div class="mb-col-3"><?php echo ($t['dt_date_paid'] <> '' ? $t['dt_date_paid'] : '-'); ?></div>
+
+        <!-- 11. Buttons -->
+        <div class="mb-col-2 mb-bt-buttons mb-align-right"> <!-- Reduced to mb-col-2 -->
+          <?php if($t['i_paid'] <> 1) { ?>
+            <a href="<?php echo osc_route_admin_url('osp-admin-transfer', array('btId' => $t['pk_i_id'], 'status' => 1)); ?>" class="mb-btn mb-bt-accept mb-button-green mb-has-tooltip-light" title="<?php echo osc_esc_html(__('Accept payment', 'osclass_pay')); ?>"><i class="fa fa-check"></i> <span><?php _e('Accept', 'osclass_pay'); ?></span></a>
+          <?php } ?>
+          <?php if($t['i_paid'] == 0) { ?>
+            <a href="<?php echo osc_route_admin_url('osp-admin-transfer', array('btId' => $t['pk_i_id'], 'status' => 2)); ?>" class="mb-btn mb-bt-cancel mb-button-white mb-has-tooltip-light" title="<?php echo osc_esc_html(__('Cancel payment', 'osclass_pay')); ?>"><i class="fa fa-times"></i></a>
+          <?php } ?>
+          <?php if($t['i_paid'] == 2) { ?>
+            <a href="<?php echo osc_route_admin_url('osp-admin-transfer', array('btId' => $t['pk_i_id'], 'status' => 9)); ?>" class="mb-btn mb-bt-remove mb-button-red mb-has-tooltip-light" title="<?php echo osc_esc_html(__('Remove payment', 'osclass_pay')); ?>" onclick="return confirm('<?php echo osc_esc_js(__('Are you sure you want to remove this transfer? Action cannot be undone.', 'osclass_pay')); ?>')"><i class="fa fa-trash"></i></a>
+          <?php } ?>
+        </div>
       </div>
+    <?php } ?>
+  <?php } ?>
+</div>
     </div>
   </div>
 </div>
