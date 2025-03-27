@@ -3537,52 +3537,61 @@ function osp_admin_button($amount = '0.00', $description = '', $itemnumber = '',
 }
 
 
+
 function osp_transfer_button($amount = '0.00', $description = '', $itemnumber = '', $extra_array = '||', $images = []) {
-  $extra = osp_prepare_custom($extra_array) . '|';
-  $extra .= 'concept,'.$description.'|';
-  $extra .= 'product,'.$itemnumber;
-  $min = (osp_param('bt_min') > 0 ? osp_param('bt_min') : 0);
+    $extra = osp_prepare_custom($extra_array) . '|';
+    $extra .= 'concept,'.$description.'|';
+    $extra .= 'product,'.$itemnumber;
+    $min = (osp_param('bt_min') > 0 ? osp_param('bt_min') : 0);
 
-  $images_html = '';
-  if (!empty($images)) {
-      $images_html .= '<div class="osp-transfer-images" style="height: auto; display: flex !important; flex-wrap: wrap; justify-content: space-around; width: 100%; max-width: 500px;">';
-      foreach ($images as $image) {
-          $images_html .= '<img src="' . $image . '" alt="" class="osp-transfer-image" style="width: 60px !important; height: 60px !important; max-width: none !important; max-height: none !important; object-fit: contain;">';
-      }
-      $images_html .= '</div>';
-  }
+    // --- SVG and Text Section ---
+    $svg_desired_height = '30px';
+    $svg_code = '<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 47.001 47.001" style="enable-background:new 0 0 47.001 47.001; height: ' . $svg_desired_height . ' !important; width: auto; display: inline-block; vertical-align: middle; margin-right: 5px;" xml:space="preserve"> <g> <g> <g> <path d="M44.845,42.718H2.136C0.956,42.718,0,43.674,0,44.855c0,1.179,0.956,2.135,2.136,2.135h42.708 c1.18,0,2.136-0.956,2.136-2.135C46.979,43.674,46.023,42.718,44.845,42.718z"/> <path d="M4.805,37.165c-1.18,0-2.136,0.956-2.136,2.136s0.956,2.137,2.136,2.137h37.37c1.18,0,2.136-0.957,2.136-2.137 s-0.956-2.136-2.136-2.136h-0.533V17.945h0.533c0.591,0,1.067-0.478,1.067-1.067s-0.478-1.067-1.067-1.067H4.805 c-0.59,0-1.067,0.478-1.067,1.067s0.478,1.067,1.067,1.067h0.534v19.219H4.805z M37.37,17.945v19.219h-6.406V17.945H37.37z M26.692,17.945v19.219h-6.406V17.945H26.692z M9.609,17.945h6.406v19.219H9.609V17.945z"/> <path d="M2.136,13.891h42.708c0.007,0,0.015,0,0.021,0c1.181,0,2.136-0.956,2.136-2.136c0-0.938-0.604-1.733-1.443-2.021 l-21.19-9.535c-0.557-0.25-1.194-0.25-1.752,0L1.26,9.808c-0.919,0.414-1.424,1.412-1.212,2.396 C0.259,13.188,1.129,13.891,2.136,13.891z"/> </g> </g> </g> </svg>';
+    $em_style = '    vertical-align: -5px; padding: 0 !important;  display: inline-block;'; // Already has the override!
 
-  // Define the desired height for the SVG
-  $svg_desired_height = '30px'; // Or your preferred height
+    // Container for SVG and Text - centered, NO bottom margin
+    $top_section_style = 'display: block; width: 100%; text-align: center; line-height: ' . $svg_desired_height . '; margin-bottom: 5px; /* Reduced margin */';
+    $top_section_html = '<span class="osp-i2 osp-i2-tr" style="' . $top_section_style . '">';
+    $top_section_html .= $svg_code;
+    // --- This is where the style is applied ---
+    $top_section_html .= '<em style="' . $em_style . '">' . __('Transfer', 'osclass_pay') . '</em>';
+    $top_section_html .= '</span>';
+    
 
-  // SVG code with inline style for height override
-  $svg_code = '<svg x="0px" y="0px" width="30" height="30" viewBox="0 0 47.001 47.001" style="enable-background:new 0 0 47.001 47.001; height: ' . $svg_desired_height . ' !important; width: auto; " xml:space="preserve"> <g> <g> <g> <path d="M44.845,42.718H2.136C0.956,42.718,0,43.674,0,44.855c0,1.179,0.956,2.135,2.136,2.135h42.708 c1.18,0,2.136-0.956,2.136-2.135C46.979,43.674,46.023,42.718,44.845,42.718z"/> <path d="M4.805,37.165c-1.18,0-2.136,0.956-2.136,2.136s0.956,2.137,2.136,2.137h37.37c1.18,0,2.136-0.957,2.136-2.137 s-0.956-2.136-2.136-2.136h-0.533V17.945h0.533c0.591,0,1.067-0.478,1.067-1.067s-0.478-1.067-1.067-1.067H4.805 c-0.59,0-1.067,0.478-1.067,1.067s0.478,1.067,1.067,1.067h0.534v19.219H4.805z M37.37,17.945v19.219h-6.406V17.945H37.37z M26.692,17.945v19.219h-6.406V17.945H26.692z M9.609,17.945h6.406v19.219H9.609V17.945z"/> <path d="M2.136,13.891h42.708c0.007,0,0.015,0,0.021,0c1.181,0,2.136-0.956,2.136-2.136c0-0.938-0.604-1.733-1.443-2.021 l-21.19-9.535c-0.557-0.25-1.194-0.25-1.752,0L1.26,9.808c-0.919,0.414-1.424,1.412-1.212,2.396 C0.259,13.188,1.129,13.891,2.136,13.891z"/> </g> </g> </g> </svg>';
-  // Added vertical-align: middle; also to the SVG for good measure, aligning it baseline-wise similarly to the text.
+    // --- Image Section ---
+    $images_html = '';
+    if (!empty($images)) {
+        // Image Container: Full width, flex, nowrap, space between items, NO margin/padding
+        $images_container_style = 'display: flex !important; flex-wrap: nowrap !important; justify-content: space-between; /* Distributes space BETWEEN items */ align-items: center; width: 100%; /* Take full available width */ box-sizing: border-box; /* Padding/border included in width */ /* REMOVED margin-top */ /* REMOVED padding */';
+        $images_html .= '<div class="osp-transfer-images" style="' . $images_container_style . '">';
 
-  // --- Define the inline style for the <em> tag ---
-  $em_style = 'padding: 0 !important; vertical-align: middle !important; display: inline-block;'; // Added display: inline-block just to be sure it behaves as expected with vertical-align
+        // Individual Image Style: Flex grow/shrink, max constraints, NO fixed width %
+        $image_style = 'flex-grow: 1; /* Allow images to grow */ flex-shrink: 1; /* Allow images to shrink */ flex-basis: 0; /* Start calculation from 0 */ min-width: 0; /* Allow shrinking below content size */ height: auto; max-width: 60px; /* Adjust if needed, e.g., 65px */ max-height: 60px; object-fit: contain; display: block; margin: 0 2px; /* Small side margin acts as gap */'; // Added small margin for gap
 
-  if ($amount >= $min) {
-      $html = '<li><a class="osp-btn-transfer osp-has-tooltip" href="' . osc_route_url('osp-transfer', array('a' => round($amount, 2), 'desc' => urlencode($description), 'extra' => urlencode($extra))) . '" title="' . osc_esc_html(__('Payment will be accepted after administrator confirms funds delivered to our account.', 'osclass_pay')) . '" style="display: flex !important; flex-direction: column; align-items: center; padding: 10px; text-align: center; width: 100%; box-sizing: border-box;">';
-      $html .= '<span class="osp-i2 osp-i2-tr">';
-      $html .= $svg_code;
-      // --- Apply the inline style to the <em> tag ---
-      $html .= '<em style="' . $em_style . '">' . __('Transfer', 'osclass_pay') . '</em>';
-      $html .= '</span>';
-      $html .= $images_html;
-      $html .= '</a></li>';
-  } else {
-      $html = '<li><a class="osp-btn-transfer osp-has-tooltip osp-disabled" disabled="disabled" href="#" onclick="return false;" title="' . osc_esc_html(sprintf(__('Minimum amount for Bank Transfer is %s.', 'osclass_pay'), osp_format_price($min))) . '" style="display: flex !important; flex-direction: column; align-items: center; padding: 10px; text-align: center; width: 100%; box-sizing: border-box;">';
-      $html .= '<span class="osp-i2 osp-i2-tr">';
-      $html .= $svg_code;
-       // --- Apply the inline style to the <em> tag ---
-      $html .= '<em style="' . $em_style . '">' . __('Transfer', 'osclass_pay') . '</em>';
-      $html .= '</span>';
-      $html .= $images_html;
-      $html .= '</a></li>';
-  }
-  echo $html;
+        foreach ($images as $image) {
+            $images_html .= '<img src="' . $image . '" alt="" class="osp-transfer-image" style="' . $image_style . '">';
+        }
+        $images_html .= '</div>';
+    }
+
+    // --- Main Link Structure ---
+    // Flex column, center items, full width, NO padding (or minimal vertical padding)
+    $link_style = 'display: flex !important; flex-direction: column; align-items: center; width: 100%; box-sizing: border-box; text-decoration: none; color: inherit; padding: 5px 0; /* Minimal vertical padding, NO side padding */'; // Adjusted padding
+
+    if ($amount >= $min) {
+        $html = '<li><a class="osp-btn-transfer osp-has-tooltip" href="' . osc_route_url('osp-transfer', array('a' => round($amount, 2), 'desc' => urlencode($description), 'extra' => urlencode($extra))) . '" title="' . osc_esc_html(__('Payment will be accepted after administrator confirms funds delivered to our account.', 'osclass_pay')) . '" style="' . $link_style . '">';
+        $html .= $top_section_html; // Add top section (SVG + Text)
+        $html .= $images_html;      // Add image section
+        $html .= '</a></li>';
+    } else {
+        $html = '<li><a class="osp-btn-transfer osp-has-tooltip osp-disabled" disabled="disabled" href="#" onclick="return false;" title="' . osc_esc_html(sprintf(__('Minimum amount for Bank Transfer is %s.', 'osclass_pay'), osp_format_price($min))) . '" style="' . $link_style . '">';
+        $html .= $top_section_html; // Add top section (SVG + Text)
+        $html .= $images_html;      // Add image section
+        $html .= '</a></li>';
+    }
+    echo $html;
 }
+
 
 
 
