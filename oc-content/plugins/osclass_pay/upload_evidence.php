@@ -132,28 +132,75 @@ if (!isset($_FILES['evidence_image'])) {
 
 // --- Perform Redirect Based on Outcome ---
 if ($upload_success) {
-    // SUCCESS: Redirect to the FINAL destination URL
-    osp_redirect($final_url);
-    exit;
+    /***************************************************
+    *   SUCCESS PATH - REDIRECT TO CONFIRMATION PAGE   *
+    ****************************************************/
+
+    // 1. Set the success flash message (will be shown on the confirmation page)
+    //    Use a message appropriate for pending verification.
+    osc_add_flash_ok_message(__('Transfer evidence uploaded successfully. Your payment is pending verification.', 'osclass_pay'));
+
+    // 2. Define the route name for your confirmation summary page
+    $confirmation_route_name = 'osp-bank-transfer-confirmation'; // Use the route name you registered
+
+    // 3. Attempt to generate the URL for the confirmation route
+    $confirmation_base_url = osc_route_url($confirmation_route_name);
+
+    if ($confirmation_base_url) {
+        // 4. Construct the full confirmation URL with necessary parameters:
+        //    - osp_confirm_tid: The ID needed by the confirmation page to fetch details.
+        //    - return_url: The original destination URL for the confirmation page's "Continue" button.
+        $confirmation_url = $confirmation_base_url
+                          . '?osp_confirm_tid=' . urlencode($transaction_id) // Pass the transaction ID
+                          . '&return_url=' . urlencode($final_url); // Pass the original $final_url
+
+        // 5. Redirect to the confirmation page
+        osp_redirect($confirmation_url);
+        exit;
+
+    } else {
+        // --- Fallback if route URL generation fails ---
+        // This indicates an issue with route registration. Log it if possible.
+        // error_log("OSP Bank Transfer Error: Failed to generate URL for confirmation route '$confirmation_route_name' for Transaction ID: " . $transaction_id);
+
+        // Add a warning message for the user
+        osc_add_flash_warning_message(__('Your evidence was uploaded, but we could not redirect you to the confirmation summary page. Please check your dashboard or contact support.', 'osclass_pay'));
+
+        // Redirect to a safe default (the original $final_url is a reasonable fallback)
+        $fallback_url = !empty($final_url) ? $final_url : (osc_is_web_user_logged_in() ? osc_user_dashboard_url() : osc_base_url());
+        osp_redirect($fallback_url);
+        exit;
+    }
+
 } else {
-    // FAILURE: Redirect BACK to the details page
+    /***************************************************
+    *     FAILURE PATH - REDIRECT BACK TO DETAILS PAGE *
+    *     (This part remains the same as original)     *
+    ****************************************************/
+
+    // Set the specific error message from the upload process
     if(empty($error_message)) { $error_message = __('An unknown upload error occurred.', 'osclass_pay'); }
     osc_add_flash_error_message($error_message);
 
-    // Construct the URL for the details page
-    $details_page_route = 'osp-bank-transfer-details'; // *** VERIFY THIS ROUTE NAME ***
+    // Construct the URL for the bank details page (where the user can retry)
+    $details_page_route = 'osp-bank-transfer-details'; // *** VERIFY THIS IS THE CORRECT ROUTE NAME for bank_transfer_details.php ***
+
     if (osc_route_url($details_page_route)) {
         $details_page_base_url = osc_route_url($details_page_route);
+        // Pass back the transaction_id and the original final_url so the details page can reload correctly
         $details_page_url = $details_page_base_url
                             . '?transaction_id=' . urlencode($transaction_id)
-                            . '&final_url=' . urlencode($final_url); // Pass params back
+                            . '&final_url=' . urlencode($final_url);
     } else {
-        // Fallback if route doesn't exist
+        // Fallback if the details page route doesn't exist or fails
+         // error_log("OSP Bank Transfer Error: Failed to generate URL for details route '$details_page_route' during upload failure for Transaction ID: " . $transaction_id);
         $details_page_url = osc_is_web_user_logged_in() ? osc_user_dashboard_url() : osc_base_url();
-        osc_add_flash_warning_message(__('Could not return to details page, returning to dashboard/home instead.', 'osclass_pay'));
+        osc_add_flash_warning_message(__('Could not return you to the details page to retry. Please start the process again or contact support.', 'osclass_pay'));
     }
 
+    // Redirect back to the details page
     osp_redirect($details_page_url);
     exit;
 }
+
 ?>
