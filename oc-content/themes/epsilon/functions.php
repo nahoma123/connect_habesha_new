@@ -1,5 +1,5 @@
 <?php
-define('EPSILON_THEME_VERSION', '1.4.8');
+define('EPSILON_THEME_VERSION', '1.5.4');
 define('USER_MENU_ICONS', 1);
 define('PRELOAD_CATEGORIES', true);
 define('THEME_COMPATIBLE_WITH_OSCLASS_HOOKS', 820);       // Compatibility with new hooks up to version
@@ -288,7 +288,7 @@ function eps_set_theme_color() {
       header('Location:' . $_SERVER['HTTP_REFERER']);
       exit;
     } else {
-      header('Location:' . $_SERVER['HTTP_REFERER']);
+      header('Location:' . osc_base_url());
       exit;
     }    
   }
@@ -821,8 +821,16 @@ function eps_decode_array($json) {
 
 // FAVORITE ITEMS SUPPORT
 function eps_make_favorite($item_id = NULL) {
-  if(function_exists('fi_save_favorite')) {
-    $item_id = ($item_id === NULL ? osc_item_id() : $item_id);
+  $item_id = ($item_id === NULL ? osc_item_id() : $item_id);
+
+  // SAVED ITEMS PLUGIN
+  if(function_exists('svi_save_btn')) {
+    $options = array();     // Let's keep options to be defined in plugin settings
+
+    echo svi_save_btn($item_id, $options);  
+  
+  // FAVORITE ITEMS PLUGIN
+  } else if(function_exists('fi_save_favorite')) {
     $options = array(
       'icon_on' => 'fas fa-star',
       'icon_off' => 'far fa-star',
@@ -1581,14 +1589,56 @@ function eps_search_param_remove() {
   $output = array();
 
   foreach($params as $n => $v) {
-    if(!in_array($n, array('page')) && ($v > 0 || $v <> '')) {
-      $output[$n] = array(
-        'value' => $v, 
-        'param' => $n,
-        'title' => eps_param_name($n),
-        'name' => eps_remove_value_name($v, $n),
-        'to_remove' => (in_array($n, array('sCompany')) ? false : true)
-     );
+    if(!in_array($n, array('page','sLocation')) && ((int)$v > 0 || $v <> '')) {
+      // Skip if value is set to default
+      if(in_array($n, array('bPic','bPremium','bPhone','sCondition','sTransaction','iRadius','sPeriod')) && (int)$v == 0) {
+        continue;
+      }
+      
+      if($n == 'meta') {
+        $meta_values = $v;
+        
+        if(is_array($meta_values) && count($meta_values) > 0) {
+          foreach($meta_values as $field_id => $meta_val) {
+            $fields = eps_get_custom_fields();
+            
+            if(isset($fields[$field_id])) {
+              $field = $fields[$field_id];
+              
+              if(isset($field['b_searchable']) && $field['b_searchable'] == 1) {
+                $meta_val_name = $meta_val;
+                
+                if($field['e_type'] == 'CHECKBOX') {
+                  $meta_val_name = ($meta_val == 1 ? __('Yes', 'zeta') : __('No', 'zeta'));
+                }
+                
+                $output['meta' . $field_id] = array(
+                  'value' => $meta_val, 
+                  'param' => 'meta' . $field_id,
+                  'title' => $field['s_name'],
+                  'type' => $field['e_type'],
+                  'is_meta' => true,
+                  'field_id' => $field_id,
+                  'name' => $meta_val_name,
+                  'to_remove' => true
+                );
+              }
+            }
+          }
+        }
+        
+      } else {
+        $output[$n] = array(
+          'value' => $v, 
+          'param' => $n,
+          'title' => eps_param_name($n),
+          'type' => 'STANDARD',
+          'is_meta' => false,
+          'field_id' => null,
+          'name' => eps_remove_value_name($v, $n, 'long'),
+          'to_remove' => (in_array($n, array('sCompany')) ? false : true)
+        );
+      }
     }
   }
 
@@ -1810,6 +1860,27 @@ function eps_get_search_view() {
   }
   
   return $view;  
+}
+
+
+// GET ALL CUSTOM FIELDS
+function eps_get_custom_fields() {
+  if(View::newInstance()->_exists('eps_custom_fields')) {
+    return View::newInstance()->_get('eps_custom_fields');
+  }
+  
+  $output = array();
+  $fields = Field::newInstance()->listAll();
+  
+  if(is_array($fields) && count($fields) > 0) {
+    foreach($fields as $field) {
+      $output[$field['pk_i_id']] = $field;
+    }
+  }
+  
+  View::newInstance()->_exportVariableToView('eps_custom_fields', $output);
+
+  return $output;
 }
 
 
@@ -2289,7 +2360,7 @@ function eps_user_menu() {
     ?>
   </div>
   
-  <a href="<?php echo osc_user_logout_url(); ?>" class="logout"><i class="fas fa-sign-out-alt"></i> <?php echo __('Log out', 'epsilon'); ?></a>
+  <a href="<?php echo osc_user_logout_url(); ?>" class="logout"><i class="fas fa-sign-out-alt"></i> <?php echo __('Logout', 'epsilon'); ?></a>
   <?php
 }
 
@@ -3081,6 +3152,14 @@ function eps_premium_items($limit = 10, $exclude_ids = array(), $category_id = N
       $search->dao->where('i.fk_i_category_id IN ('.$listCategories.')');
     }
   }
+  
+  // Category filter in theme settings
+  $restrict_category_ids = array_filter(array_unique(array_map('trim', explode(',', eps_param('premium_home_category')))));
+
+  if(is_array($restrict_category_ids) && count($restrict_category_ids) > 0) {
+    $search->dao->where('i.fk_i_category_id IN (' . implode(',', $restrict_category_ids) . ')');
+  }
+
 
   if($with_picture == true) {
     $search->dao->where('i.pk_i_id in (SELECT fk_i_item_id FROM '.DB_TABLE_PREFIX.'t_item_resource WHERE s_content_type LIKE "%image%")'); 
@@ -3119,7 +3198,15 @@ function eps_premium_items($limit = 10, $exclude_ids = array(), $category_id = N
     $search->dao->where('i.pk_i_id = l.fk_i_item_id');
     $search->dao->orderby('d_distance', 'ASC');
   }
-
+  
+  $sortby = explode('/', eps_param('premium_home_sort'));
+  $sort_col = strtolower((string)$sortby[0]);
+  $sort_ord = strtoupper(isset($sortby[1]) ? (string)$sortby[1] : 'DESC');
+  
+  if($sort_col != '') {
+    $search->dao->orderby($sort_col, $sort_ord);
+  }
+ 
   $search->dao->limit($limit);
 
   $rs = $search->dao->get();
@@ -3603,6 +3690,7 @@ function eps_logo_is_uploaded($default = true) {
 
 // INSTALL & UPDATE OPTIONS
 function eps_theme_install() {
+  osc_set_preference('footer_social_define', 0, 'theme-epsilon');
   osc_set_preference('sample_images', 1, 'theme-epsilon');
   osc_set_preference('default_location', 1, 'theme-epsilon');
   osc_set_preference('profile_location', 0, 'theme-epsilon');
@@ -3793,27 +3881,33 @@ function eps_count_messages($user_id) {
   
   
 // COUNT FAVORITE ITEMS
-function eps_count_favorite($user_id = '') {
-  if($user_id > 0) { 
+function eps_count_favorite($user_id = NULL) {
+  if($user_id !== NULL) { 
     // nothing
   } else if(osc_is_web_user_logged_in()) {
     $user_id = osc_logged_user_id();
-  } else {
+    
+  } else if(function_exists('fi_save_favorite')) {
     $user_id = mb_get_cookie('fi_user_id');
   }
+  
 
+  if($user_id > 0) {
+    if(function_exists('svi_save_btn')) {
+      return svi_count_user_items($user_id);
+      
+    } else if(class_exists('ModelFI')) {
+      $db_prefix = DB_TABLE_PREFIX;
 
-  if($user_id > 0 && class_exists('ModelFI')) {
-    $db_prefix = DB_TABLE_PREFIX;
-
-    $query = "SELECT count(*) as count FROM {$db_prefix}t_favorite_items i, {$db_prefix}t_favorite_list l WHERE l.list_id = i.list_id AND l.user_id = " . $user_id . ";";
-    $result = Item::newInstance()->dao->query($query);
-    if(!$result) { 
-      $prepare = array();
-      return 0;
-    } else {
-      $prepare = @$result->row()['count'];
-      return $prepare;
+      $query = "SELECT count(*) as count FROM {$db_prefix}t_favorite_items i, {$db_prefix}t_favorite_list l WHERE l.list_id = i.list_id AND l.user_id = " . $user_id . ";";
+      $result = Item::newInstance()->dao->query($query);
+      if(!$result) { 
+        $prepare = array();
+        return 0;
+      } else {
+        $prepare = @$result->row()['count'];
+        return $prepare;
+      }
     }
   }
 
@@ -4228,7 +4322,6 @@ osc_add_hook('header', 'eps_disable_404');
 // THEME PARAMS UPDATE
 if(!function_exists('eps_param_update')) {
   function eps_param_update($param_name, $update_param_name, $type = NULL, $plugin_var_name = null) {
-  
     $val = '';
     if($type == 'check') {
 
@@ -4243,7 +4336,7 @@ if(!function_exists('eps_param_update')) {
         }
       }
 
-    } else if($type == 'code') {
+    } else if ($type == 'code') {
 
       if(Params::getParam($update_param_name) == 'done' && Params::existParam($param_name)) {
         $val = stripslashes(Params::getParam($param_name, false, false));
@@ -4266,10 +4359,20 @@ if(!function_exists('eps_param_update')) {
     if(Params::getParam($update_param_name) == 'done') {
 
       if(osc_get_preference($param_name, $plugin_var_name) == '') {
-        osc_set_preference($param_name, $val, $plugin_var_name, 'STRING');  
+        if ($type == 'code') {
+          osc_set_preference($param_name, stripslashes($val), $plugin_var_name, 'STRING');
+        } else {
+          osc_set_preference($param_name, $val, $plugin_var_name, 'STRING');  
+        }
       } else {
         $dao_preference = new Preference();
-        $dao_preference->update(array("s_value" => $val), array("s_section" => $plugin_var_name, "s_name" => $param_name));
+
+        if ($type == 'code') {
+          $dao_preference->update(array("s_value" => stripslashes($val)), array("s_section" => $plugin_var_name, "s_name" => $param_name));
+        } else {
+          $dao_preference->update(array("s_value" => $val), array("s_section" => $plugin_var_name, "s_name" => $param_name));
+        }
+
         osc_reset_preferences();
         unset($dao_preference);
       }
@@ -4278,7 +4381,6 @@ if(!function_exists('eps_param_update')) {
     return $val;
   }
 }
-
 
 
 // MULTI-LEVEL CATEGORIES SELECT

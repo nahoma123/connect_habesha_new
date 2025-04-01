@@ -4,9 +4,6 @@
   <?php osc_current_web_theme_path('head.php'); ?>
   <meta name="robots" content="noindex, nofollow" />
   <meta name="googlebot" content="noindex, nofollow" />
-  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-<link rel="dns-prefetch" href="//www.googletagmanager.com">
-
   <script type="text/javascript" src="<?php echo osc_current_web_theme_js_url('jquery.validate.min.js'); ?>"></script>
 </head>
 
@@ -16,7 +13,7 @@
 
   <section class="container">
     <div class="box">
-      <h1><?php _e('Log in to your account', 'epsilon'); ?></h1>
+      <h1><?php _e('Sign-in to your account', 'epsilon'); ?></h1>
 
       <?php if(function_exists('fl_call_after_install') || function_exists('gc_login_button') || function_exists('fjl_login_button')) { ?>
         <div class="social">
@@ -43,7 +40,7 @@
         </div>
       <?php } ?>
 
-      <a class="alt-action" href="<?php echo osc_register_account_url(); ?>"><?php _e('Don\'t have an account? Create a new account', 'epsilon'); ?> &#8594;</a>
+      <a class="alt-action" href="<?php echo osc_register_account_url(); ?>"><?php _e('No account yet? Register a new account', 'epsilon'); ?> &#8594;</a>
 
       <form action="<?php echo osc_base_url(true); ?>" method="post" >
         <input type="hidden" name="page" value="login" />
@@ -52,9 +49,8 @@
         <?php osc_run_hook('user_pre_login_form'); ?>
 
         <div class="row">
-          <label for="phone"><?php _e('Phone', 'epsilon'); ?></label>
+          <label for="email"><?php _e('E-mail', 'epsilon'); ?></label>
           <span class="input-box"><?php UserForm::email_login_text(); ?></span>
-          <div style="text-align:left;font-style:italic;font-size:12px;margin-top:-13px;margin-bottom:15px;color:#0178d6;">Email login will be available soon.</div>
         </div>
 
         <div class="row">
@@ -79,7 +75,7 @@
 
         <button type="submit" class="btn"><?php _e('Log in', 'epsilon');?></button>
 
-        <a class="alt-action2" href="<?php echo osc_recover_user_password_url(); ?>"><?php _e('Forgot password?', 'epsilon'); ?></a>
+        <a class="alt-action2" href="<?php echo osc_recover_user_password_url(); ?>"><?php _e('I forgot my password', 'epsilon'); ?></a>
       </form>
     </div>
   </section>
@@ -88,69 +84,9 @@
   
   <script type="text/javascript">
     $(document).ready(function(){
-      $('input[name="email"]').attr('placeholder', '<?php echo osc_esc_js(__('Phone', 'epsilon')); ?>').attr('required', true);
-      $('input[name="password"]').attr('placeholder', '<?php echo osc_esc_js(__('Password', 'epsilon')); ?>').attr('required', true);
+      $('input[name="email"]').attr('placeholder', '<?php echo osc_esc_js(__('your.email@dot.com', 'epsilon')); ?>').attr('required', true);
+      $('input[name="password"]').attr('placeholder', '<?php echo osc_esc_js(__('YourPass123!', 'epsilon')); ?>').attr('required', true);
     });
-
-    document.addEventListener('DOMContentLoaded', function () {
-    const phoneInput = document.querySelector('input[name="email"]'); // Replace 'email' with your input field name or ID
-
-    if (phoneInput) {
-        phoneInput.addEventListener('input', function () {
-            validateAndNormalizePhone(phoneInput);
-        });
-
-        phoneInput.addEventListener('blur', function () {
-            validateAndNormalizePhone(phoneInput, true); // Final validation on blur
-        });
-
-        // Ensure the space is removed before form submission
-        phoneInput.form.addEventListener('submit', function (e) {
-            phoneInput.value = phoneInput.value.replace(/\s/g, ''); // Remove all spaces
-        });
-    }
-
-    function validateAndNormalizePhone(input, isFinalValidation = false) {
-        let phoneValue = input.value.trim();
-
-        // Remove all spaces and invalid characters (only allow digits and "+")
-        phoneValue = phoneValue.replace(/[^+\d]/g, '');
-
-        // If the number doesn't start with "+", consider it invalid
-        if (!phoneValue.startsWith('+')) {
-            input.value = ''; // Reset the input or set to a default value
-            return;
-        }
-
-        // Extract the country code
-        const countryCode = phoneValue.substring(0, 4); // First 4 characters (e.g., "+251")
-
-        if (countryCode === '+251') {
-            // Handle Ethiopian numbers
-            const localNumber = phoneValue.substring(4).replace(/[^0-9]/g, ''); // Extract local part after "+251"
-
-            if (!isFinalValidation) {
-                // Allow partial typing for Ethiopian numbers
-                input.value = '+251 ' + localNumber.substring(0, 9); // Add a space after the country code
-                return;
-            }
-
-            // Final validation: Ensure the local part is exactly 9 digits and starts with "9"
-            if (localNumber.length === 9 && localNumber.startsWith('9')) {
-                input.value = '+251 ' + localNumber; // Add a space after the country code
-            } else {
-                // Invalid Ethiopian number: Reset or provide feedback
-                input.value = '+251';
-            }
-        } else {
-            // For other international numbers, leave unchanged
-            input.value = phoneValue;
-        }
-    }
-});
-
-
-    
   </script>
 </body>
 </html>

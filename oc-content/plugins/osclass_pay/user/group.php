@@ -9,7 +9,7 @@
   $user_id = osc_logged_user_id();
   $currency = osp_currency();
   $symbol = osp_currency_symbol();
-  $groups = ModelOSP::newInstance()->getUserGroupsByCategory($user_id);
+  $groups = ModelOSP::newInstance()->getGroups();
   $group = ModelOSP::newInstance()->getGroup(osp_get_user_group());
   $ugroup = ModelOSP::newInstance()->getUserGroupRecord($user_id);
   $repeat = array();
@@ -42,7 +42,7 @@
       $can_prolong = false;
 
       if(osp_get_user_group() == 0) {
-        _e('You haven\'t purchased a membership yet.', 'osclass_pay');
+        _e('You are not member of any group', 'osclass_pay');
       } else {
         if(date('Y', strtotime($ugroup['dt_expire'])) > 2090 || date('Y', strtotime($ugroup['dt_expire'])) < 1980) {
           $expire_string = __('with no expiration', 'osclass_pay');
@@ -51,7 +51,7 @@
           $expire_string = __('until', 'osclass_pay') . ' ' . osc_format_date($ugroup['dt_expire']);
         }
 
-        echo sprintf(__('You have the %s membership %s.', 'osclass_pay'), '<strong>' . $group['s_name'] . '</strong>', $expire_string, '<strong>' . $group['i_discount'] . '%</strong>');
+        echo sprintf(__('You are member of %s group %s. This group has flat discount %s on all promotion products!', 'osclass_pay'), '<strong>' . $group['s_name'] . '</strong>', $expire_string, '<strong>' . $group['i_discount'] . '%</strong>');
       }
     ?>
   </div>
@@ -65,10 +65,6 @@
   <div class="osp-content">
     <?php foreach($groups as $g) { ?>
       <?php if($restricted_cat <> 1 || ($restricted_cat == 1 && in_array($g['pk_i_id'], $restricted_groups))) { ?>
-
-      <!-- <?php print($g['s_name']); ?> -->
-          <!-- <?php print_r($restricted_groups); ?> -->
-
         <div class="osp-group <?php if(osp_get_user_group() == $g['pk_i_id']) {?>active<?php } ?> <?php echo $style; ?>" data-group="<?php echo $g['pk_i_id']; ?>" data-rank="<?php echo $g['i_rank']; ?>">
           <!-- Not used, can be removed in future -->
           <?php if(1==2) { ?>
@@ -215,11 +211,18 @@
             <?php } ?>
 
 
-            
+            <label class="osp-label" for="osp-select-group"><?php _e('Duration', 'osclass_pay'); ?></label>
+            <select class="osp-select osp-select-group" id="osp-select-group" name="osp-select-group" data-group="<?php echo $g['pk_i_id']; ?>">
+              <?php $k = 0; ?>
+              <?php foreach($repeat[$g['pk_i_id']] as $r) { ?>
+                <option value="<?php echo $r['quantity']; ?>" data-days="<?php echo osc_esc_html($r['days']); ?>" data-price="<?php echo osc_esc_html($r['price']); ?>" data-price-formatted="<?php echo osc_esc_html($r['price_formatted']); ?>" <?php if($k == 0) { ?>selected="selected"<?php } ?>><?php echo osc_esc_html($r['title']); ?></option>
+                <?php $k++; ?>
+              <?php } ?>
+            </select>
           </div>
-        </div>
-        <?php } ?>
 
+        </div>
+      <?php } ?>
     <?php } ?>
   </div>
 </div>

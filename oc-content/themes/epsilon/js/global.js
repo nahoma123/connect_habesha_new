@@ -493,7 +493,7 @@ $(document).ready(function() {
           if(url.indexOf("index.php") >= 0) {
             var newUrl = url + '&sShowAs=' + viewType;
           } else {
-            var newUrl = url + '?sShowAs=' + viewType;
+            var newUrl = url.replace(/\/+$/, '') + '/?sShowAs=' + viewType;
           }
         }
 

@@ -7,19 +7,13 @@
   <meta name="googlebot" content="noindex, nofollow" />
 
   <?php if(osc_images_enabled_at_items()) { ItemForm::photos_javascript(); } ?>
-  <style>
-      .show-tip {
-          display:none;
-      }
-  </style>
 </head>
 
 <?php
   $action = 'item_add_post';
   $edit = false;
 
-
-if(Params::getParam('action') == 'item_edit') {
+  if(Params::getParam('action') == 'item_edit') {
     $action = 'item_edit_post';
     $edit = true;
   }
@@ -36,13 +30,6 @@ if(Params::getParam('action') == 'item_edit') {
     $loc_cook = eps_location_from_cookies();
 
     $prepare = array();
-    // Retrieve the user's default category ID
-$user_default_category = isset($user['category_id']) ? $user['category_id'] : null;
-
-// Set the default category in the $prepare array
-if (!$edit && $user_default_category) {
-    $prepare['i_category'] = $user_default_category;
-}
     $prepare['s_contact_name'] = osc_user_name();
     $prepare['s_contact_email'] = osc_user_email();
     $prepare['s_zip'] = osc_user_zip();
@@ -56,6 +43,7 @@ if (!$edit && $user_default_category) {
     $prepare['s_city'] = eps_get_session('sCity') <> '' ? eps_get_session('sCity') : osc_user_city();
     $prepare['s_phone'] = eps_get_session('sPhone') <> '' ? eps_get_session('sPhone') : osc_user_phone();
     $prepare['s_contact_phone'] = $prepare['s_phone'];
+    $prepare['i_category'] = eps_get_session('catId') <> '' ? eps_get_session('catId') : Params::getParam('catId');
     $location_text = @array_values(array_filter(array($prepare['s_city'], $prepare['s_region'], $prepare['s_country'])))[0];
   } else {
 
@@ -145,7 +133,7 @@ if (!$edit && $user_default_category) {
             <?php } else if($category_type == 2 || $category_type == '') { ?>
               <div class="row category multi">
                 <label for="catId"><?php _e('Select category for your listing', 'epsilon'); ?> <span class="req">*</span></label>
-                <?php ItemForm::category_multiple_selects_fixed(null, $prepare, __('Select a category', 'epsilon')); ?>
+                <?php ItemForm::category_multiple_selects(null, $prepare, __('Select a category', 'epsilon')); ?>
               </div>
             <?php } else if($category_type == 3) { ?>
               <div class="row category simple">
@@ -155,19 +143,19 @@ if (!$edit && $user_default_category) {
             <?php } ?>
           </div>
           
-          <?php /*<div class="tip">
+          <div class="tip">
             <i class="fas fa-times close-tip"></i>
             <p><strong><?php _e('Category selection is important!', 'epsilon'); ?></strong></p>
-             <p><?php _e('Selecting correct category for your item is essential part of selling process.', 'epsilon'); ?></p>
+            <p><?php _e('Selecting correct category for your item is essential part of selling process.', 'epsilon'); ?></p>
             <p><?php _e('If you select improper category, potentional buyers will not be able to find your item and it will take much more time to sell it.', 'epsilon'); ?></p>
-          </div>*/ ?>
+          </div>
           
           <?php osc_run_hook('item_publish_category'); ?>
         </section>
 
 
         <section class="location">
-          <h2><?php _e('Advert location', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
+          <h2><?php _e('Listing location', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
 
           <div class="in">
             <?php if($location_type == 0) { ?>
@@ -238,32 +226,32 @@ if (!$edit && $user_default_category) {
             <?php } ?>
 
             <div class="row address">
-              <label for="address"><?php _e('City Area', 'epsilon'); ?></label>
+              <label for="address"><?php _e('Address', 'epsilon'); ?></label>
               <div class="input-box"><?php ItemForm::address_text($prepare); ?></div>
             </div>
             
-            <?php /*<div class="row zip">
+            <div class="row zip">
               <label for="zip"><?php _e('ZIP', 'epsilon'); ?></label>
               <div class="input-box"><?php ItemForm::zip_text($prepare); ?></div>
             </div>
             
             <div class="row location-link">
               <a class="link-update location" href="#"><?php echo (@$loc_cook['success'] == 1 ? __('Are you in different city? Update location', 'epsilon') : __('Want to sell faster? Set your preferred location', 'epsilon')); ?> &#8594;</a>
-            </div>*/ ?>
+            </div>
           </div>
 
-          <?php /*<div class="tip">
+          <div class="tip">
             <i class="fas fa-times close-tip"></i>
             <p><strong><?php _e('Localize item', 'epsilon'); ?></strong></p>
             <p><?php _e('You should at least select region & city for your listing, so customers those search only offers in their city or region can find your listings.', 'epsilon'); ?></p>
-          </div>*/ ?>
+          </div>
           
           <?php osc_run_hook('item_publish_location'); ?>
         </section>
         
 
         <section class="about">
-          <h2><?php _e('Contact Information', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
+          <h2><?php _e('Seller\'s information', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
 
           <div class="in">
             <div class="seller<?php if(osc_is_web_user_logged_in() ) { ?> logged<?php } ?>">
@@ -273,11 +261,41 @@ if (!$edit && $user_default_category) {
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 408c-66.2 0-120-53.8-120-120s53.8-120 120-120 120 53.8 120 120-53.8 120-120 120zm0-192c-39.7 0-72 32.3-72 72s32.3 72 72 72 72-32.3 72-72-32.3-72-72-72zm-24 72c0-13.2 10.8-24 24-24 8.8 0 16-7.2 16-16s-7.2-16-16-16c-30.9 0-56 25.1-56 56 0 8.8 7.2 16 16 16s16-7.2 16-16zm110.7-145H464v288H48V143h121.3l24-64h125.5l23.9 64zM324.3 31h-131c-20 0-37.9 12.4-44.9 31.1L136 95H48c-26.5 0-48 21.5-48 48v288c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V143c0-26.5-21.5-48-48-48h-88l-14.3-38c-5.8-15.7-20.7-26-37.4-26z"/></svg>
                 </a>
                 
-                <label for="contactName"><?php _e('Your name', 'epsilon'); ?><?php if(strpos($required_fields, 'name') !== false) { ?><span class="req">*</span><?php } ?></label>
+                <label for="contactName"><?php _e('Contact Name', 'epsilon'); ?><?php if(strpos($required_fields, 'name') !== false) { ?><span class="req">*</span><?php } ?></label>
                 <div class="input-box"><?php ItemForm::contact_name_text($prepare); ?></div>
               </div>
             
-              
+              <div class="row phone">
+                <label for="phone"><?php _e('Phone Number', 'epsilon'); ?><?php if(strpos($required_fields, 'phone') !== false) { ?><span class="req">*</span><?php } ?></label>
+                <div class="input-box">
+                  <?php if(method_exists('ItemForm', 'contact_phone_text')) { ?>
+                    <?php ItemForm::contact_phone_text($prepare); ?>
+                  <?php } else { ?>
+                    <input type="tel" id="sPhone" name="sPhone" value="<?php echo $prepare['s_phone']; ?>" />
+                  <?php } ?>
+                </div>
+                
+                <?php if(method_exists('ItemForm', 'show_phone_checkbox')) { ?>
+                  <div class="mail-show">
+                    <div class="input-box-check">
+                      <?php ItemForm::show_phone_checkbox() ; ?>
+                      <label for="showPhone" class="label-mail-show"><?php _e('Phone visible on ad', 'epsilon'); ?></label>
+                    </div>
+                  </div>
+                <?php } ?>
+              </div>
+
+              <div class="row user-email">
+                <label for="contactEmail"><?php _e('E-mail', 'epsilon'); ?> <span class="req">*</span></label>
+                <div class="input-box"><?php ItemForm::contact_email_text($prepare); ?></div>
+
+                <div class="mail-show">
+                  <div class="input-box-check">
+                    <?php ItemForm::show_email_checkbox() ; ?>
+                    <label for="showEmail" class="label-mail-show"><?php _e('Email visible on ad', 'epsilon'); ?></label>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="row user-link">
@@ -289,18 +307,18 @@ if (!$edit && $user_default_category) {
             </div>
           </div>
           
-          <?php /*<div class="tip">
+          <div class="tip">
             <i class="fas fa-times close-tip"></i>
             <p><strong><?php _e('Trusted and open seller', 'epsilon'); ?></strong></p>
-             <p><?php _e('You should enter phone number, as most of solid customers prefer phone contact way.', 'epsilon'); ?></p>
+            <p><?php _e('You should enter phone number, as most of solid customers prefer phone contact way.', 'epsilon'); ?></p>
             <p><?php _e('For faster listing publishing and contacting with customers, it is recommended to create and account, logged-in users are more trusted.', 'epsilon'); ?></p>
-          </div>*/ ?>
+          </div>
           
           <?php osc_run_hook('item_publish_seller'); ?>
         </section>
 
 
-        <?php /*<section class="s4">
+        <section class="s4">
           <h2><?php _e('Pricing options & status', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
 
           <div class="in">
@@ -345,7 +363,7 @@ if (!$edit && $user_default_category) {
           </div>
           
           <?php osc_run_hook('item_publish_price'); ?>
-        </section> */ ?>
+        </section>
 
 
         <section class="upload-photos">
@@ -365,61 +383,55 @@ if (!$edit && $user_default_category) {
             </div>
           </div>
           
-          <?php /*<div class="tip">
+          <div class="tip">
             <i class="fas fa-times close-tip"></i>
             <p><strong><?php _e('Photos are selling!', 'epsilon'); ?></strong></p>
-             <p><?php _e('Did you know that listing with photos sells 7x faster than one with no photo?', 'epsilon'); ?></p>
+            <p><?php _e('Did you know that listing with photos sells 7x faster than one with no photo?', 'epsilon'); ?></p>
             <p><?php _e('Real product photos are key element for fast selling and helps customer to decide if product is really what they are looking for.', 'epsilon'); ?></p>
-          </div>*/ ?>
+          </div>
           
           <?php osc_run_hook('item_publish_images'); ?>
         </section>
 
 
         <section class="info">
-          <h2><?php _e('Advert description', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
+          <h2><?php _e('Listing description and attributes', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
 
           <div class="in">
             <div class="row ttle">
-              <label for="title[<?php echo osc_current_user_locale(); ?>]"><?php _e('Title', 'epsilon'); ?> <span class="req">*</span></label>
+              <label for="title[<?php echo osc_current_user_locale(); ?>]"><?php _e('Title', 'epsilon'); ?> *</label>
               <div class="input-box">
                 <?php ItemForm::title_input('title', osc_current_user_locale(), osc_esc_html(eps_post_item_title())); ?>
               </div>
             </div>
             
             <div class="row dsc">
-              <label for="description[<?php echo osc_current_user_locale(); ?>]"><?php _e('Description', 'epsilon'); ?> <span class="req">*</span></label>
+              <label for="description[<?php echo osc_current_user_locale(); ?>]"><?php _e('Description', 'epsilon'); ?> *</label>
               <div class="td-wrap d1 input-box">
                 <?php ItemForm::description_textarea('description', osc_current_user_locale(), osc_esc_html(eps_post_item_description())); ?>
               </div>
             </div>
-            
             
             <?php osc_run_hook('item_publish_description'); ?>
           
             <div id="post-hooks" class="hooks-block"><?php if($edit) { ItemForm::plugin_edit_item(); } else { ItemForm::plugin_post_item(); } ?></div>
 
             <?php osc_run_hook('item_publish_hook'); ?>
-            
-            <div class="row dsc">
-              
-            
           </div>
           
-          <?php /*<div class="tip">
+          <div class="tip">
             <i class="fas fa-times close-tip"></i>
             <p><strong><?php _e('Additional decription', 'epsilon'); ?></strong></p>
-             <p><?php _e('Title is used in search so it is recommended to use keywords of your listing in title.', 'epsilon'); ?></p>
+            <p><?php _e('Title is used in search so it is recommended to use keywords of your listing in title.', 'epsilon'); ?></p>
             <p><?php _e('Detail description will also provide customers all information they need and reduce need to contact you.', 'epsilon'); ?></p>
-          </div>*/ ?>
-          
+          </div>
         </section>
 
 
         <section class="buttons-block">
           <div class="row captcha"><?php osc_run_hook('item_publish_bottom'); eps_show_recaptcha(); ?></div>
 
-          <button type="submit" class="btn"><?php _e('Post advert', 'epsilon'); ?></button>
+          <button type="submit" class="btn"><?php _e('Submit', 'epsilon'); ?></button>
           
           <?php osc_run_hook('item_publish_buttons'); ?>
         </section>
@@ -501,7 +513,7 @@ if (!$edit && $user_default_category) {
   <script type="text/javascript">
   $(document).ready(function(){
     $('.item-publish input[name^="title"]').attr('placeholder', '<?php echo osc_esc_js(__('Summarize your offer', 'epsilon')); ?>');
-    $('.item-publish textarea[name^="description"]').attr('placeholder', '<?php echo osc_esc_js(__('Describe your service, including pricing, availability, and other relevant details.', 'epsilon')); ?>');
+    $('.item-publish textarea[name^="description"]').attr('placeholder', '<?php echo osc_esc_js(__('Detail description of your offer', 'epsilon')); ?>');
     $('.item-publish input[name="contactPhone"]').prop('type', 'tel');
 
     // HIDE THEME EXTRA FIELDS (Transaction, Condition, Status) ON EXCLUDED CATEGORIES 
@@ -771,9 +783,6 @@ if (!$edit && $user_default_category) {
         contactEmail: {
           required: true,
           email: true
-        },
-        termsConditions: {
-          required: true
         }
       },
 
@@ -846,13 +855,10 @@ if (!$edit && $user_default_category) {
         contactEmail: {
           required: '<?php echo osc_esc_js(__('Email: this field is required.', 'epsilon')); ?>',
           email: '<?php echo osc_esc_js(__('Email: invalid format of email address.', 'epsilon')); ?>'
-        },
-        termsConditions: {
-          required: '<?php echo osc_esc_js(__('Terms and conditions: this field is required.', 'epsilon')); ?>'
         }
       }, 
 
-      ignore: ":disabled",
+      ignore: ":disabled, :hidden, .ignore",
       ignoreTitle: false,
       errorLabelContainer: "#error_list",
       wrapper: "li",

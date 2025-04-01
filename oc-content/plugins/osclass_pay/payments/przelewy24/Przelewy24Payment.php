@@ -109,7 +109,7 @@ class Przelewy24Payment {
 
 
           <p class="rw">
-            <label><?php _e('Country Code', 'osclass_pay'); ?></label>
+            <label><?php _e('Country', 'osclass_pay'); ?></label>
             <span class="osp-input-box">
               <?php $countries = Country::newInstance()->listAll(); ?>
 

@@ -285,7 +285,7 @@
   .products.detail .simple-prod .img-wrap .bar {padding:0;background:transparent;}
   .products.detail .simple-prod .img-wrap .bar .image-counter {left: 3px; bottom: 3px; right: auto; background: rgba(0,0,0,0.5); padding: 2px 4px; border-radius: 4px;}
   .products.detail .simple-prod .img-wrap .user-image {display:none;}
-  .products.detail .simple-prod .favorite {left:3px;right:auto;top:3px;}
+  .products.detail .simple-prod .favorite, .products.detail .simple-prod .svi-save-btn {left:3px;right:auto;top:3px;}
   .products.detail .simple-prod .action .price {display:inline-block;}
   .products.detail .simple-prod .premium-mark {left:3px;bottom:26px;}
   !#item-image .swiper-thumbs li {width:calc(25% - 8px);min-width:64px;height:64px;}

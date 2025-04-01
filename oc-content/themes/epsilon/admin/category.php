@@ -15,7 +15,8 @@
   $sample_images = eps_param_update('sample_images', 'theme_action', 'check', 'theme-epsilon');
 
   if(Params::getParam('theme_action') == 'done') { 
-    $upload_dir_small = osc_themes_path() . osc_current_web_theme() . '/images/small_cat/';
+    // $upload_dir_small = osc_themes_path() . osc_current_web_theme() . '/images/small_cat/';
+    $upload_dir_small = osc_themes_path() . 'epsilon/images/small_cat/';      // child theme cause issue
     $data = Params::getParam('category');
 
     if(is_array($data) && count($data) > 0) {

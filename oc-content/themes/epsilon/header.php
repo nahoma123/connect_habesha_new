@@ -22,7 +22,7 @@
     <div class="links">
       <a class="publish btn" href="<?php echo osc_item_post_url(); ?>">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24" height="24"><path d="M352 240v32c0 6.6-5.4 12-12 12h-88v88c0 6.6-5.4 12-12 12h-32c-6.6 0-12-5.4-12-12v-88h-88c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h88v-88c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v88h88c6.6 0 12 5.4 12 12zm96-160v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48zm-48 346V86c0-3.3-2.7-6-6-6H54c-3.3 0-6 2.7-6 6v340c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>
-        <?php _e('Post advert', 'epsilon'); ?>
+        <?php _e('Place an ad', 'epsilon'); ?>
       </a>
       
       <a class="publish btn mini" href="<?php echo osc_item_post_url(); ?>">
@@ -36,7 +36,7 @@
           <img src="<?php echo eps_profile_picture(osc_logged_user_id(), 'medium'); ?>" alt="<?php echo osc_esc_html(osc_logged_user_name()); ?>" width="32" height="32"/>
         <?php } ?>
         
-        <?php echo (osc_is_web_user_logged_in() ? __('My Account', 'epsilon') : __('Log In / Create Account', 'epsilon')); ?>
+        <?php echo (osc_is_web_user_logged_in() ? __('My Account', 'epsilon') : __('Sign in / Register', 'epsilon')); ?>
       </a>
 
       <a class="maccount btn btn-white isMobile" href="<?php echo (!osc_is_web_user_logged_in() ? osc_user_login_url() : osc_user_dashboard_url()); ?>">
@@ -81,6 +81,17 @@
             <span class="counter"><?php echo $fav_counter; ?></span>
           <?php } ?>
         </a>
+        
+      <?php } else if (function_exists('svi_save_btn')) { ?>
+        <a class="favorite btn btn-white svi-show-saved" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" height="18" width="18"><path d="M287.9 0C297.1 0 305.5 5.25 309.5 13.52L378.1 154.8L531.4 177.5C540.4 178.8 547.8 185.1 550.7 193.7C553.5 202.4 551.2 211.9 544.8 218.2L433.6 328.4L459.9 483.9C461.4 492.9 457.7 502.1 450.2 507.4C442.8 512.7 432.1 513.4 424.9 509.1L287.9 435.9L150.1 509.1C142.9 513.4 133.1 512.7 125.6 507.4C118.2 502.1 114.5 492.9 115.1 483.9L142.2 328.4L31.11 218.2C24.65 211.9 22.36 202.4 25.2 193.7C28.03 185.1 35.5 178.8 44.49 177.5L197.7 154.8L266.3 13.52C270.4 5.249 278.7 0 287.9 0L287.9 0zM287.9 78.95L235.4 187.2C231.9 194.3 225.1 199.3 217.3 200.5L98.98 217.9L184.9 303C190.4 308.5 192.9 316.4 191.6 324.1L171.4 443.7L276.6 387.5C283.7 383.7 292.2 383.7 299.2 387.5L404.4 443.7L384.2 324.1C382.9 316.4 385.5 308.5 391 303L476.9 217.9L358.6 200.5C350.7 199.3 343.9 194.3 340.5 187.2L287.9 78.95z"/></svg>
+          <?php _e('Saved', 'epsilon'); ?>
+
+          <?php if($fav_counter > 0) { ?>
+            <span class="counter"><?php echo $fav_counter; ?></span>
+          <?php } ?>
+        </a>
+        
       <?php } ?>
       
       <div class="divider">&nbsp;</div>
@@ -145,7 +156,7 @@
       <div class="data">
         <strong>
           <span class="title"><?php echo osc_item_title(); ?></span>
-          <span class="price"><?php //echo osc_item_formated_price(); ?></span>
+          <span class="price"><?php echo osc_item_formated_price(); ?></span>
         </strong>
         <div>
           <span><?php echo sprintf(__('Posted %s', 'epsilon'), eps_smart_date(osc_item_pub_date())); ?></span>
@@ -188,7 +199,7 @@
   $breadcrumb = str_replace('<span itemprop="title">' . osc_page_title() . '</span>', '<span itemprop="title" class="home">' . $svg . ' <span>' . __('Home', 'epsilon') . '</span></span>', $breadcrumb);
   $breadcrumb = str_replace('<span itemprop="name">' . osc_page_title() . '</span>', '<span itemprop="name" class="home">' . $svg . ' <span>' . __('Home', 'epsilon') . '</span></span>', $breadcrumb);
 
-  if(osc_is_ad_page() && osc_item_formated_price()!='Check with seller') {
+  if(osc_is_ad_page()) {
     $breadcrumb = str_replace('<span itemprop="name">' . osc_item_title() . '</span>', '<span itemprop="name">' . osc_item_title() . ', <b>' . osc_item_formated_price() . '</b></span>', $breadcrumb);
   }
 ?>
