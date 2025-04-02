@@ -78,21 +78,27 @@ public function createVerification($data) {
   $this->dao->replace($this->getTable_sms_verification(), $data);
 }
 
-public function updateVerification($data, $only_pending = false) {
+public function updateVerification($data, $only_pending = false, $replace = false) {
   if($only_pending) {
     $where = array('s_phone_number' => $data['s_phone_number'], 's_status' => 'PENDING');
   } else {
     $where = array('s_phone_number' => $data['s_phone_number']);
   }
   
-  if(isset($data['s_email']) && $data['s_email'] != '') {
+  if(isset($data['s_email']) && trim((string)$data['s_email']) != '') {
     $where['s_email'] = $data['s_email'];
   }
   
-  $this->dao->update($this->getTable_sms_verification(), $data, $where);
+  // Use replace in case verification record does not exists and you want to create it
+  if($replace === true) {
+    $this->dao->replace($this->getTable_sms_verification(), $data);
+  } else {
+    $this->dao->update($this->getTable_sms_verification(), $data, $where);
+  }
 }
 
 
+// PREVIOUS VERIFICATIONS OF PHONE USING DIFFERENT EMAIL WILL BE CANCELED
 public function cancelPreviousVerification($phone, $email) {
   if($phone <> '' && $email <> '') {  
     $this->dao->query(sprintf('UPDATE %s SET s_status = "CANCELED" WHERE s_phone_number = "%s" AND s_email <> "%s" AND s_status <> "CANCELED"', $this->getTable_sms_verification(), $phone, $email));
@@ -100,6 +106,7 @@ public function cancelPreviousVerification($phone, $email) {
 }
 
 
+// PREVIOUS PHONE VERIFICATIONS OF USER WILL BE CANCELED
 public function cancelPreviousUserVerification($phone, $email) {
   if($phone <> '' && $email <> '') {  
     $this->dao->query(sprintf('UPDATE %s SET s_status = "CANCELED" WHERE s_phone_number <> "%s" AND s_email = "%s" AND s_status <> "CANCELED"', $this->getTable_sms_verification(), $phone, $email));
@@ -159,6 +166,10 @@ public function updateItemPhone($data) {
   $item_id = @$data['fk_i_item_id'];
   $phone_number = @$data['s_phone'];
   $theme = osc_current_web_theme();
+  
+  if(osc_version() >= 410) {
+    $this->dao->update(DB_TABLE_PREFIX . 't_item', array('s_contact_phone' => $phone_number), array('pk_i_id' => $item_id));
+  }
 
   if($this->checkTable($theme)) {
     $this->dao->update(DB_TABLE_PREFIX . 't_item_' . $theme, array('s_phone' => $phone_number, 'fk_i_item_id' => $item_id), array('fk_i_item_id' => $item_id));

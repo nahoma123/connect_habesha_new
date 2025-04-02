@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SMS Notification and Verification Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-25 11:11+0100\n"
-"PO-Revision-Date: 2024-11-25 11:11+0100\n"
+"POT-Creation-Date: 2025-01-08 10:07+0100\n"
+"PO-Revision-Date: 2025-01-08 10:07+0100\n"
 "Last-Translator: Miso <miso546@azet.sk>\n"
 "Language-Team: MB Themes <info@mb-themes.com>\n"
 "Language: en_US\n"
@@ -17,13 +17,14 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: languages/en_US\n"
 "X-Poedit-SearchPath-1: .\n"
+"X-Poedit-SearchPathExcluded-0: src\n"
 
-#: admin/configure.php:3 admin/configure.php:71 index.php:479 index.php:488
-#: index.php:521
+#: admin/configure.php:3 admin/configure.php:71 index.php:517 index.php:526
+#: index.php:559
 msgid "Configure"
 msgstr ""
 
-#: admin/configure.php:55 admin/provider.php:66
+#: admin/configure.php:55 admin/provider.php:69
 msgid "Settings were successfully saved"
 msgstr ""
 
@@ -302,16 +303,16 @@ msgid ""
 "registered on site."
 msgstr ""
 
-#: admin/configure.php:300 admin/provider.php:541
+#: admin/configure.php:300 admin/provider.php:576
 msgid "This is demo site"
 msgstr ""
 
-#: admin/configure.php:300 admin/configure.php:302 admin/provider.php:541
-#: admin/provider.php:543
+#: admin/configure.php:300 admin/configure.php:302 admin/provider.php:576
+#: admin/provider.php:578
 msgid "Save"
 msgstr ""
 
-#: admin/log_sms.php:3 admin/log_sms.php:21 index.php:490 index.php:523
+#: admin/log_sms.php:3 admin/log_sms.php:21 index.php:528 index.php:561
 msgid "SMS Logs"
 msgstr ""
 
@@ -319,11 +320,11 @@ msgstr ""
 msgid "Sms logs cannot be removed."
 msgstr ""
 
-#: admin/log_sms.php:31 admin/log_sms.php:56 admin/log_verification.php:31
+#: admin/log_sms.php:31 admin/log_sms.php:56 admin/log_verification.php:135
 msgid "Phone"
 msgstr ""
 
-#: admin/log_sms.php:36 admin/log_sms.php:57 admin/provider.php:585
+#: admin/log_sms.php:36 admin/log_sms.php:57 admin/provider.php:620
 msgid "Message"
 msgstr ""
 
@@ -331,7 +332,7 @@ msgstr ""
 msgid "Action"
 msgstr ""
 
-#: admin/log_sms.php:47 admin/log_verification.php:42
+#: admin/log_sms.php:47 admin/log_verification.php:146
 msgid "Search"
 msgstr ""
 
@@ -339,16 +340,16 @@ msgstr ""
 msgid "ID"
 msgstr ""
 
-#: admin/log_sms.php:55 form/verify.php:85
+#: admin/log_sms.php:55 form/verify.php:83
 msgid "User"
 msgstr ""
 
-#: admin/log_sms.php:58 admin/log_verification.php:55
+#: admin/log_sms.php:58 admin/log_verification.php:159
 msgid "Date"
 msgstr ""
 
-#: admin/log_sms.php:60 admin/log_verification.php:53 admin/provider.php:570
-#: admin/provider.php:621
+#: admin/log_sms.php:60 admin/log_verification.php:157 admin/provider.php:605
+#: admin/provider.php:656
 msgid "Provider"
 msgstr ""
 
@@ -356,7 +357,7 @@ msgstr ""
 msgid "Response"
 msgstr ""
 
-#: admin/log_sms.php:62 admin/log_verification.php:54
+#: admin/log_sms.php:62 admin/log_verification.php:158
 msgid "Status"
 msgstr ""
 
@@ -380,396 +381,441 @@ msgstr ""
 msgid "ERROR:"
 msgstr ""
 
-#: admin/log_verification.php:3 admin/log_verification.php:21
+#: admin/log_verification.php:3 admin/log_verification.php:125
 msgid "Phone Number Verification Logs"
 msgstr ""
 
-#: admin/log_verification.php:25
+#: admin/log_verification.php:32 admin/log_verification.php:54
+#: admin/log_verification.php:114
+#, php-format
+msgid ""
+"Phone number %s has been successfully verified and paired with email %s. In "
+"case this phone was already verified before by different user, this "
+"verification has been canceled"
+msgstr ""
+
+#: admin/log_verification.php:88
+#, php-format
+msgid ""
+"Phone number %s for item #%s has been successfully verified and paired with "
+"email %s. In case this phone was already verified before by different user, "
+"this verification has been canceled"
+msgstr ""
+
+#: admin/log_verification.php:129
 msgid "Verification logs cannot be removed."
 msgstr ""
 
-#: admin/log_verification.php:36
+#: admin/log_verification.php:140
 msgid "Email"
 msgstr ""
 
-#: admin/log_verification.php:50
+#: admin/log_verification.php:154
 msgid "Phone Number"
 msgstr ""
 
-#: admin/log_verification.php:51
+#: admin/log_verification.php:155
 msgid "User Email"
 msgstr ""
 
-#: admin/log_verification.php:52
+#: admin/log_verification.php:156
 msgid "Verification Code"
 msgstr ""
 
-#: admin/log_verification.php:60
+#: admin/log_verification.php:165
 msgid "No verification logs has been found"
+msgstr ""
+
+#: admin/log_verification.php:178 form/verify.php:117
+msgid "Verify"
+msgstr ""
+
+#: admin/log_verification.php:182
+msgid "Cancel"
 msgstr ""
 
 #: admin/provider.php:3
 msgid "provider"
 msgstr ""
 
-#: admin/provider.php:76
+#: admin/provider.php:79
 #, php-format
 msgid "SMS has been sent. Provider response: %s"
 msgstr ""
 
-#: admin/provider.php:78
+#: admin/provider.php:81
 #, php-format
 msgid "There was error while sending SMS. Provider response: %s"
 msgstr ""
 
-#: admin/provider.php:88
+#: admin/provider.php:91
 #, php-format
 msgid "There was problem to retrieve balance: %s"
 msgstr ""
 
-#: admin/provider.php:90
+#: admin/provider.php:93
 #, php-format
 msgid "Balance successfully retrieved. Your balance is: %s"
 msgstr ""
 
-#: admin/provider.php:114 index.php:489 index.php:522
+#: admin/provider.php:117 index.php:527 index.php:560
 msgid "SMS Providers"
 msgstr ""
 
-#: admin/provider.php:131
+#: admin/provider.php:134
 msgid "Twilio.com"
 msgstr ""
 
-#: admin/provider.php:137 admin/provider.php:138 admin/provider.php:171
-#: admin/provider.php:172 admin/provider.php:200 admin/provider.php:201
-#: admin/provider.php:229 admin/provider.php:230 admin/provider.php:259
-#: admin/provider.php:260 admin/provider.php:296 admin/provider.php:324
-#: admin/provider.php:325 admin/provider.php:367 admin/provider.php:368
-#: admin/provider.php:407 admin/provider.php:408 admin/provider.php:441
-#: admin/provider.php:442 admin/provider.php:475 admin/provider.php:476
-#: admin/provider.php:509 admin/provider.php:510
+#: admin/provider.php:140 admin/provider.php:141 admin/provider.php:174
+#: admin/provider.php:175 admin/provider.php:203 admin/provider.php:204
+#: admin/provider.php:232 admin/provider.php:233 admin/provider.php:262
+#: admin/provider.php:263 admin/provider.php:299 admin/provider.php:327
+#: admin/provider.php:328 admin/provider.php:370 admin/provider.php:371
+#: admin/provider.php:410 admin/provider.php:411 admin/provider.php:444
+#: admin/provider.php:445 admin/provider.php:478 admin/provider.php:479
+#: admin/provider.php:512 admin/provider.php:513 admin/provider.php:551
 msgid "Link will open in new window"
 msgstr ""
 
-#: admin/provider.php:137
+#: admin/provider.php:140
 msgid "Twilio Dashboard"
 msgstr ""
 
-#: admin/provider.php:138
+#: admin/provider.php:141
 msgid "Twilio Docs"
 msgstr ""
 
-#: admin/provider.php:143
+#: admin/provider.php:146
 msgid "Twilio Account SID"
 msgstr ""
 
-#: admin/provider.php:148
+#: admin/provider.php:151
 msgid "Twilio Auth Token"
 msgstr ""
 
-#: admin/provider.php:153
+#: admin/provider.php:156
 msgid "Twilio Phone Number"
 msgstr ""
 
-#: admin/provider.php:165
+#: admin/provider.php:168
 msgid "GatewayAPI.com"
 msgstr ""
 
-#: admin/provider.php:171
+#: admin/provider.php:174
 msgid "GatewayAPI Home"
 msgstr ""
 
-#: admin/provider.php:172
+#: admin/provider.php:175
 msgid "GatewayAPI Docs"
 msgstr ""
 
-#: admin/provider.php:177
+#: admin/provider.php:180
 msgid "GatewayAPI API Token"
 msgstr ""
 
-#: admin/provider.php:182
+#: admin/provider.php:185
 msgid "GatewayAPI Sender"
 msgstr ""
 
-#: admin/provider.php:194
+#: admin/provider.php:197
 msgid "RingCaptcha"
 msgstr ""
 
-#: admin/provider.php:200
+#: admin/provider.php:203
 msgid "RingCaptcha Dashboard"
 msgstr ""
 
-#: admin/provider.php:201
+#: admin/provider.php:204
 msgid "RingCaptcha Docs"
 msgstr ""
 
-#: admin/provider.php:205
+#: admin/provider.php:208
 msgid "RingCaptcha App Key"
 msgstr ""
 
-#: admin/provider.php:210
+#: admin/provider.php:213
 msgid "RingCaptcha Api Key"
 msgstr ""
 
-#: admin/provider.php:223
+#: admin/provider.php:226
 msgid "TextLocal.com"
 msgstr ""
 
-#: admin/provider.php:229
+#: admin/provider.php:232
 msgid "TextLocal.com Home"
 msgstr ""
 
-#: admin/provider.php:230
+#: admin/provider.php:233
 msgid "TextLocal.com Docs"
 msgstr ""
 
-#: admin/provider.php:235
+#: admin/provider.php:238
 msgid "TextLocal.com Api Key"
 msgstr ""
 
-#: admin/provider.php:240
+#: admin/provider.php:243
 msgid "TextLocal.com Sender"
 msgstr ""
 
-#: admin/provider.php:253
+#: admin/provider.php:256
 msgid "TextLocal.in"
 msgstr ""
 
-#: admin/provider.php:259
+#: admin/provider.php:262
 msgid "TextLocal.in Home"
 msgstr ""
 
-#: admin/provider.php:260
+#: admin/provider.php:263
 msgid "TextLocal.in Docs"
 msgstr ""
 
-#: admin/provider.php:265
+#: admin/provider.php:268
 msgid "TextLocal.in Api Key"
 msgstr ""
 
-#: admin/provider.php:270
+#: admin/provider.php:273
 msgid "TextLocal.in Sender Id"
 msgstr ""
 
-#: admin/provider.php:276
+#: admin/provider.php:279
 msgid "TextLocal.in Password"
 msgstr ""
 
-#: admin/provider.php:290
+#: admin/provider.php:293
 msgid "Way2SMS"
 msgstr ""
 
-#: admin/provider.php:296
+#: admin/provider.php:299
 msgid "Way2SMS Home"
 msgstr ""
 
-#: admin/provider.php:300
+#: admin/provider.php:303
 msgid "Way2SMS Username"
 msgstr ""
 
-#: admin/provider.php:305
+#: admin/provider.php:308
 msgid "Way2SMS Password"
 msgstr ""
 
-#: admin/provider.php:318
+#: admin/provider.php:321
 msgid "Msg91"
 msgstr ""
 
-#: admin/provider.php:324
+#: admin/provider.php:327
 msgid "Msg91 Home"
 msgstr ""
 
-#: admin/provider.php:325
+#: admin/provider.php:328
 msgid "Msg91 Docs"
 msgstr ""
 
-#: admin/provider.php:329
+#: admin/provider.php:332
 msgid ""
 "Following variables are used: OTP - One time verification code, MESSAGE - "
 "SMS text, ACTION - action code."
 msgstr ""
 
-#: admin/provider.php:334
+#: admin/provider.php:337
 msgid "Msg91 Api Key (auth key)"
 msgstr ""
 
-#: admin/provider.php:339
+#: admin/provider.php:342
 msgid "Msg91 Sender Id"
 msgstr ""
 
-#: admin/provider.php:344
+#: admin/provider.php:347
 msgid "Msg91 Template Id"
 msgstr ""
 
-#: admin/provider.php:349
+#: admin/provider.php:352
 msgid "Msg91 Short URL"
 msgstr ""
 
-#: admin/provider.php:361
+#: admin/provider.php:364
 msgid "Budget SMS"
 msgstr ""
 
-#: admin/provider.php:367
+#: admin/provider.php:370
 msgid "Budget SMS Dashboard"
 msgstr ""
 
-#: admin/provider.php:368
+#: admin/provider.php:371
 msgid "Budget SMS Docs"
 msgstr ""
 
-#: admin/provider.php:373
+#: admin/provider.php:376
 msgid "Budget SMS User Id"
 msgstr ""
 
-#: admin/provider.php:378
+#: admin/provider.php:381
 msgid "Budget SMS Username"
 msgstr ""
 
-#: admin/provider.php:383
+#: admin/provider.php:386
 msgid "Budget SMS From"
 msgstr ""
 
-#: admin/provider.php:388
+#: admin/provider.php:391
 msgid "Budget SMS Handle"
 msgstr ""
 
-#: admin/provider.php:401
+#: admin/provider.php:404
 msgid "Plivo"
 msgstr ""
 
-#: admin/provider.php:407
+#: admin/provider.php:410
 msgid "Plivo Dashboard"
 msgstr ""
 
-#: admin/provider.php:408
+#: admin/provider.php:411
 msgid "Plivo Docs"
 msgstr ""
 
-#: admin/provider.php:413
+#: admin/provider.php:416
 msgid "Plivo Smsh Id"
 msgstr ""
 
-#: admin/provider.php:418
+#: admin/provider.php:421
 msgid "Plivo Sender Id"
 msgstr ""
 
-#: admin/provider.php:423
+#: admin/provider.php:426
 msgid "Plivo Smsh Token"
 msgstr ""
 
-#: admin/provider.php:435
+#: admin/provider.php:438
 msgid "Notify.lk"
 msgstr ""
 
-#: admin/provider.php:441
+#: admin/provider.php:444
 msgid "Notify.lk Dashboard"
 msgstr ""
 
-#: admin/provider.php:442
+#: admin/provider.php:445
 msgid "Notify.lk Api Endpoints"
 msgstr ""
 
-#: admin/provider.php:447
+#: admin/provider.php:450
 msgid "Notify.lk User ID"
 msgstr ""
 
-#: admin/provider.php:452
+#: admin/provider.php:455
 msgid "Notify.lk Api Key"
 msgstr ""
 
-#: admin/provider.php:457
+#: admin/provider.php:460
 msgid "Notify.lk Sender ID"
 msgstr ""
 
-#: admin/provider.php:459
+#: admin/provider.php:462
 msgid "Default value, if you have not requested any, is NotifyDEMO"
 msgstr ""
 
-#: admin/provider.php:469
+#: admin/provider.php:472
 msgid "SMS-Assistent.by"
 msgstr ""
 
-#: admin/provider.php:475
+#: admin/provider.php:478
 msgid "SMS-Assistent.by Home"
 msgstr ""
 
-#: admin/provider.php:476
+#: admin/provider.php:479
 msgid "SMS-Assistent.by Integration Docs"
 msgstr ""
 
-#: admin/provider.php:481
+#: admin/provider.php:484
 msgid "SMS-Assistent.by Api Username"
 msgstr ""
 
-#: admin/provider.php:486
+#: admin/provider.php:489
 msgid "SMS-Assistent.by Api Password"
 msgstr ""
 
-#: admin/provider.php:491
+#: admin/provider.php:494
 msgid "SMS-Assistent.by Api Sender"
 msgstr ""
 
-#: admin/provider.php:503
+#: admin/provider.php:506
 msgid "Routee.net"
 msgstr ""
 
-#: admin/provider.php:509
+#: admin/provider.php:512
 msgid "Routee.net Account"
 msgstr ""
 
-#: admin/provider.php:510
+#: admin/provider.php:513
 msgid "Routee.net Integration Docs"
 msgstr ""
 
-#: admin/provider.php:514
+#: admin/provider.php:517
 msgid "Routee Application Id"
 msgstr ""
 
-#: admin/provider.php:519
+#: admin/provider.php:522
 msgid "Routee Application Secret"
 msgstr ""
 
-#: admin/provider.php:524
+#: admin/provider.php:527
 msgid "Routee From Name/Phone"
 msgstr ""
 
-#: admin/provider.php:530
+#: admin/provider.php:533
 msgid "Routee Default Country Code"
 msgstr ""
 
-#: admin/provider.php:532
+#: admin/provider.php:535
 msgid "Example: +90,+234,..."
 msgstr ""
 
-#: admin/provider.php:553
+#: admin/provider.php:545
+msgid "Sendsms.ro"
+msgstr ""
+
+#: admin/provider.php:551
+msgid "Sendsms.ro Integration Docs"
+msgstr ""
+
+#: admin/provider.php:555
+msgid "Sendsms.ro Username"
+msgstr ""
+
+#: admin/provider.php:560
+msgid "Sendsms.ro Password"
+msgstr ""
+
+#: admin/provider.php:565
+msgid "Sendsms.ro From"
+msgstr ""
+
+#: admin/provider.php:588
 msgid "Test SMS sending"
 msgstr ""
 
-#: admin/provider.php:564
+#: admin/provider.php:599
 msgid "You can test functionality of each SMS provider here."
 msgstr ""
 
-#: admin/provider.php:580
+#: admin/provider.php:615
 msgid "Phone Number (with +)"
 msgstr ""
 
-#: admin/provider.php:581
+#: admin/provider.php:616
 msgid "Type phone number..."
 msgstr ""
 
-#: admin/provider.php:586
+#: admin/provider.php:621
 msgid "Enter message (max 160 chars)"
 msgstr ""
 
-#: admin/provider.php:591
+#: admin/provider.php:626
 msgid "Send SMS"
 msgstr ""
 
-#: admin/provider.php:604 admin/provider.php:633
+#: admin/provider.php:639 admin/provider.php:668
 msgid "Check balance"
 msgstr ""
 
-#: admin/provider.php:615
+#: admin/provider.php:650
 msgid ""
 "Check what balance is on your account. Note that not all gateways support "
 "this feature."
@@ -789,7 +835,7 @@ msgstr ""
 msgid "User does not exists"
 msgstr ""
 
-#: form/verify.php:35 form/verify.php:58
+#: form/verify.php:35 form/verify.php:57
 msgid "Phone number has already been verified"
 msgstr ""
 
@@ -797,138 +843,147 @@ msgstr ""
 msgid "Item does not exists."
 msgstr ""
 
-#: form/verify.php:68
+#: form/verify.php:67
 msgid "Verify your phone number"
 msgstr ""
 
-#: form/verify.php:72
+#: form/verify.php:71
 msgid "Plugin is in demo mode, you can enter any phone number"
 msgstr ""
 
-#: form/verify.php:88
+#: form/verify.php:86
 msgid "Item"
 msgstr ""
 
-#: form/verify.php:94
+#: form/verify.php:92
 msgid "Mobile Phone"
 msgstr ""
 
-#: form/verify.php:98
+#: form/verify.php:96
 msgid "Send verification code"
 msgstr ""
 
-#: form/verify.php:113
+#: form/verify.php:110
 msgid "Please enter verification code we sent to"
 msgstr ""
 
-#: form/verify.php:120
-msgid "Verify"
-msgstr ""
-
-#: form/verify.php:122
+#: form/verify.php:119
 msgid "SMS may take up to 40 seconds. Wait up, please!"
 msgstr ""
 
-#: form/verify.php:123 form/verify.php:134
+#: form/verify.php:120 form/verify.php:129
 msgid "Resend in"
 msgstr ""
 
-#: form/verify.php:133
+#: form/verify.php:128
 msgid "Resend SMS"
 msgstr ""
 
-#: form/verify.php:135
+#: form/verify.php:130
 msgid "SMS Sent!"
 msgstr ""
 
-#: functions.php:57 functions.php:83
+#: functions.php:23 functions.php:50
+#, php-format
+msgid "Verify %s"
+msgstr ""
+
+#: functions.php:111 functions.php:137
 #, php-format
 msgid ""
 "Phone number %s is already registered to another account, please use "
 "different number"
 msgstr ""
 
-#: functions.php:151
+#: functions.php:205
 msgid "Phone missing"
 msgstr ""
 
-#: functions.php:156
+#: functions.php:210
 msgid "Verified"
 msgstr ""
 
-#: functions.php:158
+#: functions.php:212
 msgid "Not verified"
 msgstr ""
 
-#: functions.php:721
+#: functions.php:796
 msgid "Balance retrieval for this provider is not supported"
 msgstr ""
 
-#: functions.php:819 functions.php:852
+#: functions.php:894 functions.php:927
 msgid "Provider returned error with code:"
 msgstr ""
 
-#: functions.php:832 functions.php:843 functions.php:865
+#: functions.php:907 functions.php:918 functions.php:940
 msgid "Provider returned error:"
 msgstr ""
 
-#: functions.php:920
+#: functions.php:995
 #, php-format
 msgid "Hi admin, new message from %s on topic %s: %s"
 msgstr ""
 
-#: functions.php:942
+#: functions.php:1017
 #, php-format
 msgid "Hi %s, your ad on %s has been activated %s"
 msgstr ""
 
-#: functions.php:969
+#: functions.php:1044
 #, php-format
 msgid "Hi %s, validate your %s ad %s"
 msgstr ""
 
-#: functions.php:973
+#: functions.php:1048
 #, php-format
 msgid "Hi %s, your %s ad has been published: %s %s"
 msgstr ""
 
-#: functions.php:978
+#: functions.php:1053
 #, php-format
 msgid "Hi admin, %s has published new ad: %s %s"
 msgstr ""
 
-#: functions.php:1009
+#: functions.php:1084
 #, php-format
 msgid "Hi %s, %s has question on %s: %s"
 msgstr ""
 
-#: functions.php:1027
+#: functions.php:1102
 #, php-format
 msgid "Hi %s, reset your %s password %s"
 msgstr ""
 
-#: functions.php:1030
+#: functions.php:1105
 msgid ""
 "A SMS has been sent to your mobile number instructions to reset password"
 msgstr ""
 
-#: functions.php:1047
+#: functions.php:1122
 #, php-format
 msgid "Hi %s, validate your %s account %s"
 msgstr ""
 
-#: functions.php:1050
+#: functions.php:1125
 #, php-format
 msgid "%s activation SMS has been sent to your mobile number"
 msgstr ""
 
-#: functions.php:1063
+#: functions.php:1138
 #, php-format
 msgid "Hi admin, new user has registered: %s (%s)"
 msgstr ""
 
-#: functions.php:1323
+#: functions.php:1404
 msgid "Page:"
+msgstr ""
+
+#: index.php:31
+msgid "User phone number verification"
+msgstr ""
+
+#: index.php:32
+msgid "Item phone number verification"
 msgstr ""
 
 #: index.php:154
@@ -938,63 +993,79 @@ msgid ""
 "number!"
 msgstr ""
 
-#: index.php:191
+#: index.php:192
 #, php-format
 msgid "Hi %s, your %s verification code is: %s"
 msgstr ""
 
-#: index.php:196 index.php:206
+#: index.php:197 index.php:207
 #, php-format
 msgid "%s: Problem to send SMS: %s"
 msgstr ""
 
-#: index.php:208
+#: index.php:209
 #, php-format
 msgid ""
 "SMS Verification is in demo mode, please enter following code to proceed "
 "verification: %s"
 msgstr ""
 
-#: index.php:212
+#: index.php:213
 msgid "Phone number is not valid"
 msgstr ""
 
-#: index.php:266
+#: index.php:287
 msgid "Phone number verified. Thank you!"
 msgstr ""
 
-#: index.php:269
+#: index.php:290
 msgid "Verification has failed, verification code does not match!"
 msgstr ""
 
-#: index.php:272
+#: index.php:293
 msgid "Phone number or verification code is not valid!"
 msgstr ""
 
-#: index.php:296
+#: index.php:321
 msgid "In order to show listing, you must verify your phone number"
 msgstr ""
 
-#: index.php:322
+#: index.php:355
 msgid "You cannot activate listing, you must verify your phone number first"
 msgstr ""
 
-#: index.php:349 index.php:371
+#: index.php:382 index.php:404
 msgid "In order to improve our services, you must verify your phone number"
 msgstr ""
 
-#: index.php:491 index.php:524
+#: index.php:445 index.php:449
+msgid "Invalid number"
+msgstr ""
+
+#: index.php:446
+msgid "Invalid country code"
+msgstr ""
+
+#: index.php:447
+msgid "Too short"
+msgstr ""
+
+#: index.php:448
+msgid "Too long"
+msgstr ""
+
+#: index.php:529 index.php:562
 msgid "Verification Logs"
 msgstr ""
 
-#: index.php:506
+#: index.php:544
 msgid "Report Bug"
 msgstr ""
 
-#: index.php:507
+#: index.php:545
 msgid "Support Forums"
 msgstr ""
 
-#: index.php:508
+#: index.php:546
 msgid "Contact Us"
 msgstr ""

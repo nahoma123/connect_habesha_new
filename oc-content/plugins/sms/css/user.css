@@ -26,10 +26,11 @@
 
 @keyframes smsSpin { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
 
-.intl-tel-input .country-list {min-width:240px;}
+.intl-tel-input {z-index:1;}
+.intl-tel-input .country-list {min-width:265px;scrollbar-width: thin;}
 .intl-tel-input .country-list.dropup {width:auto;max-width:320px;}
 .intl-tel-input .flag-container {left:0;}
-.intl-tel-input .flag-container + input[type="text"] {padding-left:45px!important;}
+.intl-tel-input .flag-container + input[type="text"], .intl-tel-input .flag-container + input[type="tel"], .intl-tel-input .flag-container + input[type="email"] {padding-left:45px!important;}
 .intl-tel-input .flag-container .fa {display:none!important;}
 .intl-tel-input .sms-validation {clear: both; display: inline-block; position: absolute; right: 8px; font-size: 11px; font-style: normal; color: #888; letter-spacing: -0.2px; line-height: 16px; top: 50%; margin-top: -8px;}
 .sms-body .intl-tel-input {width:100%;display:inline-block;}

@@ -3,7 +3,7 @@
   Plugin Name: SMS Verification and Notification Plugin
   Plugin URI: https://osclasspoint.com/osclass-plugins/messaging-and-communication/sms-notification-and-verification-plugin-i104
   Description: Send SMS notifications to customers & admins, add phone number verification functionality.
-  Version: 1.9.0
+  Version: 1.9.6
   Author: MB Themes
   Author URI: https://osclasspoint.com
   Author Email: info@osclasspoint.com
@@ -28,8 +28,8 @@ osc_register_script('sms-user', osc_base_url() . 'oc-content/plugins/sms/js/user
 osc_enqueue_script('sms-user');
 osc_enqueue_script('sms-tel-script');
 
-osc_add_route('sms-user-verify', 'sms/user-verify/(.+)', 'sms/user-verify/{userId}', osc_plugin_folder(__FILE__).'/form/verify.php', false, 'sms', 'user-verify');
-osc_add_route('sms-item-verify', 'sms/item-verify/(.+)', 'sms/item-verify/{itemId}', osc_plugin_folder(__FILE__).'/form/verify.php', false, 'sms', 'item-verify');
+osc_add_route('sms-user-verify', 'sms/user-verify/(.+)', 'sms/user-verify/{userId}', osc_plugin_folder(__FILE__).'/form/verify.php', false, 'sms', 'user-verify', __('User phone number verification', 'sms'));
+osc_add_route('sms-item-verify', 'sms/item-verify/(.+)', 'sms/item-verify/{itemId}', osc_plugin_folder(__FILE__).'/form/verify.php', false, 'sms', 'item-verify', __('Item phone number verification', 'sms'));
 
 
 
@@ -117,7 +117,7 @@ function sms_init() {
     http_response_code(200);
     header("Content-Type: application/json", true);
 
-    $type = Params::getParam('type'); // USER or ITEM
+    $type = osc_esc_html(Params::getParam('type')); // USER or ITEM
 
     // STEP 1: PREPARE VERIFICATION CODE AND SEND IT
     if(Params::getParam('step') == 1) {
@@ -167,6 +167,7 @@ function sms_init() {
 
           $user_name = isset($user['s_name']) ? $user['s_name'] : '';
 
+        // Type == ITEM
         } else { 
           ModelSMS::newInstance()->updateItemPhone(
             array(
@@ -218,8 +219,10 @@ function sms_init() {
     // STEP 2: VERIFY ENTERED CODE
     if(Params::getParam('step') == 2) {
       $phone_number = sms_prepare_number(Params::getParam('phoneNumber'));
+      
       $item_id = Params::getParam('itemId');
       $item = Item::newInstance()->findByPrimaryKey($item_id);
+      
       $user_id = (osc_logged_user_id() > 0 ? osc_logged_user_id() : Params::getParam('userId'));
       $user = User::newInstance()->findByPrimaryKey($user_id);
       
@@ -255,11 +258,29 @@ function sms_init() {
           $data['s_email'] = $email; 
         }
 
-        if($status) {
-          ModelSMS::newInstance()->cancelPreviousVerification($phone_number, $email);
-          ModelSMS::newInstance()->cancelPreviousUserVerification($phone_number, $email);
-          ModelSMS::newInstance()->updateVerification($data, true);
-          ModelSMS::newInstance()->updateItem(array('b_active' => 1, 'pk_i_id' => $item_id));
+        // Check if combination of code and phone exists
+        if($status === true) {
+          if($type == 'ITEM') {
+            $item_active_flag = 1;
+            
+            // Check if item validation plugin is installed
+            if(function_exists('itv_call_after_install') || function_exists('iv_call_after_install')) {
+              if(osc_get_preference('enable', 'plugin-item_validation') == 1) {
+                $item_active_flag = 0;
+              }
+            }
+
+            ModelSMS::newInstance()->updateItem(array('b_active' => $item_active_flag, 'pk_i_id' => $item_id));
+
+          // Type == USER
+          } else { 
+            ModelSMS::newInstance()->cancelPreviousUserVerification($phone_number, $email);
+         
+          }
+          
+          ModelSMS::newInstance()->cancelPreviousVerification($phone_number, $email);       // Previous phone number verifications
+          ModelSMS::newInstance()->updateVerification($data, true);                         // Mark verification as verified
+          
 
           $url = ($type == 'USER' ? osc_user_dashboard_url() : osc_item_url_from_item($item));
 
@@ -288,16 +309,28 @@ function sms_posted_item_check($item) {
     return false;
   }
   
+  if(sms_param('verification_listing') != 1) {
+    return false;
+  }
+  
   $phone_number = sms_prepare_number(sms_item_phone_number($item['pk_i_id']));
-
-  if(sms_phone_verify($phone_number) === false && sms_param('verification_listing') == 1) {
+  
+  if(sms_phone_verify($phone_number) === false) {
     ModelSMS::newInstance()->updateItem(array('b_active' => 0, 'pk_i_id' => $item['pk_i_id']));
 
     osc_add_flash_info_message(__('In order to show listing, you must verify your phone number', 'sms'));
     header('Location:' . osc_route_url('sms-item-verify', array('itemId' => $item['pk_i_id'])));
     exit;
 
-  } else if(sms_phone_verify($phone_number) !== false && sms_param('verification_listing') == 1 && $item['b_active'] == 0) {
+  } else if(sms_phone_verify($phone_number) !== false && $item['b_active'] == 0) {
+    
+    // Check if item validation plugin is installed
+    if(function_exists('itv_call_after_install') || function_exists('iv_call_after_install')) {
+      if(osc_get_preference('enable', 'plugin-item_validation') == 1) {
+        return false;
+      }
+    }
+
     ModelSMS::newInstance()->updateItem(array('b_active' => 1, 'pk_i_id' => $item['pk_i_id']));
   }
 
@@ -383,9 +416,10 @@ function sms_js() {
   $location = Rewrite::newInstance()->get_location();
   $section  = Rewrite::newInstance()->get_section();
 
-
+  // On publish/edit page shown just in case listing verification is enabled
+  
   //if(sms_param('verification_identifier') <> '') {
-    if(((osc_is_web_user_logged_in() && $location == 'user' || osc_is_register_page() || osc_is_login_page()) && sms_param('verification_account') == 1) || ((osc_is_publish_page() || osc_is_edit_page()) && sms_param('verification_listing') == 1) || ($location == 'sms' && $section == 'item-verify' && sms_param('verification_listing') == 1) || $location == 'login' && $section == 'recover' || ($location == 'sms' && $section == 'user-verify' && sms_param('verification_account') == 1)) { 
+  if(((osc_is_web_user_logged_in() && $location == 'user' || osc_is_register_page() || osc_is_login_page()) && sms_param('verification_account') == 1) || ((osc_is_publish_page() || osc_is_edit_page()) && sms_param('verification_listing') == 1) || ($location == 'sms' && $section == 'item-verify' && sms_param('verification_listing') == 1) || ($location == 'sms' && $section == 'user-verify' && sms_param('verification_account') == 1)) { 
     ?>
     <script>
       $(document).ready(function() {
@@ -407,9 +441,13 @@ function sms_js() {
           <?php } ?>
         });
 
-
-        var errorMap = [ "Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
-
+        var errorMap = [
+          "<?php echo osc_esc_html(__('Invalid number', 'sms')); ?>", 
+          "<?php echo osc_esc_html(__('Invalid country code', 'sms')); ?>", 
+          "<?php echo osc_esc_html(__('Too short', 'sms')); ?>", 
+          "<?php echo osc_esc_html(__('Too long', 'sms')); ?>", 
+          "<?php echo osc_esc_html(__('Invalid number', 'sms')); ?>"
+        ];
 
         $('body').on('change keyup load', $('<?php echo sms_js_selector(); ?>'), function() {
           $('<?php echo sms_js_selector(); ?>').removeClass("error"); 

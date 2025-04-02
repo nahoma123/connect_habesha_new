@@ -60,15 +60,33 @@ public function uninstall() {
 
 
 // FIND USER BY EMAIL OR PHONE
-public function findUser($email_phone) {
+// Advanced find means that phone 0915 123 456 will match to field value +421 915 123 456
+public function findUser($email_phone, $advanced = true) {
   if($email_phone == '') {
     return false; 
+  }
+  
+  $email = $email_phone;
+  $phone_number = $email_phone;
+  
+  if($advanced === true) {
+    $phone_number = phl_prepare_number($phone_number, true);
+    
+    if(strlen($phone_number) < 9 || strlen($phone_number) > 16) {
+      $phone_number = 'DUMMY-NON-MATCHING-PHONE';
+    }
   }
 
   $this->dao->select();
   $this->dao->from($this->getTable_user());
 
-  $this->dao->where('s_email = "' . $email_phone . '" OR s_phone_mobile = "' . $email_phone . '"');
+  if($advanced === true) {
+    $this->dao->where(sprintf('(s_email = "%s" OR trim(LEADING "0" FROM replace(replace(replace(replace(replace(replace(s_phone_mobile, "+", ""), ")", ""), "(", ""), "-", ""), "/", ""), " ", "")) like "%%%s")', $email, $phone_number));
+
+  } else {
+    $this->dao->where('(s_email = "' . $email_phone . '" OR s_phone_mobile = "' . $email_phone . '")');
+  }
+  
   $this->dao->limit(1);
 
   $result = $this->dao->get();

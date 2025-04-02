@@ -22,7 +22,7 @@
     <div class="links">
       <a class="publish btn" href="<?php echo osc_item_post_url(); ?>">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24" height="24"><path d="M352 240v32c0 6.6-5.4 12-12 12h-88v88c0 6.6-5.4 12-12 12h-32c-6.6 0-12-5.4-12-12v-88h-88c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h88v-88c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v88h88c6.6 0 12 5.4 12 12zm96-160v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48zm-48 346V86c0-3.3-2.7-6-6-6H54c-3.3 0-6 2.7-6 6v340c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>
-        <?php _e('Place an ad', 'epsilon'); ?>
+        <?php _e('Post advert', 'epsilon'); ?>
       </a>
       
       <a class="publish btn mini" href="<?php echo osc_item_post_url(); ?>">
@@ -36,7 +36,7 @@
           <img src="<?php echo eps_profile_picture(osc_logged_user_id(), 'medium'); ?>" alt="<?php echo osc_esc_html(osc_logged_user_name()); ?>" width="32" height="32"/>
         <?php } ?>
         
-        <?php echo (osc_is_web_user_logged_in() ? __('My Account', 'epsilon') : __('Sign in / Register', 'epsilon')); ?>
+        <?php echo (osc_is_web_user_logged_in() ? __('My Account', 'epsilon') : __('Log In / Create Account', 'epsilon')); ?>
       </a>
 
       <a class="maccount btn btn-white isMobile" href="<?php echo (!osc_is_web_user_logged_in() ? osc_user_login_url() : osc_user_dashboard_url()); ?>">

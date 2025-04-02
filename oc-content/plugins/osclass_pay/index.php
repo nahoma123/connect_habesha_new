@@ -782,7 +782,7 @@ function osp_item_promote_manage() {
 function osp_user_sidebar() {
   if(osc_current_web_theme() == 'veronika' || osc_current_web_theme() == 'stela' || osc_current_web_theme() == 'starter' || (defined('USER_MENU_ICONS') && USER_MENU_ICONS == 1)) {
     if(osp_param('links_sidebar') == 0) {
-      echo '<li class="opt_osp_payment"><a href="' . osc_route_url('osp-item') . '" ><i class="fa fa-star-o"></i> ' . __('Promotions', 'osclass_pay') . '</a></li>';
+      echo '<li class="opt_osp_payment"><a href="' . osc_route_url('osp-item') . '" ><i class="fa fa-star-o"></i> ' . __('Membership', 'osclass_pay') . '</a></li>';
 
     } else {
       echo '<li class="opt_osp_item"><a href="' . osc_route_url('osp-item') . '" ><i class="fa fa-list"></i> ' . __('Items', 'osclass_pay') . '</a></li>';

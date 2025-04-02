@@ -3,7 +3,7 @@
   Plugin Name: Phone Login Plugin
   Plugin URI: https://osclasspoint.com/osclass-plugins/extra-fields-and-other/phone-number-login-plugin-i97
   Description: Phone Login enable users to login with phone number
-  Version: 1.1.7
+  Version: 1.1.8
   Author: MB Themes
   Author URI: https://osclasspoint.com
   Author Email: info@osclasspoint.com

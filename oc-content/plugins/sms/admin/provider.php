@@ -56,6 +56,9 @@
   $routee_from = sms_param_update('routee_from', 'plugin_action', 'value', 'plugin-sms');
   $routee_country_code = sms_param_update('routee_country_code', 'plugin_action', 'value', 'plugin-sms');
 
+  $sendsmsro_username = sms_param_update('sendsmsro_username', 'plugin_action', 'value', 'plugin-sms');
+  $sendsmsro_password = sms_param_update('sendsmsro_password', 'plugin_action', 'value', 'plugin-sms');
+  $sendsmsro_from = sms_param_update('sendsmsro_from', 'plugin_action', 'value', 'plugin-sms');
 
   osc_reset_preferences();    
 
@@ -533,6 +536,38 @@
             </div>
           </div>
         </div>
+
+
+        <!-- SENDSMS.RO -->
+        <div class="mb-method mb-sendsmsro <?php if(sms_param('sendsmsro_password') <> '') { ?>enabled<?php } ?>">
+          <div class="mb-method-name">
+            <i class="mb-method-status fa fa-<?php if(sms_param('sendsmsro_password') <> '') { ?>check<?php } else { ?>times<?php } ?>"></i>
+            <span><?php _e('Sendsms.ro', 'sms'); ?></span>
+            <img src="<?php echo sms_plugin_url(); ?>img/providers/sendsmsro.png"/>
+          </div>
+          
+          <div class="mb-method-body">
+            <div class="mb-row mb-method-links">
+              <a href="https://www.sendsms.ro/api/#introduction" target="_blank" class="mb-docu osp-has-tooltip" title="<?php echo osc_esc_html(__('Link will open in new window', 'sms')); ?>"><i class="fa fa-graduation-cap"></i> <span><?php _e('Sendsms.ro Integration Docs', 'sms'); ?></span></a>
+            </div>
+
+            <div class="mb-line">
+              <label for="sendsmsro_username"><span><?php _e('Sendsms.ro Username', 'sms'); ?></span></label>
+              <input name="sendsmsro_username" id="sendsmsro_username" type="text" value="<?php echo $sendsmsro_username; ?>" />
+            </div>
+            
+            <div class="mb-line">
+              <label for="sendsmsro_password"><span><?php _e('Sendsms.ro Password', 'sms'); ?></span></label>
+              <input name="sendsmsro_password" id="sendsmsro_password" type="password" autocomplete="new-password" value="<?php echo $sendsmsro_password; ?>" />
+            </div>
+            
+            <div class="mb-line">
+              <label for="sendsmsro_from"><span><?php _e('Sendsms.ro From', 'sms'); ?></span></label>
+              <input name="sendsmsro_from" id="sendsmsro_from" type="text" value="<?php echo $sendsmsro_from; ?>" />
+            </div>
+          </div>
+        </div>
+
 
         <div class="mb-row">&nbsp;</div>
 

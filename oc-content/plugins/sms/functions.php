@@ -6,6 +6,60 @@ use Twilio\Rest\Client;
 require_once 'src/sms-assistent-by/errors.php';
 
 
+
+// ADD VERIFY PHONE NUMBER TO ITEMS
+function sms_admin_item_toolbar($list, $item) {
+  $item_id = $item['pk_i_id'];
+  $url = osc_admin_base_url(true) . '?page=plugins&action=renderplugin&file=sms/admin/log_verification.php';
+  $options = array();
+
+  if(!isset($item['s_contact_phone']) || trim((string)$item['s_contact_phone']) == '') {
+    return $list;
+  }
+  
+  $phone_number = trim((string)$item['s_contact_phone']);
+  
+  if(!sms_phone_verify($phone_number)) {
+    $options[] = '<a href="' . $url . '&verifyItemPhoneNumber=' . $item_id . '">' . sprintf(__('Verify %s', 'sms'), $phone_number) . '</a>';
+  }
+  
+  if(!empty($options)) {
+    $list = array_merge($list, $options);
+  }
+  
+  return $list;
+}
+
+osc_add_filter('actions_manage_items', 'sms_admin_item_toolbar', 3);
+
+
+
+// ADD VERIFY PHONE NUMBER TO USERS
+function sms_admin_user_toolbar($list, $user) {
+  $user_id = $user['pk_i_id'];
+  $url = osc_admin_base_url(true) . '?page=plugins&action=renderplugin&file=sms/admin/log_verification.php';
+  $options = array();
+
+  if(!isset($user['s_phone_mobile']) || trim((string)$user['s_phone_mobile']) == '') {
+    return $list;
+  }
+  
+  $phone_number = trim((string)$user['s_phone_mobile']);
+  
+  if(!sms_phone_verify($phone_number)) {
+    $options[] = '<a href="' . $url . '&verifyUserPhoneNumber=' . $user_id . '">' . sprintf(__('Verify %s', 'sms'), $phone_number) . '</a>';
+  }
+  
+  if(!empty($options)) {
+    $list = array_merge($list, $options);
+  }
+  
+  return $list;
+}
+
+osc_add_filter('actions_manage_users', 'sms_admin_user_toolbar', 3);
+
+
 // CHECK IF USER IS VERIFIED
 function sms_check_user_verified($user_id = NULL) {
   if($user_id === NULL) {
@@ -26,7 +80,7 @@ function sms_check_user_verified($user_id = NULL) {
 
 // CREATE LIST OF PROVIDERS
 function sms_providers() {
-  return 'demo,gatewayapi.com,twilio,textlocal.in,textlocal.com,budgetsms,way2sms,plivo,ringcaptcha,msg91,notify.lk,smsassistent.by,routee.net';
+  return 'demo,gatewayapi.com,twilio,textlocal.in,textlocal.com,budgetsms,way2sms,plivo,ringcaptcha,msg91,notify.lk,smsassistent.by,routee.net,sendsms.ro';
 }
 
 
@@ -186,6 +240,27 @@ function sms_send($phone_number, $message, $action, $provider = '', $otp_code = 
   if($provider == 'demo') {
     // nothing to do
 
+
+  // SENDSMS.RO
+  } else if($provider == 'sendsms.ro') {
+    $data = array(
+      'username' => sms_param('sendsmsro_username'), 
+      'action' => 'message_send', 
+      'username' => sms_param('sendsmsro_username'), 
+      'password' => sms_param('sendsmsro_password'), 
+      'text' => $message, 
+      'from' => sms_param('sendsmsro_from'), 
+      'to'=> $phone_number
+    );
+    
+    $ch = curl_init('https://api.sendsms.ro/json?' . http_build_query($data));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    
+    $response = curl_exec($ch);
+    $error_num = curl_errno($ch);
+    $error = (curl_errno($ch) ? curl_error($ch) : false);
+    curl_close($ch);
+  
 
   // SMS-ASSISTENT.BY
   } else if($provider == 'smsassistent.by') {
@@ -1088,8 +1163,13 @@ function sms_item_phone_number($item_id) {
   $item = Item::newInstance()->findByPrimaryKey($item_id);  //Params::getParam('id')
   $user = User::newInstance()->findByPrimaryKey($item['fk_i_user_id']);
 
-  $check_table = ModelSMS::newInstance()->checkTable($theme);
+  // OSCLASS FIELD
+  if(isset($item['s_contact_phone']) && $item['s_contact_phone'] != '') {
+    return trim((string)$item['s_contact_phone']);
+  }
 
+
+  $check_table = ModelSMS::newInstance()->checkTable($theme);
 
   // OSCLASSPOINT THEMES
   if($check_table) {
@@ -1137,7 +1217,8 @@ function sms_item_phone_number($item_id) {
   }
 
 
-  if(@$user['s_phone_mobile'] <> '') {
+  // GET PHONE FROM USER PROFILE
+  if(isset($user['s_phone_mobile']) && $user['s_phone_mobile'] != '') {
     return $user['s_phone_mobile'];
   }
 

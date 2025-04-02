@@ -158,7 +158,7 @@ function phl_login_user() {
 
 
     if (empty($user)) {
-      $user = ModelPHL::newInstance()->findUser($email_phone);
+      $user = ModelPHL::newInstance()->findUser($email_phone, PHL_PHONE_CHECK_ADVANCED);
     }
 
     if (empty($user)) {
