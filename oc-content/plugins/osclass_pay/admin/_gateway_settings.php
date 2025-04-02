@@ -20,6 +20,14 @@
   $paypal_standard = osp_param_update('paypal_standard', 'plugin_action', 'check', 'plugin-osclass_pay');
   $paypal_sandbox = osp_param_update('paypal_sandbox', 'plugin_action', 'check', 'plugin-osclass_pay');
 
+  // New bank fields
+$bt_iban_cbe = osp_param_update('bt_iban_cbe', 'plugin_action', 'value', 'plugin-osclass_pay');
+$bt_iban_awash = osp_param_update('bt_iban_awash', 'plugin_action', 'value', 'plugin-osclass_pay');
+$bt_account_mpesa = osp_param_update('bt_account_mpesa', 'plugin_action', 'value', 'plugin-osclass_pay');
+$bt_account_telebirr = osp_param_update('bt_account_telebirr', 'plugin_action', 'value', 'plugin-osclass_pay');
+$bt_iban_abyssinia = osp_param_update('bt_iban_abyssinia', 'plugin_action', 'value', 'plugin-osclass_pay');
+
+
   $stripe_enabled = osp_param_update('stripe_enabled', 'plugin_action', 'check', 'plugin-osclass_pay');
   $stripe_public_key = osp_param_update('stripe_public_key', 'plugin_action', 'value_crypt', 'plugin-osclass_pay');
   $stripe_secret_key = osp_param_update('stripe_secret_key', 'plugin_action', 'value_crypt', 'plugin-osclass_pay');
@@ -185,46 +193,66 @@
         <input type="hidden" name="plugin_action" value="done" />
         <input type="hidden" name="position" value="2" />
 
+<!-- BANK TRANSFER -->
+<div class="mb-method mb-bt <?php if($bt_enabled == 1) { ?>enabled<?php } ?>">
+  <div class="mb-method-name">
+    <i class="mb-method-status fa fa-<?php if($bt_enabled == 1) { ?>check<?php } else { ?>times<?php } ?>"></i>
+    <span><?php _e('Bank Transfer Payments', 'osclass_pay'); ?></span>
+    <img src="<?php echo osp_url(); ?>img/payments/banktransfer.png"/>
+  </div>
 
-        <!-- BANK TRANSFER -->
-        <div class="mb-method mb-bt <?php if($bt_enabled == 1) { ?>enabled<?php } ?>">
-          <div class="mb-method-name">
-            <i class="mb-method-status fa fa-<?php if($bt_enabled == 1) { ?>check<?php } else { ?>times<?php } ?>"></i>
-            <span><?php _e('Bank Transfer Payments', 'osclass_pay'); ?></span>
-            <img src="<?php echo osp_url(); ?>img/payments/banktransfer.png"/>
-          </div>
+  <div class="mb-method-body">
+    <div class="mb-row mb-notes">
+      <div class="mb-line"><?php _e('Note that each payment must be accepted/approved by admin. After approval, promotions are executed.', 'osclass_pay'); ?></div>
+      <div class="mb-line"><?php _e('Approve transaction just in case you see it on your bank account, this action cannot be undone.', 'osclass_pay'); ?></div>
+    </div>
 
-          <div class="mb-method-body">
-            <div class="mb-row mb-notes">
-              <div class="mb-line"><?php _e('Note that each payment must be accepted/approved by admin. After approval, promotions are executed.', 'osclass_pay'); ?></div>
-              <div class="mb-line"><?php _e('Approve transaction just in case you see it on your bank account, this action cannot be undone.', 'osclass_pay'); ?></div>
-            </div>
+    <div class="mb-line">
+      <label for="bt_enabled"><span><?php _e('Enable Bank Transfer Payments', 'osclass_pay'); ?></span></label>
+      <input name="bt_enabled" id="bt_enabled" class="element-slide" type="checkbox" <?php echo ($bt_enabled == 1 ? 'checked' : ''); ?> />
+      <div class="mb-explain"><?php _e('Using bank transfer is possible to pay just for credit packs.', 'osclass_pay'); ?></div>
+    </div>
 
-            <div class="mb-line">
-              <label for="bt_enabled"><span><?php _e('Enable Bank Transfer Payments', 'osclass_pay'); ?></span></label>
-              <input name="bt_enabled" id="bt_enabled" class="element-slide" type="checkbox" <?php echo ($bt_enabled == 1 ? 'checked' : ''); ?> />
+    <!-- Bank Account Fields -->
+    <div class="mb-line">
+      <label for="bt_iban_cbe"><span><?php _e('CBE Account/IBAN', 'osclass_pay'); ?></span></label>
+      <input name="bt_iban_cbe" id="bt_iban_cbe" type="text" value="<?php echo osc_esc_html(osp_param('bt_iban_cbe')); ?>" style="width:240px;" />
+    </div>
 
-              <div class="mb-explain"><?php _e('Using bank transfer is possible to pay just for credit packs.', 'osclass_pay'); ?></div>
-            </div>
+    <div class="mb-line">
+      <label for="bt_iban_awash"><span><?php _e('Awash Bank Account/IBAN', 'osclass_pay'); ?></span></label>
+      <input name="bt_iban_awash" id="bt_iban_awash" type="text" value="<?php echo osc_esc_html(osp_param('bt_iban_awash')); ?>" style="width:240px;" />
+    </div>
 
-            <div class="mb-line">
-              <label for="bt_iban"><span><?php _e('Bank Transfer IBAN', 'osclass_pay'); ?></span></label>
-              <input name="bt_iban" id="bt_iban" type="text" value="<?php echo $bt_iban; ?>" style="width:240px;"/>
-            </div>
+    <div class="mb-line">
+      <label for="bt_account_mpesa"><span><?php _e('M-Pesa Account', 'osclass_pay'); ?></span></label>
+      <input name="bt_account_mpesa" id="bt_account_mpesa" type="text" value="<?php echo osc_esc_html(osp_param('bt_account_mpesa')); ?>" style="width:240px;" />
+      <div class="mb-explain"><?php _e('Enter the M-Pesa phone number or account ID.', 'osclass_pay'); ?></div>
+    </div>
 
-            <div class="mb-line">
-              <label for="bt_min"><span><?php _e('Minimum Value for Transfer', 'osclass_pay'); ?></span></label>
-              <input name="bt_min" id="bt_min" type="text" value="<?php echo $bt_min; ?>" style="width:80px;text-align:right;" />
-              <div class="mb-input-desc"><?php echo osp_currency_symbol(); ?></div>
+    <div class="mb-line">
+      <label for="bt_account_telebirr"><span><?php _e('Telebirr Account', 'osclass_pay'); ?></span></label>
+      <input name="bt_account_telebirr" id="bt_account_telebirr" type="text" value="<?php echo osc_esc_html(osp_param('bt_account_telebirr')); ?>" style="width:240px;" />
+      <div class="mb-explain"><?php _e('Enter the Telebirr phone number or account ID.', 'osclass_pay'); ?></div>
+    </div>
 
-              <div class="mb-explain"><?php _e('Payments with amount less than minimum will not be possible to pay using Bank Transfer.', 'osclass_pay'); ?></div>
-            </div>
+    <div class="mb-line">
+      <label for="bt_iban_abyssinia"><span><?php _e('Abyssinia Bank Account/IBAN', 'osclass_pay'); ?></span></label>
+      <input name="bt_iban_abyssinia" id="bt_iban_abyssinia" type="text" value="<?php echo osc_esc_html(osp_param('bt_iban_abyssinia')); ?>" style="width:240px;" />
+    </div>
 
-            <?php if($bt_enabled == 1) { ?>
-              <div class="mb-line"><a href="#" id="mb-move-to-bt"><i class="fa fa-exchange"></i>&nbsp;&nbsp;<?php _e('Show existing bank transfers', 'osclass_pay'); ?></a></div>
-            <?php } ?>
-          </div>
-        </div>
+    <div class="mb-line">
+      <label for="bt_min"><span><?php _e('Minimum Value for Transfer', 'osclass_pay'); ?></span></label>
+      <input name="bt_min" id="bt_min" type="text" value="<?php echo $bt_min; ?>" style="width:80px;text-align:right;" />
+      <div class="mb-input-desc"><?php echo osp_currency_symbol(); ?></div>
+      <div class="mb-explain"><?php _e('Payments with amount less than minimum will not be possible to pay using Bank Transfer.', 'osclass_pay'); ?></div>
+    </div>
+
+    <?php if($bt_enabled == 1) { ?>
+      <div class="mb-line"><a href="#" id="mb-move-to-bt"><i class="fa fa-exchange"></i>  <?php _e('Show existing bank transfers', 'osclass_pay'); ?></a></div>
+    <?php } ?>
+  </div>
+</div>
 
 
         <!-- PAYPAL -->

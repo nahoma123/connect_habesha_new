@@ -334,9 +334,18 @@
         osp_wallet_button(round($total, 2), sprintf(__('Pay %s cart items for %s', 'osclass_pay'), $count, osp_format_price($total, 2)), '901x1x'.$user_id, array('user' => @$user['pk_i_id'], 'itemid' => @$user['pk_i_id'], 'email' => @$user['s_email'], 'amount' => round($total, 2)));
       } 
 
+      $base_url = osc_base_url();
+      $image_path = $base_url . 'oc-content/themes/epsilon/images/';
+      $images = [
+        $image_path . 'cbe_logo.webp',          // CBE
+        $image_path . 'awash_bank_logo.webp',   // Awash
+        $image_path . 'abyssinia_logo.png',     // Abyssinia
+        $image_path . 'telebirr_logo.png',      // telebirr
+        $image_path . 'm_pesa_logo.png'         // M-Pesa
+      ];
 
       if(osp_param('bt_enabled') == 1 && osc_apply_filter('osp_cart_payment_transfer', true) !== false && !$contains_auction_buyout) {
-        osp_transfer_button(round($total, 2), sprintf(__('Pay %s cart items for %s', 'osclass_pay'), $count, osp_format_price($total, 2)), '901x1x'.$user_id, array('user' => @$user['pk_i_id'], 'itemid' => @$user['pk_i_id'], 'email' => @$user['s_email'], 'name' => @$user['s_name'], 'amount' => round($total, 2), 'checksum' => $checksum));
+        osp_transfer_button(round($total, 2), sprintf(__('Pay %s cart items for %s', 'osclass_pay'), $count, osp_format_price($total, 2)), '901x1x'.$user_id, array('user' => @$user['pk_i_id'], 'itemid' => @$user['pk_i_id'], 'email' => @$user['s_email'], 'name' => @$user['s_name'], 'amount' => round($total, 2), 'checksum' => $checksum), $images);
       }
 
       if(osc_apply_filter('osp_cart_payment_money', true) !== false) {

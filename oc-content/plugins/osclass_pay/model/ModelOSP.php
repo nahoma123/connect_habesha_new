@@ -13,7 +13,9 @@ function __construct() {
   parent::__construct();
 }
 
-
+public function getTable_users(){
+  return DB_TABLE_PREFIX.'t_user';
+}
 public function getTable_log() {
   return DB_TABLE_PREFIX.'t_osp_log';
 }
@@ -50,7 +52,7 @@ public function getTable_voucher_stats() {
   return DB_TABLE_PREFIX.'t_vcr_voucher_stats';
 }
 
-public function getTable_category() {
+public function getTable_category(): string {
   return DB_TABLE_PREFIX.'t_category_description';
 }
 
@@ -1852,6 +1854,83 @@ public function deletePack($pack_id) {
 }
 
 
+public function getUserGroupsByCategory($user_id, $is_admin = false) {
+  if (empty($user_id) || $user_id <= 0) {
+    return $this->getGroups($is_admin); // Fallback if user_id is invalid
+  }
+
+  // Step 1: Get the user's category ID (parent category)
+  $this->dao->select('category_id');
+  $this->dao->from($this->getTable_users());
+  $this->dao->where('pk_i_id', $user_id);
+
+  $result = $this->dao->get();
+
+  if (!$result || $result->numRows() == 0) {
+    return $this->getGroups($is_admin); // Fallback if user not found
+  }
+
+  $user = $result->row();
+  $category_id = $user['category_id'];
+
+  // Define allowed user group IDs based on category_id
+  $allowed_groups = [
+    96 => [1, 2, 3, 4, 21, 22, 23, 24],  // If category_id is 96, only allow
+    98 => [25, 26, 27, 28, 29, 30, 31, 32],   // If category_id is 101, only allow
+    100 => [33, 34, 35, 36],   // If category_id is 101, only allow
+  ];
+
+  // Step 2: Get all subcategory IDs where fk_i_parent_id = user's category_id
+  $subcategories = array($category_id); // Include the parent category itself
+  $this->dao->select('pk_i_id');
+  $this->dao->from('osxw_t_category'); // Directly accessing the correct table
+  $this->dao->where('fk_i_parent_id', $category_id);
+
+  $subcategories_result = $this->dao->get();
+
+  if ($subcategories_result && $subcategories_result->numRows() > 0) {
+    foreach ($subcategories_result->result() as $sub) {
+      $subcategories[] = $sub['pk_i_id']; // Add subcategory IDs
+    }
+  }
+
+  // Step 3: Fetch user groups where s_category contains the parent or subcategories
+  $category_conditions = array();
+  foreach ($subcategories as $cat_id) {
+    $category_conditions[] = "FIND_IN_SET($cat_id, g.s_category) > 0";
+  }
+
+  $this->dao->select('g.*');
+  $this->dao->from($this->getTable_user_group() . ' g');
+  $this->dao->where('(' . implode(' OR ', $category_conditions) . ')');
+
+  // Step 4: Only include specific user group IDs
+  if (isset($allowed_groups[$category_id])) {
+    $this->dao->whereIn('g.pk_i_id', $allowed_groups[$category_id]);
+  } else {
+    return []; // If no allowed groups are defined, return an empty array
+  }
+
+  $group_result = $this->dao->get();
+  if ($group_result) {
+    $output = array();
+    foreach ($group_result->result() as $d) {
+      $row = $d;
+
+      $row['locale'] = $this->getUserGroupLocale($d['pk_i_id'], Params::getParam('ospLocale'));
+
+      $row['s_name'] = osp_locale($row, 's_name', $is_admin);
+      $row['s_description'] = osp_locale($row, 's_description', $is_admin);
+      $row['s_custom'] = osp_locale($row, 's_custom', $is_admin);
+      $output[] = $row;
+    }
+    return $output;
+  }
+
+  return $this->getGroups($is_admin); // Fallback if no matching groups found
+}
+
+
 
 // GET ALL USER GROUPS
 public function getGroups($is_admin = false) {
@@ -2408,6 +2487,13 @@ public function createBankTransfer($variable, $cart, $description, $price, $user
   return $transaction;
 }
 
+public function updateBankTransferEvidence($id, $image_path) {
+  return $this->dao->update(
+    DB_TABLE_PREFIX . 't_osp_bank_transfer',
+    ['s_evidence_image' => $image_path],
+    ['s_transaction' => $id]
+  );
+}
 
 // GET ALL TRANSFERS
 public function getBankTransfers($paid = -1) {
