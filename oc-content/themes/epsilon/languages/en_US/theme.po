@@ -6,7 +6,7 @@ msgstr ""
 "Language-Team: Osclass Core\n"
 "Last-Translator: Administrator <admin@connecthabesha.com>\n"
 "MIME-Version: 1.0\n"
-"PO-Revision-Date: 2025-04-01 18:50:07\n"
+"PO-Revision-Date: 2025-04-02 19:14:21\n"
 "POT-Creation-Date: 2024-12-16 11:44+0100\n"
 "Project-Id-Version: Epsilon Osclass Theme\n"
 "Report-Msgid-Bugs-To: \n"
@@ -1770,7 +1770,7 @@ msgstr ""
 #: item-post.php:347
 #: search.php:144
 msgid "Transaction"
-msgstr ""
+msgstr "Age"
 
 #: functions.php:1677
 #: functions.php:2364
@@ -1848,23 +1848,23 @@ msgstr ""
 
 #: functions.php:1737
 msgid "Select a transaction..."
-msgstr ""
+msgstr "Your age is..."
 
 #: functions.php:1738
 msgid "Sell"
-msgstr ""
+msgstr "18-24"
 
 #: functions.php:1739
 msgid "Buy"
-msgstr ""
+msgstr "25-34"
 
 #: functions.php:1740
 msgid "Rent"
-msgstr ""
+msgstr "35-44"
 
 #: functions.php:1741
 msgid "Exchange"
-msgstr ""
+msgstr "45 and older"
 
 #: functions.php:1745
 msgid "Yesterday"
