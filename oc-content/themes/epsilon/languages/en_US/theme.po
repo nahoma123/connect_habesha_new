@@ -64,9 +64,7 @@ msgid "Optimize Banners for Adsense"
 msgstr ""
 
 #: admin/banner.php:56
-msgid ""
-"When enabled, default width and height of banners will be removed and will "
-"be set to 100%. Fluid/responsive adsense banners should then work better."
+msgid "When enabled, default width and height of banners will be removed and will be set to 100%. Fluid/responsive adsense banners should then work better."
 msgstr ""
 
 #: admin/banner.php:61
@@ -901,7 +899,8 @@ msgstr ""
 msgid "The logo image has been uploaded correctly"
 msgstr ""
 
-#: admin/logo.php:41 admin/logo.php:45
+#: admin/logo.php:41
+#: admin/logo.php:45
 msgid "An error has occurred, please try again"
 msgstr ""
 
@@ -938,9 +937,7 @@ msgid "Logo upload"
 msgstr ""
 
 #: admin/logo.php:126
-msgid ""
-"When new logo is uploaded, do not forget to clean your browser cache (CTRL + "
-"R or CTRL + F5)"
+msgid "When new logo is uploaded, do not forget to clean your browser cache (CTRL + R or CTRL + F5)"
 msgstr ""
 
 #: admin/logo.php:127
@@ -970,8 +967,7 @@ msgid "Please make the aforementioned image folder writable."
 msgstr ""
 
 #: admin/logo.php:148
-msgid ""
-"To make a directory writable under UNIX execute this command from the shell:"
+msgid "To make a directory writable under UNIX execute this command from the shell:"
 msgstr ""
 
 #: admin/logo.php:159
@@ -1063,11 +1059,11 @@ msgid "Show Blog Box on Home"
 msgstr ""
 
 #: admin/plugins.php:147
-msgid ""
-"Show blog articles box on home page. Osclass Blog plugin must be installed."
+msgid "Show blog articles box on home page. Osclass Blog plugin must be installed."
 msgstr ""
 
-#: admin/plugins.php:148 admin/plugins.php:168
+#: admin/plugins.php:148
+#: admin/plugins.php:168
 msgid "View plugin"
 msgstr ""
 
@@ -1088,8 +1084,7 @@ msgid "Show Companies Box on Home"
 msgstr ""
 
 #: admin/plugins.php:167
-msgid ""
-"Show companies box on home page. Business profile plugin must be installed"
+msgid "Show companies box on home page. Business profile plugin must be installed"
 msgstr ""
 
 #: admin/plugins.php:173
@@ -1109,9 +1104,7 @@ msgid "Show Favorite Items on Home"
 msgstr ""
 
 #: admin/plugins.php:186
-msgid ""
-"Show users most favorited listings block on home page. Favorite items plugin "
-"must be installed."
+msgid "Show users most favorited listings block on home page. Favorite items plugin must be installed."
 msgstr ""
 
 #: admin/plugins.php:190
@@ -1119,9 +1112,7 @@ msgid "Number of Favorite items on Home"
 msgstr ""
 
 #: admin/plugins.php:193
-msgid ""
-"Most favorited listings count shown on home page. Favorite items plugin must "
-"be installed."
+msgid "Most favorited listings count shown on home page. Favorite items plugin must be installed."
 msgstr ""
 
 #: admin/plugins.php:197
@@ -1207,9 +1198,7 @@ msgid "Subscribe to this search"
 msgstr ""
 
 #: alert-form.php:23
-msgid ""
-"Create alert to receive email notification when new listing matching search "
-"criteria is published."
+msgid "Create alert to receive email notification when new listing matching search criteria is published."
 msgstr ""
 
 #: alert-form.php:24
@@ -1346,7 +1335,8 @@ msgstr ""
 msgid "Tweet us"
 msgstr ""
 
-#: footer.php:89 user-public-profile.php:145
+#: footer.php:89
+#: user-public-profile.php:145
 msgid "Twitter"
 msgstr ""
 
@@ -2215,11 +2205,13 @@ msgstr ""
 msgid "Start typing category..."
 msgstr ""
 
-#: item-post.php:135 item-post.php:140
+#: item-post.php:135
+#: item-post.php:140
 msgid "Select category for your listing"
 msgstr ""
 
-#: item-post.php:136 item-post.php:141
+#: item-post.php:136
+#: item-post.php:141
 msgid "Select a category"
 msgstr ""
 
@@ -2228,30 +2220,29 @@ msgid "Category selection is important!"
 msgstr ""
 
 #: item-post.php:149
-msgid ""
-"Selecting correct category for your item is essential part of selling "
-"process."
+msgid "Selecting correct category for your item is essential part of selling process."
 msgstr ""
 
 #: item-post.php:150
-msgid ""
-"If you select improper category, potentional buyers will not be able to find "
-"your item and it will take much more time to sell it."
+msgid "If you select improper category, potentional buyers will not be able to find your item and it will take much more time to sell it."
 msgstr ""
 
 #: item-post.php:158
 msgid "Listing location"
 msgstr ""
 
-#: item-post.php:221 user-profile.php:154
+#: item-post.php:221
+#: user-profile.php:154
 msgid "Start typing region, city..."
 msgstr ""
 
-#: item-post.php:229 user-profile.php:167
+#: item-post.php:229
+#: user-profile.php:167
 msgid "Address"
 msgstr ""
 
-#: item-post.php:234 user-profile.php:172
+#: item-post.php:234
+#: user-profile.php:172
 msgid "ZIP"
 msgstr ""
 
@@ -2268,9 +2259,7 @@ msgid "Localize item"
 msgstr ""
 
 #: item-post.php:246
-msgid ""
-"You should at least select region & city for your listing, so customers "
-"those search only offers in their city or region can find your listings."
+msgid "You should at least select region & city for your listing, so customers those search only offers in their city or region can find your listings."
 msgstr ""
 
 #: item-post.php:254
@@ -2285,9 +2274,14 @@ msgstr ""
 msgid "Phone visible on ad"
 msgstr ""
 
-#: item-post.php:289 item-send-friend.php:162 item-send-friend.php:279
-#: item-send-friend.php:365 user-login.php:52 user-profile.php:74
-#: user-recover.php:25 user-register.php:59
+#: item-post.php:289
+#: item-send-friend.php:162
+#: item-send-friend.php:279
+#: item-send-friend.php:365
+#: user-login.php:52
+#: user-profile.php:74
+#: user-recover.php:25
+#: user-register.php:59
 msgid "E-mail"
 msgstr ""
 
@@ -2308,22 +2302,19 @@ msgid "Trusted and open seller"
 msgstr ""
 
 #: item-post.php:313
-msgid ""
-"You should enter phone number, as most of solid customers prefer phone "
-"contact way."
+msgid "You should enter phone number, as most of solid customers prefer phone contact way."
 msgstr ""
 
 #: item-post.php:314
-msgid ""
-"For faster listing publishing and contacting with customers, it is "
-"recommended to create and account, logged-in users are more trusted."
+msgid "For faster listing publishing and contacting with customers, it is recommended to create and account, logged-in users are more trusted."
 msgstr ""
 
 #: item-post.php:322
 msgid "Pricing options & status"
 msgstr ""
 
-#: item-post.php:326 item-post.php:553
+#: item-post.php:326
+#: item-post.php:553
 msgid "Price"
 msgstr ""
 
@@ -2348,15 +2339,11 @@ msgid "Wisely select price"
 msgstr ""
 
 #: item-post.php:361
-msgid ""
-"Price should reflect real status and properties of your listing. If you "
-"select too high price, it may take much longer to sell your product."
+msgid "Price should reflect real status and properties of your listing. If you select too high price, it may take much longer to sell your product."
 msgstr ""
 
 #: item-post.php:362
-msgid ""
-"You can also select transaction and condition to better describe status of "
-"your item and transaction you are looking for."
+msgid "You can also select transaction and condition to better describe status of your item and transaction you are looking for."
 msgstr ""
 
 #: item-post.php:370
@@ -2400,19 +2387,19 @@ msgid "Additional decription"
 msgstr ""
 
 #: item-post.php:425
-msgid ""
-"Title is used in search so it is recommended to use keywords of your listing "
-"in title."
+msgid "Title is used in search so it is recommended to use keywords of your listing in title."
 msgstr ""
 
 #: item-post.php:426
-msgid ""
-"Detail description will also provide customers all information they need and "
-"reduce need to contact you."
+msgid "Detail description will also provide customers all information they need and reduce need to contact you."
 msgstr ""
 
-#: item-post.php:434 user-forgot_password.php:38 user-profile.php:209
-#: user-profile.php:211 user-profile.php:249 user-profile.php:251
+#: item-post.php:434
+#: user-forgot_password.php:38
+#: user-profile.php:209
+#: user-profile.php:211
+#: user-profile.php:249
+#: user-profile.php:251
 msgid "Submit"
 msgstr ""
 
@@ -2473,7 +2460,8 @@ msgstr ""
 msgid "Pictures: upload at least %d picture(s)"
 msgstr ""
 
-#: item-post.php:831 item-post.php:834
+#: item-post.php:831
+#: item-post.php:834
 msgid "Category: this field is required."
 msgstr ""
 
@@ -2534,7 +2522,8 @@ msgstr ""
 msgid "Original comment: \"%s\""
 msgstr ""
 
-#: item-send-friend.php:110 item-send-friend.php:118
+#: item-send-friend.php:110
+#: item-send-friend.php:118
 msgid "Comments are pending moderation"
 msgstr ""
 
@@ -2546,7 +2535,9 @@ msgstr ""
 msgid "Add a new comment"
 msgstr ""
 
-#: item-send-friend.php:157 item-send-friend.php:274 item-send-friend.php:360
+#: item-send-friend.php:157
+#: item-send-friend.php:274
+#: item-send-friend.php:360
 #: user-register.php:54
 msgid "Name"
 msgstr ""
@@ -2559,7 +2550,8 @@ msgstr ""
 msgid "Submit comment"
 msgstr ""
 
-#: item-send-friend.php:221 item-send-friend.php:333
+#: item-send-friend.php:221
+#: item-send-friend.php:333
 msgid "Contact seller"
 msgstr ""
 
@@ -2801,7 +2793,8 @@ msgstr ""
 msgid "Share on Whatsapp"
 msgstr ""
 
-#: loop-single.php:37 main.php:382
+#: loop-single.php:37
+#: main.php:382
 msgid "Professional seller"
 msgstr ""
 
@@ -2826,7 +2819,8 @@ msgstr ""
 msgid "What would you like to"
 msgstr ""
 
-#: main.php:26 main.php:30
+#: main.php:26
+#: main.php:30
 msgid "buy?"
 msgstr ""
 
@@ -3044,8 +3038,7 @@ msgid "Reset filter"
 msgstr ""
 
 #: subdomain-navigation.php:17
-msgid ""
-"Join our community to buy and sell from each other everyday around the world."
+msgid "Join our community to buy and sell from each other everyday around the world."
 msgstr ""
 
 #: subdomain-navigation.php:18
@@ -3113,30 +3106,26 @@ msgstr ""
 msgid "Business profile"
 msgstr ""
 
-#: user-dashboard.php:43 user-dashboard.php:52
-msgid ""
-"Your business profile visible to customers, where your information, address "
-"and listings are shown."
+#: user-dashboard.php:43
+#: user-dashboard.php:52
+msgid "Your business profile visible to customers, where your information, address and listings are shown."
 msgstr ""
 
 #: user-dashboard.php:63
-msgid ""
-"Listings that are visible in front and customer can view and share them."
+msgid "Listings that are visible in front and customer can view and share them."
 msgstr ""
 
-#: user-dashboard.php:73 user-items.php:21
+#: user-dashboard.php:73
+#: user-items.php:21
 msgid "Validation pending listings"
 msgstr ""
 
 #: user-dashboard.php:74
-msgid ""
-"Listings that are hidden and waiting for yours or administrator's validation."
+msgid "Listings that are hidden and waiting for yours or administrator's validation."
 msgstr ""
 
 #: user-dashboard.php:85
-msgid ""
-"Listings that are expired and are not visible in front. You can renew or "
-"recreate them."
+msgid "Listings that are expired and are not visible in front. You can renew or recreate them."
 msgstr ""
 
 #: user-dashboard.php:96
@@ -3148,16 +3137,12 @@ msgid "My profile"
 msgstr ""
 
 #: user-dashboard.php:119
-msgid ""
-"Your personal information, profile picture, location, business type and "
-"others"
+msgid "Your personal information, profile picture, location, business type and others"
 msgstr ""
 
 #: user-dashboard.php:121
 #, php-format
-msgid ""
-"Your profile is not complete, you did not filled %s or more important data "
-"about you."
+msgid "Your profile is not complete, you did not filled %s or more important data about you."
 msgstr ""
 
 #: user-dashboard.php:132
@@ -3165,9 +3150,7 @@ msgid "My business profile"
 msgstr ""
 
 #: user-dashboard.php:133
-msgid ""
-"Business information, payment methods, opening hours, image gallery and more "
-"company related information."
+msgid "Business information, payment methods, opening hours, image gallery and more company related information."
 msgstr ""
 
 #: user-dashboard.php:145
@@ -3183,20 +3166,20 @@ msgid "Make your items more attractive, buy credits or membership."
 msgstr ""
 
 #: user-dashboard.php:178
-msgid ""
-"Do you have questions regarding our site or need help? Feel free to drop us "
-"a message."
+msgid "Do you have questions regarding our site or need help? Feel free to drop us a message."
 msgstr ""
 
 #: user-forgot_password.php:16
 msgid "Change password"
 msgstr ""
 
-#: user-forgot_password.php:18 user-recover.php:18
+#: user-forgot_password.php:18
+#: user-recover.php:18
 msgid "You already know password? Login to your account"
 msgstr ""
 
-#: user-forgot_password.php:27 user-profile.php:232
+#: user-forgot_password.php:27
+#: user-profile.php:232
 msgid "New password"
 msgstr ""
 
@@ -3204,13 +3187,14 @@ msgstr ""
 msgid "Repeat password"
 msgstr ""
 
-#: user-forgot_password.php:40 user-recover.php:35
+#: user-forgot_password.php:40
+#: user-recover.php:35
 msgid "Create a new account"
 msgstr ""
 
 #: user-items.php:18
 msgid "Listings visible to customers on site."
-msgstr ""
+msgstr "Your list of posts visible to other members."
 
 #: user-items.php:22
 msgid "Listings pending approval. Unapproved listings are not visible on site."
@@ -3284,19 +3268,25 @@ msgstr ""
 msgid "Sign-in to your account"
 msgstr ""
 
-#: user-login.php:21 user-login.php:23
+#: user-login.php:21
+#: user-login.php:23
 msgid "Login with Facebook"
 msgstr ""
 
-#: user-login.php:28 user-login.php:30
+#: user-login.php:28
+#: user-login.php:30
 msgid "Sign in with Google"
 msgstr ""
 
-#: user-login.php:35 user-register.php:21 user-register.php:35
+#: user-login.php:35
+#: user-register.php:21
+#: user-register.php:35
 msgid "Connect with Facebook"
 msgstr ""
 
-#: user-login.php:37 user-register.php:23 user-register.php:37
+#: user-login.php:37
+#: user-register.php:23
+#: user-register.php:37
 msgid "Continue with Facebook"
 msgstr ""
 
@@ -3304,12 +3294,16 @@ msgstr ""
 msgid "No account yet? Register a new account"
 msgstr ""
 
-#: user-login.php:57 user-register.php:69
+#: user-login.php:57
+#: user-register.php:69
 msgid "Password"
 msgstr ""
 
-#: user-login.php:60 user-profile.php:235 user-profile.php:243
-#: user-register.php:72 user-register.php:80
+#: user-login.php:60
+#: user-profile.php:235
+#: user-profile.php:243
+#: user-register.php:72
+#: user-register.php:80
 msgid "Show/hide password"
 msgstr ""
 
@@ -3321,7 +3315,9 @@ msgstr ""
 msgid "I forgot my password"
 msgstr ""
 
-#: user-login.php:88 user-register.php:100 user-register.php:101
+#: user-login.php:88
+#: user-register.php:100
+#: user-register.php:101
 msgid "YourPass123!"
 msgstr ""
 
@@ -3366,8 +3362,7 @@ msgid "Update"
 msgstr ""
 
 #: user-profile.php:182
-msgid ""
-"Are you sure you want to delete your account? This action cannot be undone"
+msgid "Are you sure you want to delete your account? This action cannot be undone"
 msgstr ""
 
 #: user-profile.php:182
@@ -3386,7 +3381,8 @@ msgstr ""
 msgid "New e-mail"
 msgstr ""
 
-#: user-profile.php:209 user-profile.php:249
+#: user-profile.php:209
+#: user-profile.php:249
 msgid "You cannot do this on demo site"
 msgstr ""
 

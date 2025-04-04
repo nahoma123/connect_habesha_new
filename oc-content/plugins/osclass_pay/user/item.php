@@ -24,7 +24,7 @@
     <div class="osp-h2"><?php echo sprintf(__('As a member of %s group, you can publish %s listings for free. Your remaining limit is %s free items.', 'osclass_pay'), '<b>' . $group['s_name'] . '</b>', '<b>' . $free_limit_101 . '</b>', '<b>' . max($free_limit_101 - $user_active_items, 0) . '</b>'); ?></div>  
   <?php } ?>
   
-  <div class="osp-h1"><?php _e('Your listings', 'osclass_pay'); ?></div>
+  <div class="osp-h1"><?php _e('Your adverts', 'osclass_pay'); ?></div>
 
 
   <div class="osp-inside">

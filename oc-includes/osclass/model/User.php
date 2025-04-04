@@ -85,7 +85,13 @@ class User extends DAO {
       'i_login_fails',
       'dt_login_fail_date',
       's_profile_img',
-      'fk_c_locale_code'
+      'fk_c_locale_code',
+      'show_on_profile',
+      'primary_methods',
+      'primary_accounts',
+      'additional_methods',
+      'additional_accounts',
+      'category_id'
     );
     $this->setFields($array_fields);
   }
@@ -307,6 +313,26 @@ class User extends DAO {
       $user['locale'][$sub_row['fk_c_locale_code']] = $sub_row;
     }
     return $user;
+  }
+
+
+    /**
+     * Get the group ID for a given user from osxw_t_osp_user_to_group
+     * @param int $user_id The user ID
+     * @return int The group_id, or 0 if not found
+     */
+    public function getUserGroupId($user_id) {
+      $this->dao->select('fk_i_group_id');
+      $this->dao->from(DB_TABLE_PREFIX . 't_osp_user_to_group');
+      $this->dao->where('fk_i_user_id', (int)$user_id);
+
+      $result = $this->dao->get();
+      if ($result === false || $result->numRows() == 0) {
+          return 0; // Default to 0 (non-VIP)
+      }
+
+      $row = $result->row();
+      return (int)$row['fk_i_group_id'];
   }
 
 

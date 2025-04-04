@@ -1,0 +1,100 @@
+diff a/oc-content/themes/epsilon/item.php b/oc-content/themes/epsilon/item.php	(rejected hunks)
+@@ -4,9 +4,58 @@
+   <?php osc_current_web_theme_path('head.php'); ?>
+   <link rel="stylesheet" media="print" href="<?php echo osc_current_web_theme_url('css/print.css?v=' . date('YmdHis')); ?>">
+   <style>
++    @media screen and (max-width: 767px) {
++    body .oc-chat.oc-closed {
++        bottom: 55px !important; /* Adjust as needed */
++        width: 46px;
++        height: 46px;
++        min-height: 46px;
++    }
++}
++
++.icon-spacing {
++    margin-right: 3px;
++}/* 
+       .oc-chat-button {
+         margin-right: 0 !important;
+-      }
++      } */
++      .contact-method {
++    display: flex;
++    width: fit-content; /* This will make the width fit the content */
++    align-items: center;
++    margin-bottom: 10px;
++    font-size: 14px;
++    margin: 6px 0 2px 0;
++    font-weight: 600;
++        padding: 2px 8px;
++    border-radius: 8px;
++    background-color: rgba(1, 120, 214, 0.12);
++    border-top-left-radius: 8px;
++    border-top-right-radius: 8px;
++    border-bottom-right-radius: 8px;
++    border-bottom-left-radius: 8px;
++    transition: 0.2s;
++}
++
++.contact-method i {
++    /* margin-right: 10px; */
++    font-size: 18px;
++    color: #0178d6; /* Icon color */
++}
++
++.contact-method span {
++    font-weight: 600;
++    color: #0178d6;
++    margin-right: 1px;
++    font-family: "Comfortaa", sans-serif;
++    font-size: 14px;
++    line-height: 1.5;
++}
++.phone-mobile span{
++    margin-right: 5px;
++    color: #0178d6;
++}
++
+   </style>
+   <?php
+     $itemviewer = (Params::getParam('itemviewer') == 1 ? 1 : 0);
+@@ -528,19 +573,6 @@
+           </a>
+         <?php } ?>
+         
+-        <?php if(eps_param('messenger_replace_button') == 1 && function_exists('im_contact_button') && im_contact_button(osc_item(), true) !== false) { ?>
+-          <!--<a href="<?php echo im_contact_button(osc_item(), true); ?>" class="contact master-button">
+-            <i class="fas fa-envelope-open"></i>
+-            <span><?php _e('Send message', 'epsilon'); ?></span>
+-          </a>-->
+-          <?php if(function_exists('oc_chat_button')) { echo oc_chat_button(); } ?> 
+-        <?php } else if(getBoolPreference('item_contact_form_disabled') != 1) { ?>
+-          <!--<a href="<?php echo eps_item_fancy_url('contact'); ?>" class="open-form contact master-button" data-type="contact">
+-            <i class="fas fa-envelope-open"></i>
+-            <span><?php _e('Send message', 'epsilon'); ?></span>
+-          </a>-->
+-          <?php if(function_exists('oc_chat_button')) { echo oc_chat_button(); } ?> 
+-        <?php } ?>
+         
+         <?php osc_run_hook('item_contact'); ?>
+ 
+@@ -709,17 +786,7 @@
+     ?>
+   </div>
+ 
+-  <?php if($phone_data['found']) { ?>
+-    <a class="sticky-button btn phone <?php echo $phone_data['class']; ?> isMobile" title="<?php echo osc_esc_html($phone_data['title']); ?>" data-prefix="tel" href="<?php echo $phone_data['url']; ?>" data-part1="<?php echo osc_esc_html($phone_data['part1']); ?>" data-part2="<?php echo osc_esc_html($phone_data['part2']); ?>">
+-      <i class="fas fa-phone-alt"></i>
+-      <span><?php echo $phone_data['masked']; ?></span>
+-    </a>
+-  <?php } else { ?>
+-    <a class="sticky-button btn disabled isMobile" title="<?php echo osc_esc_html($phone_data['title']); ?>" href="#" onclick="return false;">
+-      <i class="fas fa-phone-alt"></i>
+-      <span><?php echo $phone_data['title']; ?></span>
+-    </a>
+-  <?php } ?>
++
+ 
+   <?php if(getBoolPreference('item_contact_form_disabled') != 1) { ?>
+     <a href="<?php echo eps_item_fancy_url('contact'); ?>" class="open-form contact btn btn-secondary sticky-button isMobile" data-type="contact">

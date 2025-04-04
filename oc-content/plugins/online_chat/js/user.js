@@ -292,30 +292,69 @@ $(document).ready(function(){
   $('body').on('click', '.oc-chat-button, .oc-start-chat', function(e) {
     e.preventDefault();
 
-    //if($(this).hasClass('oc-active') && $(this).hasClass('oc-online')) {
-    if($(this).hasClass('oc-active')) {
+    if ($(this).hasClass('oc-active')) {
       var toUserId = $(this).attr('data-to-user-id');
       var toUserName = $(this).attr('data-to-user-name');
       var toUserImage = $(this).attr('data-to-user-image');
 
-      var box = $('.oc-chat-in .oc-before');
+      // Step 1: Show the chat list programmatically
+      $('.oc-chat').removeClass('oc-closed').removeClass('oc-bans-opened').addClass('oc-open');
 
-      ocMinimizeChats();   // minimize existing chats
-      $('.oc-chat-in .oc-before').show(0);  // show form
-      $('.oc-chat').removeClass('oc-closed').removeClass('oc-bans-opened').addClass('oc-init').addClass('oc-open');
+      // Step 2: Check if there are any existing chats with this user
+      var existingChat = $('.oc-chat-thread').filter(function() {
+        var chatToId = $(this).find('input[name="toId"]').val();
+        return chatToId == toUserId;
+      }).first(); // Get the first existing chat
 
-      box.find('.oc-to-user-name').text(toUserName);
-      box.find('input[name="toUserId"]').val(toUserId);
-      box.find('input[name="toUserName"]').val(toUserName);
-      box.find('input[name="toUserImage"]').val(toUserImage);
-      box.find('textarea').focus();
+      if (existingChat.length) {
+        // Step 3: Open the existing chat directly
+        ocShowAllChats(); // Minimize all chats
+
+        // Use the "Restore Chat Window" logic to open the chat
+        var thread = existingChat;
+        var box = thread.closest('.oc-chat-in');
+        var chatId = thread.attr('data-chat-id');
+
+        $('.oc-chat-thread').removeClass('oc-on'); // Minimize all chats
+        box.addClass('oc-on'); // Open the chat container
+        thread.addClass('oc-on'); // Open the chat thread
+        thread.removeClass('oc-unread'); // Mark the chat as read
+
+        // Scroll to the bottom of the chat
+        var ocBody = thread.find('.oc-body');
+        ocBody.scrollTop(ocBody[0].scrollHeight);
+      } else {
+        // Step 4: No existing chat, show the new chat form
+        var box = $('.oc-chat-in .oc-before');
+        ocMinimizeChats(); // Minimize existing chats
+        $('.oc-chat-in .oc-before').show(0); // Show the new chat form
+        $('.oc-chat').addClass('oc-init'); // Add the "init" class for the new chat form
+
+        // Update the form fields with the target user's details
+        box.find('.oc-to-user-name').text(toUserName);
+        box.find('input[name="toUserId"]').val(toUserId);
+        box.find('input[name="toUserName"]').val(toUserName);
+        box.find('input[name="toUserImage"]').val(toUserImage);
+        box.find('textarea').focus();
+      }
     } else {
       return false;
     }
   });
 
+  // Function to minimize all chats
+  function ocShowAllChats() {
+    console.log('Minimizing all chats'); // Debugging
+    $('.oc-chat-thread').removeClass('oc-on'); // Remove the "oc-on" class from all chats
+    $('.oc-chat-in').removeClass('oc-on'); // Remove the "oc-on" class from the chat container
+  }
 
-
+  // Function to show all chats
+  function ocMinimizeChats() {
+    console.log('Minimizing chats'); // Debugging
+    $('.oc-chat-in .oc-chat-thread').removeClass('oc-on');
+    $('.oc-chat-in').addClass('oc-on');
+  }
   // GET NEW CHAT MESSAGES
   if(ocUserId > 0) {
     setInterval(function(){ 
@@ -387,7 +426,7 @@ $(document).ready(function(){
           
           // PLAY SOUND
           if(newMessage == 1) {
-            ocPlayBeep();
+            // ocPlayBeep();
             PageTitleNotification.On(ocNewMessage);
           }
         },

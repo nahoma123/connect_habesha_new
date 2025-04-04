@@ -49,7 +49,7 @@
             </div>
 
             <div class="header"><?php _e('Public profile', 'epsilon'); ?></div>
-            <div class="description"><?php _e('Your business profile visible to customers, where your information, address and listings are shown.', 'epsilon'); ?></div>
+            <div class="description"><?php _e('Your profile visible to customers, where your contact numbers, location, and adverts are displayed.', 'epsilon'); ?></div>
           </a>
         <?php } ?>
         
@@ -59,8 +59,8 @@
             <span class="count"><?php echo Item::newInstance()->countItemTypesByUserID($user_id, 'active'); ?></span>
           </div>
 
-          <div class="header"><?php _e('Active listings', 'epsilon'); ?></div>
-          <div class="description"><?php _e('Listings that are visible in front and customer can view and share them.', 'epsilon'); ?></div>
+          <div class="header"><?php _e('Active posts', 'epsilon'); ?></div>
+          <div class="description"><?php _e('A list of all your posts visible to other users. From here, you can edit, deactivate, or delete your posts.', 'epsilon'); ?></div>
         </a>
 
 
@@ -70,8 +70,8 @@
             <span class="count"><?php echo Item::newInstance()->countItemTypesByUserID($user_id, 'pending_validate'); ?></span>
           </div>
 
-          <div class="header"><?php _e('Validation pending listings', 'epsilon'); ?></div>
-          <div class="description"><?php _e('Listings that are hidden and waiting for yours or administrator\'s validation.', 'epsilon'); ?></div>
+          <div class="header"><?php _e('Validation pending posts', 'epsilon'); ?></div>
+          <div class="description"><?php _e('Posts that are hidden and waiting for your or the administrator\'s validation.', 'epsilon'); ?></div>
         </a>
 
 
@@ -81,8 +81,8 @@
             <span class="count"><?php echo Item::newInstance()->countItemTypesByUserID($user_id, 'expired'); ?></span>
           </div>
 
-          <div class="header"><?php _e('Expired listings', 'epsilon'); ?></div>
-          <div class="description"><?php _e('Listings that are expired and are not visible in front. You can renew or recreate them.', 'epsilon'); ?></div>
+          <div class="header"><?php _e('Expired posts', 'epsilon'); ?></div>
+          <div class="description"><?php _e('Expired posts are hidden from users. Here, you can either renew or recreate them.', 'epsilon'); ?></div>
         </a>
 
 
@@ -109,7 +109,7 @@
           <div class="icon">
             <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M358.9 433.3l-6.8 61c-1.1 10.2 7.5 18.8 17.6 17.6l60.9-6.8 137.9-137.9-71.7-71.7-137.9 137.8zM633 268.9L595.1 231c-9.3-9.3-24.5-9.3-33.8 0l-41.8 41.8 71.8 71.7 41.8-41.8c9.2-9.3 9.2-24.4-.1-33.8zM223.9 288c79.6.1 144.2-64.5 144.1-144.1C367.9 65.6 302.4.1 224.1 0 144.5-.1 79.9 64.5 80 144.1c.1 78.3 65.6 143.8 143.9 143.9zm-4.4-239.9c56.5-2.6 103 43.9 100.4 100.4-2.3 49.2-42.1 89.1-91.4 91.4-56.5 2.6-103-43.9-100.4-100.4 2.3-49.3 42.2-89.1 91.4-91.4zM134.4 352c14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 16.7 0 32.2 5 45.5 13.3l34.4-34.4c-22.4-16.7-49.8-26.9-79.9-26.9-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h258.3c-3.8-14.6-2.2-20.3.9-48H48v-25.6c0-47.6 38.8-86.4 86.4-86.4z"/></svg>
             <span class="count">
-              <?php if($c == 0) { ?><i class="fas fa-check"></i><?php } else { ?><i class="fas fa-exclamation"></i><?php } ?>
+
             </span>
           </div>
 
@@ -118,7 +118,7 @@
             <?php if($c == 0) { ?>
               <?php _e('Your personal information, profile picture, location, business type and others', 'epsilon'); ?>
             <?php } else { ?>
-              <?php echo osc_esc_html( sprintf(__('Your profile is not complete, you did not filled %s or more important data about you.', 'epsilon'), $c) ); ?>
+              <?php echo osc_esc_html( sprintf(__('Update your Telegram, WhatsApp, and location details. This will be displayed on your profile.', 'epsilon'), $c) ); ?>
             <?php } ?>
           </div>
         </a>
@@ -164,8 +164,8 @@
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24"><path d="M288 0C305.7 0 320 14.33 320 32V96C320 113.7 305.7 128 288 128H208V160H424.1C456.6 160 483.5 183.1 488.2 214.4L510.9 364.1C511.6 368.8 512 373.6 512 378.4V448C512 483.3 483.3 512 448 512H64C28.65 512 0 483.3 0 448V378.4C0 373.6 .3622 368.8 1.083 364.1L23.76 214.4C28.5 183.1 55.39 160 87.03 160H143.1V128H63.1C46.33 128 31.1 113.7 31.1 96V32C31.1 14.33 46.33 0 63.1 0L288 0zM96 48C87.16 48 80 55.16 80 64C80 72.84 87.16 80 96 80H256C264.8 80 272 72.84 272 64C272 55.16 264.8 48 256 48H96zM80 448H432C440.8 448 448 440.8 448 432C448 423.2 440.8 416 432 416H80C71.16 416 64 423.2 64 432C64 440.8 71.16 448 80 448zM112 216C98.75 216 88 226.7 88 240C88 253.3 98.75 264 112 264C125.3 264 136 253.3 136 240C136 226.7 125.3 216 112 216zM208 264C221.3 264 232 253.3 232 240C232 226.7 221.3 216 208 216C194.7 216 184 226.7 184 240C184 253.3 194.7 264 208 264zM160 296C146.7 296 136 306.7 136 320C136 333.3 146.7 344 160 344C173.3 344 184 333.3 184 320C184 306.7 173.3 296 160 296zM304 264C317.3 264 328 253.3 328 240C328 226.7 317.3 216 304 216C290.7 216 280 226.7 280 240C280 253.3 290.7 264 304 264zM256 296C242.7 296 232 306.7 232 320C232 333.3 242.7 344 256 344C269.3 344 280 333.3 280 320C280 306.7 269.3 296 256 296zM400 264C413.3 264 424 253.3 424 240C424 226.7 413.3 216 400 216C386.7 216 376 226.7 376 240C376 253.3 386.7 264 400 264zM352 296C338.7 296 328 306.7 328 320C328 333.3 338.7 344 352 344C365.3 344 376 333.3 376 320C376 306.7 365.3 296 352 296z"/></svg>
             </div>
 
-            <div class="header"><?php _e('Promotions', 'epsilon'); ?></div>
-            <div class="description"><?php _e('Make your items more attractive, buy credits or membership.', 'epsilon'); ?></div>
+            <div class="header"><?php _e('Membership', 'epsilon'); ?></div>
+            <div class="description"><?php _e('Buy a membership to post and view ads. Use tools like Mark as Premium and Highlight to promote your posts.', 'epsilon'); ?></div>
           </a>
         <?php } ?>
         
@@ -174,8 +174,8 @@
             <i class="fas fa-envelope"></i>
           </div>
 
-          <div class="header"><?php _e('Contact us', 'epsilon'); ?></div>
-          <div class="description"><?php _e('Do you have questions regarding our site or need help? Feel free to drop us a message.', 'epsilon'); ?></div>
+          <div class="header"><?php _e('Contact Us', 'epsilon'); ?></div>
+          <div class="description"><?php _e('If you have questions about our site or need assistance, please feel free to send us a message.', 'epsilon'); ?></div>
         </a>
         
         <?php osc_run_hook('user_dashboard_links'); ?>

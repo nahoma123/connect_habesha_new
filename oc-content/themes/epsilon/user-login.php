@@ -4,6 +4,9 @@
   <?php osc_current_web_theme_path('head.php'); ?>
   <meta name="robots" content="noindex, nofollow" />
   <meta name="googlebot" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+
   <script type="text/javascript" src="<?php echo osc_current_web_theme_js_url('jquery.validate.min.js'); ?>"></script>
 </head>
 
@@ -13,7 +16,7 @@
 
   <section class="container">
     <div class="box">
-      <h1><?php _e('Sign-in to your account', 'epsilon'); ?></h1>
+      <h1><?php _e('Log in to your account', 'epsilon'); ?></h1>
 
       <?php if(function_exists('fl_call_after_install') || function_exists('gc_login_button') || function_exists('fjl_login_button')) { ?>
         <div class="social">
@@ -40,7 +43,7 @@
         </div>
       <?php } ?>
 
-      <a class="alt-action" href="<?php echo osc_register_account_url(); ?>"><?php _e('No account yet? Register a new account', 'epsilon'); ?> &#8594;</a>
+      <a class="alt-action" href="<?php echo osc_register_account_url(); ?>"><?php _e('Don\'t have an account? Create a new account', 'epsilon'); ?> &#8594;</a>
 
       <form action="<?php echo osc_base_url(true); ?>" method="post" >
         <input type="hidden" name="page" value="login" />
@@ -75,7 +78,7 @@
 
         <button type="submit" class="btn"><?php _e('Log in', 'epsilon');?></button>
 
-        <a class="alt-action2" href="<?php echo osc_recover_user_password_url(); ?>"><?php _e('I forgot my password', 'epsilon'); ?></a>
+        <a class="alt-action2" href="<?php echo osc_recover_user_password_url(); ?>"><?php _e('Forgot password?', 'epsilon'); ?></a>
       </form>
     </div>
   </section>

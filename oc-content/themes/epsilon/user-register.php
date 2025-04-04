@@ -1,11 +1,20 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" dir="<?php echo eps_language_dir(); ?>" lang="<?php echo str_replace('_', '-', osc_current_user_locale()); ?>">
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="<?php echo eps_language_dir(); ?>"
+  lang="<?php echo str_replace('_', '-', osc_current_user_locale()); ?>">
+
 <head>
   <?php osc_current_web_theme_path('head.php'); ?>
   <meta name="robots" content="noindex, nofollow" />
   <meta name="googlebot" content="noindex, nofollow" />
   <script type="text/javascript" src="<?php echo osc_current_web_theme_js_url('jquery.validate.min.js'); ?>"></script>
 </head>
+<?php
+
+// Fetch all categories
+$categories = Category::newInstance()->findRootCategories();
+?>
+
 
 <body id="body-user-register" class="pre-account register">
   <?php UserForm::js_validation(); ?>
@@ -13,26 +22,29 @@
 
   <section class="container">
     <div class="box">
-      <h1><?php _e('Register a new account', 'epsilon'); ?></h1>
+      <h1><?php _e('Create a new account', 'epsilon'); ?></h1>
 
-      <?php if(function_exists('fl_call_after_install') || function_exists('gc_login_button') || function_exists('fjl_login_button')) { ?>
+      <?php if (function_exists('fl_call_after_install') || function_exists('gc_login_button') || function_exists('fjl_login_button')) { ?>
         <div class="social">
-          <?php if(function_exists('fl_call_after_install')) { ?>
-            <a class="facebook" href="<?php echo facebook_login_link(); ?>" title="<?php echo osc_esc_html(__('Connect with Facebook', 'epsilon')); ?>">
+          <?php if (function_exists('fl_call_after_install')) { ?>
+            <a class="facebook" href="<?php echo facebook_login_link(); ?>"
+              title="<?php echo osc_esc_html(__('Connect with Facebook', 'epsilon')); ?>">
               <i class="fab fa-facebook-square"></i>
               <span><?php _e('Continue with Facebook', 'epsilon'); ?></span>
             </a>
           <?php } ?>
 
-          <?php if(function_exists('ggl_login_link')) { ?>
-            <a class="google" href="<?php echo ggl_login_link(); ?>" title="<?php echo osc_esc_html(__('Connect with Google', 'epsilon')); ?>">
+          <?php if (function_exists('ggl_login_link')) { ?>
+            <a class="google" href="<?php echo ggl_login_link(); ?>"
+              title="<?php echo osc_esc_html(__('Connect with Google', 'epsilon')); ?>">
               <i class="fab fa-google"></i>
               <span><?php _e('Continue with Google', 'epsilon'); ?></span>
             </a>
           <?php } ?>
-          
-          <?php if(function_exists('fjl_login_button')) { ?>
-            <a target="_top" href="javascript:void(0);" class="facebook fl-button fjl-button" onclick="fjlCheckLoginState();" title="<?php echo osc_esc_html(__('Connect with Facebook', 'epsilon')); ?>">
+
+          <?php if (function_exists('fjl_login_button')) { ?>
+            <a target="_top" href="javascript:void(0);" class="facebook fl-button fjl-button"
+              onclick="fjlCheckLoginState();" title="<?php echo osc_esc_html(__('Connect with Facebook', 'epsilon')); ?>">
               <i class="fab fa-facebook-square"></i>
               <span><?php _e('Continue with Facebook', 'epsilon'); ?></span>
             </a>

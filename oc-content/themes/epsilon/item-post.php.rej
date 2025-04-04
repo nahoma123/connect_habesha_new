@@ -1,0 +1,26 @@
+diff a/oc-content/themes/epsilon/item-post.php b/oc-content/themes/epsilon/item-post.php	(rejected hunks)
+@@ -425,14 +402,7 @@
+             <?php osc_run_hook('item_publish_hook'); ?>
+             
+             <div class="row dsc">
+-              <div class="td-wrap d1 input-box" style="width:auto !important;">
+-                <input type="checkbox" name="termsConditions" id="termsConditions" />
+-              </div>
+-              <div class="td-wrap d1 input-box terms-line">
+-                <?php _e('By clicking Submit, You agree our', 'epsilon'); ?> <a href="<?php echo osc_base_url(); ?>index.php?page=page&id=33" target="_blank" ><?php _e('Terms and Privacy policy', 'epsilon'); ?></a>
+-                <span class="req">*</span>
+-              </div>
+-            </div>
++              
+             
+           </div>
+           
+@@ -531,7 +501,7 @@
+   <script type="text/javascript">
+   $(document).ready(function(){
+     $('.item-publish input[name^="title"]').attr('placeholder', '<?php echo osc_esc_js(__('Summarize your offer', 'epsilon')); ?>');
+-    $('.item-publish textarea[name^="description"]').attr('placeholder', '<?php echo osc_esc_js(__('Detailed description of your offer', 'epsilon')); ?>');
++    $('.item-publish textarea[name^="description"]').attr('placeholder', '<?php echo osc_esc_js(__('Describe your service, including pricing, availability, and other relevant details.', 'epsilon')); ?>');
+     $('.item-publish input[name="contactPhone"]').prop('type', 'tel');
+ 
+     // HIDE THEME EXTRA FIELDS (Transaction, Condition, Status) ON EXCLUDED CATEGORIES 

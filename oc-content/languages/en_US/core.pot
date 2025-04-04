@@ -4745,7 +4745,7 @@ msgstr ""
 #: oc-admin/themes/modern/settings/permalinks.php:270
 #: oc-admin/themes/omega/settings/permalinks.php:289
 #: oc-admin/themes/omega/settings/permalinks.php:290
-msgid "Logout url: this field is required"
+msgid "Log out url: this field is required"
 msgstr ""
 
 #: oc-admin/themes/modern/settings/permalinks.php:273
@@ -11972,7 +11972,7 @@ msgstr ""
 
 #: oc-includes/osclass/functions.php:1931
 #: oc-includes/osclass/helpers/hUtils.php:195
-msgid "Logout"
+msgid "Log out"
 msgstr ""
 
 #: oc-includes/osclass/functions.php:1945
@@ -11985,7 +11985,7 @@ msgid "Edit item"
 msgstr ""
 
 #: oc-includes/osclass/functions.php:2003
-msgid "Logout admin"
+msgid "Log out admin"
 msgstr ""
 
 #: oc-includes/osclass/functions.php:2026

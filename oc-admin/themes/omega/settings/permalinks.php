@@ -286,8 +286,8 @@ function customHead() {
           minlength: '<?php echo osc_esc_js( __("User dashboard url: this field is required")); ?>.'
         },
         rewrite_user_logout: {
-          required: '<?php echo osc_esc_js( __("Logout url: this field is required")); ?>.',
-          minlength: '<?php echo osc_esc_js( __("Logout url: this field is required")); ?>.'
+          required: '<?php echo osc_esc_js( __("Log out url: this field is required")); ?>.',
+          minlength: '<?php echo osc_esc_js( __("Log out url: this field is required")); ?>.'
         },
         rewrite_user_register: {
           required: '<?php echo osc_esc_js( __("User register url: this field is required")); ?>.',

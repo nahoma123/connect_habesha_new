@@ -1,5 +1,6 @@
 <?php
-if(!defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+if (!defined('ABS_PATH'))
+  exit('ABS_PATH is not loaded. Direct access is not allowed.');
 
 /*
  * Copyright 2014 Osclass
@@ -21,7 +22,8 @@ if(!defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allo
 /**
  * Class UserActions
  */
-class UserActions {
+class UserActions
+{
   public $is_admin;
   public $manager;
 
@@ -30,7 +32,8 @@ class UserActions {
    *
    * @param $is_admin
    */
-  public function __construct($is_admin) {
+  public function __construct($is_admin)
+  {
     $this->is_admin = $is_admin;
     $this->manager = User::newInstance();
   }
@@ -40,58 +43,73 @@ class UserActions {
   /**
    * @return int
    */
-  public function add() {
+  public function add(): array
+  {
     $error = array();
     $flash_error = '';
-    
-    if((osc_recaptcha_enabled() && osc_recaptcha_private_key() != '') && !$this->is_admin && !osc_check_recaptcha()) {
+
+    if ((osc_recaptcha_enabled() && osc_recaptcha_private_key() != '') && !$this->is_admin && !osc_check_recaptcha()) {
       $flash_error .= _m('The reCAPTCHA was not entered correctly') . PHP_EOL;
       $error[] = 4;
     }
 
-    if(Params::getParam('s_password', false, false) == '') {
+    if (Params::getParam('s_password', false, false) == '') {
       $flash_error .= _m('The password cannot be empty') . PHP_EOL;
       $error[] = 6;
     }
 
-    if(Params::getParam('s_password', false, false) != Params::getParam('s_password2', false, false)) {
+    if (Params::getParam('s_password', false, false) != Params::getParam('s_password2', false, false)) {
       $flash_error .= _m("Passwords don't match") . PHP_EOL;
       $error[] = 7;
     }
 
     $input = $this->prepareData(true);
 
-    if($input['s_name']=='') {
+    // // Ensure methods are stored as comma-separated strings
+    // if (isset($input['primary_methods']) && is_array($input['primary_methods'])) {
+    //   $input['primary_methods'] = implode(',', $input['primary_methods']);
+    // }
+    // if (isset($input['additional_methods']) && is_array($input['additional_methods'])) {
+    //   $input['additional_methods'] = implode(',', $input['additional_methods']);
+    // }
+
+    // $show_on_profile = $input['show_on_profile'];
+    // if (!in_array($show_on_profile, ['yes', 'no'])) {
+    //   $flash_error .= _m('You must choose whether or not you want to show your phone number.') . PHP_EOL;
+    //   $error[] = 11; // Add a unique error code
+    // }
+
+    $category = $input['category_id'];
+    if ($category == '') {
+      $flash_error .= _m('You must choose your category.') . PHP_EOL;
+      $error[] = 11; // Add a unique error code
+    }
+
+
+    if ($input['s_name'] == '') {
       $flash_error .= _m('The name cannot be empty') . PHP_EOL;
       $error[] = 10;
     }
 
-    if(!osc_validate_email($input['s_email'])) {
+    if (!osc_validate_email($input['s_email'])) {
       $flash_error .= _m('The email is not valid') . PHP_EOL;
       $error[] = 5;
     }
 
-    $email_taken = $this->manager->findByEmail($input['s_email']);
-    if($email_taken != false) {
-      osc_run_hook('register_email_taken', $input['s_email']);
-      $flash_error .= _m('The specified e-mail is already in use') . PHP_EOL;
-      $error[] = 3;
-    }
-
-    if($input['s_username']!='') {
+    if ($input['s_username'] != '') {
       $username_taken = $this->manager->findByUsername($input['s_username']);
-      if(!$error && $username_taken != false) {
+      if (!$error && $username_taken != false) {
         $flash_error .= _m('Username is already taken') . PHP_EOL;
         $error[] = 8;
       }
-      if(osc_is_username_blacklisted($input['s_username'])) {
+      if (osc_is_username_blacklisted($input['s_username'])) {
         $flash_error .= _m('The specified username is not valid, it contains some invalid words') . PHP_EOL;
         $error[] = 9;
       }
     }
 
     $flash_error = osc_apply_filter('user_add_flash_error', $flash_error);
-    if($flash_error!='') {
+    if ($flash_error != '') {
       Session::newInstance()->_setForm('user_s_name', $input['s_name']);
       Session::newInstance()->_setForm('user_s_username', $input['s_username']);
       Session::newInstance()->_setForm('user_s_email', $input['s_email']);
@@ -105,27 +123,50 @@ class UserActions {
     // hook pre add or edit
     osc_run_hook('pre_user_post');
 
+
     $input = osc_apply_filter('user_insert_data', $input);
 
-    $this->manager->insert($input);
+    // Check if the email is already registered
+    $baseEmail = $input['s_email'];
+    $emailExists = $this->manager->findByEmail($baseEmail);
+
+    $counter = 1;
+    $newEmail = $baseEmail; // Default to the base email
+    while ($emailExists) {
+      $emailParts = explode('@', $baseEmail);
+      $newEmail = $emailParts[0] . $counter . '@' . $emailParts[1];
+      $emailExists = $this->manager->findByEmail($newEmail);
+      $counter++;
+    }
+    $input['s_email'] = $newEmail;
+
+
+    // save user
+    try {
+      $this->manager->insert($input);
+      error_log("Step 2: Insert successful");
+    } catch (Exception $e) {
+      error_log("DB Insert Error: " . $e->getMessage());
+    }
+
     $userId = $this->manager->dao->insertedId();
 
-    if($input['s_username'] == '') {
-      if(osc_username_generator() == 'SLUG') {
+    if ($input['s_username'] == '') {
+      if (osc_username_generator() == 'SLUG') {
         $generate_username = osc_sanitize_username($input['s_name']);
         $username_taken = $this->manager->findByUsername($generate_username);
-        
-        if($username_taken != false) {
+
+        if ($username_taken != false) {
           $generate_username .= $userId;
-          
+
           $username_taken = $this->manager->findByUsername($generate_username);
-          
-          if($username_taken != false) {
+
+          if ($username_taken != false) {
             $generate_username = $userId;
           }
         }
-        
-        if(osc_is_username_blacklisted($generate_username)) {
+
+        if (osc_is_username_blacklisted($generate_username)) {
           $generate_username = $userId;
         }
 
@@ -135,7 +176,7 @@ class UserActions {
       }
     }
 
-    if(is_array(Params::getParam('s_info'))) {
+    if (is_array(Params::getParam('s_info'))) {
       $pinfo = (osc_tinymce_users_enabled() == '1' ? Params::getParam('s_info', false, false) : Params::getParam('s_info'));   // update 420
       $pinfo = osc_apply_filter('user_update_description', $pinfo);
 
@@ -147,11 +188,11 @@ class UserActions {
     Log::newInstance()->insertLog('user', $this->is_admin ? 'add' : 'register', $userId, $input['s_email'], $this->is_admin ? 'admin' : 'user', $this->is_admin ? osc_logged_admin_id() : $userId);
 
     $user = $this->manager->findByPrimaryKey($userId);
-    if(osc_notify_new_user() && !$this->is_admin) {
+    if (osc_notify_new_user() && !$this->is_admin) {
       osc_run_hook('hook_email_admin_new_user', $user);
     }
 
-    if(osc_user_validation_enabled() && !$this->is_admin) {
+    if (osc_user_validation_enabled() && !$this->is_admin) {
       osc_run_hook('hook_email_user_validation', $user, $input);
       $success = 1;
     } else {
@@ -159,8 +200,8 @@ class UserActions {
 
       // update items with s_contact_email the same as new user email
       $items_updated = Item::newInstance()->update(array('fk_i_user_id' => $userId, 's_contact_name' => $input['s_name']), array('s_contact_email' => $input['s_email']));
-      if($items_updated!==false && $items_updated>0) {
-        User::newInstance()->update('i_items = i_items + '. (int)$items_updated, array('pk_i_id' => $userId));
+      if ($items_updated !== false && $items_updated > 0) {
+        User::newInstance()->update('i_items = i_items + ' . (int) $items_updated, array('pk_i_id' => $userId));
       }
       // update alerts user id with the same email
       Alerts::newInstance()->update(array('fk_i_user_id' => $userId), array('s_email' => $input['s_email']));
@@ -169,7 +210,7 @@ class UserActions {
     }
 
     osc_run_hook('user_register_completed', $userId);
-    return $success;
+    return array('success' => $success, 'email' => $input['s_email']);
   }
 
   //edit...
@@ -179,35 +220,36 @@ class UserActions {
    *
    * @return int
    */
-  public function edit($userId) {
+  public function edit($userId)
+  {
     $input = $this->prepareData(false);
 
     // hook pre add or edit
     osc_run_hook('pre_user_post');
     $flash_error = '';
     $error = array();
-    if($this->is_admin) {
+    if ($this->is_admin) {
       $user_email = $this->manager->findByEmail($input['s_email']);
-      if(isset($user_email['pk_i_id']) && $user_email['pk_i_id'] != $userId) {
+      if (isset($user_email['pk_i_id']) && $user_email['pk_i_id'] != $userId) {
         $flash_error .= sprintf(_m('The specified e-mail is already used by %s'), $user_email['s_username']) . PHP_EOL;
         $error[] = 3;
       }
     }
 
-    if($input['s_name']=='') {
-      $flash_error .= _m('The name cannot be empty').PHP_EOL;
+    if ($input['s_name'] == '') {
+      $flash_error .= _m('The name cannot be empty') . PHP_EOL;
       $error[] = 10;
     }
 
-    if($this->is_admin){
-      if(Params::getParam('s_password', false, false) != Params::getParam('s_password2', false, false)) {
+    if ($this->is_admin) {
+      if (Params::getParam('s_password', false, false) != Params::getParam('s_password2', false, false)) {
         $flash_error .= _m("Passwords don't match") . PHP_EOL;
         $error[] = 7;
       }
     }
 
     $flash_error = osc_apply_filter('user_edit_flash_error', $flash_error, $userId);
-    if($flash_error!='') {
+    if ($flash_error != '') {
       return $flash_error;
     }
 
@@ -215,7 +257,7 @@ class UserActions {
 
     $this->manager->update($input, array('pk_i_id' => $userId));
 
-    if($this->is_admin) {
+    if ($this->is_admin) {
       Item::newInstance()->update(array('s_contact_name' => $input['s_name'], 's_contact_email' => $input['s_email']), array('fk_i_user_id' => $userId));
       ItemComment::newInstance()->update(array('s_author_name' => $input['s_name'], 's_author_email' => $input['s_email']), array('fk_i_user_id' => $userId));
       Alerts::newInstance()->update(array('s_email' => $input['s_email']), array('fk_i_user_id' => $userId));
@@ -229,15 +271,15 @@ class UserActions {
       Log::newInstance()->insertLog('user', 'edit', $userId, $user['s_email'], $this->is_admin ? 'admin' : 'user', $this->is_admin ? osc_logged_admin_id() : osc_logged_user_id());
     }
 
-    if(!$this->is_admin) {
+    if (!$this->is_admin) {
       Session::newInstance()->_set('userName', $input['s_name']);
       $phone = $input['s_phone_mobile'] ?: $input['s_phone_land'];
       Session::newInstance()->_set('userPhone', $phone);
     }
 
-    if(is_array(Params::getParam('s_info'))) {
+    if (is_array(Params::getParam('s_info'))) {
       $pinfo = (osc_tinymce_users_enabled() == '1' ? Params::getParam('s_info', false, false) : Params::getParam('s_info'));   // update 420
-      
+
       foreach ($pinfo as $key => $value) {
         $this->manager->updateDescription($userId, $key, $value);
       }
@@ -245,21 +287,21 @@ class UserActions {
 
     osc_run_hook('user_edit_completed', $userId);
 
-    if($this->is_admin) {
+    if ($this->is_admin) {
       $iUpdated = 0;
-      if((Params::getParam('b_enabled') != '') && (Params::getParam('b_enabled') == 1)) {
+      if ((Params::getParam('b_enabled') != '') && (Params::getParam('b_enabled') == 1)) {
         $iUpdated += $this->manager->update(array('b_enabled' => 1), array('pk_i_id' => $userId));
       } else {
         $iUpdated += $this->manager->update(array('b_enabled' => 0), array('pk_i_id' => $userId));
       }
 
-      if((Params::getParam('b_active') != '') && (Params::getParam('b_active') == 1)) {
+      if ((Params::getParam('b_active') != '') && (Params::getParam('b_active') == 1)) {
         $iUpdated += $this->manager->update(array('b_active' => 1), array('pk_i_id' => $userId));
       } else {
         $iUpdated += $this->manager->update(array('b_active' => 0), array('pk_i_id' => $userId));
       }
 
-      if($iUpdated > 0) {
+      if ($iUpdated > 0) {
         return 2;
       }
     }
@@ -270,25 +312,26 @@ class UserActions {
   /**
    * @return int
    */
-  public function recover_password() {
+  public function recover_password()
+  {
     $user = User::newInstance()->findByEmail(Params::getParam('s_email'));
     Session::newInstance()->_set('recover_time', time());
 
-    if((osc_recaptcha_enabled() && osc_recaptcha_private_key() != '') && Session::newInstance()->_get('recover_captcha_not_set') != 1 && !osc_check_recaptcha()) {
+    if ((osc_recaptcha_enabled() && osc_recaptcha_private_key() != '') && Session::newInstance()->_get('recover_captcha_not_set') != 1 && !osc_check_recaptcha()) {
       return 2; // BREAK THE PROCESS, THE RECAPTCHA IS WRONG
     }
 
-    if(!$user || ($user['b_enabled'] == 0)) {
+    if (!$user || ($user['b_enabled'] == 0)) {
       return 1;
     }
 
     $code = osc_genRandomPassword(30);
     $date = date('Y-m-d H:i:s');
-    
+
     User::newInstance()->update(
       array('s_pass_code' => $code, 's_pass_date' => $date, 's_pass_ip' => osc_get_ip()),
       array('pk_i_id' => $user['pk_i_id'])
-   );
+    );
 
     $password_url = osc_forgot_user_password_confirm_url($user['pk_i_id'], $code);
     osc_run_hook('hook_email_user_forgot_password', $user, $password_url);
@@ -301,29 +344,32 @@ class UserActions {
    *
    * @return array
    */
-  public function prepareData($is_add) {
+  public function prepareData($is_add)
+  {
     $input = array();
 
-    if($is_add) {
+    if ($is_add) {
       $date = date('Y-m-d H:i:s');
       $input['dt_reg_date'] = $date;
       $input['dt_mod_date'] = $date;
       $input['dt_access_date'] = $date;
       $input['s_secret'] = osc_genRandomPassword();
+      $input['show_on_profile'] = 'no';
+
       $input['s_access_ip'] = osc_get_ip(); //Params::getServerParam('REMOTE_ADDR');
     } else {
       $input['dt_mod_date'] = date('Y-m-d H:i:s');
     }
 
     //only for administration, in the public website this two params are edited separately
-    if($this->is_admin || $is_add) {
+    if ($this->is_admin || $is_add) {
       $input['s_email'] = Params::getParam('s_email');
 
       //if we want to change the password
-      if(Params::getParam('s_password', false, false) != '') {
+      if (Params::getParam('s_password', false, false) != '') {
         $input['s_password'] = osc_hash_password(Params::getParam('s_password', false, false));
       }
-      
+
       $input['s_username'] = osc_sanitize_username(Params::getParam('s_username'));
     }
 
@@ -332,24 +378,24 @@ class UserActions {
     $input['s_phone_land'] = trim(Params::getParam('s_phone_land'));
     $input['s_phone_mobile'] = trim(Params::getParam('s_phone_mobile'));
 
-    if(stripos($input['s_website'], 'http') !== 0) {
-      $input['s_website'] = 'http://'.$input['s_website'];
+    if (stripos($input['s_website'], 'http') !== 0) {
+      $input['s_website'] = 'http://' . $input['s_website'];
     }
-    
+
     $input['s_website'] = osc_sanitize_url($input['s_website']);
 
-    if(osc_validate_url($input['s_website']) === false) {   // url is not valid, update 321
+    if (osc_validate_url($input['s_website']) === false) {   // url is not valid, update 321
       $input['s_website'] = '';
     }
 
     //locations...
     $country = Country::newInstance()->findByCode(Params::getParam('countryId'));
 
-    if(!isset($country['pk_c_code'])) {
+    if (!isset($country['pk_c_code'])) {
       $country = Country::newInstance()->findByName(Params::getParam('country'));
     }
-    
-    if(isset($country['pk_c_code'])) {
+
+    if (isset($country['pk_c_code'])) {
       $countryId = $country['pk_c_code'];
       $countryName = $country['s_name'];
       $countryNameNative = $country['s_name_native'];
@@ -359,13 +405,13 @@ class UserActions {
       $countryNameNative = null;
     }
 
-    if((int)Params::getParam('regionId') > 0) {
+    if ((int) Params::getParam('regionId') > 0) {
       $region = Region::newInstance()->findByPrimaryKey(Params::getParam('regionId'));
     } else {
       $region = Region::newInstance()->findByName(Params::getParam('region'), Params::getParam('countryId'));
     }
 
-    if(isset($region['pk_i_id'])) {
+    if (isset($region['pk_i_id'])) {
       $regionId = $region['pk_i_id'];
       $regionName = $region['s_name'];
       $regionNameNative = $region['s_name_native'];
@@ -375,13 +421,13 @@ class UserActions {
       $regionNameNative = null;
     }
 
-    if((int)Params::getParam('cityId') > 0) {
+    if ((int) Params::getParam('cityId') > 0) {
       $city = City::newInstance()->findByPrimaryKey(Params::getParam('cityId'));
     } else {
       $city = City::newInstance()->findByName(Params::getParam('city'), Params::getParam('regionId'));
     }
 
-    if(isset($city['pk_i_id'])) {
+    if (isset($city['pk_i_id'])) {
       $cityId = $city['pk_i_id'];
       $cityName = $city['s_name'];
       $cityNameNative = $city['s_name_native'];
@@ -403,10 +449,38 @@ class UserActions {
     $input['s_city_area'] = Params::getParam('cityArea');
     $input['s_address'] = Params::getParam('address');
     $input['s_zip'] = Params::getParam('zip');
-    $input['d_coord_lat'] = (Params::getParam('d_coord_lat')  != '') ? Params::getParam('d_coord_lat') : @$city['d_coord_lat'];   // maybe $city['d_coord_lat'] does not exists
+    $input['d_coord_lat'] = (Params::getParam('d_coord_lat') != '') ? Params::getParam('d_coord_lat') : @$city['d_coord_lat'];   // maybe $city['d_coord_lat'] does not exists
     $input['d_coord_long'] = (Params::getParam('d_coord_long') != '') ? Params::getParam('d_coord_long') : @$city['d_coord_long'];
     $input['b_company'] = (Params::getParam('b_company') != '' && Params::getParam('b_company') != 0) ? 1 : 0;
+    if (!$is_add) {
+      $input['show_on_profile'] = Params::getParam('show_on_profile');
+    }
+    $input['category_id'] = Params::getParam('category_id');
 
+
+
+    if (Params::getParam('primary_methods') !== null) {
+      $primaryMethods = Params::getParam('primary_methods');
+      if (is_array($primaryMethods)) {
+        $input['primary_methods'] = implode(',', $primaryMethods); // Convert array to comma-separated string
+      } else {
+        $input['primary_methods'] = trim($primaryMethods); // Trim if it's a string
+      }
+    }
+    if (Params::getParam('primary_accounts') !== null) {
+      $input['primary_accounts'] = trim(Params::getParam('primary_accounts')); // Single value
+    }
+    if (Params::getParam('additional_methods') !== null) {
+      $additionalMethods = Params::getParam('additional_methods');
+      if (is_array($additionalMethods)) {
+        $input['additional_methods'] = implode(',', $additionalMethods); // Convert array to comma-separated string
+      } else {
+        $input['additional_methods'] = trim($additionalMethods); // Trim if it's a string
+      }
+    }
+    if (Params::getParam('additional_accounts') !== null) {
+      $input['additional_accounts'] = trim(Params::getParam('additional_accounts')); // Single value
+    }
     return $input;
   }
 
@@ -416,33 +490,34 @@ class UserActions {
    * @return bool
    * @throws \Exception
    */
-  public function activate($user_id) {
+  public function activate($user_id)
+  {
     $user = $this->manager->findByPrimaryKey($user_id);
 
-    if(!$user) {
+    if (!$user) {
       return false;
     }
 
     $this->manager->update(array('b_active' => 1), array('pk_i_id' => $user_id));
 
-    if(!$this->is_admin) {
+    if (!$this->is_admin) {
       osc_run_hook('hook_email_admin_new_user', $user);
     }
 
     Log::newInstance()->insertLog('user', 'activate', $user_id, $user['s_email'], $this->is_admin ? 'admin' : 'user', $this->is_admin ? osc_logged_admin_id() : osc_logged_user_id());
 
-    if($user['b_enabled'] == 1) {
+    if ($user['b_enabled'] == 1) {
       $mItem = new ItemActions(true);
       $items = Item::newInstance()->findByUserID($user_id);
-      foreach($items as $item) {
+      foreach ($items as $item) {
         $mItem->enable($item['pk_i_id']);
       }
     }
 
     // update items with s_contact_email the same as new user email
     $items_updated = Item::newInstance()->update(array('fk_i_user_id' => $user_id, 's_contact_name' => $user['s_name']), array('s_contact_email' => $user['s_email']));
-    if($items_updated!==false && $items_updated>0) {
-      User::newInstance()->update('i_items = i_items + '. (int)$items_updated, array('pk_i_id' => $user_id));
+    if ($items_updated !== false && $items_updated > 0) {
+      User::newInstance()->update('i_items = i_items + ' . (int) $items_updated, array('pk_i_id' => $user_id));
     }
     // update alerts user id with the same email
     Alerts::newInstance()->update(array('fk_i_user_id' => $user_id), array('s_email' => $user['s_email']));
@@ -458,10 +533,11 @@ class UserActions {
    * @return bool
    * @throws \Exception
    */
-  public function deactivate($user_id) {
+  public function deactivate($user_id)
+  {
     $user = $this->manager->findByPrimaryKey($user_id);
 
-    if(!$user) {
+    if (!$user) {
       return false;
     }
 
@@ -469,10 +545,10 @@ class UserActions {
 
     Log::newInstance()->insertLog('user', 'deactivate', $user_id, $user['s_email'], $this->is_admin ? 'admin' : 'user', $this->is_admin ? osc_logged_admin_id() : osc_logged_user_id());
 
-    if($user['b_enabled'] == 1) {
+    if ($user['b_enabled'] == 1) {
       $mItem = new ItemActions(true);
       $items = Item::newInstance()->findByUserID($user_id);
-      foreach($items as $item) {
+      foreach ($items as $item) {
         $mItem->disable($item['pk_i_id']);
       }
     }
@@ -487,10 +563,11 @@ class UserActions {
    * @return bool
    * @throws \Exception
    */
-  public function enable($user_id) {
+  public function enable($user_id)
+  {
     $user = $this->manager->findByPrimaryKey($user_id);
 
-    if(!$user) {
+    if (!$user) {
       return false;
     }
 
@@ -498,10 +575,10 @@ class UserActions {
 
     Log::newInstance()->insertLog('user', 'enable', $user_id, $user['s_email'], $this->is_admin ? 'admin' : 'user', $this->is_admin ? osc_logged_admin_id() : osc_logged_user_id());
 
-    if($user['b_active'] == 1) {
+    if ($user['b_active'] == 1) {
       $mItem = new ItemActions(true);
       $items = Item::newInstance()->findByUserID($user_id);
-      foreach($items as $item) {
+      foreach ($items as $item) {
         $mItem->enable($item['pk_i_id']);
       }
     }
@@ -516,10 +593,11 @@ class UserActions {
    * @return bool
    * @throws \Exception
    */
-  public function disable($user_id) {
+  public function disable($user_id)
+  {
     $user = $this->manager->findByPrimaryKey($user_id);
 
-    if(!$user) {
+    if (!$user) {
       return false;
     }
 
@@ -527,10 +605,10 @@ class UserActions {
 
     Log::newInstance()->insertLog('user', 'disable', $user_id, $user['s_email'], $this->is_admin ? 'admin' : 'user', $this->is_admin ? osc_logged_admin_id() : osc_logged_user_id());
 
-    if($user['b_active'] == 1) {
+    if ($user['b_active'] == 1) {
       $mItem = new ItemActions(true);
       $items = Item::newInstance()->findByUserID($user_id);
-      foreach($items as $item) {
+      foreach ($items as $item) {
         $mItem->disable($item['pk_i_id']);
       }
     }
@@ -544,15 +622,16 @@ class UserActions {
    *
    * @return int
    */
-  public function resend_activation($user_id) {
+  public function resend_activation($user_id)
+  {
     $user = $this->manager->findByPrimaryKey($user_id);
     $input['s_secret'] = $user['s_secret'];
 
-    if(!$user  || $user['b_active']==1) {
+    if (!$user || $user['b_active'] == 1) {
       return 0;
     }
 
-    if(osc_user_validation_enabled()) {
+    if (osc_user_validation_enabled()) {
       osc_run_hook('hook_email_user_validation', $user, $input);
       return 1;
     }
@@ -565,18 +644,19 @@ class UserActions {
    *
    * @return int
    */
-  public function bootstrap_login($user_id) {
+  public function bootstrap_login($user_id)
+  {
     $user = User::newInstance()->findByPrimaryKey($user_id);
 
-    if(!$user) {
+    if (!$user) {
       return 0;
     }
 
-    if(!$user['b_active']) {
+    if (!$user['b_active']) {
       return 1;
     }
 
-    if(!$user['b_enabled']) {
+    if (!$user['b_enabled']) {
       return 2;
     }
 
@@ -589,28 +669,30 @@ class UserActions {
 
     return 3;
   }
-  
-  public function userRecoverPost() {
+
+  public function userRecoverPost()
+  {
     $phone = Params::getParam('s_phone');
 
     if (!$phone) {
-        osc_add_flash_error_message(__('Please provide your phone number.', 'your_theme'));
-        osc_redirect_to(osc_base_url(true) . '?page=user&action=recover');
+      osc_add_flash_error_message(__('Please provide your phone number.', 'your_theme'));
+      osc_redirect_to(osc_base_url(true) . '?page=user&action=recover');
     }
 
     // Find user by phone number
     $user = User::newInstance()->findByPhone($phone);
 
     if (!$user) {
-        osc_add_flash_error_message(__('No user found with this phone number.', 'your_theme'));
-        osc_redirect_to(osc_base_url(true) . '?page=user&action=recover');
+      osc_add_flash_error_message(__('No user found with this phone number.', 'your_theme'));
+      osc_redirect_to(osc_base_url(true) . '?page=user&action=recover');
     }
 
     // Use SMS verification plugin to send reset link
     $this->sendPasswordResetLinkViaSMS($user);
-}
+  }
 
-private function sendPasswordResetLinkViaSMS($user) {
+  private function sendPasswordResetLinkViaSMS($user)
+  {
     $reset_link = osc_base_url(true) . '?page=user&action=reset_password&user_id=' . $user['pk_i_id'];
 
     // Use the SMS plugin to send the reset link
@@ -618,7 +700,7 @@ private function sendPasswordResetLinkViaSMS($user) {
 
     osc_add_flash_ok_message(__('Password reset link sent to your phone.', 'your_theme'));
     osc_redirect_to(osc_base_url(true) . '?page=user&action=recover');
-}
+  }
 
 
 }

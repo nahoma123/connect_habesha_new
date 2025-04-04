@@ -47,7 +47,7 @@
         <?php if( osc_users_enabled() ) { ?>
           <?php if( osc_is_web_user_logged_in() ) { ?>
             <a href="<?php echo osc_user_dashboard_url(); ?>"><?php _e('My account', 'sigma'); ?></a>
-            <a href="<?php echo osc_user_logout_url(); ?>"><?php _e('Logout', 'sigma'); ?></a>
+            <a href="<?php echo osc_user_logout_url(); ?>"><?php _e('Log out', 'sigma'); ?></a>
           <?php } else { ?>
             <a id="login_open" href="<?php echo osc_user_login_url(); ?>"><?php _e('Login', 'sigma') ; ?></a>
 

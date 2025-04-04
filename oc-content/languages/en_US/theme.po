@@ -637,7 +637,7 @@ msgid "My account"
 msgstr ""
 
 #: oc-content/themes/sigma/header.php:50 oc-includes/osclass/gui/header.php:49
-msgid "Logout"
+msgid "Log out"
 msgstr ""
 
 #: oc-content/themes/sigma/header.php:55 oc-includes/osclass/gui/header.php:54

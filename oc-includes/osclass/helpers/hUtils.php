@@ -192,7 +192,7 @@ function osc_private_user_menu($options = null)
     $options[] = array('name' => __('Manage your listings'), 'url' => osc_user_list_items_url(), 'class' => 'opt_items');
     $options[] = array('name' => __('Manage your alerts'), 'url' => osc_user_alerts_url(), 'class' => 'opt_alerts');
     $options[] = array('name' => __('My profile'), 'url' => osc_user_profile_url(), 'class' => 'opt_account');
-    $options[] = array('name' => __('Logout'), 'url' => osc_user_logout_url(), 'class' => 'opt_logout');
+    $options[] = array('name' => __('Log out'), 'url' => osc_user_logout_url(), 'class' => 'opt_logout');
   }
 
   $options = osc_apply_filter('user_menu_filter', $options);

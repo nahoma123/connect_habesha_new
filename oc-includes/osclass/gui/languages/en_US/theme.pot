@@ -457,7 +457,7 @@ msgid "My account"
 msgstr ""
 
 #: header.php:49
-msgid "Logout"
+msgid "Log out"
 msgstr ""
 
 #: header.php:54
