@@ -62,7 +62,7 @@
         <?php osc_run_hook('admin_contact_form'); ?>
       </form>
     </div>
-  </div>
+  </section>
 
   <?php ContactForm::js_validation() ; ?>
   <?php osc_current_web_theme_path('footer.php') ; ?>

@@ -53,6 +53,8 @@
   $premium_search_count = eps_param_update('premium_search_count', 'theme_action', 'value', 'theme-epsilon');
   $premium_home_design = eps_param_update('premium_home_design', 'theme_action', 'value', 'theme-epsilon');
   $premium_search_design = eps_param_update('premium_search_design', 'theme_action', 'value', 'theme-epsilon');
+  $premium_home_category = eps_param_update('premium_home_category', 'theme_action', 'value', 'theme-epsilon');
+  $premium_home_sort = eps_param_update('premium_home_sort', 'theme_action', 'value', 'theme-epsilon');
 
   $footer_link = eps_param_update('footer_link', 'theme_action', 'check', 'theme-epsilon');
   $def_cur = eps_param_update('def_cur', 'theme_action', 'value', 'theme-epsilon');
@@ -97,6 +99,7 @@
 
 
   $latest_category_array = explode(',', $latest_category);
+  $premium_home_category_array = explode(',', $premium_home_category);
   $post_extra_exclude_array = explode(',', $post_extra_exclude);
   $post_required_array = explode(',', $post_required);
   $categories_new_array = explode(',', $categories_new);
@@ -310,7 +313,39 @@
 
           <div class="mb-explain"><?php _e('How many premium listings will be shown on home page.', 'epsilon'); ?></div>
         </div>
+
+
+
+
+
+        <div class="mb-row mb-row-select-multiple">
+          <label for="premium_home_category" class=""><span><?php _e('Category for Home Premium Items', 'epsilon'); ?></span></label> 
+  
+          <input type="hidden" name="premium_home_category" id="premium_home_category" value="<?php echo $premium_home_category; ?>"/>
+          <select id="premium_home_category_multiple" name="premium_home_category_multiple" multiple>
+            <?php echo eps_cat_list($premium_home_category_array); ?>
+          </select>
+          
+          <div class="mb-explain"><?php _e('Select categories that will be used to feed listings into premium items section on home page.', 'epsilon'); ?></div>
+        </div>
+
+
+        <div class="mb-row">
+          <label for="premium_home_sort" class=""><span><?php _e('Premium Home Sort', 'epsilon'); ?></span></label> 
+          <select name="premium_home_sort" id="premium_home_sort">
+            <option value="" <?php echo (eps_param('premium_home_sort') == '' ? 'selected="selected"' : ''); ?>><?php _e('Default', 'epsilon'); ?></option>
+            <option value="DT_PUB_DATE/ASC" <?php echo (eps_param('premium_home_sort') == 'DT_PUB_DATE/ASC' ? 'selected="selected"' : ''); ?>><?php _e('Publish Date - Ascending', 'epsilon'); ?></option>
+            <option value="DT_PUB_DATE/DESC" <?php echo (eps_param('premium_home_sort') == 'DT_PUB_DATE/DESC' ? 'selected="selected"' : ''); ?>><?php _e('Publish Date - Descending', 'epsilon'); ?></option>
+            <option value="RAND()/DESC" <?php echo (eps_param('premium_home_sort') == 'RAND()/DESC' ? 'selected="selected"' : ''); ?>><?php _e('Random', 'epsilon'); ?></option>
+          </select>
+          
+          <div class="mb-explain"><?php _e('Select how to sort premium items on home page.', 'epsilon'); ?></div>
+        </div>
         
+        
+        <hr/>
+
+
         <?php if(1==2) { ?>
         <div class="mb-row">
           <label for="premium_home_design" class=""><span><?php _e('Premium Items Card Design (home)', 'epsilon'); ?></span></label> 

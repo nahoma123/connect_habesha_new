@@ -43,6 +43,46 @@
       <h1><?php echo $title; ?></h1>
       <h2><?php echo $subtitle; ?></h2>
 
+      <?php if(osc_version() >= 830) { ?>
+        <form name="user-items-search" action="<?php echo osc_base_url(true); ?>" method="get" class="user-items-search-form nocsrf">
+          <input type="hidden" name="page" value="user"/>
+          <input type="hidden" name="action" value="items"/>
+
+          <?php osc_run_hook('user_items_search_form_top'); ?>
+          
+          <div class="control-group">
+            <label class="control-label" for="sItemType"><?php _e('Item type', 'epsilon'); ?></label>
+            
+            <div class="controls">
+              <?php UserForm::search_item_type_select(); ?>
+            </div>
+          </div>
+          
+          <div class="control-group">
+            <label class="control-label" for="sPattern"><?php _e('Keyword', 'epsilon'); ?></label>
+            
+            <div class="controls">
+              <?php UserForm::search_pattern_text(); ?>
+            </div>
+          </div>
+          
+          <div class="control-group">
+            <label class="control-label" for="sCategory"><?php _e('Category', 'epsilon'); ?></label>
+            
+            <div class="controls">
+              <?php UserForm::search_category_select(); ?>
+            </div>
+          </div>
+
+          
+          <?php osc_run_hook('user_items_search_form_bottom'); ?>
+          
+          <div class="actions">
+            <button type="submit" class="btn btn-primary"><?php _e('Apply', 'epsilon'); ?></button>
+          </div>
+        </form>
+      <?php } ?>
+
       <div class="items-box <?php echo $type; ?>">
         <?php if(osc_count_items() > 0) { ?>
           <?php while(osc_has_items()) { ?> 
@@ -105,6 +145,8 @@
 
                 <div class="description"><?php echo osc_highlight(osc_item_description(), 240); ?></div>
                 
+                <?php osc_run_hook('user_items_body', osc_item_id()); ?>
+                
                 <div class="buttons">
                   <?php if(osc_item_can_renew()) { ?>
                     <a class="renew" href="<?php echo osc_item_renew_url();?>" ><?php _e('Renew', 'epsilon'); ?></a>
@@ -140,6 +182,8 @@
                   <?php } ?>
 
                   <a class="delete" onclick="return confirm('<?php echo osc_esc_js(__('Are you sure you want to delete this listing? This action cannot be undone.', 'epsilon')); ?>')" href="<?php echo osc_item_delete_url(); ?>"><i class="fas fa-trash"></i> <?php _e('Delete', 'epsilon'); ?></a>
+
+                  <?php osc_run_hook('user_items_action', osc_item_id()); ?>
                 </div>
               </div>
             </div>

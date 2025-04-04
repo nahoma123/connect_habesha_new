@@ -2,13 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" dir="<?php echo eps_language_dir(); ?>" lang="<?php echo str_replace('_', '-', osc_current_user_locale()); ?>">
 <head>
   <?php osc_current_web_theme_path('head.php') ; ?>
-  <?php if(osc_count_items() == 0 || Params::getParam('iPage') > 0 || stripos($_SERVER['REQUEST_URI'], 'search'))  { ?>
-    <meta name="robots" content="noindex, nofollow" />
-    <meta name="googlebot" content="noindex, nofollow" />
-  <?php } else { ?>
-    <meta name="robots" content="index, follow" />
-    <meta name="googlebot" content="index, follow" />
-  <?php } ?>
+  <meta name="robots" content="index, follow" />
+  <meta name="googlebot" content="index, follow" />
 </head>
 <body id="search" class="<?php if(eps_device() <> '') { echo 'dvc-' . eps_device(); } ?>">
 <?php osc_current_web_theme_path('header.php') ; ?>
@@ -130,21 +125,21 @@
 
 
         <!-- CONDITION --> 
-        <?php /*if($search_cat_id <= 0 || @!in_array($search_cat_id, $exclude_tr_con)) { ?>
+        <?php if($search_cat_id <= 0 || @!in_array($search_cat_id, $exclude_tr_con)) { ?>
           <div class="row condition">
             <label for=""><?php _e('Condition', 'epsilon'); ?></label>
             <div class="input-box"><?php echo eps_simple_condition(); ?></div>
           </div>
-        <?php }*/ ?>
+        <?php } ?>
 
 
         <!-- TRANSACTION --> 
-        <?php /* if($search_cat_id <= 0 || @!in_array($search_cat_id, $exclude_tr_con)) { ?>
+        <?php if($search_cat_id <= 0 || @!in_array($search_cat_id, $exclude_tr_con)) { ?>
           <div class="row transaction">
             <label for=""><?php _e('Transaction', 'epsilon'); ?></label>
             <div class="input-box"><?php echo eps_simple_transaction(); ?></div>
           </div>
-        <?php } */ ?>
+        <?php } ?>
 
 
         <!-- PRICE -->
@@ -188,7 +183,7 @@
         </div>
 
 
-        <?php /* if(osc_images_enabled_at_items()) { ?>
+        <?php if(osc_images_enabled_at_items()) { ?>
           <div class="row with-picture checkboxes">
             <div class="input-box-check">
               <input type="checkbox" name="bPic" id="bPic" value="1" <?php echo (osc_search_has_pic() ? 'checked="checked"' : ''); ?> />
@@ -211,7 +206,7 @@
               <label for="bPhone" class="only-phone-label"><?php _e('With phone number', 'epsilon'); ?></label>
             </div>
           </div>
-        <?php } */ ?>
+        <?php } ?>
 
         <?php if($search_hooks <> '') { ?>
           <div class="row sidebar-hooks"><?php echo $search_hooks; ?></div>
@@ -359,6 +354,8 @@
       </h1>
     </div>
     
+    <?php osc_run_hook('search_items_filter'); ?>
+    
     <?php
       osc_get_premiums(20); //eps_param('premium_search_count')
     ?>
@@ -455,14 +452,19 @@
           <?php if($v['name'] <> '' && $v['title'] <> '' && $v['to_remove'] === true) { ?>
             <?php
               $rem_param = $params_all;
-              unset($rem_param[$n]);
+
+              if($v['is_meta'] === true) {
+                unset($rem_param['meta'][$v['field_id']]);
+              } else {
+                unset($rem_param[$n]);
+              }
               
               if(in_array($n, array('sCity','city','sRegion','region','sCountry','country'))) {
                 unset($rem_param['sLocation']);
               }
             ?>
 
-            <a href="<?php echo osc_search_url($rem_param); ?>" data-param="<?php echo $v['param']; ?>"><?php echo $v['title'] . ': ' . $v['name']; ?></a>
+            <a href="<?php echo osc_search_url($rem_param); ?>" data-type="<?php echo osc_esc_html(strtolower($v['type'])); ?>" data-param="<?php echo osc_esc_html($v['param']); ?>" title="<?php echo osc_esc_html($v['title'] . ': ' . $v['name']); ?>"><?php echo $v['title'] . ': ' . $v['name']; ?></a>
           <?php } ?>
         <?php } ?>
 

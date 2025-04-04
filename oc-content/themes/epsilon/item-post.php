@@ -7,11 +7,6 @@
   <meta name="googlebot" content="noindex, nofollow" />
 
   <?php if(osc_images_enabled_at_items()) { ItemForm::photos_javascript(); } ?>
-  <style>
-      .show-tip {
-          display:none;
-      }
-  </style>
 </head>
 
 <?php
@@ -148,12 +143,12 @@
             <?php } ?>
           </div>
           
-          <?php /*<div class="tip">
+          <div class="tip">
             <i class="fas fa-times close-tip"></i>
             <p><strong><?php _e('Category selection is important!', 'epsilon'); ?></strong></p>
-             <p><?php _e('Selecting correct category for your item is essential part of selling process.', 'epsilon'); ?></p>
+            <p><?php _e('Selecting correct category for your item is essential part of selling process.', 'epsilon'); ?></p>
             <p><?php _e('If you select improper category, potentional buyers will not be able to find your item and it will take much more time to sell it.', 'epsilon'); ?></p>
-          </div>*/ ?>
+          </div>
           
           <?php osc_run_hook('item_publish_category'); ?>
         </section>
@@ -231,25 +226,25 @@
             <?php } ?>
 
             <div class="row address">
-              <label for="address"><?php _e('City Area', 'epsilon'); ?></label>
+              <label for="address"><?php _e('Address', 'epsilon'); ?></label>
               <div class="input-box"><?php ItemForm::address_text($prepare); ?></div>
             </div>
             
-            <?php /*<div class="row zip">
+            <div class="row zip">
               <label for="zip"><?php _e('ZIP', 'epsilon'); ?></label>
               <div class="input-box"><?php ItemForm::zip_text($prepare); ?></div>
             </div>
             
             <div class="row location-link">
               <a class="link-update location" href="#"><?php echo (@$loc_cook['success'] == 1 ? __('Are you in different city? Update location', 'epsilon') : __('Want to sell faster? Set your preferred location', 'epsilon')); ?> &#8594;</a>
-            </div>*/ ?>
+            </div>
           </div>
 
-          <?php /*<div class="tip">
+          <div class="tip">
             <i class="fas fa-times close-tip"></i>
             <p><strong><?php _e('Localize item', 'epsilon'); ?></strong></p>
             <p><?php _e('You should at least select region & city for your listing, so customers those search only offers in their city or region can find your listings.', 'epsilon'); ?></p>
-          </div>*/ ?>
+          </div>
           
           <?php osc_run_hook('item_publish_location'); ?>
         </section>
@@ -312,18 +307,18 @@
             </div>
           </div>
           
-          <?php /*<div class="tip">
+          <div class="tip">
             <i class="fas fa-times close-tip"></i>
             <p><strong><?php _e('Trusted and open seller', 'epsilon'); ?></strong></p>
-             <p><?php _e('You should enter phone number, as most of solid customers prefer phone contact way.', 'epsilon'); ?></p>
+            <p><?php _e('You should enter phone number, as most of solid customers prefer phone contact way.', 'epsilon'); ?></p>
             <p><?php _e('For faster listing publishing and contacting with customers, it is recommended to create and account, logged-in users are more trusted.', 'epsilon'); ?></p>
-          </div>*/ ?>
+          </div>
           
           <?php osc_run_hook('item_publish_seller'); ?>
         </section>
 
 
-        <?php /*<section class="s4">
+        <section class="s4">
           <h2><?php _e('Pricing options & status', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
 
           <div class="in">
@@ -368,7 +363,7 @@
           </div>
           
           <?php osc_run_hook('item_publish_price'); ?>
-        </section> */ ?>
+        </section>
 
 
         <section class="upload-photos">
@@ -388,12 +383,12 @@
             </div>
           </div>
           
-          <?php /*<div class="tip">
+          <div class="tip">
             <i class="fas fa-times close-tip"></i>
             <p><strong><?php _e('Photos are selling!', 'epsilon'); ?></strong></p>
-             <p><?php _e('Did you know that listing with photos sells 7x faster than one with no photo?', 'epsilon'); ?></p>
+            <p><?php _e('Did you know that listing with photos sells 7x faster than one with no photo?', 'epsilon'); ?></p>
             <p><?php _e('Real product photos are key element for fast selling and helps customer to decide if product is really what they are looking for.', 'epsilon'); ?></p>
-          </div>*/ ?>
+          </div>
           
           <?php osc_run_hook('item_publish_images'); ?>
         </section>
@@ -417,32 +412,19 @@
               </div>
             </div>
             
-            
             <?php osc_run_hook('item_publish_description'); ?>
           
             <div id="post-hooks" class="hooks-block"><?php if($edit) { ItemForm::plugin_edit_item(); } else { ItemForm::plugin_post_item(); } ?></div>
 
             <?php osc_run_hook('item_publish_hook'); ?>
-            
-            <div class="row dsc">
-              <div class="td-wrap d1 input-box" style="width:auto !important;">
-                <input type="checkbox" name="termsConditions" id="termsConditions" />
-              </div>
-              <div class="td-wrap d1 input-box terms-line">
-                <?php _e('By clicking Submit, You agree our', 'epsilon'); ?> <a href="<?php echo osc_base_url(); ?>index.php?page=page&id=33" target="_blank" ><?php _e('Terms and Privacy policy', 'epsilon'); ?></a>
-                <span class="req">*</span>
-              </div>
-            </div>
-            
           </div>
           
-          <?php /*<div class="tip">
+          <div class="tip">
             <i class="fas fa-times close-tip"></i>
             <p><strong><?php _e('Additional decription', 'epsilon'); ?></strong></p>
-             <p><?php _e('Title is used in search so it is recommended to use keywords of your listing in title.', 'epsilon'); ?></p>
+            <p><?php _e('Title is used in search so it is recommended to use keywords of your listing in title.', 'epsilon'); ?></p>
             <p><?php _e('Detail description will also provide customers all information they need and reduce need to contact you.', 'epsilon'); ?></p>
-          </div>*/ ?>
-          
+          </div>
         </section>
 
 
@@ -531,7 +513,7 @@
   <script type="text/javascript">
   $(document).ready(function(){
     $('.item-publish input[name^="title"]').attr('placeholder', '<?php echo osc_esc_js(__('Summarize your offer', 'epsilon')); ?>');
-    $('.item-publish textarea[name^="description"]').attr('placeholder', '<?php echo osc_esc_js(__('Detailed description of your offer', 'epsilon')); ?>');
+    $('.item-publish textarea[name^="description"]').attr('placeholder', '<?php echo osc_esc_js(__('Detail description of your offer', 'epsilon')); ?>');
     $('.item-publish input[name="contactPhone"]').prop('type', 'tel');
 
     // HIDE THEME EXTRA FIELDS (Transaction, Condition, Status) ON EXCLUDED CATEGORIES 
@@ -801,9 +783,6 @@
         contactEmail: {
           required: true,
           email: true
-        },
-        termsConditions: {
-          required: true
         }
       },
 
@@ -876,13 +855,10 @@
         contactEmail: {
           required: '<?php echo osc_esc_js(__('Email: this field is required.', 'epsilon')); ?>',
           email: '<?php echo osc_esc_js(__('Email: invalid format of email address.', 'epsilon')); ?>'
-        },
-        termsConditions: {
-          required: '<?php echo osc_esc_js(__('Terms and conditions: this field is required.', 'epsilon')); ?>'
         }
       }, 
 
-      ignore: ":disabled",
+      ignore: ":disabled, :hidden, .ignore",
       ignoreTitle: false,
       errorLabelContainer: "#error_list",
       wrapper: "li",

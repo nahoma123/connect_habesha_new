@@ -45,40 +45,28 @@
       <form name="register" id="register" action="<?php echo osc_base_url(true); ?>" method="post" >
         <input type="hidden" name="page" value="register" />
         <input type="hidden" name="action" value="register_post" />
-        <input type="hidden" name="s_method" id="s_method_hidden" value="2" />
 
         <?php osc_run_hook('user_pre_register_form'); ?>
         
         <ul id="error_list"></ul>
 
         <div class="row nm">
-          <?php /*<label for="name"><?php _e('Name', 'epsilon'); ?> <span class="req">*</span></label>*/?>
+          <label for="name"><?php _e('Name', 'epsilon'); ?> <span class="req">*</span></label>
           <div class="input-box"><?php UserForm::name_text(); ?></div>
         </div>
-    
-        <?php /*<div class="row nm">
-          <label for="name"><?php _e('Verification Method', 'epsilon'); ?> <span class="req">*</span></label>
-          <select name="s_method" id="s_method" >
-              <option value="">Select verification method</option>
-              <option value="1">Phone</option>
-              <option value="2">Email</option>
-          </select>
-        </div>*/ ?>
         
-        <div class="row em" style="display:none;">
-          <?php /*<label for="email"><?php _e('E-mail', 'epsilon'); ?> <span class="req">*</span></label>*/?>
+        <div class="row em">
+          <label for="email"><?php _e('E-mail', 'epsilon'); ?> <span class="req">*</span></label>
           <div class="input-box"><?php UserForm::email_text(); ?></div>
-          
         </div>
         
         <div class="row mb">
-          <?php /*<label for="phone"><?php _e('Mobile Phone', 'epsilon'); ?></label>*/ ?>
+          <label for="phone"><?php _e('Mobile Phone', 'epsilon'); ?></label>
           <div class="input-box"><?php UserForm::mobile_text(osc_user()); ?></div>
-          <div style="text-align:left;font-style:italic;font-size:12px;margin-top:-13px;margin-bottom:15px;color:#0178d6;">Email registration will be available soon.</div>
         </div>
         
         <div class="row p1">
-          <?php /*<label for="password"><?php _e('Password', 'epsilon'); ?> <span class="req">*</span></label>*/?>
+          <label for="password"><?php _e('Password', 'epsilon'); ?> <span class="req">*</span></label>
           <div class="input-box">
             <?php UserForm::password_text(); ?>
             <a href="#" class="toggle-pass" title="<?php echo osc_esc_html(__('Show/hide password', 'epsilon')); ?>"><i class="fa fa-eye-slash"></i></a>
@@ -86,21 +74,10 @@
         </div>
         
         <div class="row p2">
-          <?php /*<label for="password"><?php _e('Re-type password', 'epsilon'); ?> <span class="req">*</span></label>*/?>
+          <label for="password"><?php _e('Re-type password', 'epsilon'); ?> <span class="req">*</span></label>
           <div class="input-box">
             <?php UserForm::check_password_text(); ?>
             <a href="#" class="toggle-pass" title="<?php echo osc_esc_html(__('Show/hide password', 'epsilon')); ?>"><i class="fa fa-eye-slash"></i></a>
-          </div>
-        </div>
-        
-        <div class="row p2">
-          
-          <div class="td-wrap d1 input-box" style="width:100%;font-size:11px">
-            <?php _e('By creating an account, you agree to our', 'epsilon'); ?> 
-            <a href="<?php echo osc_base_url(); ?>index.php?page=page&id=33" target="_blank" ><?php _e('Terms of Use', 'epsilon'); ?></a>,
-            <a href="<?php echo osc_base_url(); ?>index.php?page=page&id=32" target="_blank" ><?php _e('Privacy Policy', 'epsilon'); ?></a>, and 
-            <a href="<?php echo osc_base_url(); ?>" target="_blank" ><?php _e('Cookie Policy', 'epsilon'); ?></a>
-            <span class="req">*</span>
           </div>
         </div>
 
@@ -117,76 +94,12 @@
   
   <script type="text/javascript">
     $(document).ready(function(){
-        
-        $('#choose_mobile').on('click', function () {
-            //$('input[type="checkbox"]').not(this).prop('checked', false);
-            $('#s_email').removeAttr('required');
-            $('#sphone').show();
-            $('#semail').hide();
-            $('#s_email').css('display','none');
-            $('#s_phone_mobile').attr('required', true);
-            $('#s_method_hidden').val('1');
-            $('input[name="s_phone_mobile"]').attr('placeholder', '<?php echo osc_esc_js(__('phone number', 'epsilon')); ?>');
-        });
-        
-         $('#choose_email').on('click', function () {
-            //$('input[type="checkbox"]').not(this).prop('checked', false);
-            $('#s_phone_mobile').removeAttr('required');
-            $('#sphone').hide();
-            $('#semail').show();
-            $('#s_email').attr('required', true);
-            $('#s_email').css('display','block');
-            $('#s_method_hidden').val('2');
-        });
-        
-        $('#s_method').change(function() {
-            if ($(this).val()==1){
-                $('#s_email').removeAttr('required');
-                $('#sphone').show();
-                $('#semail').hide();
-                $('#s_email').css('display','none');
-                $('#s_phone_mobile').attr('required', true);
-            }else{
-                $('#s_phone_mobile').removeAttr('required');
-                $('#sphone').hide();
-                $('#semail').show();
-                $('#s_email').attr('required', true);
-                $('#s_email').css('display','block');
-            }
-        });
-        
-        let typingTimer;
-        const typingDelay = 300;
-        
-        $('#s_name').on('keyup', function () {
-            clearTimeout(typingTimer);
-            const $this = $(this);
-            typingTimer = setTimeout(() => {
-              const value = $this.val(); // Get the value
-              $('#s_email').val(value.replace(/\s+/g, "")+'@xxx.com');
-            }, typingDelay);
-        });
-        
-        // Optional: Clear timer on keydown
-        $('#s_name').on('keydown', function () {
-        clearTimeout(typingTimer);
-        });
-  
-        $('input[name="s_name"]').attr('placeholder', '<?php echo osc_esc_js(__('Name', 'epsilon')); ?>').attr('required', true);
-        $('input[name="s_email"]').attr('placeholder', '<?php echo osc_esc_js(__('Email', 'epsilon')); ?>').attr('required', true).prop('type', 'email');
-        $('input[name="s_phone_mobile"]').attr('placeholder', '<?php echo osc_esc_js(__('phone number', 'epsilon')); ?>');
-        $('input[name="s_password"]').attr('placeholder', '<?php echo osc_esc_js(__('Password', 'epsilon')); ?>').attr('required', true);
-        $('input[name="s_password2"]').attr('placeholder', '<?php echo osc_esc_js(__('Repeat password', 'epsilon')); ?>').attr('required', true);
-        $('#sphone').hide();
-        
-        
-        setTimeout(() => {
-          const value = $this.val(); // Get the value
-          $('input[name="s_phone_mobile"]').attr('placeholder', '<?php echo osc_esc_js(__('phone number', 'epsilon')); ?>');
-        }, 2000);
-        
+      $('input[name="s_name"]').attr('placeholder', '<?php echo osc_esc_js(__('First name, Last name', 'epsilon')); ?>').attr('required', true);
+      $('input[name="s_email"]').attr('placeholder', '<?php echo osc_esc_js(__('your.email@dot.com', 'epsilon')); ?>').attr('required', true).prop('type', 'email');
+      $('input[name="s_phone_mobile"]').attr('placeholder', '<?php echo osc_esc_js(__('+XXX XXX XXX', 'epsilon')); ?>');
+      $('input[name="s_password"]').attr('placeholder', '<?php echo osc_esc_js(__('YourPass123!', 'epsilon')); ?>').attr('required', true);
+      $('input[name="s_password2"]').attr('placeholder', '<?php echo osc_esc_js(__('YourPass123!', 'epsilon')); ?>').attr('required', true);
     });
-    
   </script>
 </body>
 </html>

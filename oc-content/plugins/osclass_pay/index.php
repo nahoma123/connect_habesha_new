@@ -3,7 +3,7 @@
   Plugin Name: Osclass Pay Plugin
   Plugin URI: https://osclasspoint.com/osclass-plugins/payments-and-shopping/osclass-pay-payment-plugin-i46
   Description: Ultimate payment and monetization solution for osclass classifieds
-  Version: 3.9.2
+  Version: 3.9.4
   Author: MB Themes
   Author URI: https://osclasspoint.com
   Author Email: info@osclasspoint.com

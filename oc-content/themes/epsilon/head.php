@@ -6,11 +6,11 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache" />
 <meta http-equiv="Expires" content="Mon, 01 Jul 1970 00:00:00 GMT" />
-<?php if(!osc_is_search_page())  { ?><meta name="robots" content="index, follow" /><?php } ?>
-<?php if(!osc_is_search_page())  { ?><meta name="googlebot" content="index, follow" /><?php } ?>
+<?php if(!osc_is_search_page()) { ?><meta name="robots" content="index, follow" /><?php } ?>
+<?php if(!osc_is_search_page()) { ?><meta name="googlebot" content="index, follow" /><?php } ?>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 <?php 
-  if(eps_param('generate_favicons') == 1) {
+  if(eps_param('generate_favicons') == 1 && !function_exists('pwa_call_after_install')) {
     osc_current_web_theme_path('head-favicon.php');
   }
   
@@ -134,6 +134,3 @@ if(eps_param('enable_custom_color') == 1 && ((eps_get_theme_color() != '' && eps
   osc_current_web_theme_path('head-color.php');
 }
 ?>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">

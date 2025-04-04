@@ -21,13 +21,13 @@
     <div class="container">
       <div class="box">
         <?php if(eps_param('interactive_title') == 1) { ?>
-          <h1><?php _e('Where would you like to have fun?', 'epsilon'); ?> 
+          <h1><?php _e('What would you like to', 'epsilon'); ?> 
             <div>
-              <span class="l1"><?php _e('Addis Ababa?', 'epsilon'); ?></span>
-              <span class="l2"><?php _e('Hawassa?', 'epsilon'); ?></span>
-              <span class="l3"><?php _e('Adama?', 'epsilon'); ?></span>
-              <span class="l5"><?php _e('Arba Minch?', 'epsilon'); ?></span>
-              <span class="l4"><?php _e('Dire Dawa?', 'epsilon'); ?></span>
+              <span class="l1"><?php _e('buy?', 'epsilon'); ?></span>
+              <span class="l2"><?php _e('sell?', 'epsilon'); ?></span>
+              <span class="l3"><?php _e('exchange?', 'epsilon'); ?></span>
+              <span class="l4"><?php _e('rent?', 'epsilon'); ?></span>
+              <span class="l5"><?php _e('buy?', 'epsilon'); ?></span>
             </div>
           </h1>
         <?php } else { ?>
@@ -76,7 +76,7 @@
         <?php } ?>
 
 
-        <h2><?php _e('Top Cities', 'epsilon'); ?></h2>
+        <h2><?php _e('Categories', 'epsilon'); ?></h2>
         
         <div id="home-cat">
           <?php 
@@ -85,50 +85,15 @@
             $hot_categories = explode(',', eps_param('categories_hot'));
           ?>
           
-          <?php /*<a href="<?php echo osc_search_url(array('page' => 'search')); ?>" class="all">
+          <a href="<?php echo osc_search_url(array('page' => 'search')); ?>" class="all">
             <div>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="64px" height="64px"><path d="M116.65 219.35a15.68 15.68 0 0 0 22.65 0l96.75-99.83c28.15-29 26.5-77.1-4.91-103.88C203.75-7.7 163-3.5 137.86 22.44L128 32.58l-9.85-10.14C93.05-3.5 52.25-7.7 24.86 15.64c-31.41 26.78-33 74.85-5 103.88zm143.92 100.49h-48l-7.08-14.24a27.39 27.39 0 0 0-25.66-17.78h-71.71a27.39 27.39 0 0 0-25.66 17.78l-7 14.24h-48A27.45 27.45 0 0 0 0 347.3v137.25A27.44 27.44 0 0 0 27.43 512h233.14A27.45 27.45 0 0 0 288 484.55V347.3a27.45 27.45 0 0 0-27.43-27.46zM144 468a52 52 0 1 1 52-52 52 52 0 0 1-52 52zm355.4-115.9h-60.58l22.36-50.75c2.1-6.65-3.93-13.21-12.18-13.21h-75.59c-6.3 0-11.66 3.9-12.5 9.1l-16.8 106.93c-1 6.3 4.88 11.89 12.5 11.89h62.31l-24.2 83c-1.89 6.65 4.2 12.9 12.23 12.9a13.26 13.26 0 0 0 10.92-5.25l92.4-138.91c4.88-6.91-1.16-15.7-10.87-15.7zM478.08.33L329.51 23.17C314.87 25.42 304 38.92 304 54.83V161.6a83.25 83.25 0 0 0-16-1.7c-35.35 0-64 21.48-64 48s28.65 48 64 48c35.2 0 63.73-21.32 64-47.66V99.66l112-17.22v47.18a83.25 83.25 0 0 0-16-1.7c-35.35 0-64 21.48-64 48s28.65 48 64 48c35.2 0 63.73-21.32 64-47.66V32c0-19.48-16-34.42-33.92-31.67z"/></svg>
             </div>
 
             <h3><span><?php _e('All', 'epsilon'); ?></span></h3>
-          </a>*/?>
-          
-          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235021','sLocation'=>'Addis+Ababa')); ?>" class="all">
-            <div>
-             <img class="city_icons" style="" src="https://connecthabesha.com/oc-content/themes/epsilon/images/addis-ababa.PNG" />
-            </div>
-            <h3><span><?php _e('Addis Ababa', 'epsilon'); ?></span></h3>
           </a>
-          
-          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235080','sLocation'=>'Hawassa+(Awassa)')); ?>" class="all">
-            <div>
-             <img class="city_icons" src="https://connecthabesha.com/oc-content/themes/epsilon/images/awasa.jpeg" />
-            </div>
-            <h3><span><?php _e('Hawassa', 'epsilon'); ?></span></h3>
-          </a>
-          
-          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235017','sLocation'=>'Adama')); ?>" class="all">
-            <div>
-             <img style="width:100px;height:74px;max-width:auto;max-height:auto;" src="https://connecthabesha.com/oc-content/themes/epsilon/images/adama.PNG" />
-            </div>
-            <h3><span><?php _e('Adama', 'epsilon'); ?></span></h3>
-          </a>
-          
-          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235043','sLocation'=>'Dire+Dawa')); ?>" class="all">
-            <div>
-             <img style="width:100px;height:74px;max-width:auto;max-height:auto;" src="https://connecthabesha.com/oc-content/themes/epsilon/images/addis-ababa.PNG" />
-            </div>
-            <h3><span><?php _e('Dire Dawa', 'epsilon'); ?></span></h3>
-          </a>
-          <a href="<?php echo osc_search_url(array('page' => 'search','sCity' => '15235089','sLocation'=>'Arba+Minch')); ?>" class="all">
-            <div>
-             <img style="width:100px;height:74px;max-width:auto;max-height:auto;" src="https://connecthabesha.com/oc-content/themes/epsilon/images/addis-ababa.PNG" />
-            </div>
-            <h3><span><?php _e('Arba Minch', 'epsilon'); ?></span></h3>
-          </a>
-        
             
-          <?php /*while(osc_has_categories()) { ?>
+          <?php while(osc_has_categories()) { ?>
             <?php $color = eps_get_cat_color(osc_category_id(), osc_category()); ?>
      
             <a href="<?php echo osc_search_url(array('page' => 'search', 'sCategory' => osc_category_id())); ?>" data-id="<?php echo osc_category_id(); ?>">
@@ -157,7 +122,7 @@
 
               <h3><span><?php echo osc_category_name(); ?></span></h3>
             </a>
-          <?php } */?>
+          <?php } ?>
         </div>
       </div>
     </div>
@@ -176,8 +141,8 @@
         <div class="block">
           <h2>
             <span><?php echo sprintf(__('Latest listings near %s', 'epsilon'), osc_location_native_name_selector($location_cookie, 's_name')); ?></span>
+
             <a href="#" class="change-location btn btn-secondary mini">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" width="18" height="18"><path d="M347.94 129.86L203.6 195.83a31.938 31.938 0 0 0-15.77 15.77l-65.97 144.34c-7.61 16.65 9.54 33.81 26.2 26.2l144.34-65.97a31.938 31.938 0 0 0 15.77-15.77l65.97-144.34c7.61-16.66-9.54-33.81-26.2-26.2zm-77.36 148.72c-12.47 12.47-32.69 12.47-45.16 0-12.47-12.47-12.47-32.69 0-45.16 12.47-12.47 32.69-12.47 45.16 0 12.47 12.47 12.47 32.69 0 45.16zM248 8C111.03 8 0 119.03 0 256s111.03 248 248 248 248-111.03 248-248S384.97 8 248 8zm0 448c-110.28 0-200-89.72-200-200S137.72 56 248 56s200 89.72 200 200-89.72 200-200 200z"></path></svg>
               <?php _e('Change location', 'epsilon'); ?>
             </a>  
           </h2>
@@ -226,16 +191,16 @@
     $premium_items = eps_premium_items(eps_param('premium_home_count') - $has_day_offer, @$day_offer['pk_i_id']);
   ?>
 
-  <?php if(eps_param('premium_home') == 1 && $premium_items > 0) { ?>
+  <?php if(eps_param('premium_home') == 1 && count($premium_items) > 0) { ?>
     <?php
       $default_items = View::newInstance()->_get('items'); 
       View::newInstance()->_exportVariableToView('items', $premium_items);
     ?>
-    <?php /*<section class="home-premium">
+    <section class="home-premium">
       <div class="container">
         <div class="block">
           <h2><?php _e('Today\'s premium selection', 'epsilon'); ?></h2>
-          
+
           <div class="nice-scroll-wrap">
             <div class="nice-scroll-prev"><i class="fas fa-caret-left"></i></div>
             
@@ -260,7 +225,7 @@
           </div>
         </div>
       </div>
-    </section>*/?>
+    </section>
     
     <?php View::newInstance()->_exportVariableToView('items', $default_items); ?>
   <?php } ?>
@@ -440,7 +405,7 @@
     <section class="home-latest">
       <div class="container">
         <div class="block">
-          <h2><?php _e('Latest Adverts', 'epsilon'); ?></h2>
+          <h2><?php _e('Latest listings', 'epsilon'); ?></h2>
 
           <div id="latest-items" class="products grid">
             <?php 
@@ -509,13 +474,5 @@
   <?php osc_run_hook('home_bottom'); ?>
 
   <?php osc_current_web_theme_path('footer.php') ; ?>
-  <style>
-      .city_icons {
-          width:100px  !important;
-          height:74px !important;
-          max-width:max-content !important;
-          max-height:max-content !important;
-      }
-  </style>
 </body>
 </html>	

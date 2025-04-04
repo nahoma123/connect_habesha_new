@@ -462,15 +462,15 @@
 .przelewy24-dialog p.rw-cty {width:68%;margin-right:2%!important;}
 .przelewy24-dialog p.rw-zip {width:30%;clear:none;}
 
-
 .przelewy24-dialog #przelewy24-img {float:left;clear:both;width:100%;margin-bottom:20px;text-align:center;}
 .przelewy24-dialog #przelewy24-img img {float:none;width:auto;max-width:100%;height:28px;max-height:100%;}
-.przelewy24-dialog #przelewy24-desc {margin-bottom:0px;font-style:italic;color:#999;border-bottom:1px solid #eee;padding-bottom:12px;text-align:center;}
+.przelewy24-dialog #przelewy24-desc {margin-bottom:0px;font-style:italic;color:#777;border-bottom:1px solid #e0e0e0;padding-bottom:12px;text-align:center;}
 .przelewy24-dialog #przelewy24-price {margin-bottom:5px;font-weight:500;color:#000;font-size:22px;line-height:26px;}
 .przelewy24-dialog label {line-height:16px;font-weight:600;width:100%;clear:both;display:inline-block;margin:15px 0 1px 0;color:#333;font-size:12px;}
-.przelewy24-dialog input[type="text"] {float:left;width:100%;background:#fff;font-size:13px;color:#333;padding:6px;height:34px;line-height:16px;border:1px solid #ccc;border-radius:3px;}
+.przelewy24-dialog input[type="text"], .przelewy24-dialog select {float:left;width:100%;background:#fff;font-size:13px;color:#333;padding:6px;margin:0;height:34px;line-height:16px;border:1px solid #ccc;border-radius:4px;}
+.przelewy24-dialog .osp-input-box select {height:auto;margin:0;padding:10px 6px;}
 .przelewy24-dialog p {float:left;clear:both;width:100%;}
-.przelewy24-dialog button[type="submit"], #uniform-przelewy24-submit {text-shadow:none;border:none;box-shadow:none;border-radius:3px;color: #fff!important;background: #0095f6;font-weight: bold;font-size:13px;line-height:16px;width:100%;padding:12px 8px;text-align:center;float:left;clear:both;margin-top:20px;}
+.przelewy24-dialog button[type="submit"], #uniform-przelewy24-submit {text-shadow:none;border:none;box-shadow:none;border-radius:5px;color: #fff!important;background: #0095f6;font-weight: bold;font-size:13px;line-height:16px;width:100%;padding:12px 8px;text-align:center;float:left;clear:both;margin-top:20px;}
 .przelewy24-dialog button[type="submit"]:hover, #uniform-przelewy24-submit:hover {background:#0398db;}
 #uniform-przelewy24-submit button {display:none!important;}
 .przelewy24-dialog .osp-input-box {float:left;width:100%;position:relative;}
@@ -667,20 +667,19 @@
 
 
 /* CUSTOM JQUERY UI DIALOGS */
-.osp-dialog.ui-dialog {border:none;background:#fff;box-shadow:2px 2px 15px rgba(0,0,0,0.3);border-radius:3px;padding:0;z-index:999;}
-.osp-dialog.ui-dialog .ui-dialog-titlebar {border-bottom:2px solid rgba(0,0,0,0.15);position:relative;z-index:3;padding:20px 8px;text-align:center;background:#0095f6 url('../img/dialog-bg.jpg') repeat center center;background-size:100% 100%;color:#fff;font-size:18px;font-weight:500;line-height:24px;border-radius:0;border-top-left-radius:3px;border-top-right-radius:3px;}
+body .ui-widget.ui-widget-content.osp-dialog {padding:0;border-radius:4px;border:none;background:#fff;box-shadow:2px 2px 15px rgba(0,0,0,0.3);border-radius:5px;padding:0;z-index:999;}
+.osp-dialog.ui-dialog .ui-dialog-titlebar {border:none;border-bottom:2px solid rgba(0,0,0,0.15);position:relative;z-index:3;padding:20px 50px;text-align:center;background:#0095f6 url('../img/dialog-bg.jpg') repeat center center;background-size:100% 100%;color:#fff;font-size:18px;font-weight:normal;line-height:22px;border-radius:0;border-radius:5px 5px 0 0;}
 .osp-dialog.ui-dialog .ui-dialog-titlebar img { max-width: 100%; max-height: 100%; width: auto; height: auto; }
-.osp-dialog.ui-dialog .ui-dialog-content {padding:20px 20px 25px 20px;font-size:13px;color:#444;line-height:20px;position:relative;z-index:2;}
+.osp-dialog.ui-dialog .ui-dialog-content {padding:16px 16px 20px 16px;font-size:13px;color:#444;line-height:20px;position:relative;z-index:2;}
 .osp-dialog.ui-dialog .ui-dialog-content p {margin:0;}
 .osp-dialog.ui-dialog .ui-button-icon-only .ui-button-text {display:none;}
-.osp-dialog.ui-dialog .ui-widget-header .ui-dialog-titlebar-close {width:30px;height:30px;margin-top:-15px;color:rgba(0,0,0,0.4)!important;font-size:18px;padding:0;line-height:30px;box-shadow:none;background:none;border:none;background:rgba(0,0,0,0.15);border-radius:50%;}
-.osp-dialog.ui-dialog .ui-widget-header .ui-dialog-titlebar-close:hover {background:rgba(0,0,0,0.20);}
-.osp-dialog.ui-dialog .ui-widget-header .ui-dialog-titlebar-close:active {background:rgba(0,0,0,0.25);}
-.osp-dialog.ui-dialog .ui-widget-header .ui-dialog-titlebar-close:after {font-family:"FontAwesome","Font Awesome 5 Free";content:"\f00d";}
+.osp-dialog.ui-dialog .ui-widget-header .ui-dialog-titlebar-close {width:30px;height:30px;right:10px;margin-top:-15px;color:rgba(0,0,0,0.7)!important;font-size:18px;padding:0;line-height:30px;box-shadow:none;background:none;border:none;background:rgba(0,0,0,0.25);border-radius:100px;}
+.osp-dialog.ui-dialog .ui-widget-header .ui-dialog-titlebar-close:hover {background:rgba(0,0,0,0.15);}
+.osp-dialog.ui-dialog .ui-widget-header .ui-dialog-titlebar-close:active {background:rgba(0,0,0,0.10);}
+.osp-dialog.ui-dialog .ui-widget-header .ui-dialog-titlebar-close:after {font-family:"FontAwesome","Font Awesome 5 Free";content:"\f00d";font-weight:900;}
 .osp-dialog.ui-dialog .ui-widget-header .ui-dialog-titlebar-close > span {display:none!important;}
-.osp-dialog span.ui-dialog-title {display:inline-block;height:24px;margin:0;overflow:visible;padding-left:32px;}
+.osp-dialog span.ui-dialog-title {display: inline-block; margin: 0; overflow: hidden; text-overflow: ellipsis; overflow-wrap: break-word; word-break: break-word; max-width: 100%; white-space: normal;}
 .osp-dialog.braintree-dialog span.ui-dialog-title > img {height:30px;margin:-6px 0;}
-
 
 /* ITEM PAY */
 .osp-body.osp-body-itempay {padding:0;border:none;}
@@ -1299,3 +1298,17 @@ html[dir="rtl"] .osp-product {float:right;}
 html[dir="rtl"] .osp-product-to-cart {padding-left:15px;padding-right:40px;float:right;border-radius:0 4px 4px 0;}
 html[dir="rtl"] .osp-product-to-cart svg {right:8px;left:auto;}
 html[dir="rtl"] .osp-product-quantity {float:right;margin-left:20px;margin-right:0;border-radius:4px 0 0 4px;}
+
+
+
+/* DARK MODE */
+html[mode="dark"] .osp-promote-form {background: var(--mb-color12, #363636); border-color: var(--mb-color11, #464646); color: var(--mb-color2, #d6d6d6);}
+html[mode="dark"] .osp-h1 {color: var(--mb-color2, #e6e6e6);}
+html[mode="dark"] .osp-promote-form .osp-h2 {color: var(--mb-color5, #c6c6c6);}
+html[mode="dark"] .osp-promote-form .osp-pb-line {background: var(--mb-color11, #464646);box-shadow:none;}
+html[mode="dark"] .osp-promote-form .osp-pb-line .osp-pb-name {color: var(--mb-color1, #e6e6e6);}
+html[mode="dark"] body .osp-promote-form .osp-pb-line .osp-pb-desc {color: var(--mb-color3, #c6c6c6);}
+html[mode="dark"] .osp-promote-form .osp-pb-line select {background: var(--mb-color12, #363636)!important;border-color: var(--mb-color13, #262626); color: var(--mb-color2, #d6d6d6);}
+html[mode="dark"] .osp-promote-form .osp-pb-line .osp-pb-name strong {background: var(--mb-color12, #363636);color: var(--mb-color1, #e6e6e6);}
+html[mode="dark"] {}
+

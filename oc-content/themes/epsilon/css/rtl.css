@@ -156,7 +156,8 @@ body #fi_user_lists .fi_explain sup {margin-left:4px;margin-right:0;}
 .home-search > .container:after, .pre-account > .content > section.container:after {background-position:top left;}
 .home-search > .container:after {left:3%;right:auto;}
 .pre-account > .content > section.container:after {left:0;right:auto;}
-.home-search .input-box {margin:0 0 0 12px;}
+.home-search .input-box {margin:0 0 0 12px;float:right;}
+#side-menu .section.lead a.img-container svg, #def-location a.img-container svg {right:auto;}
 header .links .btn svg, header .menu.btn svg {margin-left:2px;margin-right:0;}
 header .links .btn.account img {float:right;margin-left:5px;margin-right:-6px;}
 header .links, footer section.two span {margin-left:0;margin-right:auto;}
@@ -179,8 +180,8 @@ footer .quick-links a, .latest-search a {margin-left:4px;margin-right:0;float:ri
 #home-cat a, body#home h2 .btn svg, #comments .author .img {margin-left:5px;margin-right:0;}
 .simple-prod .img-wrap .user-image {right:8px;left:auto;}
 .simple-prod .premium-mark, .items-box .label-premium, .items-box .label-sold, .items-box .label-reserved {right:6px;left:auto;}
-.simple-prod .favorite, #item-image .swiper-pg {left:8px;right:auto;}
-#item-main .favorite {left:0px;right:auto;}
+.simple-prod .favorite, .simple-prod .svi-save-btn, #item-image .swiper-pg {left:8px;right:auto;}
+#item-main .favorite, #item-main .svi-save-btn {left:0px;right:auto;}
 .simple-prod .img-wrap .bar .image-counter {left:8px;right:auto;}
 .simple-prod .img-wrap .bar {padding-left:36px;padding-right:8px;}
 .simple-prod .img-wrap .bar .price {float:right;}
@@ -284,7 +285,7 @@ footer .col {padding-left:25px;padding-right:0;}
 .input-box-check label:before, .input-box-check label:after {right:0;left:auto;}
 .products.list .simple-prod .info .premium-mark, .products.list .simple-prod .info .label {float:right;margin-left:5px;right:auto;margin-right:0;}
 .products.list .simple-prod .img-wrap .bar .image-counter {right:3px;left:auto;}
-.products.list .simple-prod .favorite {left:auto;right:0;}
+.products.list .simple-prod .favorite, .products.list .simple-prod .svi-save-btn {left:auto;right:0;}
 .nice-scroll-next, #item-image .swiper-button.swiper-next {text-indent:-2px;}
 .nice-scroll-prev, #item-image .swiper-button.swiper-prev {text-indent:2px;}
 #item-image .swiper-button.swiper-prev:active i {text-indent:5px;}

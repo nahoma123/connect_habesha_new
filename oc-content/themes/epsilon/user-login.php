@@ -49,9 +49,8 @@
         <?php osc_run_hook('user_pre_login_form'); ?>
 
         <div class="row">
-          <label for="phone"><?php _e('Phone', 'epsilon'); ?></label>
+          <label for="email"><?php _e('E-mail', 'epsilon'); ?></label>
           <span class="input-box"><?php UserForm::email_login_text(); ?></span>
-          <div style="text-align:left;font-style:italic;font-size:12px;margin-top:-13px;margin-bottom:15px;color:#0178d6;">Email login will be available soon.</div>
         </div>
 
         <div class="row">
@@ -85,8 +84,8 @@
   
   <script type="text/javascript">
     $(document).ready(function(){
-      $('input[name="email"]').attr('placeholder', '<?php echo osc_esc_js(__('Phone', 'epsilon')); ?>').attr('required', true);
-      $('input[name="password"]').attr('placeholder', '<?php echo osc_esc_js(__('Password', 'epsilon')); ?>').attr('required', true);
+      $('input[name="email"]').attr('placeholder', '<?php echo osc_esc_js(__('your.email@dot.com', 'epsilon')); ?>').attr('required', true);
+      $('input[name="password"]').attr('placeholder', '<?php echo osc_esc_js(__('YourPass123!', 'epsilon')); ?>').attr('required', true);
     });
   </script>
 </body>

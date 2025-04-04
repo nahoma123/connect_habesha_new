@@ -342,8 +342,8 @@
               </div>
               
               <div class="dsc">
-                <strong><?php echo $user['s_name']; ?></strong>
-                <span><?php echo sprintf(__('Last online %s', 'epsilon'), eps_smart_date($user['dt_access_date'])); ?></span>
+                <strong><?php echo isset($user['s_name']) ? $user['s_name'] : __('Anonymous', 'epsilon'); ?></strong>
+                <span><?php echo sprintf(__('Last online %s', 'epsilon'), isset($user['dt_access_date']) ? eps_smart_date($user['dt_access_date']) : '-'); ?></span>
               </div>
             </div>
           </div>

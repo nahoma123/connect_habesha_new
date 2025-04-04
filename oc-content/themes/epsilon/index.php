@@ -3,7 +3,7 @@
 Theme Name: Epsilon Osclass Theme
 Theme URI: https://osclasspoint.com/osclass-themes/general/epsilon-osclass-theme_i170
 Description: Premium classifieds and marketplace theme for Osclass
-Version: 1.4.8
+Version: 1.6.0
 Author: MB Themes
 Author URI: https://osclasspoint.com
 Widgets: header,footer

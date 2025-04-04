@@ -213,11 +213,26 @@
             <div class="alert">
               <div class="head-row">
                 <div class="data">
-                  <strong><?php echo $a['name']; ?></strong>
+                  <strong>
+                    <?php 
+                      if(function_exists('osc_alert_name') && isset($a['s_name']) && $a['s_name'] != '') {
+                        echo $a['s_name'];
+                      } else {
+                        echo $a['name'];
+                      }
+                    ?>
+                  </strong>
+                  
                   <div>
                     <span><?php echo sprintf(__('%s listings match subscription conditions, %s notifications, created on %s, id: #%s. Your listings are excluded.', 'epsilon'), $a['count'], eps_alert_frequency($a['e_type']), date('j. M Y', strtotime($a['dt_date'])), $a['pk_i_id']); ?></span>
                     <a href="#" class="show-technical-details"><?php _e('Technical details', 'epsilon'); ?></a>  
                   </div>
+                  
+                  <?php
+                    if(function_exists('osc_alert_change_frequency')) {
+                      echo osc_alert_change_frequency($a);
+                    }
+                  ?>
                 </div>
                 
                 <a href="<?php echo $a['unsubscribe_url']; ?>" class="btn btn-secondary mini" onclick="javascript:return confirm('<?php echo osc_esc_js(__('This action can\'t be undone. Are you sure you want to continue?', 'epsilon')); ?>');"><?php _e('Unsubscribe', 'epsilon'); ?></a>

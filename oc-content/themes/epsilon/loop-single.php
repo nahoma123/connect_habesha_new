@@ -95,7 +95,7 @@
           <?php } ?>          
         <?php } ?>
         
-        <?php /*<span><?php echo (osc_item_views() == 1 ? __('1 person viewed', 'epsilon') : sprintf(__('%s people viewed', 'epsilon'), osc_item_views())); ?></span>*/ ?>
+        <span><?php echo (osc_item_views() == 1 ? __('1 person viewed', 'epsilon') : sprintf(__('%s people viewed', 'epsilon'), osc_item_views())); ?></span>
       </div>
 
       <div class="action isDetail">

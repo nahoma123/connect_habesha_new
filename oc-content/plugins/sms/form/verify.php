@@ -1,9 +1,9 @@
 <?php
 $location = Rewrite::newInstance()->get_location();
-$section  = Rewrite::newInstance()->get_section();
+$section = Rewrite::newInstance()->get_section();
 
-$user_id = Params::getParam('userId');
-$item_id = Params::getParam('itemId');
+$user_id = osc_esc_html(Params::getParam('userId'));
+$item_id = osc_esc_html(Params::getParam('itemId'));
 
 
 // USER PHONE VERIFICATION
@@ -50,7 +50,6 @@ if($section == 'user-verify' || Params::getParam('route') == 'sms-user-verify') 
   }
 
   $phone_number = sms_prepare_number(sms_item_phone_number($item_id));
-
 }
 
 
@@ -71,9 +70,8 @@ if(sms_phone_verify($phone_number)) {
         <div class="sms-row sms-error" style="display:none"></div>
         <div class="sms-row sms-success" <?php if(sms_param('provider') <> 'demo') { ?>style="display:none"<?php } ?>><?php if(sms_param('provider') == 'demo') { _e('Plugin is in demo mode, you can enter any phone number', 'sms'); } ?></div>
 
-        <form action="<?php echo osc_base_url(true); ?>?ajaxRequest=1" method="post" class="sms-step1 nocsrf">
+        <form action="<?php echo osc_base_url(true); ?>" method="post" class="sms-step1 nocsrf">
           <input type="hidden" name="smsAjax" value="1" />
-          <input type="hidden" name="ajaxRequest" value="1" />
           <input type="hidden" name="nolog" value="1" />
           <input type="hidden" name="type" value="<?php echo $type; ?>" />
           <input type="hidden" name="step" value="1" />
@@ -99,9 +97,8 @@ if(sms_phone_verify($phone_number)) {
         </form>
 
 
-        <form action="<?php echo osc_base_url(true); ?>?ajaxRequest=1" method="post" class="sms-step2 nocsrf" style="display:none;">
+        <form action="<?php echo osc_base_url(true); ?>" method="post" class="sms-step2 nocsrf" style="display:none;">
           <input type="hidden" name="smsAjax" value="1" />
-          <input type="hidden" name="ajaxRequest" value="1" />
           <input type="hidden" name="nolog" value="1" />
           <input type="hidden" name="type" value="<?php echo $type; ?>" />
           <input type="hidden" name="step" value="2" />
@@ -111,18 +108,16 @@ if(sms_phone_verify($phone_number)) {
 
           <div class="sms-row sms-four-inputs">
             <label for="code1"><?php _e('Please enter verification code we sent to', 'sms'); ?> <<span class="sms-phone-code-sent"></span>></label> 
-            <input id="code1" type="text" name="code1" class="sms-code" maxlength="1"/>
-            <input id="code2" type="text" name="code2" class="sms-code" maxlength="1"/>
-            <input id="code3" type="text" name="code3" class="sms-code" maxlength="1"/>
-            <input id="code4" type="text" name="code4" class="sms-code" maxlength="1"/>
+            <input id="code1" type="text" name="code1" class="sms-code" maxlength="1" inputmode="numeric"/>
+            <input id="code2" type="text" name="code2" class="sms-code" maxlength="1" inputmode="numeric"/>
+            <input id="code3" type="text" name="code3" class="sms-code" maxlength="1" inputmode="numeric"/>
+            <input id="code4" type="text" name="code4" class="sms-code" maxlength="1" inputmode="numeric"/>
           </div>
 
           <button type="submit" class="alpBg mbBg sms-button sms-button-primary sms-verify disabled" disabled><?php _e('Verify', 'sms'); ?></button>
 
           <div class="sms-row sms-rsnd"><?php _e('SMS may take up to 40 seconds. Wait up, please!', 'sms'); ?></div>
           <a href="#" class="sms-button-resend disabled" disabled><span class="txt"><?php _e('Resend in', 'sms'); ?></span> <span class="counter">60</span></a>
-
-
         </form>
       </div>
     </div>

@@ -3,11 +3,7 @@
 <head>
   <?php osc_current_web_theme_path('head.php'); ?>
   <link rel="stylesheet" media="print" href="<?php echo osc_current_web_theme_url('css/print.css?v=' . date('YmdHis')); ?>">
-  <style>
-      .oc-chat-button {
-        margin-right: 0 !important;
-      }
-  </style>
+
   <?php
     $itemviewer = (Params::getParam('itemviewer') == 1 ? 1 : 0);
     $item_extra = eps_item_extra(osc_item_id());
@@ -119,12 +115,14 @@
   <?php if(osc_item_price() <> '' and osc_item_price() <> 0) { ?><meta property="product:price:currency" content="<?php echo osc_item_currency(); ?>" /><?php } ?>
   <?php } ?>
   
+  <?php if(!function_exists('osc_structured_data_enabled')) { ?>
   <!-- GOOGLE RICH SNIPPETS -->
   <span itemscope itemtype="http://schema.org/Product">
     <meta itemprop="name" content="<?php echo osc_esc_html(osc_item_title()); ?>" />
     <meta itemprop="description" content="<?php echo osc_esc_html(osc_highlight(osc_item_description(), 500)); ?>" />
     <?php if(osc_count_item_resources() > 0) { ?><meta itemprop="image" content="<?php echo $resource_url; ?>" /><?php } ?>
   </span>
+  <?php } ?>
 </head>
 
 <body id="item" class="<?php if(eps_device() <> '') { echo ' dvc-' . eps_device(); } ?><?php if(osc_item_is_expired()) { ?> expired<?php } ?>">
@@ -151,7 +149,7 @@
               <a href="<?php echo eps_item_fancy_url('contact'); ?>" data-type="contact" class="mlink contact isMobile open-form"><i class="fas fa-envelope-open"></i></a>
             <?php } ?>
             
-            <?php /*<a href="#" class="mlink share isMobile"><i class="fas fa-share-alt"></i></a>*/ ?>
+            <a href="#" class="mlink share isMobile"><i class="fas fa-share-alt"></i></a>
             
             <?php osc_get_item_resources(); ?>
             <?php osc_reset_resources(); ?>
@@ -209,7 +207,7 @@
             
           <div class="row details">
             <span><?php echo osc_item_category(); ?></span>
-           <!--<span><?php //echo sprintf(__('%d views', 'epsilon'), osc_item_views()); ?></span>-->
+            <span><?php echo sprintf(__('%d views', 'epsilon'), osc_item_views()); ?></span>
 
             <?php if(!in_array(osc_item_category_id(), eps_extra_fields_hide())) { ?>
               <?php if(eps_get_simple_name($item_extra['i_condition'], 'condition', false) <> '') { ?>
@@ -277,9 +275,7 @@
             </div>
           <?php } ?>      
 
-          <div id="item-hook">
-              <?php osc_run_hook('item_detail', osc_item()); ?>
-          </div>
+          <div id="item-hook"><?php osc_run_hook('item_detail', osc_item()); ?></div>
         </div>
         
         <?php osc_run_hook('item_meta'); ?>
@@ -498,14 +494,15 @@
         <?php osc_run_hook('item_comment'); ?>
 
         <div id="shortcuts">
-          <?php /*<a href="#" class="print isDesktop"><i class="fas fa-print"></i> <?php _e('Print', 'epsilon'); ?></a>
-          <a class="friend open-form" href="<?php echo eps_item_fancy_url('friend'); ?>" data-type="friend"><i class="fas fa-share-square"></i> <?php _e('Send to friend', 'epsilon'); ?></a> 
+          <a href="#" class="print isDesktop"><i class="fas fa-print"></i> <?php _e('Print', 'epsilon'); ?></a>
+          <a class="friend open-form" href="<?php echo eps_item_fancy_url('friend'); ?>" data-type="friend"><i class="fas fa-share-square"></i> <?php _e('Send to friend', 'epsilon'); ?></a>
+
           <div class="item-share">
             <a class="whatsapp" href="whatsapp://send?text=<?php echo urlencode(osc_item_url()); ?>" data-action="share/whatsapp/share"><i class="fab fa-whatsapp"></i></a></span>
             <a class="facebook" title="<?php echo osc_esc_html(__('Share on Facebook', 'epsilon')); ?>" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(osc_item_url()); ?>"><i class="fab fa-facebook"></i></a> 
             <a class="twitter" title="<?php echo osc_esc_html(__('Share on Twitter', 'epsilon')); ?>" target="_blank" href="https://twitter.com/intent/tweet?text=<?php echo urlencode(osc_item_title()); ?>&url=<?php echo urlencode(osc_item_url()); ?>"><i class="fab fa-twitter"></i></a> 
             <a class="pinterest" title="<?php echo osc_esc_html(__('Share on Pinterest', 'epsilon')); ?>" target="_blank" href="https://pinterest.com/pin/create/button/?url=<?php echo urlencode(osc_item_url()); ?>&media=<?php echo urlencode($resource_url); ?>&description=<?php echo htmlspecialchars(osc_item_title()); ?>"><i class="fab fa-pinterest"></i></a> 
-          </div>*/ ?>
+          </div>
         </div>
       </div>
 
@@ -529,17 +526,15 @@
         <?php } ?>
         
         <?php if(eps_param('messenger_replace_button') == 1 && function_exists('im_contact_button') && im_contact_button(osc_item(), true) !== false) { ?>
-          <!--<a href="<?php echo im_contact_button(osc_item(), true); ?>" class="contact master-button">
+          <a href="<?php echo im_contact_button(osc_item(), true); ?>" class="contact master-button">
             <i class="fas fa-envelope-open"></i>
             <span><?php _e('Send message', 'epsilon'); ?></span>
-          </a>-->
-          <?php if(function_exists('oc_chat_button')) { echo oc_chat_button(); } ?> 
+          </a>
         <?php } else if(getBoolPreference('item_contact_form_disabled') != 1) { ?>
-          <!--<a href="<?php echo eps_item_fancy_url('contact'); ?>" class="open-form contact master-button" data-type="contact">
+          <a href="<?php echo eps_item_fancy_url('contact'); ?>" class="open-form contact master-button" data-type="contact">
             <i class="fas fa-envelope-open"></i>
             <span><?php _e('Send message', 'epsilon'); ?></span>
-          </a>-->
-          <?php if(function_exists('oc_chat_button')) { echo oc_chat_button(); } ?> 
+          </a>
         <?php } ?>
         
         <?php osc_run_hook('item_contact'); ?>
@@ -721,7 +716,13 @@
     </a>
   <?php } ?>
 
-  <?php if(getBoolPreference('item_contact_form_disabled') != 1) { ?>
+  <?php if(eps_param('messenger_replace_button') == 1 && function_exists('im_contact_button') && im_contact_button(osc_item(), true) !== false) { ?>
+    <a href="<?php echo im_contact_button(osc_item(), true); ?>" class="contact btn btn-secondary sticky-button isMobile">
+      <i class="fas fa-envelope-open"></i>
+      <span><?php _e('Send message', 'epsilon'); ?></span>
+    </a>
+
+  <?php } else if(getBoolPreference('item_contact_form_disabled') != 1) { ?>
     <a href="<?php echo eps_item_fancy_url('contact'); ?>" class="open-form contact btn btn-secondary sticky-button isMobile" data-type="contact">
       <i class="fas fa-envelope-open"></i>
       <span><?php _e('Send message', 'epsilon'); ?></span>

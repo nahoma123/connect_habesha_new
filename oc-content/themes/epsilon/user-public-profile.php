@@ -159,6 +159,46 @@
 
       <h1><?php echo sprintf(__('%s\'s listings', 'epsilon'), $contact_name); ?></h1>
 
+      <?php if(osc_version() >= 830) { ?>
+        <form name="user-public-profile-search" action="<?php echo osc_base_url(true); ?>" method="get" class="user-public-profile-search-form nocsrf">
+          <input type="hidden" name="page" value="user"/>
+          <input type="hidden" name="action" value="pub_profile"/>
+          <input type="hidden" name="id" value="<?php echo osc_esc_html($user['pk_i_id']); ?>"/>
+
+          <?php osc_run_hook('user_public_profile_search_form_top'); ?>
+          
+          <div class="control-group">
+            <label class="control-label" for="sPattern"><?php _e('Keyword', 'epsilon'); ?></label>
+            
+            <div class="controls">
+              <?php UserForm::search_pattern_text(); ?>
+            </div>
+          </div>
+          
+          <div class="control-group">
+            <label class="control-label" for="sCategory"><?php _e('Category', 'epsilon'); ?></label>
+            
+            <div class="controls">
+              <?php UserForm::search_category_select(); ?>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="sCity"><?php _e('City', 'epsilon'); ?></label>
+            
+            <div class="controls">
+              <?php UserForm::search_city_select(); ?>
+            </div>
+          </div>
+          
+          <?php osc_run_hook('user_public_profile_search_form_bottom'); ?>
+          
+          <div class="actions">
+            <button type="submit" class="btn btn-primary"><?php _e('Apply', 'epsilon'); ?></button>
+          </div>
+        </form>
+      <?php } ?>
+
       <?php if(osc_count_items() > 0) { ?>
         <div class="products list">
           <?php 

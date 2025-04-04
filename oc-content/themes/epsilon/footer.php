@@ -9,9 +9,9 @@
 ?>
 
 <?php if(!osc_is_web_user_logged_in()) { ?>
-  <section class="promo promo2"style="margin-top:0px;">
+  <section class="promo">
     <div class="container">
-      <span><?php _e('Want to advertise?', 'epsilon'); ?></span>
+      <span><?php _e('Are you a professional seller?', 'epsilon'); ?></span>
       <a href="<?php echo osc_register_account_url(); ?>" class="btn btn-transparent"><?php _e('Create an account', 'epsilon'); ?></a>
     </div>
   </section>
@@ -25,7 +25,7 @@
   <div class="container">
     <section class="one">
       <div class="col contact">
-        <h4><?php _e('Help', 'epsilon'); ?></h4>
+        <h4><?php _e('About us', 'epsilon'); ?></h4>
 
         <p class="logo"><?php echo eps_logo(); ?></p>
         <?php if(eps_param('site_name') <> '') { ?><p class="company"><strong><?php echo eps_param('site_name'); ?></strong></p><?php } ?>
@@ -63,7 +63,7 @@
       </div>
       
       <div class="col socialx">
-        <?php /*<h4><?php _e('Social media', 'epsilon'); ?></h4>
+        <h4><?php _e('Social media', 'epsilon'); ?></h4>
 
         <?php osc_reset_resources(); ?>
         
@@ -89,12 +89,11 @@
             <?php _e('Twitter', 'epsilon'); ?>
           </a>
         <?php } ?>
-        
+
         <?php if(eps_get_social_link('linkedin') !== false) { ?>
           <a class="linkedin" href="<?php echo eps_get_social_link('linkedin'); ?>" title="<?php echo osc_esc_html(__('Share us on LinkedIn', 'epsilon')); ?>" target="_blank"><i class="fab fa-linkedin"></i> <?php _e('LinkedIn', 'epsilon'); ?></a>
-        <?php } ?>*/ ?>
-        
-      </div> 
+        <?php } ?>
+      </div>
       
       <div class="col pages">
         <h4><?php _e('Information', 'epsilon'); ?></h4>
@@ -130,7 +129,7 @@
     
     <section class="two">
       <?php if(getBoolPreference('web_contact_form_disabled') != 1) { ?>
-        <a href="<?php echo osc_contact_url(); ?>"><?php _e('Contact Us', 'epsilon'); ?></a>
+        <a href="<?php echo osc_contact_url(); ?>"><?php _e('Contact us', 'epsilon'); ?></a>
       <?php } ?>
       
       <?php if(eps_param('footer_link')) { ?>
@@ -185,6 +184,18 @@
       
       <span><?php _e('Favorite', 'epsilon'); ?></span>
     </a>
+    
+  <?php } else if (function_exists('svi_save_btn')) { ?>
+    <a href="#" class="l4 favorite svi-show-saved">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" height="20" width="20"><path d="M287.9 0C297.1 0 305.5 5.25 309.5 13.52L378.1 154.8L531.4 177.5C540.4 178.8 547.8 185.1 550.7 193.7C553.5 202.4 551.2 211.9 544.8 218.2L433.6 328.4L459.9 483.9C461.4 492.9 457.7 502.1 450.2 507.4C442.8 512.7 432.1 513.4 424.9 509.1L287.9 435.9L150.1 509.1C142.9 513.4 133.1 512.7 125.6 507.4C118.2 502.1 114.5 492.9 115.1 483.9L142.2 328.4L31.11 218.2C24.65 211.9 22.36 202.4 25.2 193.7C28.03 185.1 35.5 178.8 44.49 177.5L197.7 154.8L266.3 13.52C270.4 5.249 278.7 0 287.9 0L287.9 0zM287.9 78.95L235.4 187.2C231.9 194.3 225.1 199.3 217.3 200.5L98.98 217.9L184.9 303C190.4 308.5 192.9 316.4 191.6 324.1L171.4 443.7L276.6 387.5C283.7 383.7 292.2 383.7 299.2 387.5L404.4 443.7L384.2 324.1C382.9 316.4 385.5 308.5 391 303L476.9 217.9L358.6 200.5C350.7 199.3 343.9 194.3 340.5 187.2L287.9 78.95z"/></svg>
+
+      <?php if($fav_counter > 0) { ?>
+        <span class="counter"><?php echo $fav_counter; ?></span>
+      <?php } ?>    
+      
+      <span><?php _e('Saved', 'epsilon'); ?></span>
+    </a>
+
   <?php } else { ?>
     <a href="<?php echo osc_is_web_user_logged_in() ? osc_user_dashboard_url() : osc_user_login_url(); ?>" class="l6 <?php if(in_array(osc_get_osclass_location(), array('user','login','recover','forgot','register'))) { ?>active<?php } ?>">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="20" height="20"><path d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z"/></svg>
@@ -572,10 +583,9 @@
 <?php } ?>
 
 <?php if (osc_is_admin_user_logged_in() && ((defined('OSC_DEBUG') && OSC_DEBUG == true) || (defined('OSC_DEBUG_DB') && OSC_DEBUG_DB == true))) { ?>
-  <div id="debug-mode" class="noselect"><?php _e('You have enabled DEBUG MODE, autocomplete may not work! Disable debug mode in config.php.', 'epsilon'); ?></div>
+  <div id="debug-mode" class="noselect"><?php _e('Debug mode enabled in config.php.', 'epsilon'); ?></div>
 <?php } ?>
 
 <style>
 a.fi_img-link.fi-no-image > img {content:url("<?php echo osc_base_url(); ?>/oc-content/themes/epsilon/images/no-image.png");}
 </style>
-
