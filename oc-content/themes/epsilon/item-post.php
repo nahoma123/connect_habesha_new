@@ -243,7 +243,7 @@ if (!$edit && $user_default_category) {
             </div>
             
             <div class="row location-link">
-              <a class="link-update location" href="#"><?php echo (@$loc_cook['success'] == 1 ? __('Are you in different city? Update location', 'epsilon') : __('Want to sell faster? Set your preferred location', 'epsilon')); ?> &#8594;</a>
+              <a class="link-update location" href="#"><?php echo (@$loc_cook['success'] == 1 ? __('Are you in different city? Update location', 'epsilon') : __('Want to sell faster? Set your preferred location', 'epsilon')); ?> →</a>
             </div>
           </div>
 
@@ -277,9 +277,9 @@ if (!$edit && $user_default_category) {
 
             <div class="row user-link">
               <?php if(osc_is_web_user_logged_in()) { ?>
-                <a class="link-update" target="_blank" href="<?php echo osc_user_profile_url(); ?>"><?php _e('Update your profile here', 'epsilon'); ?> &#8594;</a>
+                <a class="link-update" target="_blank" href="<?php echo osc_user_profile_url(); ?>"><?php _e('Update your profile here', 'epsilon'); ?> →</a>
               <?php } else { ?>
-                <a class="link-update" target="_blank" href="<?php echo osc_register_account_url(); ?>"><?php _e('Not registered yet? Create an account', 'epsilon'); ?> &#8594;</a>
+                <a class="link-update" target="_blank" href="<?php echo osc_register_account_url(); ?>"><?php _e('Not registered yet? Create an account', 'epsilon'); ?> →</a>
               <?php } ?>
             </div>
           </div>
@@ -394,6 +394,8 @@ if (!$edit && $user_default_category) {
             <div id="post-hooks" class="hooks-block"><?php if($edit) { ItemForm::plugin_edit_item(); } else { ItemForm::plugin_post_item(); } ?></div>
 
             <?php osc_run_hook('item_publish_hook'); ?>
+            
+            
           </div>
           
           <div class="tip">
@@ -490,7 +492,7 @@ if (!$edit && $user_default_category) {
   <script type="text/javascript">
   $(document).ready(function(){
     $('.item-publish input[name^="title"]').attr('placeholder', '<?php echo osc_esc_js(__('Summarize your offer', 'epsilon')); ?>');
-    $('.item-publish textarea[name^="description"]').attr('placeholder', '<?php echo osc_esc_js(__('Detail description of your offer', 'epsilon')); ?>');
+    $('.item-publish textarea[name^="description"]').attr('placeholder', '<?php echo osc_esc_js(__('Describe your service, including pricing, availability, and other relevant details.', 'epsilon')); ?>');
     $('.item-publish input[name="contactPhone"]').prop('type', 'tel');
 
     // HIDE THEME EXTRA FIELDS (Transaction, Condition, Status) ON EXCLUDED CATEGORIES 
@@ -853,4 +855,4 @@ if (!$edit && $user_default_category) {
 
   <?php osc_current_web_theme_path('footer.php') ; ?>
 </body>
-</html>	
+</html>

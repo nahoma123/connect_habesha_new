@@ -3,6 +3,61 @@
 <head>
   <?php osc_current_web_theme_path('head.php'); ?>
   <link rel="stylesheet" media="print" href="<?php echo osc_current_web_theme_url('css/print.css?v=' . date('YmdHis')); ?>">
+  <style>
+    /* Added CSS from rejected hunk */
+    @media screen and (max-width: 767px) {
+    body .oc-chat.oc-closed {
+        bottom: 55px !important; /* Adjust as needed */
+        width: 46px;
+        height: 46px;
+        min-height: 46px;
+    }
+}
+
+.icon-spacing {
+    margin-right: 3px;
+}/*
+      .oc-chat-button {
+        margin-right: 0 !important;
+      } */
+      .contact-method {
+    display: flex;
+    width: fit-content; /* This will make the width fit the content */
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+    margin: 6px 0 2px 0;
+    font-weight: 600;
+        padding: 2px 8px;
+    border-radius: 8px;
+    background-color: rgba(1, 120, 214, 0.12);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    transition: 0.2s;
+}
+
+.contact-method i {
+    /* margin-right: 10px; */
+    font-size: 18px;
+    color: #0178d6; /* Icon color */
+}
+
+.contact-method span {
+    font-weight: 600;
+    color: #0178d6;
+    margin-right: 1px;
+    font-family: "Comfortaa", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.phone-mobile span{
+    margin-right: 5px;
+    color: #0178d6; /* Added color from hunk */
+}
+    /* End of Added CSS */
+  </style>
 
   <?php
     $itemviewer = (Params::getParam('itemviewer') == 1 ? 1 : 0);
@@ -15,12 +70,12 @@
     $location_full = implode('<br/>', $location_full_array);
 
     $is_company = false;
-    
+
     if(osc_item_user_id() <> 0) {
       $item_user = eps_get_user(osc_item_user_id());
       View::newInstance()->_exportVariableToView('user', $item_user);
       $user_item_count = $item_user['i_items'];
-      
+
       if($item_user['b_company'] == 1) {
         $is_company = true;
       }
@@ -28,7 +83,7 @@
       $item_user = false;
       $user_item_count = Item::newInstance()->countItemTypesByEmail(osc_item_contact_email(), 'active');
     }
-    
+
     $contact_name = (osc_item_contact_name() <> '' ? osc_item_contact_name() : __('Anonymous', 'epsilon'));
 
     $item_user_location_array = array_filter(array(osc_user_address(), osc_user_zip(), osc_user_city_area(), osc_user_city(), osc_user_region(), osc_user_country()));
@@ -38,9 +93,9 @@
     $reg_type = '';
     $last_online = '';
 
-    if($item_user && $item_user['dt_reg_date'] <> '') { 
+    if($item_user && $item_user['dt_reg_date'] <> '') {
       $reg_type = sprintf(__('Member for %s', 'epsilon'), eps_smart_date2($item_user['dt_reg_date']));
-    } else if ($item_user) { 
+    } else if ($item_user) {
       $reg_type = __('Registered user', 'epsilon');
     } else {
       $reg_type = __('Unregistered user', 'epsilon');
@@ -49,14 +104,14 @@
     if($item_user && @$item_user['dt_access_date'] != '') {
       $last_online = sprintf(__('Last online %s', 'epsilon'), eps_smart_date($item_user['dt_access_date']));
     }
-    
+
     //$user_about = nl2br(strip_tags(osc_user_info()));
 
     $phone_data = eps_get_item_phone();
     $email_data = eps_get_item_email();
     $user_phone_mobile_data = eps_get_phone(isset($item_user['s_phone_mobile']) ? $item_user['s_phone_mobile'] : '');
     $user_phone_land_data = eps_get_phone(isset($item_user['s_phone_land']) ? $item_user['s_phone_land'] : '');
-    $show_phone_on_profile = $item_user['show_on_profile'];
+    $show_phone_on_profile = isset($item_user['show_on_profile']) ? $item_user['show_on_profile'] : null; // Check if $item_user exists
     // print_r($item_user);
     $has_cf = false;
     while(osc_has_item_meta()) {
@@ -67,7 +122,7 @@
     }
 
     View::newInstance()->_reset('metafields');
-    
+
     $make_offer_enabled = false;
 
     if(function_exists('mo_call_after_install')) {
@@ -76,9 +131,9 @@
       $category_array = explode(',', $category);
 
       $root = Category::newInstance()->findRootCategory(osc_item_category_id());
-      $root_id = $root['pk_i_id'];
+      $root_id = isset($root['pk_i_id']) ? $root['pk_i_id'] : null; // Check if root exists
 
-      if((in_array($root_id, $category_array) || trim($category) == '') && (osc_item_price() > 0 || osc_item_price() !== 0)) {
+      if($root_id !== null && (in_array($root_id, $category_array) || trim($category) == '') && (osc_item_price() > 0 || osc_item_price() !== 0)) {
         $setting = ModelMO::newInstance()->getOfferSettingByItemId(osc_item_id());
 
         if((isset($setting['i_enabled']) && $setting['i_enabled'] == 1) || ((!isset($setting['i_enabled']) || $setting['i_enabled'] == '') && $history == 1)) {
@@ -86,20 +141,20 @@
         }
       }
     }
-    
+
     $item_search_url = osc_search_url(array('page' => 'search', 'sCategory' => osc_item_category_id(), 'sCountry' => osc_item_country_code(), 'sRegion' => osc_item_region_id(), 'sCity' => osc_item_city_id()));
 
     if(isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] != '' && strpos($_SERVER['HTTP_REFERER'], osc_base_url()) !== false) {
       $item_search_url = false;
     }
-    
-    $dimNormal = explode('x', osc_get_preference('dimNormal', 'osclass')); 
-    $aspect_ratio = round($dimNormal[0]/$dimNormal[1], 3);
+
+    $dimNormal = explode('x', osc_get_preference('dimNormal', 'osclass'));
+    $aspect_ratio = ($dimNormal[1] != 0) ? round($dimNormal[0]/$dimNormal[1], 3) : 1; // Avoid division by zero
     $gallery_padding_top = round(1/$aspect_ratio*100, 2);
-    
+
     osc_reset_resources();
     osc_get_item_resources();
-    $resource_url = osc_resource_url(); 
+    $resource_url = osc_resource_url();
   ?>
 
   <!-- FACEBOOK OPEN GRAPH TAGS -->
@@ -115,7 +170,7 @@
   <meta property="product:price:amount" content="<?php echo osc_esc_html(strip_tags(osc_item_price()/1000000)); ?>" />
   <?php if(osc_item_price() <> '' and osc_item_price() <> 0) { ?><meta property="product:price:currency" content="<?php echo osc_item_currency(); ?>" /><?php } ?>
   <?php } ?>
-  
+
   <?php if(!function_exists('osc_structured_data_enabled')) { ?>
   <!-- GOOGLE RICH SNIPPETS -->
   <span itemscope itemtype="http://schema.org/Product">
@@ -131,12 +186,12 @@
 
   <div class="container primary">
     <?php osc_run_hook('item_top'); ?>
-    
+
     <?php echo eps_banner('item_top'); ?>
 
     <div class="data-box<?php echo osc_esc_html(@$item_extra['i_sold'] == 1 ?  ' sold' : ''); ?>" title="<?php echo osc_esc_html(@$item_extra['i_sold'] == 1 ? __('Sold', 'epsilon') : ''); ?>">
       <div id="item-main">
-        <?php if(osc_images_enabled_at_items()) { ?> 
+        <?php if(osc_images_enabled_at_items()) { ?>
           <div id="item-image" class="<?php if(osc_count_item_resources() <= 0 ) { ?>noimg<?php } ?>">
             <?php if($item_search_url !== false) { ?>
               <a href="<?php echo $item_search_url; ?>" class="mlink back isMobile"><i class="fas fa-arrow-left"></i></a>
@@ -149,13 +204,13 @@
             <?php } else if(getBoolPreference('item_contact_form_disabled') != 1) { ?>
               <a href="<?php echo eps_item_fancy_url('contact'); ?>" data-type="contact" class="mlink contact isMobile open-form"><i class="fas fa-envelope-open"></i></a>
             <?php } ?>
-            
+
             <a href="#" class="mlink share isMobile"><i class="fas fa-share-alt"></i></a>
-            
+
             <?php osc_get_item_resources(); ?>
             <?php osc_reset_resources(); ?>
 
-            <?php if(osc_count_item_resources() > 0 ) { ?>  
+            <?php if(osc_count_item_resources() > 0 ) { ?>
               <div class="swiper-container<?php if(osc_count_item_resources() <= 1) { ?> hide-buttons<?php } ?>">
                 <div class="swiper-wrapper">
                   <?php for($i = 0;osc_has_item_resources(); $i++) { ?>
@@ -166,14 +221,14 @@
                     </li>
                   <?php } ?>
                 </div>
-                
+
                 <div class="swiper-pg"></div>
 
                 <div class="swiper-button swiper-next"><i class="fas fa-caret-right"></i></div>
                 <div class="swiper-button swiper-prev"><i class="fas fa-caret-left"></i></div>
               </div>
             <?php } ?>
-            
+
             <?php osc_get_item_resources(); ?>
             <?php osc_reset_resources(); ?>
 
@@ -190,64 +245,64 @@
             <?php } ?>
           </div>
         <?php } ?>
-        
+
         <?php osc_run_hook('item_images'); ?>
-        
-        
+
+
         <div class="basic">
           <h1 class="row"><?php echo osc_item_title(); ?></h1>
-          
+
           <?php osc_run_hook('item_title'); ?>
-          
+
           <div class="labels">
             <?php if(osc_item_is_premium()) { ?><span class="premium"><?php _e('Premium', 'epsilon'); ?></span><?php } ?>
             <?php if(osc_item_is_expired()) { ?><span class="expired"><?php _e('Expired', 'epsilon'); ?></span><?php } ?>
-            <?php if($item_extra['i_sold'] == 1) { ?><span class="sold"><?php _e('Sold', 'epsilon'); ?></span><?php } ?>
-            <?php if($item_extra['i_sold'] == 2) { ?><span class="reserved"><?php _e('Reserved', 'epsilon'); ?></span><?php } ?>
+            <?php if(isset($item_extra['i_sold']) && $item_extra['i_sold'] == 1) { ?><span class="sold"><?php _e('Sold', 'epsilon'); ?></span><?php } ?>
+            <?php if(isset($item_extra['i_sold']) && $item_extra['i_sold'] == 2) { ?><span class="reserved"><?php _e('Reserved', 'epsilon'); ?></span><?php } ?>
           </div>
-            
+
           <div class="row details">
             <span><?php echo osc_item_category(); ?></span>
             <span><?php echo sprintf(__('%d views', 'epsilon'), osc_item_views()); ?></span>
 
             <?php if(!in_array(osc_item_category_id(), eps_extra_fields_hide())) { ?>
-              <?php if(eps_get_simple_name($item_extra['i_condition'], 'condition', false) <> '') { ?>
+              <?php if(isset($item_extra['i_condition']) && eps_get_simple_name($item_extra['i_condition'], 'condition', false) <> '') { ?>
                 <span><?php echo eps_get_simple_name($item_extra['i_condition'], 'condition', false); ?></span>
               <?php } ?>
 
-              <?php if(eps_get_simple_name($item_extra['i_transaction'], 'transaction', false) <> '') { ?>
+              <?php if(isset($item_extra['i_transaction']) && eps_get_simple_name($item_extra['i_transaction'], 'transaction', false) <> '') { ?>
                 <span><?php echo eps_get_simple_name($item_extra['i_transaction'], 'transaction', false); ?></span>
-              <?php } ?>          
+              <?php } ?>
             <?php } ?>
-            
+
             <span><?php echo sprintf(__('ID: %d', 'epsilon'), osc_item_id()); ?></span>
           </div>
-          
+
           <?php if(eps_check_category_price(osc_item_category_id())) { ?>
             <div class="row price under-header p-<?php echo osc_esc_html(osc_item_price()); ?>x<?php if(osc_item_price() <= 0) { ?> isstring<?php } ?>"><?php echo osc_item_formated_price(); ?></div>
           <?php } ?>
-          
+
           <?php if(function_exists('mo_show_offer_link_raw') && mo_show_offer_link_raw() !== false) { ?>
             <a href="<?php echo mo_show_offer_link_raw(); ?>" class="mo-open-offer mo-button-create mo-make-offer-price"><?php _e('Make price offer', 'epsilon'); ?></a>
           <?php } ?>
-          
-          
+
+
           <?php if($make_offer_enabled && 1==2) { ?>
             <a href="#" id="mk-offer" class="make-offer-link" data-item-id="<?php echo osc_item_id(); ?>" data-item-currency="<?php echo osc_item_currency(); ?>" data-ajax-url="<?php echo mo_ajax_url(); ?>&moAjaxOffer=1&itemId=<?php echo osc_item_id(); ?>"><?php _e('Submit your offer', 'epsilon'); ?></a>
           <?php } ?>
 
           <!-- <div class="row date">
             <p>
-              <?php 
+              <?php
                 echo sprintf(__('Published on %s', 'epsilon'), osc_format_date(osc_item_pub_date()));
                 echo (osc_item_mod_date() <> '' ? '. ' . sprintf(__('Modified on %s', 'epsilon'), osc_format_date(osc_item_mod_date())) . '.' : '');
               ?>
             </p>
           </div> -->
-          
+
            <?php eps_make_favorite(); ?>
         </div>
-        
+
 
         <!-- CUSTOM FIELDS -->
         <div class="props<?php if($has_cf) { ?> style<?php } ?>">
@@ -260,29 +315,29 @@
                   $meta = osc_item_meta();
                   $meta_type = @$meta['e_type'];
                   $meta_value = @$meta['s_value'];
-                  
+
                   if($meta_type != 'CHECKBOX') {
                     $meta_value = osc_item_meta_value();
                   }
                 ?>
-              
+
                 <?php if(osc_item_meta_value() != '') { ?>
                   <div class="field type-<?php echo osc_esc_html($meta_type); ?> name-<?php echo osc_esc_html(strtoupper(str_replace(' ', '-', osc_item_meta_name()))); ?> value-<?php echo osc_esc_html($meta_value); ?>">
-                    <span class="name"><?php echo osc_item_meta_name(); ?></span> 
+                    <span class="name"><?php echo osc_item_meta_name(); ?></span>
                     <span class="value"><?php echo osc_item_meta_value(); ?></span>
                   </div>
                 <?php } ?>
               <?php } ?>
             </div>
-          <?php } ?>      
+          <?php } ?>
 
           <div id="item-hook"><?php osc_run_hook('item_detail', osc_item()); ?></div>
         </div>
-        
+
         <?php osc_run_hook('item_meta'); ?>
-        
+
         <?php echo eps_banner('item_description'); ?>
-        
+
         <!-- DESCRIPTION -->
         <div class="row description">
           <h2><?php _e('Description', 'epsilon'); ?></h2>
@@ -297,7 +352,7 @@
                       <?php show_qrcode(); ?>
                     </div>
                   <?php } ?>
-              
+
                   <?php echo substr(strip_tags(osc_item_description()), 0, 720) . (strlen(strip_tags(osc_item_description())) > 720 ? '...' : ''); ?>
                 </div>
 
@@ -309,7 +364,7 @@
                         <?php show_qrcode(); ?>
                       </div>
                     <?php } ?>
-                  
+
                     <?php echo osc_item_description(); ?>
                   </div>
 
@@ -325,33 +380,33 @@
                       <?php show_qrcode(); ?>
                     </div>
                   <?php } ?>
-                  
+
                   <?php echo osc_item_description(); ?>
                 </div>
               <?php } ?>
             </div>
-            
+
             <?php osc_run_hook('item_description'); ?>
-          
+
             <div class="location">
               <h2><i class="fas fa-map-marked-alt"></i> <?php _e('Location', 'epsilon'); ?></h2>
 
               <?php if($location <> '') { ?>
                 <div class="row address"><?php echo $location_full; ?></div>
-                
+
                 <?php if(osc_item_latitude() <> 0 && osc_item_longitude() <> 0) { ?>
                   <div class="row cords"><?php echo osc_item_latitude(); ?>, <?php echo osc_item_longitude(); ?></div>
                 <?php } ?>
-                
+
                 <a target="_blank" class="directions" href="https://maps.google.com/maps?daddr=<?php echo urlencode($location); ?>">
-                  <?php _e('Get directions', 'epsilon'); ?> &#8594;
+                  <?php _e('Get directions', 'epsilon'); ?> →
                 </a>
               <?php } else { ?>
                 <?php _e('Unknown location', 'epsilon'); ?>
               <?php } ?>
             </div>
           </div>
-          
+
           <div id="location-hook"><?php osc_run_hook('location'); ?></div>
         </div>
 
@@ -367,20 +422,20 @@
                   <?php
                     $comment_author = (osc_comment_author_name() == '' ? __('Anonymous', 'epsilon') : osc_comment_author_name());
                   ?>
-                  
+
                   <div class="comment">
                     <a class="author" href="<?php echo (osc_comment_user_id() ? eps_user_public_profile_url(osc_comment_user_id()) : '#'); ?>" <?php echo (osc_comment_user_id() > 0 ? '' : 'onclick="return false;"'); ?>>
                       <img class="img <?php echo (eps_is_lazy() ? 'lazy' : ''); ?>" <?php echo (eps_is_lazy_browser() ? 'loading="lazy"' : ''); ?> src="<?php echo (eps_is_lazy() ? eps_get_load_image() : eps_profile_picture(osc_comment_user_id(), 'medium')); ?>" data-src="<?php echo eps_profile_picture(osc_comment_user_id(), 'medium'); ?>" alt="<?php echo osc_esc_html(osc_comment_author_name()); ?>"/>
                       <strong class="name"><?php echo $comment_author; ?></strong>
                     </a>
-                    
+
                     <div class="data">
                       <?php if(osc_comment_title() != '') { ?>
                         <h3><?php echo osc_comment_title(); ?></h3>
                       <?php } ?>
-                      
+
                       <div class="date"><?php echo eps_smart_date(osc_comment_pub_date()); ?></div>
-                      
+
                       <?php if(function_exists('osc_enable_comment_rating') && osc_enable_comment_rating()) { ?>
                         <div class="rating">
                           <?php for($i = 1; $i <= 5; $i++) { ?>
@@ -398,7 +453,7 @@
                       <?php } ?>
 
                       <div class="body"><?php echo nl2br(osc_comment_body()); ?></div>
-   
+
                       <?php if(osc_comment_user_id() && (osc_comment_user_id() == osc_logged_user_id())) { ?>
                         <a rel="nofollow" class="remove" href="<?php echo osc_delete_comment_url(); ?>" title="<?php echo osc_esc_html(__('Delete your comment', 'epsilon')); ?>">
                           <i class="fas fa-trash-alt"></i> <span><?php _e('Delete', 'epsilon'); ?></span>
@@ -415,20 +470,20 @@
                           <?php
                             $comment_reply_author = (osc_comment_reply_author_name() == '' ? __('Anonymous', 'epsilon') : osc_comment_reply_author_name());
                           ?>
-                          
+
                           <div class="comment">
                             <a class="author" href="<?php echo (osc_comment_reply_user_id() ? eps_user_public_profile_url(osc_comment_reply_user_id()) : '#'); ?>" <?php echo (osc_comment_reply_user_id() > 0 ? '' : 'onclick="return false;"'); ?>>
                               <img class="img <?php echo (eps_is_lazy() ? 'lazy' : ''); ?>" <?php echo (eps_is_lazy_browser() ? 'loading="lazy"' : ''); ?> src="<?php echo (eps_is_lazy() ? eps_get_load_image() : eps_profile_picture(osc_comment_reply_user_id(), 'medium')); ?>" data-src="<?php echo eps_profile_picture(osc_comment_reply_user_id(), 'medium'); ?>" alt="<?php echo osc_esc_html(osc_comment_reply_author_name()); ?>"/>
                               <strong class="name"><?php echo $comment_reply_author; ?></strong>
                             </a>
-                            
+
                             <div class="data">
                               <?php if(osc_comment_reply_title() != '') { ?>
                                 <h3><?php echo osc_comment_reply_title(); ?></h3>
                               <?php } ?>
-                              
+
                               <div class="date"><?php echo eps_smart_date(osc_comment_reply_pub_date()); ?></div>
-                              
+
                               <?php if(function_exists('osc_enable_comment_rating') && osc_enable_comment_rating()) { ?>
                                 <div class="rating">
                                   <?php for($i = 1; $i <= 5; $i++) { ?>
@@ -446,7 +501,7 @@
                               <?php } ?>
 
                               <div class="body"><?php echo nl2br(osc_comment_reply_body()); ?></div>
-           
+
                               <?php if(osc_comment_reply_user_id() && (osc_comment_reply_user_id() == osc_logged_user_id())) { ?>
                                 <a rel="nofollow" class="remove" href="<?php echo osc_delete_comment_reply_url(); ?>" title="<?php echo osc_esc_html(__('Delete your comment', 'epsilon')); ?>">
                                   <i class="fas fa-trash-alt"></i> <span><?php _e('Delete', 'epsilon'); ?></span>
@@ -458,10 +513,10 @@
                       </div>
                     <?php } ?>
                   <?php } ?>
-                  
+
                   <?php if(
                     function_exists('osc_enable_comment_reply')
-                    && osc_enable_comment_reply() 
+                    && osc_enable_comment_reply()
                     && (
                       osc_comment_reply_user_type() == ''
                       || osc_comment_reply_user_type() == 'LOGGED' && osc_is_web_user_logged_in()
@@ -481,17 +536,17 @@
               <?php } else { ?>
                 <div class="empty-comments"><?php _e('No comments has been added yet', 'epsilon'); ?></div>
               <?php } ?>
-              
+
               <?php if(osc_reg_user_post_comments() && osc_is_web_user_logged_in() || !osc_reg_user_post_comments()) { ?>
                 <a class="open-form add btn<?php echo (osc_enable_comment_rating() ? ' has-rating' : ''); ?>" href="<?php echo eps_item_fancy_url('comment'); ?>" data-type="comment">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16"><path d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 9.8 11.2 15.5 19.1 9.7L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64zm-80 216c0 8.8-7.2 16-16 16h-72v72c0 8.8-7.2 16-16 16h-16c-8.8 0-16-7.2-16-16v-72h-72c-8.8 0-16-7.2-16-16v-16c0-8.8 7.2-16 16-16h72v-72c0-8.8 7.2-16 16-16h16c8.8 0 16 7.2 16 16v72h72c8.8 0 16 7.2 16 16v16z"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16"><path d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 9.8 11.2 15.5 19.1 9.7L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64zm-80 216c0 8.8-7.2 16-16 16h-72v72c0 8.8-7.2 16-16 16h-16c-8.8 0-16-7.2-16-16v-72h-72c-8.8 0-16-7.2-16-16v-16c0-8.8 7.2-16 16-16h72v-72c0 8.8 7.2-16 16-16h16c8.8 0 16 7.2 16 16v72h72c8.8 0 16 7.2 16 16v16z"/></svg>
                   <?php _e('Add comment', 'epsilon'); ?>
                 </a>
               <?php } ?>
             </div>
           </div>
         <?php } ?>
-        
+
         <?php osc_run_hook('item_comment'); ?>
 
         <div id="shortcuts">
@@ -500,9 +555,9 @@
 
           <div class="item-share">
             <a class="whatsapp" href="whatsapp://send?text=<?php echo urlencode(osc_item_url()); ?>" data-action="share/whatsapp/share"><i class="fab fa-whatsapp"></i></a></span>
-            <a class="facebook" title="<?php echo osc_esc_html(__('Share on Facebook', 'epsilon')); ?>" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(osc_item_url()); ?>"><i class="fab fa-facebook"></i></a> 
-            <a class="twitter" title="<?php echo osc_esc_html(__('Share on Twitter', 'epsilon')); ?>" target="_blank" href="https://twitter.com/intent/tweet?text=<?php echo urlencode(osc_item_title()); ?>&url=<?php echo urlencode(osc_item_url()); ?>"><i class="fab fa-twitter"></i></a> 
-            <a class="pinterest" title="<?php echo osc_esc_html(__('Share on Pinterest', 'epsilon')); ?>" target="_blank" href="https://pinterest.com/pin/create/button/?url=<?php echo urlencode(osc_item_url()); ?>&media=<?php echo urlencode($resource_url); ?>&description=<?php echo htmlspecialchars(osc_item_title()); ?>"><i class="fab fa-pinterest"></i></a> 
+            <a class="facebook" title="<?php echo osc_esc_html(__('Share on Facebook', 'epsilon')); ?>" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(osc_item_url()); ?>"><i class="fab fa-facebook"></i></a>
+            <a class="twitter" title="<?php echo osc_esc_html(__('Share on Twitter', 'epsilon')); ?>" target="_blank" href="https://twitter.com/intent/tweet?text=<?php echo urlencode(osc_item_title()); ?>&url=<?php echo urlencode(osc_item_url()); ?>"><i class="fab fa-twitter"></i></a>
+            <a class="pinterest" title="<?php echo osc_esc_html(__('Share on Pinterest', 'epsilon')); ?>" target="_blank" href="https://pinterest.com/pin/create/button/?url=<?php echo urlencode(osc_item_url()); ?>&media=<?php echo urlencode($resource_url); ?>&description=<?php echo htmlspecialchars(osc_item_title()); ?>"><i class="fab fa-pinterest"></i></a>
           </div>
         </div>
       </div>
@@ -511,7 +566,7 @@
       <!-- SIDEBAR - RIGHT -->
       <div id="item-side">
         <?php osc_run_hook('item_sidebar_top'); ?>
-        
+
 
 
         <?php if($email_data['visible']) { ?>
@@ -520,19 +575,9 @@
             <span><?php echo $email_data['masked']; ?></span>
           </a>
         <?php } ?>
-        
-        <?php if(eps_param('messenger_replace_button') == 1 && function_exists('im_contact_button') && im_contact_button(osc_item(), true) !== false) { ?>
-          <a href="<?php echo im_contact_button(osc_item(), true); ?>" class="contact master-button">
-            <i class="fas fa-envelope-open"></i>
-            <span><?php _e('Send message', 'epsilon'); ?></span>
-          </a>
-        <?php } else if(getBoolPreference('item_contact_form_disabled') != 1) { ?>
-          <a href="<?php echo eps_item_fancy_url('contact'); ?>" class="open-form contact master-button" data-type="contact">
-            <i class="fas fa-envelope-open"></i>
-            <span><?php _e('Send message', 'epsilon'); ?></span>
-          </a>
-        <?php } ?>
-        
+
+        <!-- Removed contact button block as per rejected hunk -->
+
         <?php osc_run_hook('item_contact'); ?>
 
         <div class="box" id="seller">
@@ -557,13 +602,13 @@
               <?php } ?>
 
               <div class="items"><?php echo sprintf(__('%d active adverts', 'epsilon'), $user_item_count); ?></div>
-              
+
               <?php if($is_company) { ?>
                 <div class="pro"><?php _e('Pro', 'epsilon'); ?></div>
               <?php } ?>
             </div>
           </div>
-          
+
           <?php if(osc_item_user_id() > 0 && function_exists('ur_show_rating_link')) { ?>
             <div class="line-rating">
               <span class="ur-fdb">
@@ -572,7 +617,7 @@
               </span>
             </div>
           <?php } ?>
-          
+
           <div class="line2">
             <div class="date"><?php echo $last_online; ?></div>
             <div class="reg"><?php echo $reg_type; ?></div>
@@ -612,6 +657,10 @@ $additional_account = !empty($item_user['additional_accounts']) ? trim($item_use
 
 // Function to generate icons for a given account and methods
 function generate_contact_methods($account, $methods, $show_phone_on_profilehow) {
+    if (empty($account) || $show_phone_on_profilehow == 'no') { // Check if account is empty or if profile setting hides it
+        return;
+    }
+
     $icons = [];
     foreach ($methods as $method) {
         $method = trim($method);
@@ -629,24 +678,25 @@ function generate_contact_methods($account, $methods, $show_phone_on_profilehow)
                 $icons[] = '<i class="icon-spacing fas fa-phone-alt" title="DirectCall"></i>';
                 break;
             default:
-                $icons[] = '<i class="icon-spacing fas fa-question-circle" title="Unknown"></i>';
+                // Optionally handle unknown methods or skip them
+                // $icons[] = '<i class="icon-spacing fas fa-question-circle" title="Unknown"></i>';
                 break;
         }
     }
 
     if (!empty($icons)) {
-        echo '<div class="contact-method phone-mobile phone">';
-        echo '<span>' . $account . '</span>';
+        echo '<div class="contact-method phone-mobile phone">'; // Added phone class for consistency?
+        echo '<span>' . htmlspecialchars($account, ENT_QUOTES, 'UTF-8') . '</span>'; // Sanitize output
         echo implode('', $icons); // Display all icons
         echo '</div>';
     }
 }
 
-// Display primary methods with their shared account
-generate_contact_methods($primary_account, $primary_methods, $user['show_on_profile']);
+// Display primary methods with their shared account, respecting profile setting
+generate_contact_methods($primary_account, $primary_methods, $show_phone_on_profile);
 
-// Display additional methods with their shared account
-generate_contact_methods($additional_account, $additional_methods, $user['show_on_profile']);
+// Display additional methods with their shared account, respecting profile setting
+generate_contact_methods($additional_account, $additional_methods, $show_phone_on_profile);
 ?>
         </div>
 
@@ -655,7 +705,7 @@ generate_contact_methods($additional_account, $additional_methods, $user['show_o
           <a href="<?php echo eps_user_public_profile_url(osc_item_user_id()); ?>" class="seller-button seller-profile"><?php echo __('Seller\'s profile', 'epsilon'); ?></a>
           <a href="<?php echo osc_search_url(array('page' => 'search', 'userId' => osc_item_user_id())); ?>" class="seller-button seller-items"><?php echo __('All seller items', 'epsilon') . ' (' . $user_item_count . ')'; ?></a>
 
-          <?php if(trim(osc_user_website()) <> '') { ?>
+          <?php if(isset($item_user['s_website']) && trim($item_user['s_website']) <> '') { // Check user array directly ?>
             <a href="<?php echo osc_user_website(); ?>" target="_blank" rel="nofollow noreferrer" class="seller-button seller-url">
               <i class="fas fa-external-link-alt"></i>
               <span><?php echo rtrim(str_replace(array('https://', 'http://'), '', osc_user_website()), '/'); ?></span>
@@ -671,34 +721,34 @@ generate_contact_methods($additional_account, $additional_methods, $user['show_o
 
         <?php if(osc_is_web_user_logged_in() && osc_item_user_id() == osc_logged_user_id()) { ?>
           <div class="manage-delimit"></div>
-          
+
           <?php if(osc_item_is_inactive()) { ?>
             <?php if((function_exists('iv_add_item') && osc_get_preference('enable','plugin-item_validation') <> 1) || !function_exists('iv_add_item')) { ?>
               <a class="manage-button activate" target="_blank" href="<?php echo osc_item_activate_url(); ?>"><?php _e('Validate', 'epsilon'); ?></a>
             <?php } ?>
           <?php } ?>
-          
+
           <a class="manage-button edit" href="<?php echo osc_item_edit_url(); ?>"><i class="fas fa-edit"></i> <span><?php _e('Edit', 'epsilon'); ?></span></a>
-          <a class="manage-button delete" href="<?php echo osc_item_delete_url(); ?>" onclick="return confirm('<?php _e('Are you sure you want to delete this listing? This action cannot be undone.', 'epsilon'); ?>?')"><i class="fas fa-trash-alt"></i> <span><?php _e('Remove', 'epsilon'); ?></span></a>
+          <a class="manage-button delete" href="<?php echo osc_item_delete_url(); ?>" onclick="return confirm('<?php echo osc_esc_js(__('Are you sure you want to delete this listing? This action cannot be undone.', 'epsilon')); ?>?')"><i class="fas fa-trash-alt"></i> <span><?php _e('Remove', 'epsilon'); ?></span></a>
         <?php } ?>
-        
-        
+
+
         <?php echo eps_banner('item_sidebar'); ?>
 
-        
+
         <div class="box" id="protection">
           <h2><?php _e('Useful Tips:', 'epsilon'); ?></h2>
-          
+
           <div class="point">
             <div class="icon i1"><i class="far fa-credit-card"></i></div>
             <span><?php _e('Don’t pay anyone before meeting them in person.', 'epsilon'); ?></span>
           </div>
-          
+
           <div class="point">
             <div class="icon i2"><i class="fas fa-cash-register"></i></div>
             <span><?php _e('Be careful with people who ask for payment before you meet them.', 'epsilon'); ?></span>
           </div>
-          
+
           <div class="point">
             <div class="icon i3"><i class="fas fa-user-secret"></i></div>
             <span><?php _e('Don\'t meet someone you don\'t know in a secluded or unknown location; meet in a public place. Also, do not invite strangers into your home.', 'epsilon'); ?></span>
@@ -715,7 +765,7 @@ generate_contact_methods($additional_account, $additional_methods, $user['show_o
             <img src="<?php echo osc_current_web_theme_url('images/report.png'); ?>" alt="<?php echo osc_esc_html(__('Report', 'epsilon')); ?>" />
             <div class="header"><?php _e('Report advert', 'epsilon'); ?></div>
             <div class="subheader"><?php _e('If you think this Ad is inappropriate, offensive, or fake, please let us know. Select one of the following reasons:', 'epsilon'); ?></div>
-            
+
             <div class="text">
               <a href="<?php echo osc_item_link_spam() ; ?>" rel="nofollow"><?php _e('Spam', 'epsilon') ; ?></a>
               <a href="<?php echo osc_item_link_bad_category() ; ?>" rel="nofollow"><?php _e('Misclassified', 'epsilon') ; ?></a>
@@ -725,56 +775,41 @@ generate_contact_methods($additional_account, $additional_methods, $user['show_o
             </div>
           </div>
         </div>
-        
+
         <?php echo eps_banner('item_sidebar_bottom'); ?>
-        
+
         <?php osc_run_hook('item_sidebar_bottom'); ?>
       </div>
     </div>
-  
-    <?php 
+
+    <?php
       if(eps_param('related') == 1) {
         eps_related_ads('category', eps_param('related_design'), eps_param('related_count'));
       }
 
       echo eps_banner('item_bottom');
-      
+
       if(eps_param('recent_item') == 1) {
         eps_recent_ads(eps_param('recent_design'), eps_param('recent_count'), 'onitem');
       }
     ?>
   </div>
 
-  <?php if($phone_data['found']) { ?>
-    <a class="sticky-button btn phone <?php echo $phone_data['class']; ?> isMobile" title="<?php echo osc_esc_html($phone_data['title']); ?>" data-prefix="tel" href="<?php echo $phone_data['url']; ?>" data-part1="<?php echo osc_esc_html($phone_data['part1']); ?>" data-part2="<?php echo osc_esc_html($phone_data['part2']); ?>">
-      <i class="fas fa-phone-alt"></i>
-      <span><?php echo $phone_data['masked']; ?></span>
-    </a>
-  <?php } else { ?>
-    <a class="sticky-button btn disabled isMobile" title="<?php echo osc_esc_html($phone_data['title']); ?>" href="#" onclick="return false;">
-      <i class="fas fa-phone-alt"></i>
-      <span><?php echo $phone_data['title']; ?></span>
-    </a>
-  <?php } ?>
+  <!-- Removed sticky phone button block as per rejected hunk -->
 
-  <?php if(eps_param('messenger_replace_button') == 1 && function_exists('im_contact_button') && im_contact_button(osc_item(), true) !== false) { ?>
-    <a href="<?php echo im_contact_button(osc_item(), true); ?>" class="contact btn btn-secondary sticky-button isMobile">
-      <i class="fas fa-envelope-open"></i>
-      <span><?php _e('Send message', 'epsilon'); ?></span>
-    </a>
 
-  <?php } else if(getBoolPreference('item_contact_form_disabled') != 1) { ?>
+  <?php if(getBoolPreference('item_contact_form_disabled') != 1) { ?>
     <a href="<?php echo eps_item_fancy_url('contact'); ?>" class="open-form contact btn btn-secondary sticky-button isMobile" data-type="contact">
       <i class="fas fa-envelope-open"></i>
       <span><?php _e('Send message', 'epsilon'); ?></span>
     </a>
   <?php } ?>
-  
+
   <div class="share-item-data" style="display:none">
     <a class="whatsapp" href="whatsapp://send?text=<?php echo urlencode(osc_item_url()); ?>" data-action="share/whatsapp/share"><i class="fab fa-whatsapp"></i> <?php _e('Share on Whatsapp', 'epsilon'); ?></a></span>
-    <a class="facebook" title="<?php echo osc_esc_html(__('Share on Facebook', 'epsilon')); ?>" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(osc_item_url()); ?>"><i class="fab fa-facebook"></i> <?php _e('Share on Facebook', 'epsilon'); ?></a> 
-    <a class="twitter" title="<?php echo osc_esc_html(__('Share on Twitter', 'epsilon')); ?>" target="_blank" href="https://twitter.com/intent/tweet?text=<?php echo urlencode(osc_item_title()); ?>&url=<?php echo urlencode(osc_item_url()); ?>"><i class="fab fa-twitter"></i> <?php _e('Share on Twitter', 'epsilon'); ?></a> 
-    <a class="pinterest" title="<?php echo osc_esc_html(__('Share on Pinterest', 'epsilon')); ?>" target="_blank" href="https://pinterest.com/pin/create/button/?url=<?php echo urlencode(osc_item_url()); ?>&media=<?php echo urlencode($resource_url); ?>&description=<?php echo htmlspecialchars(osc_item_title()); ?>"><i class="fab fa-pinterest"></i> <?php _e('Share on Pinterest', 'epsilon'); ?></a> 
+    <a class="facebook" title="<?php echo osc_esc_html(__('Share on Facebook', 'epsilon')); ?>" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(osc_item_url()); ?>"><i class="fab fa-facebook"></i> <?php _e('Share on Facebook', 'epsilon'); ?></a>
+    <a class="twitter" title="<?php echo osc_esc_html(__('Share on Twitter', 'epsilon')); ?>" target="_blank" href="https://twitter.com/intent/tweet?text=<?php echo urlencode(osc_item_title()); ?>&url=<?php echo urlencode(osc_item_url()); ?>"><i class="fab fa-twitter"></i> <?php _e('Share on Twitter', 'epsilon'); ?></a>
+    <a class="pinterest" title="<?php echo osc_esc_html(__('Share on Pinterest', 'epsilon')); ?>" target="_blank" href="https://pinterest.com/pin/create/button/?url=<?php echo urlencode(osc_item_url()); ?>&media=<?php echo urlencode($resource_url); ?>&description=<?php echo htmlspecialchars(osc_item_title()); ?>"><i class="fab fa-pinterest"></i> <?php _e('Share on Pinterest', 'epsilon'); ?></a>
     <a class="friend open-form" href="<?php echo eps_item_fancy_url('friend'); ?>" data-type="friend"><i class="fas fa-user-friends"></i> <?php _e('Send to friend', 'epsilon'); ?></a>
   </div>
 
@@ -793,19 +828,24 @@ function formatPhoneNumber(phoneNumber) {
         // Convert 09XXXXXXXX to +251 9XXXXXXXX
         return '+251 ' + phoneNumber.slice(1);
     } else {
-        // Not an Ethiopian phone number, return as is
-        return phoneNumber.slice(0, 4) + ' ' + phoneNumber.slice(4);
-
+        // Try to format other numbers assuming they start with '+' and country code
+        if (phoneNumber.startsWith('+') && phoneNumber.length > 4) {
+             return phoneNumber.slice(0, 4) + ' ' + phoneNumber.slice(4);
+        }
+        // Otherwise, return as is if format is unknown or too short
+        return phoneNumber;
     }
 }
 
 
 document.querySelectorAll('.contact-method span, .phone-mobile span, .phone-land span').forEach(span => {
     const originalValue = span.textContent.trim();
-    const formattedValue = formatPhoneNumber(originalValue);
-    console.log('Before:', originalValue);
-    console.log('After:', formattedValue);
-    span.textContent = formattedValue;
+    if (originalValue) { // Only format if there's content
+        const formattedValue = formatPhoneNumber(originalValue);
+        // console.log('Before:', originalValue);
+        // console.log('After:', formattedValue);
+        span.textContent = formattedValue;
+    }
 });
 
     $(document).ready(function(){
@@ -819,11 +859,11 @@ document.querySelectorAll('.contact-method span, .phone-mobile span, .phone-land
               url: '<?php echo osc_esc_js(osc_item_url()); ?>',
           }).catch((error) => console.log('ERROR: ', error));
         }
-        
+
         return false;
       });
-      
-      
+
+
       $('.main-data > .img .mlink.share').on('click', () => {
         if (navigator.share) {
           navigator.share({
@@ -836,31 +876,33 @@ document.querySelectorAll('.contact-method span, .phone-mobile span, .phone-land
           if(($('#item-summary').is(':hidden') || $('.share-item-data').is(':hidden')) && $('.main-data > .img .mlink.share').hasClass('shown')) {
             $('.main-data > .img .mlink.share').removeClass('shown');
           }
-          
+
           if(!$('.main-data > .img .mlink.share').hasClass('shown')) {
             $('.share-item-data').fadeIn(200);
-            
+
             if(!$('#item-summary').hasClass('shown')) {
               $('#item-summary').addClass('shown').show(0).css('overflow', 'visible').css('bottom', '-100px').css('opacity', '0').stop(false, false).animate( {bottom:'8px', opacity:1}, 250);
             }
           } else {
             $('.share-item-data').fadeOut(200);
 
-            if($('#listing .item .data').offset().top - 50 > $(window).scrollTop()) {
+            // Check if the listing data section is still visible before hiding the summary
+            let listingDataTop = $('#listing .item .data').length ? $('#listing .item .data').offset().top : $(window).height(); // Fallback if element not found
+            if(listingDataTop - 50 > $(window).scrollTop()) {
               $('#item-summary').removeClass('shown').stop(false, false).animate( {bottom:'-100px', opacity:0}, 250, function() {$('#item-summary').hide(0);});
             }
           }
-            
+
           $('.main-data > .img .mlink.share').toggleClass('shown');
         }
-        
+
         return false;
       });
-      
+
 
     });
   </script>
 
   <?php osc_current_web_theme_path('footer.php') ; ?>
 </body>
-</html>				
+</html>

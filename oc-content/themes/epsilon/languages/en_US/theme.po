@@ -1,21 +1,24 @@
+# Merged file: oc-content/themes/epsilon/languages/en_US/theme.po
+# Based on your 'file:' block, with 'msgstr' changes from the rejected patch integrated.
+
 msgid ""
 msgstr ""
 "Project-Id-Version: Epsilon Osclass Theme\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-02 14:35+0200\n"
-"PO-Revision-Date: 2025-04-02 14:35+0200\n"
-"Last-Translator: Miso <miso546@azet.sk>\n"
-"Language-Team: MB Themes <info@mb-themes.com>\n"
-"Language: en\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: __;_e;_m\n"
-"X-Poedit-Basepath: ../..\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.5\n"
-"X-Poedit-SearchPath-0: languages/en_US\n"
-"X-Poedit-SearchPath-1: .\n"
+"PO-Revision-Date: 2025-04-02 14:35+0200\n" # Kept current file's header
+"Last-Translator: Miso <miso546@azet.sk>\n"  # Kept current file's header
+"Language-Team: MB Themes <info@mb-themes.com>\n" # Kept current file's header
+"Language: en\n"                             # Kept current file's header
+"MIME-Version: 1.0\n"                        # Kept current file's header
+"Content-Type: text/plain; charset=UTF-8\n"   # Kept current file's header
+"Content-Transfer-Encoding: 8bit\n"         # Kept current file's header
+"X-Poedit-KeywordsList: __;_e;_m\n"          # Kept current file's header
+"X-Poedit-Basepath: ../..\n"                 # Kept current file's header
+"X-Poedit-SourceCharset: UTF-8\n"            # Kept current file's header
+"X-Generator: Poedit 3.5\n"                  # Kept current file's header
+"X-Poedit-SearchPath-0: languages/en_US\n"   # Kept current file's header
+"X-Poedit-SearchPath-1: .\n"                 # Kept current file's header
 
 #: 404.php:36
 msgid "OOPS! Page Not Found!"
@@ -43,13 +46,13 @@ msgstr ""
 msgid ""
 "If you use Banner Ads Plugin, you can use banner or advert directly in theme "
 "banner space by defining its ID in bellow form."
-msgstr ""
+msgstr "" # Kept current file's format (already correct)
 
 #: admin/banner.php:34
 msgid ""
 "Usage examples: {{BANNER-ADS-PLUGIN-HOOK: my_custom_hook}}, {{BANNER-ADS-"
 "PLUGIN-BANNER: 123}}, {{BANNER-ADS-PLUGIN-ADVERT: 987}}"
-msgstr ""
+msgstr "" # Kept current file's format (already correct)
 
 #: admin/banner.php:46
 msgid "Enable Theme Banners"
@@ -1439,7 +1442,7 @@ msgstr ""
 
 #: footer.php:307 functions.php:2331 user-dashboard.php:62 user-items.php:17
 msgid "Active listings"
-msgstr ""
+msgstr "Active adverts" # INTEGRATED CHANGE
 
 #: footer.php:319 functions.php:2354 user-profile.php:36
 msgid "My Profile"
@@ -1477,9 +1480,9 @@ msgstr ""
 msgid "Enable dark mode"
 msgstr ""
 
-#: footer.php:438
+#: footer.php:438 functions.php:2363 # Keep this reference from the current file
 msgid "Log out"
-msgstr ""
+msgstr "" # Kept entry as per current file, ignoring rejected patch's removal attempt
 
 #: footer.php:447
 msgid "Support pages"
@@ -1543,11 +1546,11 @@ msgstr ""
 
 #: footer.php:522 functions.php:638
 msgid "item"
-msgstr ""
+msgstr "advert" # INTEGRATED CHANGE
 
 #: footer.php:522 functions.php:638
 msgid "items"
-msgstr ""
+msgstr "adverts" # INTEGRATED CHANGE
 
 #: footer.php:528
 msgid "Clean default location"
@@ -1657,7 +1660,7 @@ msgstr ""
 
 #: functions.php:1347
 msgid "Related items"
-msgstr ""
+msgstr "Similar adverts" # INTEGRATED CHANGE
 
 #: functions.php:1350
 msgid "Other items from this seller"
@@ -1962,6 +1965,7 @@ msgstr ""
 msgid "Expired listings"
 msgstr ""
 
+# Reference kept from current file, msgstr kept blank as per current file
 #: functions.php:2363
 msgid "Logout"
 msgstr ""
@@ -2353,7 +2357,7 @@ msgstr ""
 #: item-post.php:374
 #, php-format
 msgid "You can upload up to %d pictures per listing"
-msgstr ""
+msgstr "You can upload up to %d pictures per advert" # INTEGRATED CHANGE
 
 #: item-post.php:388
 msgid "Photos are selling!"
@@ -2715,11 +2719,11 @@ msgstr ""
 
 #: item.php:614
 msgid "Seller's profile"
-msgstr ""
+msgstr "View profile" # INTEGRATED CHANGE
 
 #: item.php:615 user-public-profile.php:125
 msgid "All seller items"
-msgstr ""
+msgstr "Show all adverts" # INTEGRATED CHANGE
 
 #: item.php:636 user-items.php:163
 msgid "Validate"
@@ -3194,7 +3198,7 @@ msgstr ""
 
 #: user-items.php:18
 msgid "Listings visible to customers on site."
-msgstr "Your list of posts visible to other members."
+msgstr "Your list of posts visible to other members." # INTEGRATED CHANGE
 
 #: user-items.php:22
 msgid "Listings pending approval. Unapproved listings are not visible on site."

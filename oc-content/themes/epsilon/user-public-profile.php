@@ -208,7 +208,7 @@ generate_contact_methods($additional_account, $additional_methods, $user['show_o
         </div>
       <?php } ?>
 
-      
+
 
       <?php echo eps_banner('public_profile_sidebar'); ?>
       <?php osc_run_hook('user_public_profile_sidebar_bottom'); ?>
@@ -218,7 +218,7 @@ generate_contact_methods($additional_account, $additional_methods, $user['show_o
     <!-- LISTINGS OF SELLER -->
     <div id="public-main">
       <?php osc_run_hook('user_public_profile_items_top'); ?>
-      
+
       <?php echo eps_banner('public_profile_top'); ?>
 
       <h1><?php echo sprintf(__('%s\'s listings', 'epsilon'), $contact_name); ?></h1>
@@ -230,18 +230,18 @@ generate_contact_methods($additional_account, $additional_methods, $user['show_o
           <input type="hidden" name="id" value="<?php echo osc_esc_html($user['pk_i_id']); ?>"/>
 
           <?php osc_run_hook('user_public_profile_search_form_top'); ?>
-          
+
           <div class="control-group">
             <label class="control-label" for="sPattern"><?php _e('Keyword', 'epsilon'); ?></label>
-            
+
             <div class="controls">
               <?php UserForm::search_pattern_text(); ?>
             </div>
           </div>
-          
+
           <div class="control-group">
             <label class="control-label" for="sCategory"><?php _e('Category', 'epsilon'); ?></label>
-            
+
             <div class="controls">
               <?php UserForm::search_category_select(); ?>
             </div>
@@ -249,24 +249,24 @@ generate_contact_methods($additional_account, $additional_methods, $user['show_o
 
           <div class="control-group">
             <label class="control-label" for="sCity"><?php _e('City', 'epsilon'); ?></label>
-            
+
             <div class="controls">
               <?php UserForm::search_city_select(); ?>
             </div>
           </div>
-          
+
           <?php osc_run_hook('user_public_profile_search_form_bottom'); ?>
-          
+
           <div class="actions">
             <button type="submit" class="btn btn-primary"><?php _e('Apply', 'epsilon'); ?></button>
           </div>
         </form>
       <?php } ?>
 
-      <?php if(osc_count_items() > 0) { ?>
+      <?php if (osc_count_items() > 0) { ?>
         <div class="products list">
-          <?php 
-            $c = 1; 
+          <?php
+            $c = 1;
             while(osc_has_items()) {
               eps_draw_item($c);
 
@@ -275,10 +275,10 @@ generate_contact_methods($additional_account, $additional_methods, $user['show_o
               }
 
               $c++;
-            } 
+            }
           ?>
         </div>
-        
+
         <div class="paginate"><?php echo eps_fix_arrow(osc_pagination_items()); ?></div>
 
       <?php } else { ?>
