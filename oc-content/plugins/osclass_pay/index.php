@@ -1112,11 +1112,7 @@ osc_add_route(
   'osp-bank-transfer-confirmation',             // Route name (used in Page 1's form action)
   'bank-transfer-confirmation',     // URL pattern
   'bank-transfer-confirmation',     // Static path (can be same as pattern)
-  osc_plugin_folder(__FILE__) . 'bank_transfer_confirmation.php', // Path to Page 2 PHP file WITHIN the plugin
-  false,                                    // CSRF protected? Yes, for the POST request
-  'custom',                                // Type: 'custom' for file include
-  'osclass_pay',                           // Plugin slug
-  'POST'                                   // Only allow POST method to access this page
+  osc_plugin_folder(__FILE__) . 'bank_transfer_confirmation.php' // Path to Page 2 PHP file WITHIN the plugin
 );
 
 osc_add_route(

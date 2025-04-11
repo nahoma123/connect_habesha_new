@@ -36,7 +36,8 @@ try {
     // Assuming the transaction_id passed in the URL IS the primary key (pk_i_id)
     // If $transaction_id is the 'code' (like osp_tx_...), use getBankTransferByCode()
     // *** ADJUST ModelOSP function name if necessary ***
-    $transfer_data = ModelOSP::newInstance()->getBankTransferById($transaction_id); // Or getBankTransferByCode($transaction_id)
+
+    $transfer_data = ModelOSP::newInstance()->getBankTransferByTransactionId($transaction_id); // Or getBankTransferByCode($transaction_id)
 
     if (!$transfer_data) {
         throw new Exception(__('Transaction record not found.', 'osclass_pay'));

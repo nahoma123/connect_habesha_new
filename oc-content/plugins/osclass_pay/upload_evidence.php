@@ -143,36 +143,46 @@ if ($upload_success) {
     // 2. Define the route name for your confirmation summary page
     $confirmation_route_name = 'osp-bank-transfer-confirmation'; // Use the route name you registered
 
-    // 3. Attempt to generate the URL for the confirmation route
+    // 3. Attempt to generate the base URL for the confirmation route
+    //    This will return either a pretty URL (e.g., /bank-transfer-confirmation)
+    //    or a non-pretty URL (e.g., /index.php?page=custom&route=osp-bank-transfer-confirmation)
     $confirmation_base_url = osc_route_url($confirmation_route_name);
 
     if ($confirmation_base_url) {
-        // 4. Construct the full confirmation URL with necessary parameters:
-        //    - osp_confirm_tid: The ID needed by the confirmation page to fetch details.
-        //    - return_url: The original destination URL for the confirmation page's "Continue" button.
-        $confirmation_url = $confirmation_base_url
-                          . '?osp_confirm_tid=' . urlencode($transaction_id) // Pass the transaction ID
-                          . '&return_url=' . urlencode($final_url); // Pass the original $final_url
+        // 4. Define the parameters to add to the URL
+        //    - osp_confirm_tid: The ID needed by the confirmation page.
+        //    - return_url: The original destination URL. It MUST be urlencoded
+        //      because it contains special characters (?, &, =) that would break the outer URL.
+        $params = array(
+            'osp_confirm_tid' => $transaction_id,
+            'return_url' => urlencode($final_url) // Essential: encode the URL being passed as a parameter
+        );
 
-        // 5. Redirect to the confirmation page
+        // 5. Use osc_update_query_string to correctly append parameters.
+        //    This function handles whether to use '?' or '&' automatically.
+        $confirmation_url = $confirmation_base_url . (strpos($confirmation_base_url, '?') === false ? '?' : '&') . http_build_query($params);
+
+        // 6. Redirect to the correctly constructed confirmation page URL
+        //    osp_redirect handles the actual redirection.
         osp_redirect($confirmation_url);
-        exit;
+        exit; // Important: Stop script execution after redirection
 
     } else {
         // --- Fallback if route URL generation fails ---
-        // This indicates an issue with route registration. Log it if possible.
+        // This indicates an issue with route registration or Osclass routing itself.
+        // Log the error for debugging purposes if possible.
         // error_log("OSP Bank Transfer Error: Failed to generate URL for confirmation route '$confirmation_route_name' for Transaction ID: " . $transaction_id);
 
         // Add a warning message for the user
         osc_add_flash_warning_message(__('Your evidence was uploaded, but we could not redirect you to the confirmation summary page. Please check your dashboard or contact support.', 'osclass_pay'));
 
-        // Redirect to a safe default (the original $final_url is a reasonable fallback)
+        // Redirect to a safe default (the original $final_url or user dashboard/home)
         $fallback_url = !empty($final_url) ? $final_url : (osc_is_web_user_logged_in() ? osc_user_dashboard_url() : osc_base_url());
         osp_redirect($fallback_url);
-        exit;
+        exit; // Important: Stop script execution after redirection
     }
 
-} else {
+}else {
     /***************************************************
     *     FAILURE PATH - REDIRECT BACK TO DETAILS PAGE *
     *     (This part remains the same as original)     *
