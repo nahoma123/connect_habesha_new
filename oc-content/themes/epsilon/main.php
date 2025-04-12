@@ -166,6 +166,9 @@
             text-align: center;
             cursor: pointer;
           }
+          body#home > .content > section.home-latest {
+            box-shadow : none;
+          }
         </style>
       </div>
     </div>
