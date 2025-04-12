@@ -35,9 +35,6 @@
     ?>
   </div>
 
-  <!-- Debugging: Show transfer count -->
-  <div>DEBUG: Number of transfers = <?php echo count($transfers); ?></div>
-
   <div class="osp-table-payments osp-table-transfers">
     <div class="osp-head-row">
       <div class="osp-col source"><?php _e('Source', 'osclass_pay'); ?></div>
@@ -88,7 +85,6 @@
             </div>
           <?php } ?>
         <?php } else { ?>
-          <div>DEBUG: No transfers found, buttons should still appear below for testing.</div>
           <div class="osp-bank-selection">
             <p><?php _e('Select a bank (test mode):', 'osclass_pay'); ?></p>
             <div class="osp-bank-buttons">

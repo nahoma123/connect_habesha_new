@@ -2644,6 +2644,8 @@ public function getBankTransferByUserId($user_id, $status = 0) {
   $this->dao->where('i_paid', $status);
   $this->dao->where('i_user_id', $user_id);
   
+  $this->dao->orderby('pk_i_id' , 'DESC');
+
   $result = $this->dao->get();
   
   if($result) {
