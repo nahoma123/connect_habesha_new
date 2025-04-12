@@ -130,21 +130,21 @@
 
 
         <!-- CONDITION --> 
-        <?php /*if($search_cat_id <= 0 || @!in_array($search_cat_id, $exclude_tr_con)) { ?>
+        <?php if($search_cat_id <= 0 || @!in_array($search_cat_id, $exclude_tr_con)) { ?>
           <div class="row condition">
             <label for=""><?php _e('Condition', 'epsilon'); ?></label>
             <div class="input-box"><?php echo eps_simple_condition(); ?></div>
           </div>
-        <?php }*/ ?>
+        <?php } ?>
 
 
         <!-- TRANSACTION --> 
-        <?php /* if($search_cat_id <= 0 || @!in_array($search_cat_id, $exclude_tr_con)) { ?>
+        <?php  if($search_cat_id <= 0 || @!in_array($search_cat_id, $exclude_tr_con)) { ?>
           <div class="row transaction">
             <label for=""><?php _e('Transaction', 'epsilon'); ?></label>
             <div class="input-box"><?php echo eps_simple_transaction(); ?></div>
           </div>
-        <?php } */ ?>
+        <?php }  ?>
 
 
         <!-- PRICE -->
