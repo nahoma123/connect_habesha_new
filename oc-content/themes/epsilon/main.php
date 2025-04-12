@@ -33,7 +33,7 @@
   <section class="home-latest">
     <div class="container">
       <div class="block">
-        <h2><?php _e('Latest Adverts', 'epsilon'); ?></h2>
+        <h2><?php /**_e('Latest Adverts', 'epsilon'); */?></h2>
 
         <div id="latest-items" class="products grid">
           <?php
