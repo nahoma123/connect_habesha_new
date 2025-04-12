@@ -27,6 +27,29 @@
 
   <?php osc_run_hook('home_search_pre'); ?>
 
+  <?php View::newInstance()->_exportVariableToView('latestItems', eps_random_items()); ?>
+
+<?php if (osc_count_latest_items() > 0) { ?>
+  <section class="home-latest">
+    <div class="container">
+      <div class="block">
+        <h2><?php _e('Latest Adverts', 'epsilon'); ?></h2>
+
+        <div id="latest-items" class="products grid">
+          <?php
+          $c = 1;
+
+          while (osc_has_latest_items()) {
+            eps_draw_item($c, false, 'medium ' . eps_param('latest_design'));
+            $c++;
+          }
+          ?>
+        </div>
+      </div>
+    </div>
+  </section>
+<?php } ?>
+
   <section class="home-search">
     <div class="container">
       <div class="box">

@@ -300,7 +300,7 @@ if (!$edit && $user_default_category) {
         </section>
 
 
-        <?php /*<section class="s4">
+        <section class="s4">
           <h2><?php _e('Pricing options & status', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
 
           <div class="in">
@@ -345,7 +345,7 @@ if (!$edit && $user_default_category) {
           </div>
           
           <?php osc_run_hook('item_publish_price'); ?>
-        </section> */ ?>
+        </section>
 
 
         <section class="upload-photos">
