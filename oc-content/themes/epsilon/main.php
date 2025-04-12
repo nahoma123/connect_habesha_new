@@ -167,7 +167,7 @@
             cursor: pointer;
           }
           body#home > .content > section.home-latest {
-            box-shadow : none;
+            box-shadow : 1px;
           }
         </style>
       </div>
