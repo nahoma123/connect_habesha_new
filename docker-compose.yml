@@ -1,46 +1,59 @@
 services:
-  php-apache:
+  # PHP & Apache Service
+  php:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: php_apache_dev
     ports:
-      - "8080:80"
+      - "8080:80" # Access web server via http://localhost:8080
     volumes:
-      - ./:/var/www/html
-    environment:
-      PHP_ENABLE_XDEBUG: 1
-      MYSQLI_ENABLED: true
-
+      - ./:/var/www/html # <-- REVERTED: Mount current directory to Apache root
     depends_on:
       - db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
+    restart: unless-stopped
+    # For Linux hosts, uncomment the following section if 'host.docker.internal' doesn't resolve:
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway"
+
+  # Database Service
   db:
     image: mysql:5.7
     container_name: mysql_dev
-    restart: always
     environment:
-      DB_HOST: db
-      ENV: development
-      MYSQL_ROOT_PASSWORD: root_password  # Replace with your root password
-      MYSQL_DATABASE: u609444707_NvDH4new   # Your database name
-      MYSQL_USER: u609444707_6txkvnew       # Your database username
-      MYSQL_PASSWORD: 1A/T#pm|t|rf         # Your database password
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_password} # Use .env or default
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-u609444707_NvDH4new}
+      MYSQL_USER: ${MYSQL_USER:-u609444707_6txkvnew}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-1A/T#pm|t|rf}
     volumes:
+      # <-- REVERTED: Using relative path bind mount from original example
       - ../connect_habesh_db_data:/var/lib/mysql
+    restart: unless-stopped
 
+  # phpMyAdmin Service
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    restart: always
+    container_name: phpmyadmin_dev
     ports:
-      - "8081:80"
+      - "8081:80" # Access phpMyAdmin via http://localhost:8081
     environment:
-      PMA_HOST: db
-      PMA_USER: u609444707_6txkvnew
-      PMA_PASSWORD: 1A/T#pm|t|rf
+      PMA_HOST: db # Connects to the 'db' service hostname
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_password} # Use root password from db service
     depends_on:
       - db
+    restart: unless-stopped
 
+# NOTE: This 'external: true' with a relative bind mount in the 'db' service
+# definition is unusual. Docker might ignore 'external: true' here.
+# If you truly need an externally managed volume/directory at that location,
+# ensure '../connect_habesh_db_data' exists relative to docker-compose.yml.
+# If you just want persistent data managed by Docker, the named volume
+# approach ('db_data:/var/lib/mysql' and 'volumes: db_data: driver: local')
+# is preferred. For now, we revert to closer match the original file structure provided.
 volumes:
-  db_data:
-    external: true
+  db_data: # Name matches original example, behavior dictated by service mount.
+     external: true # As per original example
