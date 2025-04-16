@@ -357,4 +357,10 @@ $upload_evidence_url = osc_route_url('osp-upload-evidence');
     </script>
 
 </body>
+<style>
+.osp-container {
+    margin: 0px;
+}
+</style>
+
 </html>

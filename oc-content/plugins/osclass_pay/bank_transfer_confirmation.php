@@ -343,4 +343,9 @@ if (!empty($return_url) && filter_var($return_url, FILTER_VALIDATE_URL)) {
     </script>
 
 </body>
+<style>
+.osp-container {
+    margin: 0px;
+}
+</style>
 </html>
