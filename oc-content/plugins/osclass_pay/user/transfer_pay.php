@@ -142,7 +142,7 @@ $details_page_url = osc_route_url('osp-bank-transfer-details');
 <body>
     <div class="osp-container">
         <h2 class="osp-title"><?php _e('Select Your Bank', 'osclass_pay'); ?></h2>
-        <p class="subtitle"><?php _e('Please choose the bank or payment service you intend to use.', 'osclass_pay'); ?></p>
+        <p class="subtitle"><?php _e('Please select one of the following payment methods to finalize your transaction.', 'osclass_pay'); ?></p>
 
         <form id="bank-select-form" action="<?php echo osc_esc_html($details_page_url); ?>" method="post">
             <?php /* CSRF removed */ ?>

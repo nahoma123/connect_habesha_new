@@ -222,7 +222,7 @@ $upload_evidence_url = osc_route_url('osp-upload-evidence');
             <!-- Pass the FINAL destination URL to the upload handler -->
             <input type="hidden" name="final_url" value="<?php echo osc_esc_html($final_url); ?>">
 
-            <label for="evidence_image"><?php _e('Select Proof of Payment File:', 'osclass_pay'); ?></label>
+            <label for="evidence_image"><?php _e('Upload Receipt:', 'osclass_pay'); ?></label>
             <input type="file" name="evidence_image" id="evidence_image" accept="image/*,application/pdf" required> <?php /* HTML5 required */ ?>
 
             <p class="info-text" id="complete-message">
@@ -234,7 +234,7 @@ $upload_evidence_url = osc_route_url('osp-upload-evidence');
                     id="complete-button"
                     class="osp-complete-btn"
                     disabled <?php /* Start disabled via attribute */ ?> >
-                <?php _e('Upload Evidence & Complete Payment', 'osclass_pay'); ?>
+                <?php _e('Complete Payment', 'osclass_pay'); ?>
             </button>
 
         </form>
