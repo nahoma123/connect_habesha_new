@@ -894,5 +894,93 @@ if (!$edit && $user_default_category) {
 
 
   <?php osc_current_web_theme_path('footer.php') ; ?>
+  <script>
+function formatPhoneNumber(phoneNumber) {
+    // Trim whitespace first
+    let num = phoneNumber.trim();
+
+    // Remove any non-digit characters except leading '+'
+    num = num.replace(/[^\d+]/g, ''); // Keep '+' only if it's at the start implicitly
+
+    // Ethiopian formats to check
+    const ethiopianRegex1 = /^\+2519(\d{8})$/; // +2519XXXXXXXX
+    const ethiopianRegex2 = /^09(\d{8})$/;     // 09XXXXXXXX
+    const ethiopianRegex3 = /^2519(\d{8})$/;    // 2519XXXXXXXX (less common, but handle)
+    const ethiopianRegex4 = /^9(\d{8})$/;      // 9XXXXXXXX (very short, assume mobile)
+
+    let match;
+
+    if (match = num.match(ethiopianRegex1)) {
+        // Format: +251 9XX XXX XXXX
+        return '+251 9' + match[1].substring(0, 2) + ' ' + match[1].substring(2, 5) + ' ' + match[1].substring(5);
+    } else if (match = num.match(ethiopianRegex2)) {
+        // Format: 09 XX XXX XXXX (or convert to +251?) Let's keep original prefix format for now.
+        // return '+251 9' + match[1].substring(0, 2) + ' ' + match[1].substring(2, 5) + ' ' + match[1].substring(5);
+        return '09 ' + match[1].substring(0, 2) + ' ' + match[1].substring(2, 5) + ' ' + match[1].substring(5);
+    } else if (match = num.match(ethiopianRegex3)) {
+         // Format: +251 9XX XXX XXXX (Add '+' )
+         return '+251 9' + match[1].substring(0, 2) + ' ' + match[1].substring(2, 5) + ' ' + match[1].substring(5);
+    } else if (match = num.match(ethiopianRegex4)) {
+         // Format: 09 XX XXX XXXX (Assume it's mobile, prepend '0')
+         return '09 ' + match[1].substring(0, 2) + ' ' + match[1].substring(2, 5) + ' ' + match[1].substring(5);
+    } else {
+        // Not a recognized Ethiopian format, return original cleaned number or apply basic spacing
+        // Basic spacing example: Add space after 4 chars (adjust as needed)
+        // if (num.length > 4) {
+        //     return num.slice(0, 4) + ' ' + num.slice(4);
+        // }
+        return phoneNumber; // Return original input if no specific format matches
+    }
+}
+
+function applyFormattingToVisiblePhones() {
+    // Select spans inside *revealed* phone links (main and optional)
+    document.querySelectorAll('a.phone.logged span, a.contact-method.phone.logged span.contact-value').forEach(span => {
+        const originalValue = span.textContent;
+        // Only format if it doesn't already seem formatted (basic check for spaces)
+        if (originalValue && originalValue.indexOf(' ') === -1) {
+            const formattedValue = formatPhoneNumber(originalValue);
+             if (originalValue !== formattedValue) { // Avoid unnecessary DOM manipulation
+                span.textContent = formattedValue;
+                // Optional: Add a class to indicate it has been formatted
+                // span.classList.add('phone-formatted');
+             }
+        }
+    });
+}
+
+// --- Run on initial page load for already logged-in users ---
+document.addEventListener('DOMContentLoaded', function() {
+    applyFormattingToVisiblePhones();
+});
+
+// --- Re-apply formatting after a phone number is potentially revealed by theme JS ---
+// Use event delegation on a stable parent (#seller or .line3)
+const contactContainer = document.querySelector('#seller .line3'); // More specific container
+if (contactContainer) {
+    contactContainer.addEventListener('click', function(event) {
+        // Find the clicked link element (could be the target or a parent)
+        const clickedLink = event.target.closest('a.phone.not-logged');
+
+        if (clickedLink) {
+            // Wait a very short moment for the theme's JS to likely update the content and class
+            setTimeout(() => {
+                // Now target the span *within the specific link that was clicked*
+                // It should now have the 'logged' class if the theme worked correctly
+                const spanToFormat = clickedLink.querySelector('span');
+                if (spanToFormat && clickedLink.classList.contains('logged')) {
+                    const originalValue = spanToFormat.textContent;
+                    const formattedValue = formatPhoneNumber(originalValue);
+                     if (originalValue !== formattedValue) {
+                         spanToFormat.textContent = formattedValue;
+                         // spanToFormat.classList.add('phone-formatted');
+                     }
+                }
+            }, 100); // 100ms delay, adjust if needed
+        }
+    });
+}
+
+</script>
 </body>
 </html>	
