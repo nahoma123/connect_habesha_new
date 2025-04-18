@@ -895,44 +895,38 @@ if (!$edit && $user_default_category) {
 
   <?php osc_current_web_theme_path('footer.php') ; ?>
   <script>
-function formatPhoneNumber(phoneNumber) {
+    function formatPhoneNumber(phoneNumber) {
     // Trim whitespace first
     let num = phoneNumber.trim();
 
-    // Remove any non-digit characters except leading '+'
-    num = num.replace(/[^\d+]/g, ''); // Keep '+' only if it's at the start implicitly
+    // Remove any non-digit characters (we'll add '+' back later)
+    num = num.replace(/[^\d]/g, '');
 
-    // Ethiopian formats to check
-    const ethiopianRegex1 = /^\+2519(\d{8})$/; // +2519XXXXXXXX
-    const ethiopianRegex2 = /^09(\d{8})$/;     // 09XXXXXXXX
-    const ethiopianRegex3 = /^2519(\d{8})$/;    // 2519XXXXXXXX (less common, but handle)
-    const ethiopianRegex4 = /^9(\d{8})$/;      // 9XXXXXXXX (very short, assume mobile)
+    // Define core 8 digits regex patterns
+    const ethiopianRegex1 = /^2519(\d{8})$/; // Matches 2519XXXXXXXX (after stripping '+')
+    const ethiopianRegex2 = /^09(\d{8})$/;     // Matches 09XXXXXXXX
+    const ethiopianRegex3 = /^9(\d{8})$/;      // Matches 9XXXXXXXX
 
+    let coreDigits = null;
     let match;
 
     if (match = num.match(ethiopianRegex1)) {
-        // Format: +251 9XX XXX XXXX
-        return '+251 9' + match[1].substring(0, 2) + ' ' + match[1].substring(2, 5) + ' ' + match[1].substring(5);
+        coreDigits = match[1]; // The 8 digits after 2519
     } else if (match = num.match(ethiopianRegex2)) {
-        // Format: 09 XX XXX XXXX (or convert to +251?) Let's keep original prefix format for now.
-        // return '+251 9' + match[1].substring(0, 2) + ' ' + match[1].substring(2, 5) + ' ' + match[1].substring(5);
-        return '09 ' + match[1].substring(0, 2) + ' ' + match[1].substring(2, 5) + ' ' + match[1].substring(5);
+        coreDigits = match[1]; // The 8 digits after 09
     } else if (match = num.match(ethiopianRegex3)) {
-         // Format: +251 9XX XXX XXXX (Add '+' )
-         return '+251 9' + match[1].substring(0, 2) + ' ' + match[1].substring(2, 5) + ' ' + match[1].substring(5);
-    } else if (match = num.match(ethiopianRegex4)) {
-         // Format: 09 XX XXX XXXX (Assume it's mobile, prepend '0')
-         return '09 ' + match[1].substring(0, 2) + ' ' + match[1].substring(2, 5) + ' ' + match[1].substring(5);
+        coreDigits = match[1]; // The 8 digits after 9
+    }
+
+    // If we found the 8 core digits from any valid pattern
+    if (coreDigits) {
+        // Always format as +251 9XX XXX XXXX
+        return '+251 9' + coreDigits.substring(0, 2) + ' ' + coreDigits.substring(2, 5) + ' ' + coreDigits.substring(5);
     } else {
-        // Not a recognized Ethiopian format, return original cleaned number or apply basic spacing
-        // Basic spacing example: Add space after 4 chars (adjust as needed)
-        // if (num.length > 4) {
-        //     return num.slice(0, 4) + ' ' + num.slice(4);
-        // }
-        return phoneNumber; // Return original input if no specific format matches
+        // Not a recognized Ethiopian format, return original input
+        return phoneNumber;
     }
 }
-
 function applyFormattingToVisiblePhones() {
     // Select spans inside *revealed* phone links (main and optional)
     document.querySelectorAll('a.phone.logged span, a.contact-method.phone.logged span.contact-value').forEach(span => {
