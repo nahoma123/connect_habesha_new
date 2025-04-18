@@ -299,7 +299,6 @@ if (!$edit && $user_default_category) {
           <?php osc_run_hook('item_publish_seller'); ?>
         </section>
 
-
         <section class="s4">
           <h2><?php _e('Pricing options & status', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
 
@@ -307,19 +306,18 @@ if (!$edit && $user_default_category) {
             <?php if(osc_price_enabled_at_items()) { ?>
               <label for="price"><?php _e('Price', 'epsilon'); ?> <span class="req">*</span></label>
 
-              <div class="enter<?php if($price_type == 'FREE' || $price_type == 'CHECK') { ?> disable<?php } ?>">
+              <?php /* REMOVED conditional disable class based on FREE/CHECK */ ?>
+              <div class="enter">
                 <div class="input-box">
                   <?php ItemForm::price_input_text(); ?>
                   <?php echo eps_simple_currency(); ?>
                 </div>
 
-                <div class="or"><span><?php _e('or', 'epsilon'); ?></span></div>
+                <?php /* REMOVED <div class="or"> */ ?>
               </div>
-              
-              <div class="selection">
-                <a href="#" data-price="0" class="btn btn-secondary<?php if($price_type == 'FREE') { ?> active<?php } ?>" title="<?php echo osc_esc_html(__('Item is offered for free', 'epsilon')); ?>"><i class="fas fa-hand-holding-usd"></i> <?php _e('Item for free', 'epsilon'); ?></a>
-                <a href="#" data-price="" class="btn btn-secondary<?php if($price_type == 'CHECK') { ?> active<?php } ?>" title="<?php echo osc_esc_html(__('Based on agreement with seller', 'epsilon')); ?>"><i class="far fa-handshake"></i> <?php _e('Check with seller', 'epsilon'); ?></a>
-              </div>
+
+              <?php /* REMOVED <div class="selection"> buttons */ ?>
+
             <?php } ?>
 
 
@@ -336,17 +334,75 @@ if (!$edit && $user_default_category) {
               </div>
             </div>
           </div>
-          
+
+          <?php /* Keep the tip div if you want it, or remove it */ ?>
           <div class="tip">
             <i class="fas fa-times close-tip"></i>
             <p><strong><?php _e('Wisely select price', 'epsilon'); ?></strong></p>
             <p><?php _e('Price should reflect real status and properties of your listing. If you select too high price, it may take much longer to sell your product.', 'epsilon'); ?></p>
             <p><?php _e('You can also select transaction and condition to better describe status of your item and transaction you are looking for.', 'epsilon'); ?></p>
           </div>
-          
+
           <?php osc_run_hook('item_publish_price'); ?>
         </section>
 
+
+        <section class="upload-photos">
+           <?php /* ... photo section remains the same ... */ ?>
+        </section>
+
+
+        <section class="info">
+          <h2><?php _e('Advert description', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
+
+          <div class="in">
+            <div class="row ttle">
+              <label for="title[<?php echo osc_current_user_locale(); ?>]"><?php _e('Title', 'epsilon'); ?> <span class="req">*</span></label>
+              <div class="input-box">
+                <?php ItemForm::title_input('title', osc_current_user_locale(), osc_esc_html(eps_post_item_title())); ?>
+              </div>
+            </div>
+
+            <div class="row dsc">
+              <label for="description[<?php echo osc_current_user_locale(); ?>]"><?php _e('Description', 'epsilon'); ?> <span class="req">*</span></label>
+              <div class="td-wrap d1 input-box">
+                <?php ItemForm::description_textarea('description', osc_current_user_locale(), osc_esc_html(eps_post_item_description())); ?>
+              </div>
+            </div>
+
+            <?php // ***** START: ADDED AGE FIELD ***** ?>
+            <div class="row age">
+              <label for="sAge"><?php _e('Age', 'epsilon'); ?> <?php /* Add <span class="req">*</span> if required */ ?></label>
+              <div class="input-box">
+                  <?php // Use @ to suppress errors if s_age doesn't exist in $prepare, especially on new item page ?>
+                  <!-- <input type="text" name="sAge" id="sAge" value="<?php echo osc_esc_html(@$prepare['s_age']); ?>" placeholder="<?php echo osc_esc_js(__('e.g., New, 1 year, 5 months', 'epsilon')); ?>" /> --> 
+                  <input type="number" name="sAge" id="sAge" value="<?php echo osc_esc_html(@$prepare['s_age']); ?>" min="0" step="1" placeholder="<?php echo osc_esc_js(__('e.g., 2 (years)', 'epsilon')); ?>" />
+                  <?php /* Alternative: Use select for predefined options
+                  <select name="sAge" id="sAge">
+                      <option value="" <?php echo (@$prepare['s_age'] == '' ? 'selected="selected"' : ''); ?>><?php _e('Select age', 'epsilon'); ?></option>
+                      <option value="New" <?php echo (@$prepare['s_age'] == 'New' ? 'selected="selected"' : ''); ?>><?php _e('New', 'epsilon'); ?></option>
+                      <option value="<1 year" <?php echo (@$prepare['s_age'] == '<1 year' ? 'selected="selected"' : ''); ?>><?php _e('Less than 1 year', 'epsilon'); ?></option>
+                      </select>
+                  */?>
+              </div>
+            </div>
+            <?php // ***** END: ADDED AGE FIELD ***** ?>
+
+
+            <?php osc_run_hook('item_publish_description'); ?>
+
+            <div id="post-hooks" class="hooks-block"><?php if($edit) { ItemForm::plugin_edit_item(); } else { ItemForm::plugin_post_item(); } ?></div>
+
+            <?php osc_run_hook('item_publish_hook'); ?>
+
+             <?php /* Removed the extra empty <div class="row dsc"> here */ ?>
+
+          </div>
+
+          <?php /* Keep the tip div if you want it, or remove it */ ?>
+          <?php /* <div class="tip"> ... </div> */ ?>
+
+        </section>
 
         <section class="upload-photos">
           <h2><?php _e('Photos', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
@@ -706,6 +762,12 @@ if (!$edit && $user_default_category) {
         "description[<?php echo osc_current_user_locale(); ?>]": {
           required: true,
           minlength: 10
+        },
+
+        sAge: {
+          // required: true,
+           minlength: 1 // Example: ensure at least something is entered if not required
+           // digits: true // Uncomment if you used type="number" and want only digits
         },
 
         <?php if(strpos($required_fields, 'country') !== false || strpos($required_fields, 'region') !== false || strpos($required_fields, 'city') !== false) { ?>
