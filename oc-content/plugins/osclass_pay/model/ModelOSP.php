@@ -2003,10 +2003,11 @@ public function getGroupByName($name) {
 
 
 // INSERT GROUP IF DOES NOT EXIST, OTHERWISE UPDATE
-public function updateGroup($id, $name, $desc, $price, $discount, $days, $color, $category, $pbonus, $custom, $rank, $attr, $max_items, $max_items_days, $free_items_101 = 0, $free_items_201 = 0, $free_items_401 = 0) {
+public function updateGroup($id, $name, $desc, $type, $price, $discount, $days, $color, $category, $pbonus, $custom, $rank, $attr, $max_items, $max_items_days, $free_items_101 = 0, $free_items_201 = 0, $free_items_401 = 0) {
   $value = array(
     's_name' => $name, 
     's_description' => $desc, 
+    's_type' => $type, // <-- ADD THIS LINE
     'f_price' => $price, 
     'i_discount' => $discount, 
     'i_days' => $days, 
