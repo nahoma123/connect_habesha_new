@@ -434,5 +434,138 @@ function generate_contact_methods_enhanced($account_value, $methods_string, $sho
     }
     /* --- End Original CSS --- */
     </style>
+<script>
+function formatPhoneNumber(phoneNumber) {
+    console.log("Format attempt Input:", phoneNumber); // DEBUG: See original value
+    // Trim whitespace first
+    let num = phoneNumber.trim();
+
+    // ** Crucial Check: Only process if it looks like a full, unmasked number **
+    // Return original if it contains '*' or is too short after stripping non-digits
+    const digitsOnly = num.replace(/[^\d]/g, '');
+    if (num.includes('*') || digitsOnly.length < 9 || digitsOnly.length > 12) { // Typical Ethiopian numbers are 9 (9xx), 10 (09xx), 12 (+2519xx/2519xx) digits
+        console.log("Format skipped: Invalid, masked, or wrong length."); // DEBUG
+        return phoneNumber; // Return original input
+    }
+
+    // Use 'num' which is the cleaned number (digits only) for matching
+    const ethiopianRegex1 = /^2519(\d{8})$/; // Matches 2519XXXXXXXX
+    const ethiopianRegex2 = /^09(\d{8})$/;     // Matches 09XXXXXXXX
+    const ethiopianRegex3 = /^9(\d{8})$/;      // Matches 9XXXXXXXX
+
+    let coreDigits = null;
+    let match;
+
+    if (match = digitsOnly.match(ethiopianRegex1)) {
+        coreDigits = match[1];
+    } else if (match = digitsOnly.match(ethiopianRegex2)) {
+        coreDigits = match[1];
+    } else if (match = digitsOnly.match(ethiopianRegex3)) {
+        coreDigits = match[1];
+    }
+
+    if (coreDigits) {
+        // Always format as +251 9XX XXX XXXX
+        const formatted = '+251 9' + coreDigits.substring(0, 2) + ' ' + coreDigits.substring(2, 5) + ' ' + coreDigits.substring(5);
+        console.log("Format Success Output:", formatted); // DEBUG
+        return formatted;
+    } else {
+        console.log("Format skipped: No Ethiopian pattern matched."); // DEBUG
+        return phoneNumber; // Return original input if no valid pattern found
+    }
+}
+
+function applyFormattingToElement(spanElement) {
+    if (!spanElement) {
+        console.log("ApplyFormatting: No span element found."); // DEBUG
+        return;
+    }
+
+    const parentLink = spanElement.closest('a'); // Get the parent link
+     // ** Check parent class and span content again before formatting **
+    if (parentLink && parentLink.classList.contains('logged')) {
+        const originalValue = spanElement.textContent;
+        // Avoid re-formatting if it already has spaces
+        if (originalValue && !originalValue.includes(' ')) {
+            const formattedValue = formatPhoneNumber(originalValue);
+            if (originalValue !== formattedValue) {
+                spanElement.textContent = formattedValue;
+                console.log("ApplyFormatting: Applied format:", formattedValue, "to element:", spanElement); // DEBUG
+            } else {
+                 console.log("ApplyFormatting: Value unchanged after format attempt on:", originalValue); // DEBUG
+            }
+        } else {
+             console.log("ApplyFormatting: Skipped (already has spaces or empty):", originalValue); // DEBUG
+        }
+    } else {
+         console.log("ApplyFormatting: Skipped (parent link doesn't have .logged class). Parent:", parentLink); // DEBUG
+    }
+
+}
+
+function runInitialFormatting() {
+    console.log("Running initial formatting (DOM ready)..."); // DEBUG
+    // Select spans inside *already revealed* phone links on load
+    document.querySelectorAll('a.phone.logged span, a.contact-method.phone.logged span.contact-value').forEach(span => {
+        applyFormattingToElement(span);
+    });
+}
+
+// --- Run on initial page load ---
+// Ensure DOM is fully ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runInitialFormatting);
+} else {
+    // DOMContentLoaded has already fired
+    setTimeout(runInitialFormatting, 0); // Run immediately but defer slightly
+}
+
+
+// --- Re-apply formatting after theme JS reveals number on click ---
+const contactContainer = document.querySelector('#seller .line3');
+if (contactContainer) {
+    console.log("Setting up click listener..."); // DEBUG
+    contactContainer.addEventListener('click', function(event) {
+        // Target the link that was *just* clicked and might reveal
+        const clickedLink = event.target.closest('a.phone'); // Target any phone link clicked
+
+        if (clickedLink && clickedLink.classList.contains('not-logged')) { // Only act if it was masked
+            console.log("Clicked masked link:", clickedLink); // DEBUG
+
+            // ** Use MutationObserver for reliability instead of setTimeout **
+            const observer = new MutationObserver((mutationsList, observerInstance) => {
+                 // Check if the 'logged' class was added or 'not-logged' was removed
+                if (clickedLink.classList.contains('logged')) {
+                    console.log("MutationObserver: Detected .logged class added to:", clickedLink); // DEBUG
+                    const spanToFormat = clickedLink.querySelector('span') || clickedLink.querySelector('span.contact-value');
+                    if (spanToFormat) {
+                        applyFormattingToElement(spanToFormat);
+                    }
+                    observerInstance.disconnect(); // Stop observing once formatted
+                }
+            });
+
+            // Observe attribute changes (specifically the 'class' attribute) on the clicked link
+            observer.observe(clickedLink, { attributes: true, attributeFilter: ['class'] });
+
+            // Optional: Timeout as a fallback in case mutation observer doesn't trigger (shouldn't be needed)
+             setTimeout(() => {
+                 if(observer) observer.disconnect(); // Disconnect fallback timeout observer if it's still running
+                 console.log("Observer fallback timeout reached for:", clickedLink); // DEBUG
+             }, 1000); // 1 second fallback
+
+        } else if (clickedLink && clickedLink.classList.contains('logged')){
+             console.log("Clicked an already revealed link:", clickedLink); // DEBUG
+             // Optionally re-format even revealed ones on click? Usually not needed.
+             // const spanToFormat = clickedLink.querySelector('span') || clickedLink.querySelector('span.contact-value');
+             // if(spanToFormat) applyFormattingToElement(spanToFormat);
+        }
+    });
+} else {
+    console.error("Could not find contact container '#seller .line3'."); // DEBUG
+}
+
+</script>
 </body>
+
 </html>
