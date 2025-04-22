@@ -231,20 +231,20 @@
       }
 
       // Password Toggle
-      const togglePassword = document.querySelector('.toggle-pass');
-      const passwordInput = document.querySelector('input[name="password"]'); // Ensure this selector is correct
+      // const togglePassword = document.querySelector('.toggle-pass');
+      // const passwordInput = document.querySelector('input[name="password"]'); // Ensure this selector is correct
 
-      if (togglePassword && passwordInput) {
-          togglePassword.addEventListener('click', function (e) {
-              e.preventDefault();
-              // Toggle the type attribute
-              const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-              passwordInput.setAttribute('type', type);
-              // Toggle the eye icon
-              this.querySelector('i').classList.toggle('fa-eye');
-              this.querySelector('i').classList.toggle('fa-eye-slash');
-          });
-      }
+      // if (togglePassword && passwordInput) {
+      //     togglePassword.addEventListener('click', function (e) {
+      //         e.preventDefault();
+      //         // Toggle the type attribute
+      //         const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      //         passwordInput.setAttribute('type', type);
+      //         // Toggle the eye icon
+      //         this.querySelector('i').classList.toggle('fa-eye');
+      //         this.querySelector('i').classList.toggle('fa-eye-slash');
+      //     });
+      // }
 
     });
   </script>
