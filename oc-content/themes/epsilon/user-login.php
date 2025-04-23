@@ -20,10 +20,10 @@
     }
 
     .btn { /* Assuming this is your primary login button style */
-      background-color: #0178d6; /* Example primary color */
+      background-color: #7a4d9e; /* Example primary color */
       color: white;
       padding: 10px 15px;
-      border: 1px solid #0178d6;
+      border: 1px solid #7a4d9e;
       text-decoration: none;
       display: inline-block; /* Changed back from block for side-by-side potential */
       text-align: center;
@@ -33,22 +33,39 @@
       box-sizing: border-box; /* Include padding and border in the element's total width and height */
     }
 
-    .btn-create-account { /* Style for the new create account button */
-      background-color: white; /* Inverted background */
-      color: #0178d6; /* Inverted text color (matches original background) */
-      border: 1px solid #0178d6; /* Keep or adjust border */
-      display: block; /* Make the link behave like a block element */
-      margin-top: 10px; /* Add space above create account button */
-    }
+.btn-create-account {
+  background-color: #ffffff;
+  color: #7a4d9e;
+  border: 1px solid #7a4d9e;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out, border-color 0.25s ease-in-out;
+}
 
-    /* Optional: Add hover effects */
-    .btn:hover {
-       opacity: 0.9;
-    }
+.btn-create-account:hover {
+  background-color: #f9f7fc;
+  color: #693c8a;
+  border-color: #693c8a;
+  box-shadow:
+    0 2px 4px rgba(122, 77, 158, 0.1),
+    0 4px 8px rgba(122, 77, 158, 0.15),
+    0 6px 16px rgba(122, 77, 158, 0.2); /* Layered shadows for depth */
+}
 
-    .btn-create-account:hover {
-      background-color: #f0f0f0; /* Slight change on hover */
-    }
+
+
+
+
+
+
 
     /* --- Styles for Forgot Password Link --- */
     .alt-action2 {
@@ -64,13 +81,42 @@
     /* Adjust Login button margin */
     form button.btn[type="submit"] { /* Target specifically the submit button */
         margin-top: 5px; /* Add some space above the login button */
-        margin-bottom: 10px; /* Add space below the login button */
+        margin-bottom: 50px; /* Add space below the login button */
     }
 
     /* Adjust spacing for reCAPTCHA if present */
     .g-recaptcha { /* Or whatever class your reCAPTCHA container has */
         margin-bottom: 5px; /* Reduce space below reCAPTCHA */
     }
+.separator-text {
+  position: relative;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #7a4d9e;
+  margin: 20px 0;
+  letter-spacing: 0.7px;
+  text-transform: none; /* <- This ensures "Join Xethio Now!" stays in correct case */
+}
+
+
+.separator-text::before,
+.separator-text::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 35%;
+  height: 1px;
+  background-color: #c8a8e4;
+}
+
+.separator-text::before {
+  left: 0;
+}
+
+.separator-text::after {
+  right: 0;
+}
 
   </style>
 </head>
@@ -149,9 +195,12 @@
 
         <button type="submit" class="btn"><?php _e('Log in', 'epsilon');?></button>
 
-        <a href="<?php echo osc_register_account_url(); ?>" class="btn btn-create-account">
-            <?php _e('Create New Account', 'epsilon'); ?>
-        </a>
+<div class="separator-text">Join <strong>Xethio</strong> Now!</div>
+
+<a href="<?php echo osc_register_account_url(); ?>" class="btn btn-create-account">
+    <?php _e('Create new account', 'epsilon'); ?>
+</a>
+
 
       </form>
     </div>

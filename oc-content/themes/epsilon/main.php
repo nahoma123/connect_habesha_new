@@ -527,57 +527,7 @@
 
 
 
-  <?php if (eps_param('users_home') == 1) { ?>
-    <?php $users = eps_get_users('by_items', eps_param('users_home_count')); ?>
-    <?php if (is_array($users) && count($users) > 0) { ?>
-      <section class="home-users">
-        <div class="container">
-          <div id="users-list-block" class="block">
-            <h2>
-              <span><?php _e('Best sellers', 'epsilon'); ?></span>
-            </h2>
-
-            <div class="nice-scroll-wrap">
-              <div class="nice-scroll-prev"><i class="fas fa-caret-left"></i></div>
-
-              <div id="users-list" class="nice-scroll no-visible-scroll">
-                <?php
-                foreach ($users as $user) {
-                  ?>
-                  <a href="<?php echo eps_user_public_profile_url($user['pk_i_id']); ?>" class="user">
-                    <div class="img">
-                      <img class="<?php echo (eps_is_lazy() ? 'lazy' : ''); ?>"
-                        src="<?php echo (eps_is_lazy() ? eps_get_load_image() : eps_profile_picture($user['pk_i_id'], 'small')); ?>"
-                        data-src="<?php echo eps_profile_picture($user['pk_i_id'], 'small'); ?>"
-                        alt="<?php echo osc_esc_html($user['s_name']); ?>" />
-
-                      <?php if (eps_user_is_online($user['pk_i_id'])) { ?>
-                        <div class="online" title="<?php echo osc_esc_html(__('User is online', 'epsilon')); ?>"></div>
-                      <?php } else { ?>
-                        <div class="online off" title="<?php echo osc_esc_html(__('User is offline', 'epsilon')); ?>"></div>
-                      <?php } ?>
-                    </div>
-
-                    <?php if ($user['b_company'] == 1) { ?>
-                      <span class="business"
-                        title="<?php echo osc_esc_html(__('Professional seller', 'epsilon')); ?>"><?php _e('Pro', 'epsilon'); ?></span>
-                    <?php } ?>
-
-                    <strong class="name"><?php echo $user['s_name']; ?></strong>
-                    <span class="items"><?php echo sprintf(__('%d items', 'epsilon'), $user['i_items']); ?></span>
-                  </a>
-                  <?php
-                }
-                ?>
-              </div>
-
-              <div class="nice-scroll-next"><i class="fas fa-caret-right"></i></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    <?php } ?>
-  <?php } ?>
+  
 
 
   <?php View::newInstance()->_exportVariableToView('latestItems', eps_random_items()); ?>
