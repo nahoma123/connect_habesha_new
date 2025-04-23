@@ -481,39 +481,53 @@ function eps_get_item_email() {
 
 // GET PHONE
 function eps_get_phone($mobile = '') {
+  $mobile = trim($mobile);
   $found = true;
   $code = 'OK';
   $title = __('Click to see phone number', 'epsilon');
-  
   $login_required = false;
-  if($mobile == null) { $mobile = ''; }
 
-  if(osc_get_preference('reg_user_can_see_phone', 'osclass') == 1 && !osc_is_web_user_logged_in() && strlen(trim($mobile)) >= 4) {
-    //$mobile = '';
-    $title = __('Login to see phone number. Click to login.', 'epsilon');
-    $found = true;
-    $login_required = true;
-    $code = 'LOGIN_REQUIRED';
-  } else if(trim($mobile) == '' || strlen(trim($mobile)) < 4) { 
-    $mobile = '';
-    $title = __('No phone number', 'epsilon');
-    $found = false;
-    $code = 'EMPTY';
+  if (osc_get_preference('reg_user_can_see_phone', 'osclass') == 1 && !osc_is_web_user_logged_in() && strlen($mobile) >= 4) {
+      $title = __('Login to see phone number. Click to login.', 'epsilon');
+      $login_required = true;
+      $code = 'LOGIN_REQUIRED';
+  } elseif ($mobile === '' || strlen($mobile) < 4) {
+      $mobile = '';
+      $title = __('No phone number', 'epsilon');
+      $found = false;
+      $code = 'EMPTY';
   }
-  
+
+  // Ensure +251 has a space after it
+  if (strpos($mobile, '+251') === 0 && strpos($mobile, '+251 ') !== 0) {
+      $mobile = '+251 ' . substr($mobile, 4);
+  }
+
+  $masked = '';
+  $part1 = '';
+  $part2 = '';
+  if ($found) {
+      $masked = substr($mobile, 0, strlen($mobile) - 4) . 'xxxx';
+      if (!$login_required) {
+          $part1 = substr($mobile, 0, strlen($mobile) - 4);
+          $part2 = substr($mobile, strlen($mobile) - 4);
+      }
+  }
+
   return array(
-    'found' => $found,
-    'code' => $code,
-    'login_required' => $login_required,
-    'title' => $title,
-    'phone' => $mobile,
-    'masked' => $found ? substr($mobile, 0, strlen($mobile) - 4) . 'xxxx' : '',
-    'part1' => ($found && !$login_required) ? substr($mobile, 0, strlen($mobile) - 4) : '',
-    'part2' => ($found && !$login_required) ? substr($mobile, strlen($mobile) - 4) : '',
-    'class' => ($found && !$login_required) ? 'masked' : '',
-    'url' => ($found && $login_required) ? osc_user_login_url() : '#'
+      'found' => $found,
+      'code' => $code,
+      'login_required' => $login_required,
+      'title' => $title,
+      'phone' => $mobile,
+      'masked' => $masked,
+      'part1' => $part1,
+      'part2' => $part2,
+      'class' => ($found && !$login_required) ? 'masked' : '',
+      'url' => ($found && $login_required) ? osc_user_login_url() : '#'
   );
 }
+
 
 
 // EXPORT ALL CATEGORIES

@@ -33,6 +33,57 @@ if (!empty($user['dt_access_date'])) {
 }
 
 
+function xethio_format_ethiopian_phone($phoneNumber) {
+  // Trim whitespace first
+  $num = trim($phoneNumber);
+
+  // If it's empty, return original
+  if (empty($num)) {
+      return $phoneNumber;
+  }
+
+  // Avoid formatting obvious non-numbers or already formatted numbers
+  if (strpos($num, '@') !== false || strpos($num, ' ') !== false || !preg_match('/^[+0-9]+$/', preg_replace('/\s+/', '', $num)) ) {
+       // If it contains '@', spaces already, or non-numeric/non-+ characters, assume it's not a simple number to format.
+       // Handle potentially already correct format '+251 9...'
+       if (preg_match('/^\+251\s9\d{8}$/', $num)) {
+           return $num; // It's already correct
+       }
+      // Otherwise return original for things like usernames, complex strings etc.
+      return $phoneNumber;
+  }
+
+
+  // Remove non-digit characters, except keep '+' if it's at the start
+  $cleanedNum = preg_replace('/\D/', '', $num); // Remove all non-digits first
+   if (strpos($num, '+') === 0) {
+       $cleanedNum = '+' . $cleanedNum; // Add plus back if it was originally there
+   }
+
+
+  $coreDigits = null;
+
+  // Try matching different Ethiopian formats
+  if (strpos($cleanedNum, '+2519') === 0 && strlen($cleanedNum) === 13) { // +2519XXXXXXXX
+      $coreDigits = substr($cleanedNum, 4);
+  } elseif (strpos($cleanedNum, '2519') === 0 && strlen($cleanedNum) === 12) { // 2519XXXXXXXX
+      $coreDigits = substr($cleanedNum, 3);
+  } elseif (strpos($cleanedNum, '09') === 0 && strlen($cleanedNum) === 10) { // 09XXXXXXXX
+      $coreDigits = substr($cleanedNum, 2); // Get the 8 digits after '09'
+  } elseif (strpos($cleanedNum, '9') === 0 && strlen($cleanedNum) === 9) { // 9XXXXXXXX
+      $coreDigits = substr($cleanedNum, 1); // Get the 8 digits after '9'
+  }
+
+  // If we found the 8 core digits after the prefix '9'
+  if ($coreDigits !== null && strlen($coreDigits) === 8) {
+      // Format as +251 9XXXXXXXXX (assuming the prefix was 9)
+      return '+251 9' . $coreDigits;
+  } else {
+      // Return original if no valid pattern found or core digits length mismatch
+      return $phoneNumber;
+  }
+}
+
 // User About Info - Use s_info field
 $user_about = !empty($user['s_info']) ? nl2br(strip_tags($user['s_info'])) : '';
 
@@ -44,22 +95,50 @@ $contact_name = (osc_user_name() <> '' ? osc_user_name() : __('Anonymous', 'epsi
 if (!function_exists('eps_get_phone')) {
     // Simple fallback if theme function is missing (less ideal)
     function eps_get_phone($phone) {
-         $is_logged_in = osc_is_web_user_logged_in();
-         $masked = $is_logged_in ? $phone : '***';
-         if (strlen($phone) > 4 && !$is_logged_in) {
-              $masked = substr($phone, 0, 2) . '***' . substr($phone, -2);
-         }
-        return array(
-            'found' => !empty($phone),
-            'masked' => $masked,
-            'class' => $is_logged_in ? 'logged' : 'not-logged',
-            'url' => $is_logged_in ? 'tel:' . preg_replace('/[^0-9+]/', '', $phone) : osc_user_login_url(),
-            'title' => $is_logged_in ? osc_esc_html($phone) : __('Login to view phone', 'epsilon'),
-            'part1' => $is_logged_in ? substr($phone, 0, floor(strlen($phone) / 2)) : '',
-            'part2' => $is_logged_in ? substr($phone, floor(strlen($phone) / 2)) : '',
-        );
-    }
-}
+
+      // --- ADD THIS LINE AT THE VERY BEGINNING ---
+      $formatted_phone = function_exists('xethio_format_ethiopian_phone') ? xethio_format_ethiopian_phone($phone) : $phone;
+      // --- Use $formatted_phone instead of $phone below ---
+  
+      $is_logged_in = osc_is_web_user_logged_in();
+      $show_pref = osc_user() ? (isset(osc_user()['show_on_profile']) ? osc_user()['show_on_profile'] : 'yes') : 'yes'; // Get preference
+  
+  
+      $masked = $formatted_phone; // Start with the formatted number
+      $is_visible = $is_logged_in || ($show_pref !== 'no'); // Simplified visibility logic, refine as needed
+      $should_mask = !$is_visible || ($show_pref === 'no' && !$is_logged_in); // Mask if preference is no AND not logged in, or generally not visible
+  
+      // Apply masking *to the formatted number* if needed
+      if ($should_mask && !empty($formatted_phone)) {
+           $masked = '***'; // Simple mask
+           // More complex masking like the original example:
+            $len = mb_strlen($formatted_phone);
+            if ($len > 5) { $masked = mb_substr($formatted_phone, 0, 2) . '***' . mb_substr($formatted_phone, -2); }
+            elseif ($len > 1) { $masked = mb_substr($formatted_phone, 0, 1) . '***'; }
+            else { $masked = '***'; }
+      }
+  
+  
+      // Generate parts *from the formatted number* for theme JS reveal
+      $part1 = '';
+      $part2 = '';
+      if (!empty($formatted_phone) && !$should_mask) { // Generate parts only if visible/not masked
+          $part1 = mb_substr($formatted_phone, 0, floor(mb_strlen($formatted_phone) / 2));
+          $part2 = mb_substr($formatted_phone, floor(mb_strlen($formatted_phone) / 2));
+      }
+  
+  
+      return array(
+          'found' => !empty($formatted_phone),
+          'raw'   => $formatted_phone, // Keep the formatted raw value
+          'masked' => $masked,        // The potentially masked value for display
+          'class' => $is_logged_in ? 'logged' : 'not-logged', // Class still based on login status for theme JS trigger
+          'url' => $is_logged_in ? 'tel:' . preg_replace('/[^0-9+]/', '', $formatted_phone) : osc_user_login_url(),
+          'title' => $is_logged_in ? osc_esc_html($formatted_phone) : __('Login to view phone', 'epsilon'),
+          'part1' => osc_esc_html($part1), // Use parts generated from formatted number
+          'part2' => osc_esc_html($part2), // Use parts generated from formatted number
+      );
+  }}
 
 // Check the user's preference for showing contact info
 $show_phone_on_profile = isset($user['show_on_profile']) ? $user['show_on_profile'] : 'yes'; // Default to yes
@@ -78,98 +157,181 @@ $additional_account_val = isset($user['additional_accounts']) ? trim($user['addi
  * Generates the HTML for an optional contact field, mimicking theme's phone behavior.
  * (Corrected Version)
  */
+/**
+ * Generates the HTML for an optional contact field (primary or additional account)
+ * on the public user profile.
+ *
+ * It formats Ethiopian phone numbers using xethio_format_ethiopian_phone() first,
+ * then utilizes the theme's eps_get_phone() function to handle masking,
+ * splitting for reveal (data-part1/2), and CSS class assignment (logged/not-logged).
+ * Handles non-phone values (usernames, emails, URLs) appropriately based on login status.
+ *
+ * @param string $account_value The raw account value from the database.
+ * @param string $methods_string Comma-separated string of communication methods (e.g., "Telegram,WhatsApp").
+ * @param string $show_flag User's preference ('yes' or 'no') whether to show contact info.
+ * @param string $field_label Label for the field (e.g., "Primary Contact").
+ * @return void Outputs HTML directly.
+ */
 function generate_contact_methods_enhanced($account_value, $methods_string, $show_flag, $field_label = 'Contact') {
-    if (empty($account_value) || $show_flag === 'no') {
-        return;
-    }
 
-    $methods = !empty($methods_string) ? explode(',', $methods_string) : [];
-    $icons_html = '';
-    $has_phone_icon = false;
+  // 1. Format the account value first (handles Ethiopian phone numbers)
+  $formatted_account_value = function_exists('xethio_format_ethiopian_phone') ? xethio_format_ethiopian_phone($account_value) : $account_value;
 
-    foreach ($methods as $method) {
-        $method = trim(strtolower($method));
-        switch ($method) {
-            case 'whatsapp': $icons_html .= '<i class="icon-spacing fab fa-whatsapp" title="WhatsApp"></i>'; break;
-            case 'telegram': $icons_html .= '<i class="icon-spacing fab fa-telegram-plane" title="Telegram"></i>'; break;
-            case 'sms': $icons_html .= '<i class="icon-spacing fas fa-sms" title="SMS"></i>'; break;
-            case 'directcall':
-                if (!$has_phone_icon) {
-                     $icons_html .= '<i class="icon-spacing fas fa-phone-alt" title="Direct Call"></i>';
-                     $has_phone_icon = true;
-                }
-                break;
-        }
-    }
+  // 2. Check if we should display anything
+  // Skip if empty *after formatting* or if show_flag is 'no'
+  if (empty($formatted_account_value) || $show_flag === 'no') {
+      return; // Output nothing
+  }
 
-    $phone_data = function_exists('eps_get_phone') ? eps_get_phone($account_value) : array('found' => false);
-    $is_phone = $phone_data['found'];
-    $is_logged_in = osc_is_web_user_logged_in();
+  // 3. Process communication method icons
+  $methods = !empty($methods_string) ? explode(',', $methods_string) : [];
+  $icons_html = '';
+  $has_phone_icon = false; // Track if a call-related icon is already added
 
-    $container_tag = 'div';
-    $container_classes = ['contact-method']; // Use specific class for styling
-    $data_attributes = '';
-    $link_href = '#';
-    $title_attr = osc_esc_html($field_label);
-    $display_value = '';
+  foreach ($methods as $method) {
+      $method = trim(strtolower($method));
+      switch ($method) {
+          case 'whatsapp':
+              $icons_html .= '<i class="icon-spacing fab fa-whatsapp" title="WhatsApp"></i>';
+              break;
+          case 'telegram':
+              $icons_html .= '<i class="icon-spacing fab fa-telegram-plane" title="Telegram"></i>';
+              break;
+          case 'sms':
+              $icons_html .= '<i class="icon-spacing fas fa-sms" title="SMS"></i>';
+              break;
+          case 'directcall':
+              // Avoid duplicate phone icons if multiple call methods are selected
+              if (!$has_phone_icon) {
+                  $icons_html .= '<i class="icon-spacing fas fa-phone-alt" title="Direct Call"></i>';
+                  $has_phone_icon = true;
+              }
+              break;
+              // Add other icons here if needed
+      }
+  }
 
-    if ($is_phone) {
-        $container_tag = 'a';
-        $container_classes[] = 'phone'; // Crucial: Add 'phone' class for theme JS
-        $container_classes[] = $phone_data['class']; // 'logged' or 'not-logged'
-        $link_href = $phone_data['url'];
-        $title_attr = osc_esc_html($phone_data['title']);
-        $data_attributes = sprintf(
-            ' data-prefix="tel" data-part1="%s" data-part2="%s"',
-            osc_esc_html($phone_data['part1']),
-            osc_esc_html($phone_data['part2'])
-        );
-        $display_value = $phone_data['masked'];
-        if (!$has_phone_icon) {
-            $icons_html .= '<i class="icon-spacing fas fa-phone-alt" title="' . osc_esc_html(__('Call', 'epsilon')) . '"></i>';
-            $has_phone_icon = true;
-        }
-    } else { // Not a phone number
-        if ($is_logged_in) {
-            $container_classes[] = 'logged'; // Still add logged class
-            $display_value = osc_esc_html($account_value);
-             if (filter_var($account_value, FILTER_VALIDATE_URL)) {
-                 $container_tag = 'a'; $link_href = $account_value; $title_attr = osc_esc_html(__('Visit link', 'epsilon')); $data_attributes = ' target="_blank" rel="nofollow noreferrer"';
-             } elseif (filter_var($account_value, FILTER_VALIDATE_EMAIL)) {
-                 $container_tag = 'a'; $link_href = 'mailto:' . $account_value; $title_attr = osc_esc_html(__('Send email', 'epsilon'));
-             } else {
-                 $container_tag = 'div'; $title_attr = osc_esc_html($field_label . ': ' . $account_value);
-             }
-        } else { // Logged out, non-phone
-            $container_tag = 'a'; // Make clickable for login prompt
-            $container_classes[] = 'phone'; // Crucial: Add 'phone' class for theme JS login trigger
-            $container_classes[] = 'not-logged';
-            $link_href = '#'; // Let theme JS handle redirect
-            $title_attr = osc_esc_html(__('Login to view contact', 'epsilon'));
-            $len = mb_strlen($account_value);
-            if ($len > 5) { $display_value = osc_esc_html(mb_substr($account_value, 0, 2)) . '***' . osc_esc_html(mb_substr($account_value, -2)); }
-            elseif ($len > 1) { $display_value = osc_esc_html(mb_substr($account_value, 0, 1)) . '***'; }
-            else { $display_value = '***'; }
-            $data_attributes .= ' data-login-url="' . osc_esc_html(osc_user_login_url()) . '"';
-            // $data_attributes .= ' data-part1="" data-part2=""'; // Add only if absolutely required by theme JS
-        }
-    }
+  // 4. Use theme's function to check if it's a phone and get masking/parts data
+  // IMPORTANT: Assumes eps_get_phone has been modified to accept and use the pre-formatted number!
+  $phone_data = function_exists('eps_get_phone') ? eps_get_phone($formatted_account_value) : array('found' => false);
 
-    if ($container_tag === 'a') { $link_href = osc_esc_html($link_href); }
+  // Determine if eps_get_phone recognized the formatted value as a phone number
+  $is_phone = isset($phone_data['found']) && $phone_data['found'];
+  $is_logged_in = osc_is_web_user_logged_in();
 
-    // Output with original theme structure in mind: an outer div/a, then span, then icons
-    echo sprintf(
-        '<%s class="%s"%s title="%s"%s>',
-        $container_tag,
-        implode(' ', $container_classes),
-        ($container_tag === 'a' ? ' href="' . $link_href . '"' : ''),
-        $title_attr,
-        $data_attributes
-    );
-    echo sprintf('<span class="contact-value">%s</span>', $display_value); // Add specific class to span if needed
-    echo $icons_html;
-    echo sprintf('</%s>', $container_tag);
-}
+  // 5. Prepare variables for HTML output
+  $container_tag = 'div'; // Default container tag
+  $container_classes = ['contact-method']; // Base CSS class
+  $data_attributes = ''; // For data-* attributes used by JS
+  $link_href = '#'; // Default link target
+  $title_attr = osc_esc_html($field_label); // Default title attribute
+  $display_value = ''; // The text to display inside the container
+
+  // 6. Determine output based on type (phone vs. other) and login status
+  if ($is_phone) {
+      // --- It's a Phone Number ---
+      // Use the data returned by the modified eps_get_phone
+      $container_tag = 'a'; // Phone numbers are usually clickable links
+      $container_classes[] = 'phone'; // Crucial class for theme JS (reveal/login prompt)
+      $container_classes[] = $phone_data['class']; // Adds 'logged' or 'not-logged' based on login status
+
+      $link_href = $phone_data['url']; // tel: link or login URL
+      $title_attr = osc_esc_html($phone_data['title']); // Title (full number or login prompt)
+
+      // Add data attributes needed by theme's JS to reconstruct the number on click/hover
+      // These parts are generated *from the formatted number* inside the modified eps_get_phone
+      $data_attributes = sprintf(
+          ' data-prefix="tel" data-part1="%s" data-part2="%s"',
+          isset($phone_data['part1']) ? $phone_data['part1'] : '', // Use the parts from eps_get_phone
+          isset($phone_data['part2']) ? $phone_data['part2'] : ''  // Use the parts from eps_get_phone
+      );
+
+      // The value to display initially (could be masked '***' or partially masked)
+      $display_value = $phone_data['masked'];
+
+      // Add a default phone icon if 'DirectCall' wasn't explicitly chosen
+      if (!$has_phone_icon) {
+          $icons_html .= '<i class="icon-spacing fas fa-phone-alt" title="' . osc_esc_html(__('Call', 'epsilon')) . '"></i>';
+          $has_phone_icon = true;
+      }
+
+  } else {
+      // --- Not a Phone Number (e.g., Username, Email, URL) ---
+      if ($is_logged_in) {
+          // --- User is Logged In ---
+          $container_classes[] = 'logged'; // Mark as logged in for consistent styling maybe
+          $display_value = osc_esc_html($formatted_account_value); // Show the full (formatted) value
+
+          // Check if it's a clickable type (URL or Email)
+          if (filter_var($formatted_account_value, FILTER_VALIDATE_URL)) {
+              $container_tag = 'a';
+              $link_href = $formatted_account_value;
+              $title_attr = osc_esc_html(__('Visit link', 'epsilon'));
+              $data_attributes = ' target="_blank" rel="nofollow noreferrer"'; // Open external links safely
+          } elseif (filter_var($formatted_account_value, FILTER_VALIDATE_EMAIL)) {
+              $container_tag = 'a';
+              $link_href = 'mailto:' . $formatted_account_value;
+              $title_attr = osc_esc_html(__('Send email', 'epsilon'));
+          } else {
+              // Just display as text (e.g., username)
+              $container_tag = 'div';
+              $title_attr = osc_esc_html($field_label . ': ' . $formatted_account_value); // More descriptive title
+          }
+
+      } else {
+          // --- User is Logged Out ---
+          $container_tag = 'a'; // Make it clickable to trigger login prompt
+          $container_classes[] = 'phone'; // Add 'phone' class - likely REQUIRED by theme JS to trigger login action
+          $container_classes[] = 'not-logged'; // Mark as not logged in
+
+          $link_href = '#'; // Let the theme's JS handle the redirect based on class/data attributes
+          $title_attr = osc_esc_html(__('Login to view contact', 'epsilon'));
+
+          // Mask the non-phone value
+          $len = mb_strlen($formatted_account_value);
+          if ($len > 5) {
+              $display_value = osc_esc_html(mb_substr($formatted_account_value, 0, 2)) . '***' . osc_esc_html(mb_substr($formatted_account_value, -2));
+          } elseif ($len > 1) {
+              $display_value = osc_esc_html(mb_substr($formatted_account_value, 0, 1)) . '***';
+          } else {
+              $display_value = '***';
+          }
+
+          // Add data attribute for login URL if theme JS needs it
+          $data_attributes = ' data-login-url="' . osc_esc_html(osc_user_login_url()) . '"';
+      }
+  }
+
+  // 7. Assemble and Output the HTML
+  // Escape link href if it's an actual link
+  if ($container_tag === 'a') {
+      $link_href = osc_esc_html($link_href);
+  }
+
+  // Build the opening tag
+  echo sprintf(
+      '<%s class="%s"%s title="%s"%s>',
+      $container_tag,                          // 'a' or 'div'
+      implode(' ', $container_classes),        // CSS classes (e.g., "contact-method phone logged")
+      ($container_tag === 'a' ? ' href="' . $link_href . '"' : ''), // Add href only for <a> tags
+      $title_attr,                             // Tooltip text
+      $data_attributes                         // data-* attributes for JS
+  );
+
+  // Output the visible text (masked or full value)
+  echo sprintf('<span class="contact-value">%s</span>', $display_value);
+
+  // Output the communication method icons
+  echo $icons_html;
+
+  // Build the closing tag
+  echo sprintf('</%s>', $container_tag);
+
+} // --- End of function generate_contact_methods_enhanced ---
+
+?>
+
+
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -435,43 +597,45 @@ function generate_contact_methods_enhanced($account_value, $methods_string, $sho
     /* --- End Original CSS --- */
     </style>
 <script>
+  /**
+ * Formats a raw Ethiopian phone number string into +251 9XXXXXXXXX format.
+ *
+ * @param {string} phoneNumber The raw phone number string.
+ * @returns {string} The formatted number or the original string if not applicable.
+ */
 function formatPhoneNumber(phoneNumber) {
-    console.log("Format attempt Input:", phoneNumber); // DEBUG: See original value
     // Trim whitespace first
     let num = phoneNumber.trim();
 
-    // ** Crucial Check: Only process if it looks like a full, unmasked number **
-    // Return original if it contains '*' or is too short after stripping non-digits
-    const digitsOnly = num.replace(/[^\d]/g, '');
-    if (num.includes('*') || digitsOnly.length < 9 || digitsOnly.length > 12) { // Typical Ethiopian numbers are 9 (9xx), 10 (09xx), 12 (+2519xx/2519xx) digits
-        console.log("Format skipped: Invalid, masked, or wrong length."); // DEBUG
-        return phoneNumber; // Return original input
+    // If it's empty, contains '*' (masked), or already has a space after +251, return original
+    // (Refined check to avoid re-formatting already correct numbers)
+    if (!num || num.includes('*') || /^\+251\s/.test(num)) {
+        return phoneNumber;
     }
 
-    // Use 'num' which is the cleaned number (digits only) for matching
-    const ethiopianRegex1 = /^2519(\d{8})$/; // Matches 2519XXXXXXXX
-    const ethiopianRegex2 = /^09(\d{8})$/;     // Matches 09XXXXXXXX
-    const ethiopianRegex3 = /^9(\d{8})$/;      // Matches 9XXXXXXXX
+    // Remove non-digit characters, except keep '+' if it's at the start
+    let cleanedNum = num.startsWith('+') ? '+' + num.substring(1).replace(/\D/g, '') : num.replace(/\D/g, '');
 
     let coreDigits = null;
-    let match;
 
-    if (match = digitsOnly.match(ethiopianRegex1)) {
-        coreDigits = match[1];
-    } else if (match = digitsOnly.match(ethiopianRegex2)) {
-        coreDigits = match[1];
-    } else if (match = digitsOnly.match(ethiopianRegex3)) {
-        coreDigits = match[1];
+    // Try matching different Ethiopian formats
+    if (cleanedNum.startsWith('+2519') && cleanedNum.length === 13) { // +2519XXXXXXXX
+        coreDigits = cleanedNum.substring(4);
+    } else if (cleanedNum.startsWith('2519') && cleanedNum.length === 12) { // 2519XXXXXXXX
+        coreDigits = cleanedNum.substring(3);
+    } else if (cleanedNum.startsWith('09') && cleanedNum.length === 10) { // 09XXXXXXXX
+        coreDigits = cleanedNum.substring(2); // Get the 8 digits after '09'
+    } else if (cleanedNum.startsWith('9') && cleanedNum.length === 9) { // 9XXXXXXXX
+        coreDigits = cleanedNum.substring(1); // Get the 8 digits after '9'
     }
 
-    if (coreDigits) {
-        // Always format as +251 9XX XXX XXXX
-        const formatted = '+251 9' + coreDigits.substring(0, 2) + ' ' + coreDigits.substring(2, 5) + ' ' + coreDigits.substring(5);
-        console.log("Format Success Output:", formatted); // DEBUG
-        return formatted;
+    // If we found the 8 core digits after the prefix '9'
+    if (coreDigits && coreDigits.length === 8) {
+        // Format as +251 9XXXXXXXXX (assuming the prefix was 9)
+        return '+251 9' + coreDigits; // Concatenate directly
     } else {
-        console.log("Format skipped: No Ethiopian pattern matched."); // DEBUG
-        return phoneNumber; // Return original input if no valid pattern found
+        // Return original if no valid pattern found or core digits length mismatch
+        return phoneNumber;
     }
 }
 
@@ -503,12 +667,33 @@ function applyFormattingToElement(spanElement) {
 
 }
 
+/**
+ * Runs formatting on initially visible phone numbers.
+ */
 function runInitialFormatting() {
-    console.log("Running initial formatting (DOM ready)..."); // DEBUG
-    // Select spans inside *already revealed* phone links on load
-    document.querySelectorAll('a.phone.logged span, a.contact-method.phone.logged span.contact-value').forEach(span => {
-        applyFormattingToElement(span);
-    });
+    console.log("Running initial formatting..."); // Debug
+
+    // Define the selector
+    const selector = 'a.phone.logged span, a.contact-method.phone.logged span.contact-value';
+    console.log("Using selector:", selector); // Debug: Log the selector
+
+    // Execute the query
+    const spansToFormat = document.querySelectorAll(selector);
+
+    // Log the result
+    console.log("Found spans:", spansToFormat); // Debug: See if the NodeList is empty or contains elements
+
+    // Check the count
+    if (spansToFormat.length === 0) {
+        console.warn("No elements found matching the selector for initial formatting. Check HTML classes ('phone', 'logged', 'contact-method', 'contact-value') and structure.");
+    } else {
+        // Proceed with formatting if elements were found
+        spansToFormat.forEach(span => {
+            // Add logging inside the loop for detailed info
+            console.log("Attempting to format span:", span, "with text:", span.textContent);
+            applyFormattingToElement(span);
+        });
+    }
 }
 
 // --- Run on initial page load ---
