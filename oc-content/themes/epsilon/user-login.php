@@ -32,6 +32,7 @@
       width: 100%; /* Make buttons full width like inputs */
       box-sizing: border-box; /* Include padding and border in the element's total width and height */
     }
+    .pre-account > .content > section.container:after {background-image:none;}
 
 .btn-create-account {
   background-color: #ffffff;
