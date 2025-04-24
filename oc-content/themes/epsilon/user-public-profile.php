@@ -530,6 +530,9 @@ function generate_contact_methods_enhanced($account_value, $methods_string, $sho
   <?php // Minimal CSS needed ONLY for the new contact methods ?>
   <style>
     /* --- CSS ONLY for Optional Contact Fields --- */
+    #seller .line3 .phone i {
+      font-size: 16px;
+    }
 
     /* Style the container for the new contact methods */
     /* Try to match the appearance of .phone-mobile / .phone-land */

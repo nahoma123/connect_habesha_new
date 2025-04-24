@@ -45,6 +45,9 @@ if (!function_exists('generate_contact_methods_enhanced')) {
     @media screen and (max-width: 767px) {
       body .oc-chat.oc-closed { bottom: 55px !important; width: 46px; height: 46px; min-height: 46px; }
     }
+    #seller .line3 .phone i {
+      font-size: 16px;
+    }
     .icon-spacing { margin-right: 3px; }
     .contact-method { display: flex; width: fit-content; align-items: center; margin-bottom: 10px; font-size: 14px; margin: 6px 0 2px 0; font-weight: 600; padding: 2px 8px; border-radius: 8px; background-color: rgba(1, 120, 214, 0.12); transition: 0.2s; }
     .contact-method i { font-size: 16px; color: #0178d6; vertical-align: middle; }
@@ -268,7 +271,7 @@ if (!function_exists('generate_contact_methods_enhanced')) {
                       </div>
                     <?php } ?>
                   <?php } ?>
-                  <?php
+<?php
                   // Check if comment replies are enabled AND if the current user has permission
                   if(
                     function_exists('osc_enable_comment_reply')
