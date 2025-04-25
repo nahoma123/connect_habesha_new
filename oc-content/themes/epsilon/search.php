@@ -133,15 +133,6 @@
         <?php } ?>
 
 
-        <!-- TRANSACTION --> 
-        <?php if($search_cat_id <= 0 || @!in_array($search_cat_id, $exclude_tr_con)) { ?>
-          <div class="row transaction">
-            <label for=""><?php _e('Transaction', 'epsilon'); ?></label>
-            <div class="input-box"><?php echo eps_simple_transaction(); ?></div>
-          </div>
-        <?php } ?>
-
-
         <!-- PRICE -->
         <?php if(eps_check_category_price($search_cat_id)) { ?>
           <div class="row price">
@@ -169,17 +160,22 @@
           </div>
         <?php } ?>
 
+        <?php // ***** START: ADDED AGE FILTER ***** ?>
+<div class="row age-filter">
+  <label for="sAgeMin"><?php _e('Age range (years)', 'your_theme_domain'); ?></label> <?php // Replace 'your_theme_domain' if needed ?>
+  <div class="line input-box">
+    <input type="number" class="ageMin" name="sAgeMin" id="sAgeMin" value="<?php echo osc_esc_html(Params::getParam('sAgeMin')); ?>" min="0" step="1" placeholder="<?php echo osc_esc_js(__('Min', 'your_theme_domain')); ?>"/>
+    <span class="delim"></span>
+    <input type="number" class="ageMax" name="sAgeMax" id="sAgeMax" value="<?php echo osc_esc_html(Params::getParam('sAgeMax')); ?>" min="0" step="1" placeholder="<?php echo osc_esc_js(__('Max', 'your_theme_domain')); ?>"/>
+  </div>
+</div>
+<?php // ***** END: ADDED AGE FILTER ***** ?>
+
 
         <!-- PERIOD--> 
         <div class="row period">
           <label for="sPriceMin"><?php _e('Period', 'epsilon'); ?></label>
           <div class="input-box"><?php echo eps_simple_period(); ?></div>
-        </div>
-
-        <!-- COMPANY --> 
-        <div class="row company isMobile">
-          <label for="sCompany"><?php _e('Seller type', 'epsilon'); ?></label>
-          <div class="input-box"><?php echo eps_simple_seller(); ?></div>
         </div>
 
 

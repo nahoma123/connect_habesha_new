@@ -404,6 +404,7 @@ if (!$edit && $user_default_category) {
             <p><?php _e('Title is used in search so it is recommended to use keywords of your listing in title.', 'epsilon'); ?></p>
             <p><?php _e('Detail description will also provide customers all information they need and reduce need to contact you.', 'epsilon'); ?></p>
           </div>
+          
         </section>
 
 
