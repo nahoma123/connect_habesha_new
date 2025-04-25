@@ -231,28 +231,27 @@ if (!$edit && $user_default_category) {
                 </div>
               </div>
             <?php } ?>
-
+            
             <div class="row address">
-              <label for="address"><?php _e('Address', 'epsilon'); ?></label>
+              <label for="address"><?php _e('City Area', 'epsilon'); ?></label>
               <div class="input-box"><?php ItemForm::address_text($prepare); ?></div>
             </div>
             
-            <div class="row zip">
+            <?php /*<div class="row zip">
               <label for="zip"><?php _e('ZIP', 'epsilon'); ?></label>
               <div class="input-box"><?php ItemForm::zip_text($prepare); ?></div>
             </div>
             
             <div class="row location-link">
-              <a class="link-update location" href="#"><?php echo (@$loc_cook['success'] == 1 ? __('Are you in different city? Update location', 'epsilon') : __('Want to sell faster? Set your preferred location', 'epsilon')); ?> →</a>
-            </div>
+              <a class="link-update location" href="#"><?php echo (@$loc_cook['success'] == 1 ? __('Are you in different city? Update location', 'epsilon') : __('Want to sell faster? Set your preferred location', 'epsilon')); ?> &#8594;</a>
+            </div>*/ ?>
           </div>
 
-          <div class="tip">
+          <?php /*<div class="tip">
             <i class="fas fa-times close-tip"></i>
             <p><strong><?php _e('Localize item', 'epsilon'); ?></strong></p>
             <p><?php _e('You should at least select region & city for your listing, so customers those search only offers in their city or region can find your listings.', 'epsilon'); ?></p>
-          </div>
-          
+          </div>*/ ?>          
           <?php osc_run_hook('item_publish_location'); ?>
         </section>
         
