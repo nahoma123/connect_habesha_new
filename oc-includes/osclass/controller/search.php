@@ -313,6 +313,11 @@ class CWebSearch extends BaseModel {
     $p_sPriceMin = Params::getParam('sPriceMin');
     $p_sPriceMax = Params::getParam('sPriceMax');
 
+// ***** START: ADDED AGE PARAMETER RETRIEVAL *****
+$p_sAgeMin = Params::getParam('sAgeMin');
+$p_sAgeMax = Params::getParam('sAgeMax');
+// ***** END: ADDED AGE PARAMETER RETRIEVAL *****
+
     //WE CAN ONLY USE THE FIELDS RETURNED BY Search::getAllowedColumnsForSorting()
     $p_sOrder = Params::getParam('sOrder');
     if(!in_array($p_sOrder, Search::getAllowedColumnsForSorting())) {
@@ -445,7 +450,49 @@ class CWebSearch extends BaseModel {
 
     //FILTERING BY RANGE PRICE
     $this->mSearch->priceRange($p_sPriceMin, $p_sPriceMax);
+    
 
+// ***** START: CORRECTED AGE FILTERING LOGIC *****
+if ( (is_numeric($p_sAgeMin) && $p_sAgeMin >= 0) || (is_numeric($p_sAgeMax) && $p_sAgeMax >= 0) ) {
+  $ageFieldSlug = 's_age'; // The slug of your Age custom field
+
+  // Find the Field ID using the slug
+  try {
+      $field = Field::newInstance()->findBySlug($ageFieldSlug);
+  } catch (Exception $e) {
+      $field = null; // Handle potential errors during lookup
+  }
+
+  // Proceed only if the field was found and has an ID
+  if ($field && isset($field['pk_i_id'])) {
+      $ageFieldId = (int)$field['pk_i_id']; // Get the numeric ID (e.g., 2)
+
+      $metaTable = DB_TABLE_PREFIX . 't_item_meta';
+      $itemTable = DB_TABLE_PREFIX . 't_item';
+
+      // Build the subquery using the correct fk_i_field_id column
+      $sql = "SELECT {$metaTable}.fk_i_item_id
+              FROM {$metaTable}
+              WHERE {$metaTable}.fk_i_field_id = " . $ageFieldId; // <<< Use the Field ID here
+
+      // Add Min Age condition (if provided)
+      if (is_numeric($p_sAgeMin) && $p_sAgeMin >= 0) {
+          $sql .= " AND {$metaTable}.s_value <> '' AND CAST({$metaTable}.s_value AS UNSIGNED) >= " . (int)$p_sAgeMin;
+      }
+
+      // Add Max Age condition (if provided)
+      if (is_numeric($p_sAgeMax) && $p_sAgeMax >= 0) {
+          $sql .= " AND {$metaTable}.s_value <> '' AND CAST({$metaTable}.s_value AS UNSIGNED) <= " . (int)$p_sAgeMax;
+      }
+
+      // Add the condition to the main search
+      $this->mSearch->addConditions("{$itemTable}.pk_i_id IN ({$sql})");
+  }
+  // Optional: Add an else here to log if the field 's_age' wasn't found, for debugging.
+}
+// ***** END: CORRECTED AGE FILTERING LOGIC *****
+
+    
     //ORDERING THE SEARCH RESULTS
     $this->mSearch->order($p_sOrder, $allowedTypesForSorting[$p_iOrderType]);
 
@@ -641,6 +688,11 @@ class CWebSearch extends BaseModel {
     $this->_exportVariableToView('search_city', $cityName);
     $this->_exportVariableToView('search_price_min', $p_sPriceMin);
     $this->_exportVariableToView('search_price_max', $p_sPriceMax);
+
+    $this->_exportVariableToView('search_age_min', $p_sAgeMin);
+$this->_exportVariableToView('search_age_max', $p_sAgeMax);
+
+
     $this->_exportVariableToView('search_total_items', $iTotalItems);
     $this->_exportVariableToView('items', $aItems);
     $this->_exportVariableToView('search_show_as', $p_sShowAs);

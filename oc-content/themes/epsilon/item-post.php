@@ -432,7 +432,41 @@ if (!$edit && $user_default_category) {
         </section>
 
 
-        
+        <section class="info">
+          <h2><?php _e('Advert description', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
+
+          <div class="in">
+            <div class="row ttle">
+              <label for="title[<?php echo osc_current_user_locale(); ?>]"><?php _e('Title', 'epsilon'); ?> <span class="req">*</span></label>
+              <div class="input-box">
+                <?php ItemForm::title_input('title', osc_current_user_locale(), osc_esc_html(eps_post_item_title())); ?>
+              </div>
+            </div>
+            
+            <div class="row dsc">
+              <label for="description[<?php echo osc_current_user_locale(); ?>]"><?php _e('Description', 'epsilon'); ?> <span class="req">*</span></label>
+              <div class="td-wrap d1 input-box">
+                <?php ItemForm::description_textarea('description', osc_current_user_locale(), osc_esc_html(eps_post_item_description())); ?>
+              </div>
+            </div>
+            
+            <?php osc_run_hook('item_publish_description'); ?>
+          
+            <div id="post-hooks" class="hooks-block"><?php if($edit) { ItemForm::plugin_edit_item(); } else { ItemForm::plugin_post_item(); } ?></div>
+
+            <?php osc_run_hook('item_publish_hook'); ?>
+            
+            
+          </div>
+          
+          <div class="tip">
+            <i class="fas fa-times close-tip"></i>
+            <p><strong><?php _e('Additional decription', 'epsilon'); ?></strong></p>
+            <p><?php _e('Title is used in search so it is recommended to use keywords of your listing in title.', 'epsilon'); ?></p>
+            <p><?php _e('Detail description will also provide customers all information they need and reduce need to contact you.', 'epsilon'); ?></p>
+          </div>
+          
+        </section>
 
 
         <section class="buttons-block">
