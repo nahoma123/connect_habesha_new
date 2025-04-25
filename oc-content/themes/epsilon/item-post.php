@@ -370,25 +370,6 @@ if (!$edit && $user_default_category) {
               </div>
             </div>
 
-            <?php // ***** START: ADDED AGE FIELD ***** ?>
-            <div class="row age">
-              <label for="sAge"><?php _e('Age', 'epsilon'); ?> <?php /* Add <span class="req">*</span> if required */ ?></label>
-              <div class="input-box">
-                  <?php // Use @ to suppress errors if s_age doesn't exist in $prepare, especially on new item page ?>
-                  <!-- <input type="text" name="sAge" id="sAge" value="<?php echo osc_esc_html(@$prepare['s_age']); ?>" placeholder="<?php echo osc_esc_js(__('e.g., New, 1 year, 5 months', 'epsilon')); ?>" /> --> 
-                  <input type="number" name="sAge" id="sAge" value="<?php echo osc_esc_html(@$prepare['s_age']); ?>" min="0" step="1" placeholder="<?php echo osc_esc_js(__('e.g., 2 (years)', 'epsilon')); ?>" />
-                  <?php /* Alternative: Use select for predefined options
-                  <select name="sAge" id="sAge">
-                      <option value="" <?php echo (@$prepare['s_age'] == '' ? 'selected="selected"' : ''); ?>><?php _e('Select age', 'epsilon'); ?></option>
-                      <option value="New" <?php echo (@$prepare['s_age'] == 'New' ? 'selected="selected"' : ''); ?>><?php _e('New', 'epsilon'); ?></option>
-                      <option value="<1 year" <?php echo (@$prepare['s_age'] == '<1 year' ? 'selected="selected"' : ''); ?>><?php _e('Less than 1 year', 'epsilon'); ?></option>
-                      </select>
-                  */?>
-              </div>
-            </div>
-            <?php // ***** END: ADDED AGE FIELD ***** ?>
-
-
             <?php osc_run_hook('item_publish_description'); ?>
 
             <div id="post-hooks" class="hooks-block"><?php if($edit) { ItemForm::plugin_edit_item(); } else { ItemForm::plugin_post_item(); } ?></div>
