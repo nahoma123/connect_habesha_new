@@ -295,7 +295,7 @@ if (!$edit && $user_default_category) {
         </section>
 
 
-        <section class="s4">
+        <section class="s4" style="display: block;">
           <h2><?php _e('Pricing options & status', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
 
           <div class="in">
@@ -308,23 +308,12 @@ if (!$edit && $user_default_category) {
                   <?php echo eps_simple_currency(); ?>
                 </div>
 
-                <div class="or"><span><?php _e('or', 'epsilon'); ?></span></div>
-              </div>
-              
-              <div class="selection">
-                <a href="#" data-price="0" class="btn btn-secondary<?php if($price_type == 'FREE') { ?> active<?php } ?>" title="<?php echo osc_esc_html(__('Item is offered for free', 'epsilon')); ?>"><i class="fas fa-hand-holding-usd"></i> <?php _e('Item for free', 'epsilon'); ?></a>
-                <a href="#" data-price="" class="btn btn-secondary<?php if($price_type == 'CHECK') { ?> active<?php } ?>" title="<?php echo osc_esc_html(__('Based on agreement with seller', 'epsilon')); ?>"><i class="far fa-handshake"></i> <?php _e('Check with seller', 'epsilon'); ?></a>
               </div>
             <?php } ?>
 
 
             <!-- CONDITION & TRANSACTION -->
             <div class="status-wrap">
-              <div class="transaction">
-                <label for="sTransaction"><?php _e('Transaction', 'epsilon'); ?></label>
-                <?php echo eps_simple_transaction(true); ?>
-              </div>
-
               <div class="condition">
                 <label for="sCondition"><?php _e('Condition', 'epsilon'); ?></label>
                 <?php echo eps_simple_condition(true); ?>
