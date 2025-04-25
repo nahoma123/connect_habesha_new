@@ -7,11 +7,6 @@
   <meta name="googlebot" content="noindex, nofollow" />
 
   <?php if(osc_images_enabled_at_items()) { ItemForm::photos_javascript(); } ?>
-  <style>
-      .show-tip {
-          display:none;
-      }
-  </style>
 </head>
 
 <?php
@@ -155,12 +150,12 @@ if (!$edit && $user_default_category) {
             <?php } ?>
           </div>
           
-          <?php /*<div class="tip">
+          <div class="tip">
             <i class="fas fa-times close-tip"></i>
             <p><strong><?php _e('Category selection is important!', 'epsilon'); ?></strong></p>
-             <p><?php _e('Selecting correct category for your item is essential part of selling process.', 'epsilon'); ?></p>
+            <p><?php _e('Selecting correct category for your item is essential part of selling process.', 'epsilon'); ?></p>
             <p><?php _e('If you select improper category, potentional buyers will not be able to find your item and it will take much more time to sell it.', 'epsilon'); ?></p>
-          </div>*/ ?>
+          </div>
           
           <?php osc_run_hook('item_publish_category'); ?>
         </section>
@@ -238,25 +233,25 @@ if (!$edit && $user_default_category) {
             <?php } ?>
 
             <div class="row address">
-              <label for="address"><?php _e('City Area', 'epsilon'); ?></label>
+              <label for="address"><?php _e('Address', 'epsilon'); ?></label>
               <div class="input-box"><?php ItemForm::address_text($prepare); ?></div>
             </div>
             
-            <?php /*<div class="row zip">
+            <div class="row zip">
               <label for="zip"><?php _e('ZIP', 'epsilon'); ?></label>
               <div class="input-box"><?php ItemForm::zip_text($prepare); ?></div>
             </div>
             
             <div class="row location-link">
-              <a class="link-update location" href="#"><?php echo (@$loc_cook['success'] == 1 ? __('Are you in different city? Update location', 'epsilon') : __('Want to sell faster? Set your preferred location', 'epsilon')); ?> &#8594;</a>
-            </div>*/ ?>
+              <a class="link-update location" href="#"><?php echo (@$loc_cook['success'] == 1 ? __('Are you in different city? Update location', 'epsilon') : __('Want to sell faster? Set your preferred location', 'epsilon')); ?> →</a>
+            </div>
           </div>
 
-          <?php /*<div class="tip">
+          <div class="tip">
             <i class="fas fa-times close-tip"></i>
             <p><strong><?php _e('Localize item', 'epsilon'); ?></strong></p>
             <p><?php _e('You should at least select region & city for your listing, so customers those search only offers in their city or region can find your listings.', 'epsilon'); ?></p>
-          </div>*/ ?>
+          </div>
           
           <?php osc_run_hook('item_publish_location'); ?>
         </section>
@@ -277,78 +272,63 @@ if (!$edit && $user_default_category) {
                 <div class="input-box"><?php ItemForm::contact_name_text($prepare); ?></div>
               </div>
             
-              
+
             </div>
 
             <div class="row user-link">
               <?php if(osc_is_web_user_logged_in()) { ?>
-                <a class="link-update" target="_blank" href="<?php echo osc_user_profile_url(); ?>"><?php _e('Update your profile here', 'epsilon'); ?> &#8594;</a>
+                <a class="link-update" target="_blank" href="<?php echo osc_user_profile_url(); ?>"><?php _e('Update your profile here', 'epsilon'); ?> →</a>
               <?php } else { ?>
-                <a class="link-update" target="_blank" href="<?php echo osc_register_account_url(); ?>"><?php _e('Not registered yet? Create an account', 'epsilon'); ?> &#8594;</a>
+                <a class="link-update" target="_blank" href="<?php echo osc_register_account_url(); ?>"><?php _e('Not registered yet? Create an account', 'epsilon'); ?> →</a>
               <?php } ?>
             </div>
           </div>
           
-          <?php /*<div class="tip">
+          <div class="tip">
             <i class="fas fa-times close-tip"></i>
             <p><strong><?php _e('Trusted and open seller', 'epsilon'); ?></strong></p>
-             <p><?php _e('You should enter phone number, as most of solid customers prefer phone contact way.', 'epsilon'); ?></p>
+            <p><?php _e('You should enter phone number, as most of solid customers prefer phone contact way.', 'epsilon'); ?></p>
             <p><?php _e('For faster listing publishing and contacting with customers, it is recommended to create and account, logged-in users are more trusted.', 'epsilon'); ?></p>
-          </div>*/ ?>
+          </div>
           
           <?php osc_run_hook('item_publish_seller'); ?>
         </section>
 
-        <section class="s4">
+
+        <section class="s4" style="display: block;">
           <h2><?php _e('Pricing options & status', 'epsilon'); ?> <i class="show-tip fas fa-question-circle"></i></h2>
 
           <div class="in">
             <?php if(osc_price_enabled_at_items()) { ?>
               <label for="price"><?php _e('Price', 'epsilon'); ?> <span class="req">*</span></label>
 
-              <?php /* REMOVED conditional disable class based on FREE/CHECK */ ?>
-              <div class="enter">
+              <div class="enter<?php if($price_type == 'FREE' || $price_type == 'CHECK') { ?> disable<?php } ?>">
                 <div class="input-box">
                   <?php ItemForm::price_input_text(); ?>
                   <?php echo eps_simple_currency(); ?>
                 </div>
 
-                <?php /* REMOVED <div class="or"> */ ?>
               </div>
-
-              <?php /* REMOVED <div class="selection"> buttons */ ?>
-
             <?php } ?>
 
 
             <!-- CONDITION & TRANSACTION -->
             <div class="status-wrap">
-              <div class="transaction">
-                <label for="sTransaction"><?php _e('Transaction', 'epsilon'); ?></label>
-                <?php echo eps_simple_transaction(true); ?>
-              </div>
-
               <div class="condition">
                 <label for="sCondition"><?php _e('Condition', 'epsilon'); ?></label>
                 <?php echo eps_simple_condition(true); ?>
               </div>
             </div>
           </div>
-
-          <?php /* Keep the tip div if you want it, or remove it */ ?>
+          
           <div class="tip">
             <i class="fas fa-times close-tip"></i>
             <p><strong><?php _e('Wisely select price', 'epsilon'); ?></strong></p>
             <p><?php _e('Price should reflect real status and properties of your listing. If you select too high price, it may take much longer to sell your product.', 'epsilon'); ?></p>
             <p><?php _e('You can also select transaction and condition to better describe status of your item and transaction you are looking for.', 'epsilon'); ?></p>
           </div>
-
+          
           <?php osc_run_hook('item_publish_price'); ?>
-        </section>
-
-
-        <section class="upload-photos">
-           <?php /* ... photo section remains the same ... */ ?>
         </section>
 
 
@@ -369,12 +349,12 @@ if (!$edit && $user_default_category) {
             </div>
           </div>
           
-          <?php /*<div class="tip">
+          <div class="tip">
             <i class="fas fa-times close-tip"></i>
             <p><strong><?php _e('Photos are selling!', 'epsilon'); ?></strong></p>
-             <p><?php _e('Did you know that listing with photos sells 7x faster than one with no photo?', 'epsilon'); ?></p>
+            <p><?php _e('Did you know that listing with photos sells 7x faster than one with no photo?', 'epsilon'); ?></p>
             <p><?php _e('Real product photos are key element for fast selling and helps customer to decide if product is really what they are looking for.', 'epsilon'); ?></p>
-          </div>*/ ?>
+          </div>
           
           <?php osc_run_hook('item_publish_images'); ?>
         </section>
@@ -709,12 +689,6 @@ if (!$edit && $user_default_category) {
           minlength: 10
         },
 
-        sAge: {
-          // required: true,
-           minlength: 1 // Example: ensure at least something is entered if not required
-           // digits: true // Uncomment if you used type="number" and want only digits
-        },
-
         <?php if(strpos($required_fields, 'country') !== false || strpos($required_fields, 'region') !== false || strpos($required_fields, 'city') !== false) { ?>
         sLocation: {
           required: true
@@ -778,9 +752,6 @@ if (!$edit && $user_default_category) {
         contactEmail: {
           required: true,
           email: true
-        },
-        termsConditions: {
-          required: true
         }
       },
 
@@ -853,13 +824,10 @@ if (!$edit && $user_default_category) {
         contactEmail: {
           required: '<?php echo osc_esc_js(__('Email: this field is required.', 'epsilon')); ?>',
           email: '<?php echo osc_esc_js(__('Email: invalid format of email address.', 'epsilon')); ?>'
-        },
-        termsConditions: {
-          required: '<?php echo osc_esc_js(__('Terms and conditions: this field is required.', 'epsilon')); ?>'
         }
       }, 
 
-      ignore: ":disabled",
+      ignore: ":disabled, :hidden, .ignore",
       ignoreTitle: false,
       errorLabelContainer: "#error_list",
       wrapper: "li",
@@ -876,6 +844,5 @@ if (!$edit && $user_default_category) {
 
 
   <?php osc_current_web_theme_path('footer.php') ; ?>
-  
 </body>
-</html>	
+</html>
