@@ -397,6 +397,7 @@ function sms_js() {
           <?php if(@count(array_filter(explode(',', sms_param('only_country')))) == 1) { ?>allowDropdown: false,<?php } ?>
           autoFormat: true,
           nationalMode: false,
+          excludeCountries: ['us'], 
           <?php if(sms_param('geo_ip_lookup') == 1) { ?>
           geoIpLookup: function(success, failure) {
             $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
