@@ -480,53 +480,80 @@ function eps_get_item_email() {
 
 
 // GET PHONE
-function eps_get_phone($mobile = '') {
-  $mobile = trim($mobile);
-  $found = true;
-  $code = 'OK';
-  $title = __('Click to see phone number', 'epsilon');
+/**
+ * Processes a potential phone number, checks validity and login requirements.
+ * Assumes input $phone_number might already be formatted.
+ *
+ * @param string $phone_number The phone number string.
+ * @return array Associative array with phone data.
+ */
+function eps_get_phone($phone_number = '') {
+  $mobile = trim($phone_number);
+  $found = false; // Assume not found initially
+  $code = 'EMPTY';
+  $title = __('No phone number', 'epsilon');
   $login_required = false;
-
-  if (osc_get_preference('reg_user_can_see_phone', 'osclass') == 1 && !osc_is_web_user_logged_in() && strlen($mobile) >= 4) {
-      $title = __('Login to see phone number. Click to login.', 'epsilon');
-      $login_required = true;
-      $code = 'LOGIN_REQUIRED';
-  } elseif ($mobile === '' || strlen($mobile) < 4) {
-      $mobile = '';
-      $title = __('No phone number', 'epsilon');
-      $found = false;
-      $code = 'EMPTY';
-  }
-
-  // Ensure +251 has a space after it
-  if (strpos($mobile, '+251') === 0 && strpos($mobile, '+251 ') !== 0) {
-      $mobile = '+251 ' . substr($mobile, 4);
-  }
-
   $masked = '';
-  $part1 = '';
-  $part2 = '';
-  if ($found) {
-      $masked = substr($mobile, 0, strlen($mobile) - 4) . 'xxxx';
-      if (!$login_required) {
-          $part1 = substr($mobile, 0, strlen($mobile) - 4);
-          $part2 = substr($mobile, strlen($mobile) - 4);
+  $url = '#'; // Default URL
+
+  // Basic check: Must have a minimum length (adjust if needed) and not be empty.
+  // You might add more robust validation here if needed, but xethio_format should handle most.
+  if (!empty($mobile) && strlen($mobile) >= 9) { // Example: Min length for formatted Ethiopian numbers like "+251 9XXXXXXXX" is 13, raw maybe 9/10. Adjust as needed.
+      $found = true; // It looks like a potential number
+      $code = 'OK';
+      $title = __('Click to see phone number', 'epsilon'); // Default title if logged in
+
+      // Check if login is required by Osclass setting
+      if (osc_get_preference('reg_user_can_see_phone', 'osclass') == 1 && !osc_is_web_user_logged_in()) {
+          $login_required = true;
+          $code = 'LOGIN_REQUIRED';
+          $title = __('Login to see phone number. Click to login.', 'epsilon');
+          $url = osc_user_login_url(); // Set URL to login page
+
+          // --- Masking Logic (Only needed if login is required) ---
+          $phone_length = strlen($mobile);
+          $mask_chars = 4; // Number of characters to mask
+          if ($phone_length > $mask_chars) {
+               $masked = substr($mobile, 0, $phone_length - $mask_chars) . str_repeat('x', $mask_chars);
+          } else {
+               $masked = str_repeat('x', $phone_length); // Mask the whole thing if too short
+          }
+          // --- End Masking Logic ---
+
+      } else {
+          // User is logged in OR login is not required by settings
+          $login_required = false;
+          $masked = $mobile; // If not login required, "masked" is the full number initially
+          // Title for logged-in users (or when login not required) - can be set in the calling function too
+          $title = osc_esc_html(sprintf(__('Phone: %s', 'epsilon'), $mobile));
+          $url = '#'; // URL is not needed here, the tel: link is built in the other function
       }
+
+  } else {
+      // Input was empty or too short
+      $found = false;
+      $code = 'INVALID_LENGTH'; // Or keep 'EMPTY'
+      $title = __('No valid phone number provided', 'epsilon');
+      $mobile = ''; // Ensure it's empty if not found
   }
+
 
   return array(
-      'found' => $found,
-      'code' => $code,
-      'login_required' => $login_required,
-      'title' => $title,
-      'phone' => $mobile,
-      'masked' => $masked,
-      'part1' => $part1,
-      'part2' => $part2,
-      'class' => ($found && !$login_required) ? 'masked' : '',
-      'url' => ($found && $login_required) ? osc_user_login_url() : '#'
+      'found'          => $found,
+      'code'           => $code,
+      'login_required' => $login_required, // Still useful to know if settings require login
+      'title'          => $title,          // Title reflects login state or number
+      'phone'          => $mobile,         // The original (potentially formatted) number
+      'masked'         => $masked,         // Masked version ONLY if login_required is true
+      // 'part1'       => '', // No longer needed here
+      // 'part2'       => '', // No longer needed here
+      // 'class'       => '', // No longer needed here, handled in generate_contact_methods_enhanced
+      'url'            => $url             // Login URL or '#'
   );
 }
+
+
+
 
 
 
