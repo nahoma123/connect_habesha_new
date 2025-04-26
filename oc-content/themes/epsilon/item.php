@@ -9,33 +9,122 @@ if (!function_exists('xethio_format_ethiopian_phone')) {
       if ($coreDigits !== null && strlen($coreDigits) === 8) { return '+251 9' . $coreDigits; } else { return $phoneNumber; }
     }
 }
-if (!function_exists('eps_get_phone')) { // Fallback - Fix theme's function if possible
-    function eps_get_phone($phone) {
-        $formatted_phone = function_exists('xethio_format_ethiopian_phone') ? xethio_format_ethiopian_phone($phone) : $phone;
-        $is_logged_in = osc_is_web_user_logged_in(); global $item_user; $show_pref = 'yes';
-        if ($item_user && isset($item_user['show_on_profile'])) { $show_pref = $item_user['show_on_profile']; } elseif (!osc_item_user_id()) { $show_pref = 'yes'; }
-        $is_visible = $is_logged_in || ($show_pref !== 'no'); $should_mask = !$is_visible; $masked = $formatted_phone;
-        if ($should_mask && !empty($formatted_phone)) { $len = mb_strlen($formatted_phone); if ($len > 5) { $masked = mb_substr($formatted_phone, 0, 2) . '***' . mb_substr($formatted_phone, -2); } elseif ($len > 1) { $masked = mb_substr($formatted_phone, 0, 1) . '***'; } else { $masked = '***'; } }
-        $part1 = ''; $part2 = ''; if (!empty($formatted_phone) && !$should_mask) { $part1 = mb_substr($formatted_phone, 0, floor(mb_strlen($formatted_phone) / 2)); $part2 = mb_substr($formatted_phone, floor(mb_strlen($formatted_phone) / 2)); }
-        return array( 'found' => !empty($formatted_phone), 'raw' => $formatted_phone, 'masked' => $masked, 'class' => $is_visible ? 'logged' : 'not-logged', 'url' => $is_visible ? 'tel:' . preg_replace('/[^0-9+]/', '', $formatted_phone) : '#', 'title' => $is_visible ? osc_esc_html($formatted_phone) : __('Login to view phone', 'epsilon'), 'part1' => osc_esc_html($part1), 'part2' => osc_esc_html($part2) );
-    }
-}
-if (!function_exists('generate_contact_methods_enhanced')) {
-    function generate_contact_methods_enhanced($account_value, $methods_string, $show_flag, $field_label = 'Contact') {
-        $formatted_account_value = function_exists('xethio_format_ethiopian_phone') ? xethio_format_ethiopian_phone($account_value) : $account_value;
-        if (empty($formatted_account_value) || $show_flag === 'no') { return; }
-        $methods = !empty($methods_string) ? explode(',', $methods_string) : []; $icons_html = ''; $has_phone_icon = false;
-        foreach ($methods as $method) { $method = trim(strtolower($method)); switch ($method) { case 'whatsapp': $icons_html .= '<i class="icon-spacing fab fa-whatsapp" title="WhatsApp"></i>'; break; case 'telegram': $icons_html .= '<i class="icon-spacing fab fa-telegram-plane" title="Telegram"></i>'; break; case 'sms': $icons_html .= '<i class="icon-spacing fas fa-sms" title="SMS"></i>'; break; case 'directcall': if (!$has_phone_icon) { $icons_html .= '<i class="icon-spacing fas fa-phone-alt" title="Direct Call"></i>'; $has_phone_icon = true; } break; } }
-        $phone_data = function_exists('eps_get_phone') ? eps_get_phone($formatted_account_value) : array('found' => false); $is_phone = isset($phone_data['found']) && $phone_data['found']; $is_logged_in = osc_is_web_user_logged_in();
-        $container_tag = 'div'; $container_classes = ['contact-method']; $data_attributes = ''; $link_href = '#'; $title_attr = osc_esc_html($field_label); $display_value = '';
-        if ($is_phone) { $container_tag = 'a'; $container_classes[] = 'phone'; $container_classes[] = $phone_data['class']; $link_href = $phone_data['url']; $title_attr = osc_esc_html($phone_data['title']); $data_attributes = sprintf(' data-prefix="tel" data-part1="%s" data-part2="%s"', isset($phone_data['part1']) ? $phone_data['part1'] : '', isset($phone_data['part2']) ? $phone_data['part2'] : ''); $display_value = $phone_data['masked']; if (!$has_phone_icon) { $icons_html .= '<i class="icon-spacing fas fa-phone-alt" title="' . osc_esc_html(__('Call', 'epsilon')) . '"></i>'; $has_phone_icon = true; } }
-        else { if ($is_logged_in || $show_flag !== 'no') { $container_classes[] = 'logged'; $display_value = osc_esc_html($formatted_account_value); if (filter_var($formatted_account_value, FILTER_VALIDATE_URL)) { $container_tag = 'a'; $link_href = $formatted_account_value; $title_attr = osc_esc_html(__('Visit link', 'epsilon')); $data_attributes = ' target="_blank" rel="nofollow noreferrer"'; } elseif (filter_var($formatted_account_value, FILTER_VALIDATE_EMAIL)) { $container_tag = 'a'; $link_href = 'mailto:' . $formatted_account_value; $title_attr = osc_esc_html(__('Send email', 'epsilon')); } else { $container_tag = 'div'; $title_attr = osc_esc_html($field_label . ': ' . $formatted_account_value); } }
-        else { $container_tag = 'a'; $container_classes[] = 'phone'; $container_classes[] = 'not-logged'; $link_href = '#'; $title_attr = osc_esc_html(__('Login to view contact', 'epsilon')); $len = mb_strlen($formatted_account_value); if ($len > 5) { $display_value = osc_esc_html(mb_substr($formatted_account_value, 0, 2)) . '***' . osc_esc_html(mb_substr($formatted_account_value, -2)); } elseif ($len > 1) { $display_value = osc_esc_html(mb_substr($formatted_account_value, 0, 1)) . '***'; } else { $display_value = '***'; } $data_attributes = ' data-login-url="' . osc_esc_html(osc_user_login_url()) . '"'; } }
-        if ($container_tag === 'a') { $link_href = osc_esc_html($link_href); }
-        echo sprintf('<%s class="%s"%s title="%s"%s>', $container_tag, implode(' ', $container_classes), ($container_tag === 'a' ? ' href="' . $link_href . '"' : ''), $title_attr, $data_attributes); echo sprintf('<span class="contact-value">%s</span>', $display_value); echo $icons_html; echo sprintf('</%s>', $container_tag);
-    }
-}
+
+  function generate_contact_methods_enhanced($account_value, $methods_string,  $field_label = 'Contact') {
+      $formatted_account_value = function_exists('xethio_format_ethiopian_phone') ? xethio_format_ethiopian_phone($account_value) : $account_value;
+      
+      if (empty($formatted_account_value)) {
+          return;
+      }
+  
+      $methods = !empty($methods_string) ? explode(',', $methods_string) : [];
+      $icons_html = '';
+      $has_phone_icon = false;
+  
+      foreach ($methods as $method) {
+          $method = trim(strtolower($method));
+          switch ($method) {
+              case 'whatsapp':
+                  $icons_html .= '<i class="icon-spacing fab fa-whatsapp" title="WhatsApp"></i>';
+                  break;
+              case 'telegram':
+                  $icons_html .= '<i class="icon-spacing fab fa-telegram-plane" title="Telegram"></i>';
+                  break;
+              case 'sms':
+                  $icons_html .= '<i class="icon-spacing fas fa-sms" title="SMS"></i>';
+                  break;
+              case 'directcall':
+                  if (!$has_phone_icon) {
+                      $icons_html .= '<i class="icon-spacing fas fa-phone-alt" title="Direct Call"></i>';
+                      $has_phone_icon = true;
+                  }
+                  break;
+          }
+      }
+  
+      $phone_data = function_exists('eps_get_phone') ? eps_get_phone($formatted_account_value) : array('found' => false);
+      $is_phone = isset($phone_data['found']) && $phone_data['found'];
+      $is_logged_in = osc_is_web_user_logged_in();
+  
+      $container_tag = 'div';
+      $container_classes = ['contact-method'];
+      $data_attributes = '';
+      $link_href = '#';
+      $title_attr = osc_esc_html($field_label);
+      $display_value = '';
+  
+      if ($is_phone) {
+          $container_tag = 'a';
+          $container_classes[] = 'phone';
+          $container_classes[] = $phone_data['class'];
+          $link_href = $phone_data['url'];
+          $title_attr = osc_esc_html($phone_data['title']);
+          $data_attributes = sprintf(
+              ' data-prefix="tel" data-part1="%s" data-part2="%s"',
+              isset($phone_data['part1']) ? $phone_data['part1'] : '',
+              isset($phone_data['part2']) ? $phone_data['part2'] : ''
+          );
+          $display_value = $phone_data['masked'];
+  
+          if (!$has_phone_icon) {
+              $icons_html .= '<i class="icon-spacing fas fa-phone-alt" title="' . osc_esc_html(__('Call', 'epsilon')) . '"></i>';
+              $has_phone_icon = true;
+          }
+      } else {
+          if ($is_logged_in) {
+              $container_classes[] = 'logged';
+              $display_value = osc_esc_html($formatted_account_value);
+  
+              if (filter_var($formatted_account_value, FILTER_VALIDATE_URL)) {
+                  $container_tag = 'a';
+                  $link_href = $formatted_account_value;
+                  $title_attr = osc_esc_html(__('Visit link', 'epsilon'));
+                  $data_attributes = ' target="_blank" rel="nofollow noreferrer"';
+              } elseif (filter_var($formatted_account_value, FILTER_VALIDATE_EMAIL)) {
+                  $container_tag = 'a';
+                  $link_href = 'mailto:' . $formatted_account_value;
+                  $title_attr = osc_esc_html(__('Send email', 'epsilon'));
+              } else {
+                  $container_tag = 'div';
+                  $title_attr = osc_esc_html($field_label . ': ' . $formatted_account_value);
+              }
+          } else {
+              $container_tag = 'a';
+              $container_classes[] = 'phone';
+              $container_classes[] = 'not-logged';
+              $link_href = '#';
+              $title_attr = osc_esc_html(__('Login to view contact', 'epsilon'));
+  
+              $len = mb_strlen($formatted_account_value);
+              if ($len > 5) {
+                  $display_value = osc_esc_html(mb_substr($formatted_account_value, 0, 2)) . '***' . osc_esc_html(mb_substr($formatted_account_value, -2));
+              } elseif ($len > 1) {
+                  $display_value = osc_esc_html(mb_substr($formatted_account_value, 0, 1)) . '***';
+              } else {
+                  $display_value = '***';
+              }
+              $data_attributes = ' data-login-url="' . osc_esc_html(osc_user_login_url()) . '"';
+          }
+      }
+  
+      if ($container_tag === 'a') {
+          $link_href = osc_esc_html($link_href);
+      }
+  
+      echo sprintf(
+          '<%s class="%s"%s title="%s"%s>',
+          $container_tag,
+          implode(' ', $container_classes),
+          ($container_tag === 'a' ? ' href="' . $link_href . '"' : ''),
+          $title_attr,
+          $data_attributes
+      );
+      echo sprintf('<span class="contact-value">%s</span>', $display_value);
+      echo $icons_html;
+      echo sprintf('</%s>', $container_tag);
+  }
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="<?php echo eps_language_dir(); ?>" lang="<?php echo str_replace('_', '-', osc_current_user_locale()); ?>">
 <head>
@@ -67,7 +156,9 @@ if (!function_exists('generate_contact_methods_enhanced')) {
     $location = implode(', ', $location_array);
     $location_full_array = array_filter(array(osc_item_address(), osc_item_zip(), osc_item_city_area(), osc_item_city(), osc_item_region(), osc_item_country()));
     $location_full = implode('<br/>', $location_full_array);
-    $is_company = false; $item_user = null; $user_item_count = 0; $show_phone_on_profile = 'yes'; $user_location = '';
+    $is_company = false; 
+    $item_user = null; 
+    $user_item_count = 0; $show_phone_on_profile = 'yes'; $user_location = '';
     if(osc_item_user_id() <> 0) {
       $item_user = eps_get_user(osc_item_user_id());
       if($item_user) {
@@ -345,7 +436,7 @@ if (!function_exists('generate_contact_methods_enhanced')) {
                 <div class="address"><i class="fas fa-map-marked-alt"></i> <?php echo $user_location; ?></div>
               <?php } ?>
 
-              <?php if($user_phone_mobile_data['found']) { ?>
+              <?php if($user_phone_mobile_data['found'] && $show_phone_on_profile=="yes") { ?>
                     <a class="phone-mobile phone <?php echo $user_phone_mobile_data['class']; ?>" title="<?php echo osc_esc_html($user_phone_mobile_data['title']); ?>" data-prefix="tel" href="<?php echo osc_esc_html($user_phone_mobile_data['url']); ?>" data-part1="<?php echo osc_esc_html($user_phone_mobile_data['part1']); ?>" data-part2="<?php echo osc_esc_html($user_phone_mobile_data['part2']); ?>">
                       <span><?php echo $user_phone_mobile_data['masked']; ?></span><i class="fas fa-phone-alt"></i>
                     </a>
@@ -359,9 +450,9 @@ if (!function_exists('generate_contact_methods_enhanced')) {
 
               <?php
                 // Display Primary Optional Contact
-                generate_contact_methods_enhanced( $primary_account_val, $primary_methods_str, $show_phone_on_profile, __('Primary Contact', 'epsilon') );
+                generate_contact_methods_enhanced( $primary_account_val, $primary_methods_str,  __('Primary Contact', 'epsilon') );
                 // Display Additional Optional Contact
-                generate_contact_methods_enhanced( $additional_account_val, $additional_methods_str, $show_phone_on_profile, __('Additional Contact', 'epsilon') );
+                generate_contact_methods_enhanced( $additional_account_val, $additional_methods_str,  __('Additional Contact', 'epsilon') );
               ?>
 
             </div> <?php // End line3 ?>
