@@ -1,4 +1,190 @@
 <?php
+// Ensure helper functions are defined (ideally move these to functions.php)
+
+
+function xethio_format_ethiopian_phone($phoneNumber) {
+  // Trim whitespace first
+  $num = trim($phoneNumber);
+
+  // If it's empty or clearly not a phone number candidate, return original
+  if (empty($num) || strpos($num, '@') !== false || strpos($num, ' ') !== false) {
+       // Check if it's ALREADY correctly formatted (+251 9...)
+       if (preg_match('/^\+251\s9\d{8}$/', $num)) {
+           return $num; // It's already perfect
+       }
+       // Otherwise, likely not a simple number we should format
+       return $phoneNumber;
+  }
+
+  // Clean the number: remove all non-digits EXCEPT a leading '+'
+  $cleanedNum = preg_replace('/[^\d+]/', '', $num);
+  if (strpos($num, '+') !== 0 && strpos($cleanedNum, '+') === 0) {
+      // Remove '+' if it wasn't at the start of the original string
+      $cleanedNum = str_replace('+', '', $cleanedNum);
+  }
+   // Remove internal '+' if any snuck through (e.g., +251+9...)
+  if (substr_count($cleanedNum, '+') > 1 || (strpos($cleanedNum, '+') > 0) ) {
+     $cleanedNum = preg_replace('/\+/', '', $cleanedNum);
+     if (strpos($num, '+') === 0) { // Add back leading plus if original had it
+          $cleanedNum = '+' . $cleanedNum;
+     }
+  }
+
+  // Use regex to capture the core 9 digits (9 followed by 8 digits)
+  if (preg_match('/^(?:\+?251|0)?(9\d{8})$/', $cleanedNum, $matches)) {
+      // Found a valid pattern, format it with the space
+      return '+251 ' . $matches[1]; // $matches[1] contains '9XXXXXXXX'
+  }
+
+  // No valid Ethiopian pattern found, return the original input
+  return $phoneNumber;
+}
+
+
+function generate_contact_methods_enhanced($account_value, $methods_string, $field_label = 'Contact') {
+  // Format the input value FIRST using the improved function
+  $formatted_account_value = function_exists('xethio_format_ethiopian_phone') ? xethio_format_ethiopian_phone($account_value) : $account_value;
+
+  if (empty($formatted_account_value)) {
+      return; // Nothing to display
+  }
+
+  $methods = !empty($methods_string) ? explode(',', $methods_string) : [];
+  $icons_html = '';
+  $has_phone_icon = false;
+
+  // Generate icons based on methods_string
+  foreach ($methods as $method) {
+      $method = trim(strtolower($method));
+      switch ($method) {
+          case 'whatsapp':
+              $icons_html .= '<i class="icon-spacing fab fa-whatsapp" title="WhatsApp"></i>';
+              break;
+          case 'telegram':
+              $icons_html .= '<i class="icon-spacing fab fa-telegram-plane" title="Telegram"></i>';
+              break;
+          case 'sms':
+              $icons_html .= '<i class="icon-spacing fas fa-sms" title="SMS"></i>';
+              break;
+          case 'directcall':
+              // Only add the phone icon once, even if 'directcall' appears multiple times
+              if (!$has_phone_icon) {
+                  $icons_html .= '<i class="icon-spacing fas fa-phone-alt" title="Direct Call"></i>';
+                  $has_phone_icon = true;
+              }
+              break;
+      }
+  }
+
+  // Check if the formatted value is likely a phone number using eps_get_phone
+  $phone_data = function_exists('eps_get_phone') ? eps_get_phone($formatted_account_value) : array('found' => false);
+  $is_phone = isset($phone_data['found']) && $phone_data['found'];
+  $is_logged_in = osc_is_web_user_logged_in();
+
+  $container_tag = 'div'; // Default to div
+  $container_classes = ['contact-method'];
+  $data_attributes = '';
+  $link_href = '#';
+  $title_attr = osc_esc_html($field_label);
+  $display_value = '';
+
+  if ($is_phone) {
+      // --- Phone Number Logic ---
+      $container_classes[] = 'phone'; // It's definitely a phone
+
+      if ($is_logged_in) {
+          // --- LOGGED IN: Show full number, direct tel: link ---
+          $container_tag = 'a';
+          $container_classes[] = 'logged'; // Class for styling logged-in state
+          $display_value = osc_esc_html($phone_data['phone']); // Use the FULL, potentially formatted number
+          $link_href = 'tel:' . preg_replace('/\s+/', '', $phone_data['phone']); // Create clean tel: link
+          // Use a title indicating the action (call) or just the number itself
+          $title_attr = osc_esc_html(sprintf(__('Call %s', 'epsilon'), $phone_data['phone']));
+          $data_attributes = ''; // No data attributes needed for reveal
+
+      } else {
+          // --- NOT LOGGED IN: Show masked number, link to login ---
+          $container_tag = 'a';
+          $container_classes[] = 'not-logged'; // Use class from eps_get_phone or set here
+          $display_value = $phone_data['masked']; // Show the masked version
+          $link_href = osc_esc_html($phone_data['url']); // URL should be login URL from eps_get_phone
+          $title_attr = osc_esc_html($phone_data['title']); // Title should indicate login required
+          // Optional: Add data attribute for login URL if needed by JS elsewhere, but link already goes there
+          $data_attributes = ' data-login-url="' . osc_esc_html(osc_user_login_url()) . '"';
+      }
+
+      // Optional: Add specific phone type class if needed (e.g., based on format)
+      // if (strpos($phone_data['phone'], '+251 ') === 0) {
+      //     $container_classes[] = 'phone-mobile';
+      // }
+
+  } else {
+      // --- Not a Phone Number (Email, URL, Plain Text) Logic ---
+      // Use $formatted_account_value as it's not treated as a phone
+      if ($is_logged_in) {
+          $container_classes[] = 'logged'; // General logged-in class
+          $display_value = osc_esc_html($formatted_account_value); // Show the potentially formatted value
+
+          if (filter_var($formatted_account_value, FILTER_VALIDATE_URL)) {
+              $container_tag = 'a';
+              $link_href = $formatted_account_value;
+              $title_attr = osc_esc_html(__('Visit link', 'epsilon'));
+              $data_attributes = ' target="_blank" rel="nofollow noreferrer"';
+          } elseif (filter_var($formatted_account_value, FILTER_VALIDATE_EMAIL)) {
+              $container_tag = 'a';
+              $link_href = 'mailto:' . $formatted_account_value;
+              $title_attr = osc_esc_html(__('Send email', 'epsilon'));
+          } else {
+              // Just plain text
+              $container_tag = 'div';
+              $title_attr = osc_esc_html($field_label . ': ' . $formatted_account_value);
+              $link_href = '#'; // No link for div
+          }
+      } else { // Not a phone, not logged in
+          $container_tag = 'a'; // Link to login to view
+          $container_classes[] = 'not-logged'; // Generic class for not logged in
+          $link_href = osc_user_login_url();
+          $title_attr = osc_esc_html(__('Login to view contact', 'epsilon'));
+
+          // Simple masking for non-phone, non-logged in
+          $len = mb_strlen($formatted_account_value);
+          if ($len > 5) {
+              $display_value = osc_esc_html(mb_substr($formatted_account_value, 0, 2)) . '***' . osc_esc_html(mb_substr($formatted_account_value, -2));
+          } elseif ($len > 1) {
+              $display_value = osc_esc_html(mb_substr($formatted_account_value, 0, 1)) . '***';
+          } else {
+              $display_value = '***';
+          }
+          $data_attributes = ' data-login-url="' . osc_esc_html(osc_user_login_url()) . '"';
+      }
+  }
+
+  // Final Output Generation
+  // Set href attribute only if it's a link and not linking to '#'
+  $link_href_attr = '';
+  if ($container_tag === 'a' && $link_href !== '#') {
+      $link_href_attr = ' href="' . osc_esc_html($link_href) . '"';
+  }
+
+  // Build the HTML output
+  echo sprintf(
+      '<%s class="%s"%s title="%s"%s>',
+      $container_tag,
+      implode(' ', array_unique($container_classes)), // Use array_unique to avoid duplicate classes
+      $link_href_attr,
+      $title_attr,
+      $data_attributes // Includes login URL if not logged in and not phone, empty otherwise for phones
+  );
+  // Use span.contact-value for the displayed text
+  echo sprintf('<span class="contact-value">%s</span>', $display_value);
+  echo $icons_html; // Append icons (WhatsApp, Telegram, etc.)
+  echo sprintf('</%s>', $container_tag);
+}
+
+
+?>
+
+<?php
 // Get user data
 $user = osc_user();
 if (!$user) {
@@ -32,44 +218,6 @@ if (!empty($user['dt_access_date'])) {
      $last_online = __('Last online: Unknown', 'epsilon');
 }
 
-
-function xethio_format_ethiopian_phone($phoneNumber) {
-    // Trim whitespace first
-    $num = trim($phoneNumber);
-  
-    // If it's empty or clearly not a phone number candidate, return original
-    if (empty($num) || strpos($num, '@') !== false || strpos($num, ' ') !== false) {
-         // Check if it's ALREADY correctly formatted (+251 9...)
-         if (preg_match('/^\+251\s9\d{8}$/', $num)) {
-             return $num; // It's already perfect
-         }
-         // Otherwise, likely not a simple number we should format
-         return $phoneNumber;
-    }
-  
-    // Clean the number: remove all non-digits EXCEPT a leading '+'
-    $cleanedNum = preg_replace('/[^\d+]/', '', $num);
-    if (strpos($num, '+') !== 0 && strpos($cleanedNum, '+') === 0) {
-        // Remove '+' if it wasn't at the start of the original string
-        $cleanedNum = str_replace('+', '', $cleanedNum);
-    }
-     // Remove internal '+' if any snuck through (e.g., +251+9...)
-    if (substr_count($cleanedNum, '+') > 1 || (strpos($cleanedNum, '+') > 0) ) {
-       $cleanedNum = preg_replace('/\+/', '', $cleanedNum);
-       if (strpos($num, '+') === 0) { // Add back leading plus if original had it
-            $cleanedNum = '+' . $cleanedNum;
-       }
-    }
-  
-    // Use regex to capture the core 9 digits (9 followed by 8 digits)
-    if (preg_match('/^(?:\+?251|0)?(9\d{8})$/', $cleanedNum, $matches)) {
-        // Found a valid pattern, format it with the space
-        return '+251 ' . $matches[1]; // $matches[1] contains '9XXXXXXXX'
-    }
-  
-    // No valid Ethiopian pattern found, return the original input
-    return $phoneNumber;
-  }
   
 
 // User About Info - Use s_info field
@@ -90,146 +238,6 @@ $primary_account_val = isset($user['primary_accounts']) ? trim($user['primary_ac
 $additional_methods_str = isset($user['additional_methods']) ? $user['additional_methods'] : '';
 $additional_account_val = isset($user['additional_accounts']) ? trim($user['additional_accounts']) : '';
 
-function generate_contact_methods_enhanced($account_value, $methods_string, $field_label = 'Contact') {
-    // Format the input value FIRST using the improved function
-    $formatted_account_value = function_exists('xethio_format_ethiopian_phone') ? xethio_format_ethiopian_phone($account_value) : $account_value;
-  
-    if (empty($formatted_account_value)) {
-        return; // Nothing to display
-    }
-  
-    $methods = !empty($methods_string) ? explode(',', $methods_string) : [];
-    $icons_html = '';
-    $has_phone_icon = false;
-  
-    // Generate icons based on methods_string
-    foreach ($methods as $method) {
-        $method = trim(strtolower($method));
-        switch ($method) {
-            case 'whatsapp':
-                $icons_html .= '<i class="icon-spacing fab fa-whatsapp" title="WhatsApp"></i>';
-                break;
-            case 'telegram':
-                $icons_html .= '<i class="icon-spacing fab fa-telegram-plane" title="Telegram"></i>';
-                break;
-            case 'sms':
-                $icons_html .= '<i class="icon-spacing fas fa-sms" title="SMS"></i>';
-                break;
-            case 'directcall':
-                // Only add the phone icon once, even if 'directcall' appears multiple times
-                if (!$has_phone_icon) {
-                    $icons_html .= '<i class="icon-spacing fas fa-phone-alt" title="Direct Call"></i>';
-                    $has_phone_icon = true;
-                }
-                break;
-        }
-    }
-  
-    // Check if the formatted value is likely a phone number using eps_get_phone
-    $phone_data = function_exists('eps_get_phone') ? eps_get_phone($formatted_account_value) : array('found' => false);
-    $is_phone = isset($phone_data['found']) && $phone_data['found'];
-    $is_logged_in = osc_is_web_user_logged_in();
-  
-    $container_tag = 'div'; // Default to div
-    $container_classes = ['contact-method'];
-    $data_attributes = '';
-    $link_href = '#';
-    $title_attr = osc_esc_html($field_label);
-    $display_value = '';
-  
-    if ($is_phone) {
-        // --- Phone Number Logic ---
-        $container_classes[] = 'phone'; // It's definitely a phone
-  
-        if ($is_logged_in) {
-            // --- LOGGED IN: Show full number, direct tel: link ---
-            $container_tag = 'a';
-            $container_classes[] = 'logged'; // Class for styling logged-in state
-            $display_value = osc_esc_html($phone_data['phone']); // Use the FULL, potentially formatted number
-            $link_href = 'tel:' . preg_replace('/\s+/', '', $phone_data['phone']); // Create clean tel: link
-            // Use a title indicating the action (call) or just the number itself
-            $title_attr = osc_esc_html(sprintf(__('Call %s', 'epsilon'), $phone_data['phone']));
-            $data_attributes = ''; // No data attributes needed for reveal
-  
-        } else {
-            // --- NOT LOGGED IN: Show masked number, link to login ---
-            $container_tag = 'a';
-            $container_classes[] = 'not-logged'; // Use class from eps_get_phone or set here
-            $display_value = $phone_data['masked']; // Show the masked version
-            $link_href = osc_esc_html($phone_data['url']); // URL should be login URL from eps_get_phone
-            $title_attr = osc_esc_html($phone_data['title']); // Title should indicate login required
-            // Optional: Add data attribute for login URL if needed by JS elsewhere, but link already goes there
-            $data_attributes = ' data-login-url="' . osc_esc_html(osc_user_login_url()) . '"';
-        }
-  
-        // Optional: Add specific phone type class if needed (e.g., based on format)
-        // if (strpos($phone_data['phone'], '+251 ') === 0) {
-        //     $container_classes[] = 'phone-mobile';
-        // }
-  
-    } else {
-        // --- Not a Phone Number (Email, URL, Plain Text) Logic ---
-        // Use $formatted_account_value as it's not treated as a phone
-        if ($is_logged_in) {
-            $container_classes[] = 'logged'; // General logged-in class
-            $display_value = osc_esc_html($formatted_account_value); // Show the potentially formatted value
-  
-            if (filter_var($formatted_account_value, FILTER_VALIDATE_URL)) {
-                $container_tag = 'a';
-                $link_href = $formatted_account_value;
-                $title_attr = osc_esc_html(__('Visit link', 'epsilon'));
-                $data_attributes = ' target="_blank" rel="nofollow noreferrer"';
-            } elseif (filter_var($formatted_account_value, FILTER_VALIDATE_EMAIL)) {
-                $container_tag = 'a';
-                $link_href = 'mailto:' . $formatted_account_value;
-                $title_attr = osc_esc_html(__('Send email', 'epsilon'));
-            } else {
-                // Just plain text
-                $container_tag = 'div';
-                $title_attr = osc_esc_html($field_label . ': ' . $formatted_account_value);
-                $link_href = '#'; // No link for div
-            }
-        } else { // Not a phone, not logged in
-            $container_tag = 'a'; // Link to login to view
-            $container_classes[] = 'not-logged'; // Generic class for not logged in
-            $link_href = osc_user_login_url();
-            $title_attr = osc_esc_html(__('Login to view contact', 'epsilon'));
-  
-            // Simple masking for non-phone, non-logged in
-            $len = mb_strlen($formatted_account_value);
-            if ($len > 5) {
-                $display_value = osc_esc_html(mb_substr($formatted_account_value, 0, 2)) . '***' . osc_esc_html(mb_substr($formatted_account_value, -2));
-            } elseif ($len > 1) {
-                $display_value = osc_esc_html(mb_substr($formatted_account_value, 0, 1)) . '***';
-            } else {
-                $display_value = '***';
-            }
-            $data_attributes = ' data-login-url="' . osc_esc_html(osc_user_login_url()) . '"';
-        }
-    }
-  
-    // Final Output Generation
-    // Set href attribute only if it's a link and not linking to '#'
-    $link_href_attr = '';
-    if ($container_tag === 'a' && $link_href !== '#') {
-        $link_href_attr = ' href="' . osc_esc_html($link_href) . '"';
-    }
-  
-    // Build the HTML output
-    echo sprintf(
-        '<%s class="%s"%s title="%s"%s>',
-        $container_tag,
-        implode(' ', array_unique($container_classes)), // Use array_unique to avoid duplicate classes
-        $link_href_attr,
-        $title_attr,
-        $data_attributes // Includes login URL if not logged in and not phone, empty otherwise for phones
-    );
-    // Use span.contact-value for the displayed text
-    echo sprintf('<span class="contact-value">%s</span>', $display_value);
-    echo $icons_html; // Append icons (WhatsApp, Telegram, etc.)
-    echo sprintf('</%s>', $container_tag);
-  }
-  
 ?>
 
 
@@ -303,40 +311,39 @@ function generate_contact_methods_enhanced($account_value, $methods_string, $fie
             <div class="address"><i class="fas fa-map-marked-alt"></i> <?php echo $user_location; ?></div>
           <?php } ?>
 
-          <?php // --- Display Main Mobile Phone (Original Structure) --- ?>
-          <?php if($user_phone_mobile_data['found'] && $show_phone_on_profile !== "no" ) { ?>
-                <a class="phone-mobile phone <?php echo $user_phone_mobile_data['class']; ?>" title="<?php echo osc_esc_html($user_phone_mobile_data['title']); ?>" data-prefix="tel" href="<?php echo osc_esc_html($user_phone_mobile_data['url']); ?>" data-part1="<?php echo osc_esc_html($user_phone_mobile_data['part1']); ?>" data-part2="<?php echo osc_esc_html($user_phone_mobile_data['part2']); ?>">
-                  <span><?php echo $user_phone_mobile_data['masked']; ?></span>
-                  <i class="fas fa-phone-alt"></i> <?php // Original icon placement ?>
-                </a>
-          <?php } ?>
-
-          <?php // --- Display Main Landline Phone (Original Structure) --- ?>
-          <?php if($user_phone_land_data['found'] && $show_phone_on_profile !== "no") { ?>
-                <a class="phone-land phone <?php echo $user_phone_land_data['class']; ?>" title="<?php echo osc_esc_html($user_phone_land_data['title']); ?>" data-prefix="tel" href="<?php echo osc_esc_html($user_phone_land_data['url']); ?>" data-part1="<?php echo osc_esc_html($user_phone_land_data['part1']); ?>" data-part2="<?php echo osc_esc_html($user_phone_land_data['part2']); ?>">
-                  <span><?php echo $user_phone_land_data['masked']; ?></span>
-                  <i class="fas fa-phone-alt"></i> <?php // Original icon placement ?>
-                </a>
-          <?php } ?>
-
           <?php
-            // --- NEW: Display Primary Optional Contact ---
-            generate_contact_methods_enhanced(
-                $primary_account_val,
-                $primary_methods_str,
-                $show_phone_on_profile, // Use the same flag
-                __('Primary Contact', 'epsilon') // Label
-            );
+                // --- CORRECTED: Use $user variable ---
+                $formatted_mobile = (function_exists('xethio_format_ethiopian_phone'))
+                                    ? xethio_format_ethiopian_phone(isset($user['s_phone_mobile']) ? $user['s_phone_mobile'] : '') // Use $user
+                                    : (isset($user['s_phone_mobile']) ? $user['s_phone_mobile'] : ''); // Use $user
+                $user_phone_mobile_data = eps_get_phone($formatted_mobile);
+              ?>
+              <?php // The $show_phone_on_profile check was already correctly using the variable derived from $user at the top ?>
+              <?php if($user_phone_mobile_data['found'] && $show_phone_on_profile=="yes") { ?>
+                    <a class="phone-mobile phone <?php echo $user_phone_mobile_data['class']; ?>" title="<?php echo osc_esc_html($user_phone_mobile_data['title']); ?>" data-prefix="tel" href="<?php echo osc_esc_html($user_phone_mobile_data['url']); ?>" data-part1="<?php echo osc_esc_html($user_phone_mobile_data['part1']); ?>" data-part2="<?php echo osc_esc_html($user_phone_mobile_data['part2']); ?>">
+                      <span><?php echo $user_phone_mobile_data['masked']; ?></span><i class="fas fa-phone-alt"></i>
+                    </a>
+              <?php } ?>
 
-            // --- NEW: Display Additional Optional Contact ---
-            generate_contact_methods_enhanced(
-                $additional_account_val,
-                $additional_methods_str,
-                $show_phone_on_profile, // Use the same flag
-                __('Additional Contact', 'epsilon') // Label
-            );
-          ?>
+              <?php
+                // --- CORRECTED: Use $user variable ---
+                $formatted_land = (function_exists('xethio_format_ethiopian_phone'))
+                                  ? xethio_format_ethiopian_phone(isset($user['s_phone_land']) ? $user['s_phone_land'] : '') // Use $user
+                                  : (isset($user['s_phone_land']) ? $user['s_phone_land'] : ''); // Use $user
+                $user_phone_land_data = eps_get_phone($formatted_land);
+              ?>
+              <?php if($user_phone_land_data['found']) { // Landline doesn't seem to have the show_on_profile check in either file ?>
+                    <a class="phone-land phone <?php echo $user_phone_land_data['class']; ?>" title="<?php echo osc_esc_html($user_phone_land_data['title']); ?>" data-prefix="tel" href="<?php echo osc_esc_html($user_phone_land_data['url']); ?>" data-part1="<?php echo osc_esc_html($user_phone_land_data['part1']); ?>" data-part2="<?php echo osc_esc_html($user_phone_land_data['part2']); ?>">
+                      <span><?php echo $user_phone_land_data['masked']; ?></span><i class="fas fa-phone-alt"></i>
+                    </a>
+              <?php } ?>
 
+              <?php
+                // Display Primary Optional Contact (This part was already correct)
+                generate_contact_methods_enhanced( $primary_account_val, $primary_methods_str,  __('Primary Contact', 'epsilon') );
+                // Display Additional Optional Contact (This part was already correct)
+                generate_contact_methods_enhanced( $additional_account_val, $additional_methods_str,  __('Additional Contact', 'epsilon') );
+              ?>
         </div> <?php // End line3 ?>
 
       </div> <?php // End #seller box ?>
