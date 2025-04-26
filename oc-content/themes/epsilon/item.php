@@ -1,16 +1,56 @@
 <?php
 // Ensure helper functions are defined (ideally move these to functions.php)
-if (!function_exists('xethio_format_ethiopian_phone')) {
     function xethio_format_ethiopian_phone($phoneNumber) {
-      $num = trim($phoneNumber); if (empty($num)) { return $phoneNumber; }
-      if (strpos($num, '@') !== false || strpos($num, ' ') !== false || !preg_match('/^[+0-9]+$/', preg_replace('/\s+/', '', $num)) ) { if (preg_match('/^\+251\s9\d{8}$/', $num)) { return $num; } return $phoneNumber; }
-      $cleanedNum = preg_replace('/\D/', '', $num); if (strpos($num, '+') === 0) { $cleanedNum = '+' . $cleanedNum; } $coreDigits = null;
-      if (strpos($cleanedNum, '+2519') === 0 && strlen($cleanedNum) === 13) { $coreDigits = substr($cleanedNum, 4); } elseif (strpos($cleanedNum, '2519') === 0 && strlen($cleanedNum) === 12) { $coreDigits = substr($cleanedNum, 3); } elseif (strpos($cleanedNum, '09') === 0 && strlen($cleanedNum) === 10) { $coreDigits = substr($cleanedNum, 2); } elseif (strpos($cleanedNum, '9') === 0 && strlen($cleanedNum) === 9) { $coreDigits = substr($cleanedNum, 1); }
-      if ($coreDigits !== null && strlen($coreDigits) === 8) { return '+251 9' . $coreDigits; } else { return $phoneNumber; }
+      // Trim whitespace first
+      $num = trim($phoneNumber);
+    
+      // If it's empty, return original
+      if (empty($num)) {
+          return $phoneNumber;
+      }
+    
+      // Avoid formatting obvious non-numbers or already formatted numbers
+      if (strpos($num, '@') !== false || strpos($num, ' ') !== false || !preg_match('/^[+0-9]+$/', preg_replace('/\s+/', '', $num)) ) {
+           // If it contains '@', spaces already, or non-numeric/non-+ characters, assume it's not a simple number to format.
+           // Handle potentially already correct format '+251 9...'
+           if (preg_match('/^\+251\s9\d{8}$/', $num)) {
+               return $num; // It's already correct
+           }
+          // Otherwise return original for things like usernames, complex strings etc.
+          return $phoneNumber;
+      }
+    
+    
+      // Remove non-digit characters, except keep '+' if it's at the start
+      $cleanedNum = preg_replace('/\D/', '', $num); // Remove all non-digits first
+       if (strpos($num, '+') === 0) {
+           $cleanedNum = '+' . $cleanedNum; // Add plus back if it was originally there
+       }
+    
+    
+      $coreDigits = null;
+    
+      // Try matching different Ethiopian formats
+      if (strpos($cleanedNum, '+2519') === 0 && strlen($cleanedNum) === 13) { // +2519XXXXXXXX
+          $coreDigits = substr($cleanedNum, 4);
+      } elseif (strpos($cleanedNum, '2519') === 0 && strlen($cleanedNum) === 12) { // 2519XXXXXXXX
+          $coreDigits = substr($cleanedNum, 3);
+      } elseif (strpos($cleanedNum, '09') === 0 && strlen($cleanedNum) === 10) { // 09XXXXXXXX
+          $coreDigits = substr($cleanedNum, 2); // Get the 8 digits after '09'
+      } elseif (strpos($cleanedNum, '9') === 0 && strlen($cleanedNum) === 9) { // 9XXXXXXXX
+          $coreDigits = substr($cleanedNum, 1); // Get the 8 digits after '9'
+      }
+    
+      // If we found the 8 core digits after the prefix '9'
+      if ($coreDigits !== null && strlen($coreDigits) === 8) {
+          // Format as +251 9XXXXXXXXX (assuming the prefix was 9)
+          return '+251 9' . $coreDigits;
+      } else {
+          // Return original if no valid pattern found or core digits length mismatch
+          return $phoneNumber;
+      }
     }
-}
-
-  function generate_contact_methods_enhanced($account_value, $methods_string,  $field_label = 'Contact') {
+    function generate_contact_methods_enhanced($account_value, $methods_string,  $field_label = 'Contact') {
       $formatted_account_value = function_exists('xethio_format_ethiopian_phone') ? xethio_format_ethiopian_phone($account_value) : $account_value;
       
       if (empty($formatted_account_value)) {
@@ -65,12 +105,7 @@ if (!function_exists('xethio_format_ethiopian_phone')) {
               isset($phone_data['part2']) ? $phone_data['part2'] : ''
           );
           $display_value = $phone_data['masked'];
-  
-          if (!$has_phone_icon) {
-              $icons_html .= '<i class="icon-spacing fas fa-phone-alt" title="' . osc_esc_html(__('Call', 'epsilon')) . '"></i>';
-              $has_phone_icon = true;
-          }
-      } else {
+        } else {
           if ($is_logged_in) {
               $container_classes[] = 'logged';
               $display_value = osc_esc_html($formatted_account_value);
@@ -123,6 +158,7 @@ if (!function_exists('xethio_format_ethiopian_phone')) {
       echo $icons_html;
       echo sprintf('</%s>', $container_tag);
   }
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

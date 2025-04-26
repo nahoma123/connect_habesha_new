@@ -157,12 +157,7 @@ function generate_contact_methods_enhanced($account_value, $methods_string,  $fi
             isset($phone_data['part2']) ? $phone_data['part2'] : ''
         );
         $display_value = $phone_data['masked'];
-
-        if (!$has_phone_icon) {
-            $icons_html .= '<i class="icon-spacing fas fa-phone-alt" title="' . osc_esc_html(__('Call', 'epsilon')) . '"></i>';
-            $has_phone_icon = true;
-        }
-    } else {
+      } else {
         if ($is_logged_in) {
             $container_classes[] = 'logged';
             $display_value = osc_esc_html($formatted_account_value);
