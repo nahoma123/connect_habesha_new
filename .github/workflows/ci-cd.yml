@@ -27,9 +27,9 @@ jobs:
     
     - name: Deploy to Hostinger
       run: |
-        # Install sshpass for password authentication
+        # Update package lists and install required packages
         sudo apt-get update
-        sudo apt-get install -y sshpass
+        sudo apt-get install -y sshpass rsync
         
         # Create SSH config file
         mkdir -p ~/.ssh
@@ -37,6 +37,9 @@ jobs:
           HostName ${{ secrets.HOSTINGER_HOST }}
           User ${{ secrets.HOSTINGER_USER }}
           StrictHostKeyChecking no" > ~/.ssh/config
+        
+        # Set proper permissions for SSH config
+        chmod 600 ~/.ssh/config
         
         # Deploy using SSH with password
         sshpass -p "${{ secrets.HOSTINGER_PASSWORD }}" rsync -avz --exclude '.git' --exclude '.github' --exclude 'vendor' --exclude 'node_modules' --exclude '.env' --exclude '.gitignore' --exclude 'README.md' ./ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:${{ secrets.HOSTINGER_PATH }} 
