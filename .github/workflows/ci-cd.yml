@@ -27,6 +27,9 @@ jobs:
     
     - name: Deploy to Hostinger
       run: |
+        # Remove PHP PPA if it exists
+        sudo rm -f /etc/apt/sources.list.d/ondrej-*.list
+        
         # Update package lists and install required packages
         sudo apt-get update
         sudo apt-get install -y sshpass rsync
