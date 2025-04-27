@@ -22,10 +22,4 @@ jobs:
       run: npm install
     
     - name: Build project
-      run: npm run build
-    
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: build
-        path: dist/ 
+      run: npm run build 
