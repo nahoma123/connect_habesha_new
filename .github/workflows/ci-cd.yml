@@ -25,28 +25,23 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
     
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.8.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    
     - name: Deploy to Hostinger
       run: |
-        # Remove PHP PPA if it exists
-        sudo rm -f /etc/apt/sources.list.d/ondrej-*.list
-        
-        # Update package lists and install required packages
-        sudo apt-get update
-        sudo apt-get install -y rsync
-        
         # Create SSH config file
         mkdir -p ~/.ssh
         echo "Host ${{ secrets.HOSTINGER_HOST }}
           HostName ${{ secrets.HOSTINGER_HOST }}
           Port 65002
           User ${{ secrets.HOSTINGER_USER }}
-          IdentityFile ~/.ssh/deploy_key
           StrictHostKeyChecking no" > ~/.ssh/config
         
-        # Create SSH key file
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
-        chmod 600 ~/.ssh/deploy_key
+        # Set proper permissions
         chmod 600 ~/.ssh/config
         
-        # Deploy using SSH key
+        # Deploy using SSH
         rsync -avz -e "ssh -p 65002" --exclude '.git' --exclude '.github' --exclude 'vendor' --exclude 'node_modules' --exclude '.env' --exclude '.gitignore' --exclude 'README.md' ./ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:${{ secrets.HOSTINGER_PATH }} 
