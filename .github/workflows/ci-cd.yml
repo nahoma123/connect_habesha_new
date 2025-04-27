@@ -13,13 +13,17 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
       with:
-        node-version: '18'
+        php-version: '8.2'
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, mysql, zip
+    
+    - name: Validate composer.json
+      run: composer validate --strict
     
     - name: Install dependencies
-      run: npm install
+      run: composer install --prefer-dist --no-progress
     
     - name: Build project
-      run: npm run build 
+      run: composer run build 
