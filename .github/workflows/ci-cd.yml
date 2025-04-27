@@ -38,6 +38,7 @@ jobs:
         mkdir -p ~/.ssh
         echo "Host ${{ secrets.HOSTINGER_HOST }}
           HostName ${{ secrets.HOSTINGER_HOST }}
+          Port 65002
           User ${{ secrets.HOSTINGER_USER }}
           StrictHostKeyChecking no" > ~/.ssh/config
         
@@ -45,4 +46,4 @@ jobs:
         chmod 600 ~/.ssh/config
         
         # Deploy using SSH with password
-        sshpass -p "${{ secrets.HOSTINGER_PASSWORD }}" rsync -avz --exclude '.git' --exclude '.github' --exclude 'vendor' --exclude 'node_modules' --exclude '.env' --exclude '.gitignore' --exclude 'README.md' ./ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:${{ secrets.HOSTINGER_PATH }} 
+        sshpass -p "${{ secrets.HOSTINGER_PASSWORD }}" rsync -avz -e "ssh -p 65002" --exclude '.git' --exclude '.github' --exclude 'vendor' --exclude 'node_modules' --exclude '.env' --exclude '.gitignore' --exclude 'README.md' ./ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:${{ secrets.HOSTINGER_PATH }} 
