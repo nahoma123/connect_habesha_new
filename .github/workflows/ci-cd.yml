@@ -32,7 +32,7 @@ jobs:
         
         # Update package lists and install required packages
         sudo apt-get update
-        sudo apt-get install -y sshpass rsync
+        sudo apt-get install -y rsync
         
         # Create SSH config file
         mkdir -p ~/.ssh
@@ -40,10 +40,13 @@ jobs:
           HostName ${{ secrets.HOSTINGER_HOST }}
           Port 65002
           User ${{ secrets.HOSTINGER_USER }}
+          IdentityFile ~/.ssh/deploy_key
           StrictHostKeyChecking no" > ~/.ssh/config
         
-        # Set proper permissions for SSH config
+        # Create SSH key file
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+        chmod 600 ~/.ssh/deploy_key
         chmod 600 ~/.ssh/config
         
-        # Deploy using SSH with password
-        sshpass -p "${{ secrets.HOSTINGER_PASSWORD }}" rsync -avz -e "ssh -p 65002" --exclude '.git' --exclude '.github' --exclude 'vendor' --exclude 'node_modules' --exclude '.env' --exclude '.gitignore' --exclude 'README.md' ./ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:${{ secrets.HOSTINGER_PATH }} 
+        # Deploy using SSH key
+        rsync -avz -e "ssh -p 65002" --exclude '.git' --exclude '.github' --exclude 'vendor' --exclude 'node_modules' --exclude '.env' --exclude '.gitignore' --exclude 'README.md' ./ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:${{ secrets.HOSTINGER_PATH }} 
