@@ -43,5 +43,15 @@ jobs:
         # Set proper permissions
         chmod 600 ~/.ssh/config
         
-        # Deploy using SSH
-        rsync -avz -e "ssh -p 65002" --exclude '.git' --exclude '.github' --exclude 'vendor' --exclude 'node_modules' --exclude '.env' --exclude '.gitignore' --exclude 'README.md' ./ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:${{ secrets.HOSTINGER_PATH }} 
+        # First do a dry run to see what would change
+        echo "🚀 Starting deployment dry run..."
+        rsync -avz --dry-run -e "ssh -p 65002" --exclude '.git' --exclude '.github' --exclude 'vendor' --exclude 'node_modules' --exclude '.env' --exclude '.gitignore' --exclude 'README.md' ./ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:${{ secrets.HOSTINGER_PATH }}
+        
+        # Ask for confirmation before actual deployment
+        echo "📋 Dry run completed. Review the changes above."
+        echo "✅ If everything looks correct, the actual deployment will proceed."
+        
+        # Actual deployment
+        echo "🚀 Starting actual deployment..."
+        rsync -avz -e "ssh -p 65002" --exclude '.git' --exclude '.github' --exclude 'vendor' --exclude 'node_modules' --exclude '.env' --exclude '.gitignore' --exclude 'README.md' ./ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:${{ secrets.HOSTINGER_PATH }}
+        echo "✅ Deployment completed successfully!" 
