@@ -1,4 +1,4 @@
-name: Simple File Sync Deployment
+name: Simple Sync Deployment
 
 on:
   push:
