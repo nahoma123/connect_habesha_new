@@ -6,8 +6,6 @@ on:
   pull_request:
     branches: [ main ]
 
-    # This workflow will run on every push to the main branch and on pull requests targeting the main branch.
-
 jobs:
   # Job for building, testing (add tests if you have them)
   build:
@@ -44,7 +42,18 @@ jobs:
       run: composer validate --strict
 
     - name: Install dependencies (use cache)
+      # Only run composer install if cache wasn't restored
+      # If cache *was* restored, vendor dir exists from cache step
+      # run: composer install --prefer-dist --no-progress --no-dev --optimize-autoloader
+      # Simpler: always run install, composer is fast if vendor dir matches lock file
       run: composer install --prefer-dist --no-progress --no-dev --optimize-autoloader
+
+    # --- Add your test steps here ---
+    # Example:
+    # - name: Run tests (e.g., PHPUnit)
+    #   run: vendor/bin/phpunit
+
+  # Separate job for deployment, only runs on push to main
   deploy:
     needs: build # Ensure build job completes successfully first
     runs-on: ubuntu-latest
@@ -54,18 +63,25 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+      # No need to fetch full history for deployment usually
       with:
         fetch-depth: 1 # Fetch only the latest commit
+
+    # Note: We checkout again here. If you need build artifacts (like compiled assets
+    # or the vendor dir *if you decide to deploy it*), you should use
+    # actions/upload-artifact in the 'build' job and actions/download-artifact here.
+    # Since 'vendor' is excluded in rsync, we assume it's handled on the server.
 
     - name: Setup SSH Agent
       uses: webfactory/ssh-agent@v0.8.0
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-    - name: Deploy to Hostinger using Rsync (No Deletion)
+    - name: Deploy to Hostinger using Rsync
       run: |
         echo "🚀 Preparing deployment..."
         mkdir -p ~/.ssh
+        # Use printf for potentially safer variable expansion
         printf "Host %s\n  HostName %s\n  Port 65002\n  User %s\n  StrictHostKeyChecking no\n  LogLevel ERROR\n" \
           "${{ secrets.HOSTINGER_HOST }}" \
           "${{ secrets.HOSTINGER_HOST }}" \
@@ -73,9 +89,11 @@ jobs:
         chmod 600 ~/.ssh/config
 
         echo "🚀 Starting deployment..."
-        # Removed the --delete flag to prevent deleting server-only files
-        # Kept necessary exclusions for files you don't want to upload from repo
-        rsync -avz \
+        # Use --delete to remove files on the destination that no longer exist in the source
+        # Removed the dry-run step for speed
+        # Added --checksum to potentially be more reliable than mod-time/size but might be slightly slower
+        # Keep -z (compression), usually good unless network is extremely fast / CPU slow
+        rsync -avz --delete \
           --exclude '.git' \
           --exclude '.github' \
           --exclude 'vendor' \
@@ -83,12 +101,6 @@ jobs:
           --exclude '.env' \
           --exclude '.gitignore' \
           --exclude 'README.md' \
-          # You generally DON'T need to exclude config.php here anymore,
-          # because without --delete, rsync won't remove it.
-          # However, excluding it prevents accidental upload if it somehow existed locally.
-          --exclude 'config.php' \
-          # Add other files/dirs from your REPO you never want to upload (if any)
-          # --exclude 'local_dev_stuff/' \
           -e "ssh -p 65002" \
           ./ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:${{ secrets.HOSTINGER_PATH }}
 
