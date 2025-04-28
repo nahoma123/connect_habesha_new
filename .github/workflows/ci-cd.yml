@@ -89,11 +89,10 @@ jobs:
         chmod 600 ~/.ssh/config
 
         echo "🚀 Starting deployment..."
-        # Use --delete to remove files on the destination that no longer exist in the source
         # Removed the dry-run step for speed
         # Added --checksum to potentially be more reliable than mod-time/size but might be slightly slower
         # Keep -z (compression), usually good unless network is extremely fast / CPU slow
-        rsync -avz --delete \
+        rsync -avz  \
           --exclude '.git' \
           --exclude '.github' \
           --exclude 'vendor' \
