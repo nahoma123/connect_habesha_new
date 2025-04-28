@@ -6,6 +6,8 @@ on:
   pull_request:
     branches: [ main ]
 
+    # This workflow will run on every push to the main branch and on pull requests targeting the main branch.
+
 jobs:
   # Job for building, testing (add tests if you have them)
   build:
