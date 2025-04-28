@@ -206,18 +206,29 @@
                       <div class="osp-perc<?php if($g['i_free_items_101'] <= 0) { ?> osp-none<?php } ?>"><?php _e('Free active listings:', 'osclass_pay'); ?> <?php echo ($g['i_free_items_101'] > 0 ? $g['i_free_items_101'] : 0); ?></div>
                     <?php } ?>
 
-                    <?php if(ModelOSP::newInstance()->checkGroupCategory() && osp_param('groups_category') == 1) { ?>
-                       <?php if(trim($g['s_category']) <> '') { ?>
-                         <?php /* Category access details */
-                            $ids = array_filter(explode(',', trim($g['s_category']))); $names = array();
-                            foreach($ids as $i) { $cat = Category::newInstance()->findByPrimaryKey($i); if($cat) { $names[] = $cat['s_name']; } }
-                            $categories = implode(', ', array_filter($names));
-                         ?>
-                         <div class="osp-cats osp-has-tooltip" title="<?php echo osc_esc_html(__('Exclusive access to categories:', 'osclass_pay') . ' ' . $categories); ?>"><?php _e('Exclusive access to categories:', 'osclass_pay'); ?> <?php echo osc_esc_html($categories); ?></div>
-                       <?php } else { ?>
-                         <div class="osp-cats osp-none"><?php _e('No exclusive access to categories', 'osclass_pay'); ?></div>
-                       <?php } ?>
-                    <?php } ?>
+                    <?php if(ModelOSP::newInstance()->checkGroupCategory()) { ?>
+              <?php if(osp_param('groups_category') == 1) { ?>
+                <?php if(trim($g['s_category']) <> '') { ?>
+                  <?php
+                    $ids = explode(',', trim($g['s_category']));
+                    $ids = array_filter($ids);
+
+                    $names = array();
+                    foreach($ids as $i) {
+                      $cat = Category::newInstance()->findByPrimaryKey($i);
+                      $names[] = $cat['s_name'];
+                    }
+
+                    $names = array_filter($names);
+                    $categories = implode(', ', $names);
+                  ?>
+
+                  <div class="osp-cats osp-has-tooltip" title="<?php echo osc_esc_html(__('Exclusive access to categories:', 'osclass_pay') . ' ' . $categories); ?>"><?php _e('Exclusive access to categories:', 'osclass_pay'); ?> <?php echo $categories; ?></div>
+                <?php } else { ?>
+                  <div class="osp-cats osp-none"><?php _e('No exclusive access to categories', 'osclass_pay'); ?></div>
+                <?php } ?>
+              <?php } ?>
+            <?php } ?>
                  </div>
              </div>
              <!-- --- END: Standard Group Item HTML --- -->
@@ -319,19 +330,31 @@
                       <div class="osp-perc<?php if($g['i_free_items_101'] <= 0) { ?> osp-none<?php } ?>"><?php _e('Free active listings:', 'osclass_pay'); ?> <?php echo ($g['i_free_items_101'] > 0 ? $g['i_free_items_101'] : 0); ?></div>
                     <?php } ?>
 
-                    <?php if(ModelOSP::newInstance()->checkGroupCategory() && osp_param('groups_category') == 1) { ?>
-                       <?php if(trim($g['s_category']) <> '') { ?>
-                         <?php /* Category access details */
-                            $ids = array_filter(explode(',', trim($g['s_category']))); $names = array();
-                            foreach($ids as $i) { $cat = Category::newInstance()->findByPrimaryKey($i); if($cat) { $names[] = $cat['s_name']; } }
-                            $categories = implode(', ', array_filter($names));
-                         ?>
-                         <div class="osp-cats osp-has-tooltip" title="<?php echo osc_esc_html(__('Exclusive access to categories:', 'osclass_pay') . ' ' . $categories); ?>"><?php _e('Exclusive access to categories:', 'osclass_pay'); ?> <?php echo osc_esc_html($categories); ?></div>
-                       <?php } else { ?>
-                         <div class="osp-cats osp-none"><?php _e('No exclusive access to categories', 'osclass_pay'); ?></div>
-                       <?php } ?>
-                    <?php } ?>
-                 </div>
+                    <?php if(ModelOSP::newInstance()->checkGroupCategory()) { ?>
+              <?php if(osp_param('groups_category') == 1) { ?>
+                <?php if(trim($g['s_category']) <> '') { ?>
+                  <?php
+                    $ids = explode(',', trim($g['s_category']));
+                    $ids = array_filter($ids);
+
+                    $names = array();
+                    foreach($ids as $i) {
+                      $cat = Category::newInstance()->findByPrimaryKey($i);
+                      $names[] = $cat['s_name'];
+                    }
+
+                    $names = array_filter($names);
+                    $categories = implode(', ', $names);
+                  ?>
+
+                  <div class="osp-cats osp-has-tooltip" title="<?php echo osc_esc_html(__('Exclusive access to categories:', 'osclass_pay') . ' ' . $categories); ?>"><?php _e('Exclusive access to categories:', 'osclass_pay'); ?> <?php echo $categories; ?></div>
+                <?php } else { ?>
+                  <div class="osp-cats osp-none"><?php _e('No exclusive access to categories', 'osclass_pay'); ?></div>
+                <?php } ?>
+              <?php } ?>
+            <?php } ?>
+
+          </div>
              </div>
              <!-- --- END: VIP Group Item HTML --- -->
 
