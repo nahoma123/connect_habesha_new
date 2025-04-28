@@ -330,6 +330,7 @@
                       <div class="osp-perc<?php if($g['i_free_items_101'] <= 0) { ?> osp-none<?php } ?>"><?php _e('Free active listings:', 'osclass_pay'); ?> <?php echo ($g['i_free_items_101'] > 0 ? $g['i_free_items_101'] : 0); ?></div>
                     <?php } ?>
 
+                    <?php if(ModelOSP::newInstance()->checkGroupCategory()) { ?>
                 <?php if(trim($g['s_category']) <> '') { ?>
                   <?php
                     $ids = explode(',', trim($g['s_category']));
@@ -349,6 +350,8 @@
                 <?php } else { ?>
                   <div class="osp-cats osp-none"><?php _e('No exclusive access to categories', 'osclass_pay'); ?></div>
                 <?php } ?>
+              
+            <?php } ?>
 
           </div>
              </div>
