@@ -7,101 +7,51 @@ on:
     branches: [ main ]
 
 jobs:
-  # Job for building, testing (add tests if you have them)
   build:
     runs-on: ubuntu-latest
+    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Setup PHP with Composer cache
+    - uses: actions/checkout@v4
+    
+    - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.2'
         extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, mysql, zip
-        coverage: none # Disable Xdebug/pcov unless you run tests that need coverage
-        tools: composer:v2 # Optionally specify composer version
-      # Cache Composer dependencies based on composer.lock hash
-      # This is simpler than using actions/cache separately for Composer
-      env:
-         COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Often needed for private repos via composer
-
-    # Cache Composer vendor directory
-    # Use a separate cache step for more control if needed, but setup-php often handles it well.
-    # This is an alternative/complementary cache strategy to setup-php's internal one.
-    - name: Cache Composer dependencies
-      id: composer-cache
-      uses: actions/cache@v4
-      with:
-        path: vendor # Cache the vendor directory
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
-
+    
     - name: Validate composer.json
       run: composer validate --strict
-
-    - name: Install dependencies (use cache)
-      # Only run composer install if cache wasn't restored
-      # If cache *was* restored, vendor dir exists from cache step
-      # run: composer install --prefer-dist --no-progress --no-dev --optimize-autoloader
-      # Simpler: always run install, composer is fast if vendor dir matches lock file
-      run: composer install --prefer-dist --no-progress --no-dev --optimize-autoloader
-
-    # --- Add your test steps here ---
-    # Example:
-    # - name: Run tests (e.g., PHPUnit)
-    #   run: vendor/bin/phpunit
-
-  # Separate job for deployment, only runs on push to main
-  deploy:
-    needs: build # Ensure build job completes successfully first
-    runs-on: ubuntu-latest
-    # Only run deployment on actual pushes to the main branch, not on PRs
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      # No need to fetch full history for deployment usually
-      with:
-        fetch-depth: 1 # Fetch only the latest commit
-
-    # Note: We checkout again here. If you need build artifacts (like compiled assets
-    # or the vendor dir *if you decide to deploy it*), you should use
-    # actions/upload-artifact in the 'build' job and actions/download-artifact here.
-    # Since 'vendor' is excluded in rsync, we assume it's handled on the server.
-
-    - name: Setup SSH Agent
+    
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
+    
+    - name: Setup SSH
       uses: webfactory/ssh-agent@v0.8.0
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-    - name: Deploy to Hostinger using Rsync
+    
+    - name: Deploy to Hostinger
       run: |
-        echo "🚀 Preparing deployment..."
+        # Create SSH config file
         mkdir -p ~/.ssh
-        # Use printf for potentially safer variable expansion
-        printf "Host %s\n  HostName %s\n  Port 65002\n  User %s\n  StrictHostKeyChecking no\n  LogLevel ERROR\n" \
-          "${{ secrets.HOSTINGER_HOST }}" \
-          "${{ secrets.HOSTINGER_HOST }}" \
-          "${{ secrets.HOSTINGER_USER }}" > ~/.ssh/config
+        echo "Host ${{ secrets.HOSTINGER_HOST }}
+          HostName ${{ secrets.HOSTINGER_HOST }}
+          Port 65002
+          User ${{ secrets.HOSTINGER_USER }}
+          StrictHostKeyChecking no" > ~/.ssh/config
+        
+        # Set proper permissions
         chmod 600 ~/.ssh/config
-
-        echo "🚀 Starting deployment..."
-        # Use --delete to remove files on the destination that no longer exist in the source
-        # Removed the dry-run step for speed
-        # Added --checksum to potentially be more reliable than mod-time/size but might be slightly slower
-        # Keep -z (compression), usually good unless network is extremely fast / CPU slow
-        rsync -avz --delete \
-          --exclude '.git' \
-          --exclude '.github' \
-          --exclude 'vendor' \
-          --exclude 'node_modules' \
-          --exclude '.env' \
-          --exclude '.gitignore' \
-          --exclude 'README.md' \
-          -e "ssh -p 65002" \
-          ./ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:${{ secrets.HOSTINGER_PATH }}
-
-        echo "Deployment completed successfully!"
+        
+        # First do a dry run to see what would change
+        echo "🚀 Starting deployment dry run..."
+        rsync -avz --dry-run -e "ssh -p 65002" --exclude '.git' --exclude '.github' --exclude 'vendor' --exclude 'node_modules' --exclude '.env' --exclude '.gitignore' --exclude 'README.md' ./ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:${{ secrets.HOSTINGER_PATH }}
+        
+        # Ask for confirmation before actual deployment
+        echo "📋 Dry run completed. Review the changes above."
+        echo "✅ If everything looks correct, the actual deployment will proceed."
+        
+        # Actual deployment
+        echo "🚀 Starting actual deployment..."
+        rsync -avz -e "ssh -p 65002" --exclude '.git' --exclude '.github' --exclude 'vendor' --exclude 'node_modules' --exclude '.env' --exclude '.gitignore' --exclude 'README.md' ./ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:${{ secrets.HOSTINGER_PATH }}
+        echo "✅ Deployment completed successfully!" 
