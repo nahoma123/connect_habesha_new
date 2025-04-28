@@ -54,7 +54,7 @@
     <div class="container">
       <div class="box">
         <?php if (eps_param('interactive_title') == 1) { ?>
-          <h1><?php _e('Where would you like to have fun?', 'epsilon'); ?>
+          <h1><?php _e('Where would you like to have fun2?', 'epsilon'); ?>
             <div>
               <span class="l1"><?php _e('Addis Ababa?', 'epsilon'); ?></span>
               <span class="l2"><?php _e('Hawassa?', 'epsilon'); ?></span>
