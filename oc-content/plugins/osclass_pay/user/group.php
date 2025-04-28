@@ -506,7 +506,7 @@ jQuery(document).ready(function($) {
       clear: both;
   }
 
-  /* --- Section Spacing --- */
+  /* --- Section Spacing ---  */
    #vip-section {
        margin-top: 40px;      /* Space above VIP section */
        padding-top: 40px;     /* Space between top border and VIP title */
