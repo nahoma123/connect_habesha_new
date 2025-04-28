@@ -2,15 +2,13 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main ] # Deploy only when merging/pushing to main
+    branches: [ main ]
   pull_request:
-    branches: [ main ] # Build and test on PRs to main
+    branches: [ main ]
   workflow_dispatch: # Allow manual triggering
 
 jobs:
-  build-and-deploy: # Combined build and deploy job for simplicity
-    # Only run deployment steps when pushing to main or manually triggered
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+  ci-cd: # Combined CI and CD job
     runs-on: ubuntu-latest
     
     steps:
@@ -20,14 +18,13 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.2' # Specify your desired PHP version
-        extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, mysql, zip # Add necessary extensions
-        coverage: none # Disable coverage drivers unless needed for tests
+        php-version: '8.2' # Specify your PHP version
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, mysql, zip # Essential extensions
+        coverage: none # Disable coverage drivers
 
     - name: Get Composer Cache Directory
       id: composer-cache
-      run: |
-        echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
     - name: Cache Composer Dependencies
       uses: actions/cache@v4
@@ -38,109 +35,102 @@ jobs:
           ${{ runner.os }}-composer-
 
     - name: Validate composer.json and composer.lock
-      run: composer validate --strict
+      run: composer validate --strict --no-check-version # --no-check-version can speed up slightly if PHP platform check isn't critical here
 
-    - name: Install Dependencies
-      run: composer install --prefer-dist --no-progress --no-dev # Use --no-dev if you don't deploy dev dependencies
+    # Install ALL dependencies (including dev) for PRs (testing)
+    - name: Install Dependencies (for PR)
+      if: github.event_name == 'pull_request'
+      run: composer install --prefer-dist --no-progress --no-scripts
 
-    # Optional: Add build steps like compiling assets (npm/yarn) if needed
+    # Install ONLY production dependencies for deployment (main push / manual trigger)
+    # Add --optimize-autoloader for production performance
+    - name: Install Dependencies (for Deploy)
+      if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+      run: composer install --no-dev --prefer-dist --no-progress --no-scripts --optimize-autoloader
+
+    # Run composer scripts manually if needed after install
+    # Example: if you have post-install-cmd scripts for asset building etc.
+    # - name: Run Composer Scripts
+    #   run: composer run-script post-install-cmd --no-dev # Or appropriate script name
+
+    # Optional: Build Frontend Assets (Uncomment if needed)
     # - name: Build Frontend Assets
     #   run: |
-    #     npm install
+    #     npm install --omit=dev # Install only production frontend deps
     #     npm run build
 
     - name: Basic PHP Syntax Check (Linting)
-      run: find . -name '*.php' -not -path './vendor/*' -exec php -l {} \;
+      run: find . -name '*.php' -not -path './vendor/*' -not -path './node_modules/*' -exec php -l {} \;
 
-    # --- Deployment Steps ---
+    # Run tests only on Pull Requests
+    - name: Run Tests (e.g., PHPUnit)
+      if: github.event_name == 'pull_request'
+      run: echo "Add your test command here, e.g., ./vendor/bin/phpunit" # Replace with your actual test command
 
+    # --- Deployment Steps (only run on push to main or manual trigger) ---
     - name: Setup SSH Agent
-      uses: webfactory/ssh-agent@v0.8.0
+      if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
+      uses: webfactory/ssh-agent@v0.9.0 # Use latest version
       with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }} # Ensure this secret is set in GitHub repo settings
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Deploy to Hostinger via Rsync
+      if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
       env:
         HOSTINGER_HOST: ${{ secrets.HOSTINGER_HOST }}
         HOSTINGER_USER: ${{ secrets.HOSTINGER_USER }}
         HOSTINGER_PATH: ${{ secrets.HOSTINGER_PATH }} # e.g., public_html/myapp
         SSH_PORT: 65002 # Hostinger's non-standard SSH port
       run: |
-        set -e # Exit immediately if a command exits with a non-zero status.
+        echo "🚀 Starting deployment..."
+        # Use StrictHostKeyChecking=no for simplicity, or manage known_hosts for better security
+        SSH_OPTIONS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 
-        # Add host key to known_hosts for better security (optional but recommended)
-        # Obtain the host key beforehand using: ssh-keyscan -p $SSH_PORT $HOSTINGER_HOST
-        # echo "PASTE_HOST_KEY_HERE" >> ~/.ssh/known_hosts
-        # If not adding known_hosts, we'll use -o StrictHostKeyChecking=no (less secure)
-        SSH_OPTIONS="-o StrictHostKeyChecking=no" # Or remove this if using known_hosts
-
-        # Define excludes
+        # Define excludes - NOTE: 'vendor' is NOT excluded anymore
         EXCLUDES=(
-          --exclude '.git'
-          --exclude '.github'
-          --exclude 'vendor' # Assuming you run composer install on the server or handle it differently
-          --exclude 'node_modules'
-          --exclude '.env' # Sensitive environment variables should be managed on the server
-          --exclude '.gitignore'
-          --exclude 'README.md'
-          # Add any other files/dirs you want to exclude
+          --exclude='.git'
+          --exclude='.github'
+          --exclude='node_modules' # Exclude if you build assets elsewhere or don't need them
+          --exclude='.env' # MUST be managed on the server
+          --exclude='.env.example'
+          --exclude='.gitignore'
+          --exclude='storage/logs/*' # Avoid deploying logs
+          --exclude='storage/framework/sessions/*'
+          --exclude='storage/framework/cache/*'
+          --exclude='storage/framework/views/*'
+          --exclude='README.md'
+          --exclude='phpunit.xml'
+          # Add any other development files/dirs to exclude
         )
 
         # Deployment Target
-        REMOTE_TARGET="${HOSTINGER_USER}@${HOSTINGER_HOST}:${HOSTINGER_PATH}"
+        REMOTE_TARGET="${HOSTINGER_USER}@${HOSTINGER_HOST}:${HOSTINGER_PATH}/" # Ensure trailing slash on target
 
-        echo "🚀 Performing deployment dry run..."
-        rsync -avz --dry-run -e "ssh -p ${SSH_PORT} ${SSH_OPTIONS}" "${EXCLUDES[@]}" ./ "${REMOTE_TARGET}"
-
-        echo "-----------------------------------------------------"
-        echo "✅ Dry run complete. Review changes above."
-        echo "🚀 Starting actual deployment (will NOT delete remote files)..."
-        echo "-----------------------------------------------------"
-
-        # Actual deployment - uses -avz which copies new/changed files but does NOT delete remote files
+        # Actual deployment - uses -avz (archive, verbose, compress)
+        # Add --delete flag if you want to remove files on the server that are no longer in your repo
+        # Use --delete cautiously!
         rsync -avz -e "ssh -p ${SSH_PORT} ${SSH_OPTIONS}" "${EXCLUDES[@]}" ./ "${REMOTE_TARGET}"
 
-        echo "✅ Deployment to Hostinger completed successfully!"
+        echo "✅ Deployment sync to Hostinger completed."
 
-    # Optional: Add post-deployment steps (run migrations, clear cache on server, etc.)
-    # - name: Run Post-Deployment Commands on Server
-    #   env:
-    #     HOSTINGER_HOST: ${{ secrets.HOSTINGER_HOST }}
-    #     HOSTINGER_USER: ${{ secrets.HOSTINGER_USER }}
-    #     HOSTINGER_PATH: ${{ secrets.HOSTINGER_PATH }}
-    #     SSH_PORT: 65002
-    #   run: |
-    #     ssh -p ${SSH_PORT} -o StrictHostKeyChecking=no ${HOSTINGER_USER}@${HOSTINGER_HOST} "cd ${HOSTINGER_PATH} && php artisan cache:clear && php artisan migrate --force"
-
-# Optional: Separate job for Pull Requests (Build & Test only)
-  test:
-    # Only run on pull requests
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-          extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, mysql, zip
-          coverage: none
-      - name: Get Composer Cache Directory
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-      - name: Cache Composer Dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
-      - name: Validate composer.json and composer.lock
-        run: composer validate --strict
-      - name: Install Dependencies (including dev)
-        run: composer install --prefer-dist --no-progress # Install dev dependencies for testing
-      - name: Basic PHP Syntax Check (Linting)
-        run: find . -name '*.php' -not -path './vendor/*' -exec php -l {} \;
-      # Add your test commands here (e.g., PHPUnit)
-      # - name: Run Tests
-      #   run: ./vendor/bin/phpunit
+    # --- Post-Deployment Steps (Run commands on the server) ---
+    # ESSENTIAL for frameworks like Laravel/Symfony after deploying vendor dir
+    - name: Run Post-Deployment Commands on Server
+      if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
+      env:
+        HOSTINGER_HOST: ${{ secrets.HOSTINGER_HOST }}
+        HOSTINGER_USER: ${{ secrets.HOSTINGER_USER }}
+        HOSTINGER_PATH: ${{ secrets.HOSTINGER_PATH }}
+        SSH_PORT: 65002
+      run: |
+        echo "🚀 Running post-deployment commands on server..."
+        ssh -p ${SSH_PORT} -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${HOSTINGER_USER}@${HOSTINGER_HOST} "cd ${HOSTINGER_PATH} && php artisan optimize:clear && php artisan migrate --force"
+        # Common commands:
+        # - php artisan optimize:clear # Clears route, config, view, event caches
+        # - php artisan config:cache   # If not using optimize:clear
+        # - php artisan route:cache    # If not using optimize:clear
+        # - php artisan view:cache     # If not using optimize:clear
+        # - php artisan migrate --force # Run database migrations (use --force for non-interactive)
+        # - php artisan storage:link   # If needed and not already set up
+        # - Other commands like queue restarts, etc.
+        echo "✅ Post-deployment commands finished."
