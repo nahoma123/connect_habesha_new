@@ -207,7 +207,6 @@
                     <?php } ?>
 
                     <?php if(ModelOSP::newInstance()->checkGroupCategory()) { ?>
-              <?php if(osp_param('groups_category') == 1) { ?>
                 <?php if(trim($g['s_category']) <> '') { ?>
                   <?php
                     $ids = explode(',', trim($g['s_category']));
@@ -227,7 +226,6 @@
                 <?php } else { ?>
                   <div class="osp-cats osp-none"><?php _e('No exclusive access to categories', 'osclass_pay'); ?></div>
                 <?php } ?>
-              <?php } ?>
             <?php } ?>
                  </div>
              </div>
