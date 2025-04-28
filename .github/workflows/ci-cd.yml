@@ -104,4 +104,4 @@ jobs:
           -e "ssh -p 65002" \
           ./ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:${{ secrets.HOSTINGER_PATH }}
 
-        echo "✅ Deployment completed successfully!"
+        echo "Deployment completed successfully!"
