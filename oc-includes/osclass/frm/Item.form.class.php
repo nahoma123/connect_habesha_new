@@ -459,6 +459,11 @@ class ItemForm extends Form {
     $('#select_' + select).next("a").find(".select-box-label").text(osc.langs.select_subcategory);
     $('#select_' + select).trigger("created");
 
+    // MODIFICATION: Select the first option by default if it's a subcategory dropdown
+    if (categoryID != 0 && tmp_categories.length > 0) {
+      $('#select_' + select).find('option:eq(1)').prop('selected', true).trigger('change');
+    }
+
     // If this is a subcategory select and at least one option is disabled, append the "Upgrade to VIP" button
     if(categoryID != 0 && has_disabled_option) {
       if($('#select_' + select).next('.upgrade-vip-button').length == 0) {
