@@ -182,9 +182,28 @@ if (!$edit && $user_default_category) {
                 </div>
                 
                 <div class="row region">
-                  <label for="regionId"><?php _e('Region', 'epsilon'); ?></label>
-                  <div class="input-box"><?php ItemForm::region_select($regions, $prepare); ?></div>
-                </div>
+  <label for="regionId"><?php _e('Region', 'epsilon'); ?> <span class="req">*</span></label>
+  <div class="input-box">
+    <?php
+      // 1) capture whatever ItemForm::region_select() echoes
+      ob_start();
+      ItemForm::region_select($regions, $prepare);
+      $html = ob_get_clean();
+
+      // 2) inject required="required" into the <select> tag
+      //    (assumes the first <select> in $html is the region dropdown)
+      $html = str_replace(
+        '<select ',
+        '<select required="required" ',
+        $html
+      );
+
+      // 3) output the modified HTML
+      echo $html;
+    ?>
+  </div>
+</div>
+
               <?php } else { ?>
                 <?php 
                   $country_code = $countries[0]['pk_c_code'];
@@ -199,9 +218,27 @@ if (!$edit && $user_default_category) {
                 <input type="hidden" id="countryId" name="countryId" value="<?php echo osc_esc_html($country_code); ?>"/>
                 
                 <div class="row region">
-                  <label for="region"><?php _e('Region', 'epsilon'); ?></label>
-                  <div class="input-box"><?php ItemForm::region_select($regions, $prepare); ?></div>
-                </div>
+  <label for="region"><?php _e('Region', 'epsilon'); ?> <span class="req">*</span></label>
+  <div class="input-box">
+    <?php
+      // 1) Capture the <select> output
+      ob_start();
+      ItemForm::region_select($regions, $prepare);
+      $html = ob_get_clean();
+
+      // 2) Inject required="required" into the first <select> tag
+      $html = str_replace(
+        '<select ',
+        '<select required="required" ',
+        $html
+      );
+
+      // 3) Echo the modified HTML
+      echo $html;
+    ?>
+  </div>
+</div>
+
               <?php } ?>
 
               <?php 
@@ -212,9 +249,22 @@ if (!$edit && $user_default_category) {
               ?>
 
               <div class="row city">
-                <label for="city"><?php _e('City', 'epsilon'); ?></label>
-                <div class="input-box"><?php ItemForm::city_select($cities, $prepare); ?></div>
-              </div>
+  <label for="city"><?php _e('City', 'epsilon'); ?> <span class="req">*</span></label>
+  <div class="input-box">
+    <?php
+      ob_start();
+      ItemForm::city_select($cities, $prepare);
+      $html = ob_get_clean();
+      $html = str_replace(
+        '<select ',
+        '<select required="required" ',
+        $html
+      );
+      echo $html;
+    ?>
+  </div>
+</div>
+
               
             <?php } else if($location_type == 1) { ?>
               <input type="hidden" name="countryId" id="sCountry" value="<?php echo osc_esc_html($prepare['fk_c_country_code']); ?>"/>

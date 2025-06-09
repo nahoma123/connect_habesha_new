@@ -5,7 +5,7 @@
   <meta name="robots" content="noindex, nofollow" />
   <meta name="googlebot" content="noindex, nofollow" />
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-<link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
 
   <script type="text/javascript" src="<?php echo osc_current_web_theme_js_url('jquery.validate.min.js'); ?>"></script>
 
@@ -34,39 +34,32 @@
     }
     .pre-account > .content > section.container:after {background-image:none;}
 
-.btn-create-account {
-  background-color: #ffffff;
-  color: #7a4d9e;
-  border: 1px solid #7a4d9e;
-  padding: 10px 15px;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.4;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  width: 100%;
-  box-sizing: border-box;
-  cursor: pointer;
-  transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out, border-color 0.25s ease-in-out;
-}
+    .btn-create-account {
+      background-color: #ffffff;
+      color: #7a4d9e;
+      border: 1px solid #7a4d9e;
+      padding: 10px 15px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.4;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      width: 100%;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out, border-color 0.25s ease-in-out;
+    }
 
-.btn-create-account:hover {
-  background-color: #f9f7fc;
-  color: #693c8a;
-  border-color: #693c8a;
-  box-shadow:
-    0 2px 4px rgba(122, 77, 158, 0.1),
-    0 4px 8px rgba(122, 77, 158, 0.15),
-    0 6px 16px rgba(122, 77, 158, 0.2); /* Layered shadows for depth */
-}
-
-
-
-
-
-
-
+    .btn-create-account:hover {
+      background-color: #f9f7fc;
+      color: #693c8a;
+      border-color: #693c8a;
+      box-shadow:
+        0 2px 4px rgba(122, 77, 158, 0.1),
+        0 4px 8px rgba(122, 77, 158, 0.15),
+        0 6px 16px rgba(122, 77, 158, 0.2); /* Layered shadows for depth */
+    }
 
     /* --- Styles for Forgot Password Link --- */
     .alt-action2 {
@@ -89,35 +82,34 @@
     .g-recaptcha { /* Or whatever class your reCAPTCHA container has */
         margin-bottom: 5px; /* Reduce space below reCAPTCHA */
     }
-.separator-text {
-  position: relative;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 700;
-  color: #7a4d9e;
-  margin: 20px 0;
-  letter-spacing: 0.7px;
-  text-transform: none; /* <- This ensures "Join Xethio Now!" stays in correct case */
-}
+    .separator-text {
+      position: relative;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #7a4d9e;
+      margin: 20px 0;
+      letter-spacing: 0.7px;
+      text-transform: none; /* <- This ensures "Join Xethio Now!" stays in correct case */
+    }
 
+    .separator-text::before,
+    .separator-text::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 35%;
+      height: 1px;
+      background-color: #c8a8e4;
+    }
 
-.separator-text::before,
-.separator-text::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 35%;
-  height: 1px;
-  background-color: #c8a8e4;
-}
+    .separator-text::before {
+      left: 0;
+    }
 
-.separator-text::before {
-  left: 0;
-}
-
-.separator-text::after {
-  right: 0;
-}
+    .separator-text::after {
+      right: 0;
+    }
 
   </style>
 </head>
@@ -179,7 +171,6 @@
 
         <a id="forgot_password" class="alt-action2" href="<?php echo osc_recover_user_password_url(); ?>"><?php _e('Forgot password?', 'epsilon'); ?></a>
 
-
         <div class="input-box-check">
           <?php UserForm::rememberme_login_checkbox();?>
           <label for="remember"><?php _e('Remember me', 'epsilon'); ?></label>
@@ -196,12 +187,11 @@
 
         <button type="submit" class="btn"><?php _e('Log in', 'epsilon');?></button>
 
-<div class="separator-text">Join <strong>Xethio</strong> Now!</div>
+        <div class="separator-text">Join <strong>Xethio</strong> Now!</div>
 
-<a href="<?php echo osc_register_account_url(); ?>" class="btn btn-create-account">
-    <?php _e('Create new account', 'epsilon'); ?>
-</a>
-
+        <a href="<?php echo osc_register_account_url(); ?>" class="btn btn-create-account">
+            <?php _e('Create new account', 'epsilon'); ?>
+        </a>
 
       </form>
     </div>
@@ -211,92 +201,129 @@
 
   <script type="text/javascript">
     $(document).ready(function(){
-      $('input[name="email"]').attr('placeholder', '<?php echo osc_esc_js(__('Phone', 'epsilon')); ?>').attr('required', true);
-      $('input[name="password"]').attr('placeholder', '<?php echo osc_esc_js(__('Password', 'epsilon')); ?>').attr('required', true);
+      $('input[name="email"]')
+        .attr('placeholder', '<?php echo osc_esc_js(__('Phone', 'epsilon')); ?>')
+        .attr('required', true)
+        .attr('pattern', '^\\+251 9[0-9]{8}$')
+        .attr('title', 'Must be +251 9XXXXXXXX');
+      $('input[name="password"]')
+        .attr('placeholder', '<?php echo osc_esc_js(__('Password', 'epsilon')); ?>')
+        .attr('required', true);
     });
+  </script>
 
-    document.addEventListener('DOMContentLoaded', function () {
-      const phoneInput = document.querySelector('input[name="email"]'); // Assuming 'email' is used for phone input based on context
+  <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function () {
+    const phoneInput = document.querySelector('input[name="email"]'); // "email" field is used for phone login
 
-      if (phoneInput) {
-          phoneInput.addEventListener('input', function () {
-              validateAndNormalizePhone(phoneInput);
-          });
+    const fixedPrefix = '+251 ';
 
-          phoneInput.addEventListener('blur', function () {
-              validateAndNormalizePhone(phoneInput, true); // Final validation on blur
-          });
+    if (phoneInput) {
+      // Autofill prefix on focus
+      phoneInput.addEventListener('focus', function () {
+        if (!this.value.startsWith(fixedPrefix)) {
+          this.value = fixedPrefix;
+        }
+      });
 
-          // Ensure the space is removed before form submission
-          if (phoneInput.form) {
-            phoneInput.form.addEventListener('submit', function (e) {
-                phoneInput.value = phoneInput.value.replace(/\s/g, ''); // Remove all spaces
-            });
-          }
+      // Prevent deletion inside the fixed prefix
+      phoneInput.addEventListener('keydown', function (e) {
+        const cursorPosition = this.selectionStart;
+
+        // Block backspace/delete within prefix zone
+        if ((e.key === 'Backspace' || e.key === 'Delete') && cursorPosition <= fixedPrefix.length) {
+          e.preventDefault();
+        }
+      });
+
+      // Normalize on input
+      phoneInput.addEventListener('input', function () {
+        validateAndNormalizePhone(this);
+      });
+
+      // Validate on blur
+      phoneInput.addEventListener('blur', function () {
+        validateAndNormalizePhone(this, true); // Final validation on blur
+      });
+
+      // Clean up value before form submission
+      if (phoneInput.form) {
+        phoneInput.form.addEventListener('submit', function () {
+          phoneInput.value = phoneInput.value.replace(/\s/g, ''); // Remove all spaces
+        });
       }
 
       function validateAndNormalizePhone(input, isFinalValidation = false) {
-          let phoneValue = input.value.trim();
+  let value = input.value.trim();
 
-          // Remove all non-digit characters except for the leading '+'
-          phoneValue = phoneValue.replace(/[^\d+]/g, '');
-          if (phoneValue.length > 1) {
-             phoneValue = '+' + phoneValue.substring(1).replace(/\+/g, ''); // Ensure only one '+' at the start
-          } else if (phoneValue !== '+' && phoneValue !== '') {
-             phoneValue = '+' + phoneValue; // Add '+' if missing and not empty
-          }
+  // Always enforce the fixed prefix
+  if (!value.startsWith(fixedPrefix)) {
+    value = fixedPrefix + value.replace(/^\+?251\s?/, '').replace(/[^\d]/g, '');
+  }
 
+  // Extract only digits after "+251 "
+  let localNumber = value.replace(fixedPrefix, '').replace(/[^\d]/g, '');
 
-          // If the number doesn't start with "+", consider it potentially incomplete or invalid
-          if (!phoneValue.startsWith('+') && phoneValue.length > 0) {
-              // Optionally prepend '+' or handle as error - current logic adds '+' above
-               if (!phoneValue.startsWith('+')) phoneValue = '+' + phoneValue.replace(/\+/g, ''); // Re-ensure '+'
-          }
+  // ← ADD THIS LINE TO TRIM TO 9 DIGITS:
+  localNumber = localNumber.substring(0, 9);
 
-          // Handle Ethiopian numbers specifically: +251 9XXXXXXXX
-          if (phoneValue.startsWith('+251')) {
-              const localNumber = phoneValue.substring(4).replace(/[^0-9]/g, ''); // Extract local part after "+251"
+  if (isFinalValidation) {
+    if (!(localNumber.length === 9 && localNumber.startsWith('9'))) {
+      // Optionally show a validation message here
+      // input.setCustomValidity("Phone must be +251 9XXXXXXXX");
+      // input.reportValidity();
+    }
+  }
 
-              // Format with space during typing for readability
-              let formattedNumber = '+251 ' + localNumber.substring(0, 9); // Limit length while typing
+  // Always recompose the field as "+251 " + up-to-9 digits
+  input.value = fixedPrefix + localNumber;
+}
 
-              if (isFinalValidation) {
-                  // Final validation: Ensure the local part is exactly 9 digits and starts with "9"
-                  if (localNumber.length === 9 && localNumber.startsWith('9')) {
-                      formattedNumber = '+251 ' + localNumber; // Correct format
-                  } else {
-                      // Invalid Ethiopian number structure on blur: Provide feedback or reset partially
-                      // Resetting to '+251 ' might be user-friendly
-                      formattedNumber = '+251 ';
-                      // Or input.setCustomValidity("Ethiopian phone number must be +251 9XXXXXXXX"); input.reportValidity();
-                  }
-              }
-               input.value = formattedNumber.trim(); // Update input field, remove trailing space if any
+    }
 
-          } else {
-              // For other international numbers, just keep the cleaned value
-              // You might want to add more validation rules for other country codes if needed
-              input.value = phoneValue;
-          }
-      }
+    // Password toggle
+    const togglePassword = document.querySelector('.toggle-pass');
+    const passwordInput = document.querySelector('input[name="password"]');
 
-      // Password Toggle
-      // const togglePassword = document.querySelector('.toggle-pass');
-      // const passwordInput = document.querySelector('input[name="password"]'); // Ensure this selector is correct
+    if (togglePassword && passwordInput) {
+      togglePassword.addEventListener('click', function (e) {
+        e.preventDefault();
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.querySelector('i').classList.toggle('fa-eye');
+        this.querySelector('i').classList.toggle('fa-eye-slash');
+      });
+    }
 
-      // if (togglePassword && passwordInput) {
-      //     togglePassword.addEventListener('click', function (e) {
-      //         e.preventDefault();
-      //         // Toggle the type attribute
-      //         const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-      //         passwordInput.setAttribute('type', type);
-      //         // Toggle the eye icon
-      //         this.querySelector('i').classList.toggle('fa-eye');
-      //         this.querySelector('i').classList.toggle('fa-eye-slash');
-      //     });
-      // }
-
-    });
+    $('input[name="email"]')
+      .attr('placeholder', '<?php echo osc_esc_js(__('Phone', 'epsilon')); ?>')
+      .attr('required', true)
+      .attr('pattern', '^\\+251 9[0-9]{8}$')
+      .attr('title', 'Must be +251 9XXXXXXXX');
+    $('input[name="password"]')
+      .attr('placeholder', '<?php echo osc_esc_js(__('Password', 'epsilon')); ?>')
+      .attr('required', true);
+  });
   </script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.querySelector('.toggle-pass');
+    // Change this selector to match your real input, e.g. by ID:
+    const input = document.querySelector('#password');
+    if (!toggle || !input) return;
+
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      // Toggle the type
+      input.type = input.type === 'password' ? 'text' : 'password';
+      // Toggle the eye icon classes
+      const icon = this.querySelector('i');
+      icon.classList.toggle('fa-eye');
+      icon.classList.toggle('fa-eye-slash');
+    });
+  });
+  </script>
+
 </body>
 </html>
